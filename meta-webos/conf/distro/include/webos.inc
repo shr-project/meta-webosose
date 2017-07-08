@@ -328,7 +328,7 @@ do_populate_lic:append() {
             bb.fatal("%s is in source repository but LIC_FILES_CHKSUM doesn't include it." % oss_filename)
 }
 
-WARN_QA:append = " version-going-backwards webos-enh-sub-warning"
+ERROR_QA:append = " webos-enh-sub-warning"
 WEBOS_ERROR_QA_AUTOREV ?= "webos-enh-sub-autorev-error"
 ERROR_QA:append = " webos-enh-sub-error acg-dirty acg-json ${WEBOS_ERROR_QA_AUTOREV} acg-api acg-perm ls2-role ls2-schema"
 ERROR_QA:remove = " version-going-backwards"
