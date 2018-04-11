@@ -1,5 +1,6 @@
 # Imported from meta-raspberrypi
 # kernel dependency changed to do_webos_deploy_fixup task
+# and multiple boot.scr scripts
 
 inherit image_types
 
@@ -136,7 +137,9 @@ IMAGE_CMD_rpi-sdimg () {
     fi
     if [ "${RPI_USE_U_BOOT}" = "1" ]; then
         mcopy -v -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/u-boot.bin ::${SDIMG_KERNELIMAGE} || bbfatal "mcopy cannot copy ${DEPLOY_DIR_IMAGE}/u-boot.bin into boot.img"
-        mcopy -v -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/boot.scr ::boot.scr || bbfatal "mcopy cannot copy ${DEPLOY_DIR_IMAGE}/boot.scr into boot.img"
+        for f in boot.cmd.mmc boot.cmd.mmc-optee boot.cmd.nfs boot.cmd.nfs-optee boot.cmd.nfs-script; do
+            mcopy -v -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/$f.scr ::$f.scr || bbfatal "mcopy cannot copy ${DEPLOY_DIR_IMAGE}/$f.scr into boot.img"
+        done
         if [ ! -z "${INITRAMFS_IMAGE}" -a "${INITRAMFS_IMAGE_BUNDLE}" = "1" ]; then
             mcopy -v -i ${WORKDIR}/boot.img -s ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${INITRAMFS_LINK_NAME}.bin ::${KERNEL_IMAGETYPE} || bbfatal "mcopy cannot copy ${DEPLOY_DIR_IMAGE}/${KERNEL_IMAGETYPE}-${INITRAMFS_LINK_NAME}.bin into boot.img"
         else
