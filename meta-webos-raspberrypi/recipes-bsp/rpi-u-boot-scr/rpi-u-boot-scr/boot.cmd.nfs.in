@@ -1,0 +1,16 @@
+fdt addr ${fdt_addr} && fdt get value bootargs /chosen bootargs
+
+tftpserverip=192.168.169.40
+nfspath=/var/lib/tftpboot/image-rpi
+
+dhcp ${kernel_addr_r} ${tftpserverip}:@@KERNEL_IMAGETYPE@@-rpi
+
+# based on default built-in kernel cmdline:
+# [    0.000000] Kernel command line: 8250.nr_uarts=1 cma=256M bcm2708_fb.fbwidth=720 bcm2708_fb.fbheight=480 bcm2708_fb.fbswap=1 vc_mem.mem_base=0x3dc00000 vc_mem.mem_size=0x3f000000  dwc_otg.lpm_enable=0 console=ttyS0,115200 root=/dev/mmcblk0p2 rootfstype=ext4 rootwait   rw
+# with just fbwidth, fbheight increases to FullHD
+setenv bootargs "8250.nr_uarts=1 cma=256M bcm2708_fb.fbwidth=1920 bcm2708_fb.fbheight=1080 bcm2708_fb.fbswap=1 vc_mem.mem_base=0x3dc00000 vc_mem.mem_size=0x3f000000  dwc_otg.lpm_enable=0 console=ttyS0,115200 rootwait"
+setenv bootargs "${bootargs} root=/dev/nfs rw rootfstype=nfs nfsroot=${tftpserverip}:${nfspath},tcp,vers=3 ip=dhcp"
+
+echo "booting with bootargs: ${bootargs}"
+
+@@KERNEL_BOOTCMD@@ ${kernel_addr_r} - ${fdt_addr}
