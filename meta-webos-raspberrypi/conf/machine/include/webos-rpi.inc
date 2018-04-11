@@ -74,3 +74,5 @@ IMAGE_FSTYPES_remove = "ext3"
 
 # OSTree target
 SOTA_MACHINE_rpi = "webos-rpi"
+
+RPI_USE_U_BOOT = "1"
