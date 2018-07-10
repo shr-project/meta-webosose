@@ -1,5 +1,4 @@
 # Imported from meta-raspberrypi
-# kernel dependency changed to do_webos_deploy_fixup task
 
 inherit image_types
 
@@ -56,7 +55,7 @@ do_image_rpi_sdimg[depends] = " \
     parted-native:do_populate_sysroot \
     mtools-native:do_populate_sysroot \
     dosfstools-native:do_populate_sysroot \
-    virtual/kernel:do_webos_deploy_fixup \
+    virtual/kernel:do_deploy \
     ${IMAGE_BOOTLOADER}:do_deploy \
     ${@bb.utils.contains('MACHINE_FEATURES', 'armstub', 'armstubs:do_deploy', '' ,d)} \
     ${@bb.utils.contains('RPI_USE_U_BOOT', '1', 'u-boot:do_deploy', '',d)} \
