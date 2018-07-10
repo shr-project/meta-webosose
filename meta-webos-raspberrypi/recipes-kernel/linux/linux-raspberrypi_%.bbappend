@@ -45,10 +45,4 @@ KERNEL_MODULE_AUTOLOAD:append = " \
     snd-soc-bcm2835-i2s \
 "
 
-do_deploy:append() {
-    # Remove kernel image link in meta-webos/classes/kernel.bbclass
-    # However the image link is required in raspberrypi
-    ln -sf ${type}-${KERNEL_IMAGE_NAME}.bin ${DEPLOYDIR}/${type}-${KERNEL_IMAGE_LINK_NAME}.bin
-}
-
 export CCACHE_MAXSIZE = "1G"
