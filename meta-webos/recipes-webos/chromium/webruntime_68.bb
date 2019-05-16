@@ -30,3 +30,9 @@ python do_write_toolchain_file () {
 addtask write_toolchain_file after do_patch before do_configure
 # end TODO: drop this after we migrate to ubuntu 16.04 or above
 
+# Fix build with linux-headers-5.2
+# http://caprica.lgsvl.com:8080/Errors/Details/1614408
+# From: http://gpro.lge.com/254192
+SRC_URI += " \
+    file://0001-fix-build-after-y2038-changes-in-glibc.patch \
+"
