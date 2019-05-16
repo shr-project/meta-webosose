@@ -34,3 +34,9 @@ LTTNG_PROVIDER = "liblttng_provider.so"
 SRC_URI += " \
     file://0001-fix-build-after-y2038-changes-in-glibc.patch \
 "
+
+#SRC_URI += " \
+#    file://0001-snapshot_toolchain.gni-use-host_toolchain-when-build.patch;patchdir=src/v8 \
+#"
+# From http://gpro.lge.com/247551
+SRC_URI += "file://0001-downstream-build-Fix-not-to-add-ldflags.patch"
