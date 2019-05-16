@@ -131,22 +131,10 @@ GN_ARGS = "\
     ${PACKAGECONFIG_CONFARGS}\
 "
 
-# TODO: drop this after we migrate to ubuntu 16.04 or above
 GN_ARGS += "\
     is_host_clang=true\
-    host_toolchain=\"//build/toolchain/yocto:clang_yocto_native\" \
     fatal_linker_warnings=false\
 "
-
-python do_write_toolchain_file () {
-    """Writes a BUILD.gn file for Yocto detailing its toolchains."""
-    toolchain_dir = d.expand("${S}/src/build/toolchain/yocto")
-    bb.utils.mkdirhier(toolchain_dir)
-    toolchain_file = os.path.join(toolchain_dir, "BUILD.gn")
-    write_toolchain_file(d, toolchain_file)
-}
-addtask write_toolchain_file after do_patch before do_configure
-# end TODO: drop this after we migrate to ubuntu 16.04 or above
 
 # More options to speed up the build
 GN_ARGS += "\
