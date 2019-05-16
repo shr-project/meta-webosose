@@ -30,6 +30,12 @@ python do_write_toolchain_file () {
 addtask write_toolchain_file after do_patch before do_configure
 # end TODO: drop this after we migrate to ubuntu 16.04 or above
 
+# [PLAT-78282] mksnapshot from webruntime fails to run when host and target have different glibc version
+GN_ARGS += "v8_snapshot_toolchain=\"//build/toolchain/yocto:clang_yocto_native\""
+MKSNAPSHOT_PATH = "clang_yocto_native/"
+MKSNAPSHOT_PATH_arm = "clang_yocto_native/"
+MKSNAPSHOT_PATH_aarch64 = "clang_yocto_native/"
+
 # Fix build with linux-headers-5.2
 # http://caprica.lgsvl.com:8080/Errors/Details/1614408
 # From: http://gpro.lge.com/254192
