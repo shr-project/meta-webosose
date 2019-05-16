@@ -1,6 +1,6 @@
 # Copyright (c) 2012-2019 LG Electronics, Inc.
 
-PREFERRED_VERSION_webruntime ?= "72.%"
+PREFERRED_VERSION_webruntime ?= "68.%"
 
 PREFERRED_VERSION_gstreamer1.0              ?= "1.14.%"
 PREFERRED_VERSION_gstreamer1.0-plugins-bad  ?= "1.14.%"
