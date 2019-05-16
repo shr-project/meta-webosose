@@ -27,3 +27,10 @@ GN_ARGS_append = " closure_compile=false"
 
 CBE_DATA_LOCALES_PATH = "${CBE_DATA_PATH}/neva_locales"
 LTTNG_PROVIDER = "liblttng_provider.so"
+
+# Fix build with linux-headers-5.2
+# http://caprica.lgsvl.com:8080/Errors/Details/1614408
+# From: http://gpro.lge.com/254192
+SRC_URI += " \
+    file://0001-fix-build-after-y2038-changes-in-glibc.patch \
+"
