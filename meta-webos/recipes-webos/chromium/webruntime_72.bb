@@ -15,10 +15,7 @@ WEBOS_REPO_NAME_V8 = "chromium-v8"
 WEBOS_VERSION_V8 = "7.2.502.28-chromium72.7_cd41b2480f1e1c640887d70cd4435bae2ed55165"
 SRCREV_v8 = "3c24ac757b6083171b208457e5ff7b2a15e5863e"
 
-# In Neva we don't need the toolchain hack as we are allowing to use cros toolchain
-# directly, and we also have changes to pass host extra flags
-deltask write_toolchain_file
-GN_ARGS_remove = "host_toolchain=\"//build/toolchain/yocto:clang_yocto_native\""
+# In Neva we have changes to pass host extra flags
 GN_ARGS_append = " host_pkg_config=\"pkg-config-native\""
 
 # TODO: get rid of this when (and if) we adopt GPU info collector patch
