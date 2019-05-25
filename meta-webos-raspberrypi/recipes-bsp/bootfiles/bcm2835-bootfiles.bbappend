@@ -4,9 +4,6 @@
 # ae6611e bcm2835-bootfiles: Clarify license conditions
 # baba59d linux-raspberrypi=4.19.80 bcm2835-bootfiles=20191021
 
-# Backported from meta-raspberrypi Yocto 3.0 Zeus
-# 787bcf3 bcm2835-bootfiles: tighten up dep on rpi-config
-
 RPIFW_DATE = "20191210"
 SRCREV = "9d6be5b07e81bdfb9c4b9a560e90fbc7477fdc6e"
 SRC_URI[md5sum] = "645e812765c8b4ca05d6cb47a1f67ab0"
