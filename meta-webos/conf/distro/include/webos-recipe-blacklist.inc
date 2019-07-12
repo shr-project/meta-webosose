@@ -56,7 +56,6 @@ INSANE_SKIP_libmpeg2_pn-mpeg2dec += "textrel"
 
 ERROR_QA_remove_pn-uthash = " src-uri-bad"
 ERROR_QA_remove_pn-libuv = " src-uri-bad"
-ERROR_QA_remove_pn-opencv = " src-uri-bad"
 ERROR_QA_remove_pn-uhubctl = " src-uri-bad"
 ERROR_QA_remove_pn-firewalld = " src-uri-bad"
 ERROR_QA_remove_pn-python-matplotlib = " src-uri-bad"
