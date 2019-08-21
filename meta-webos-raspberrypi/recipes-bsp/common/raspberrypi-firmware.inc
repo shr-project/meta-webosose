@@ -1,9 +1,4 @@
-# Backported from meta-raspberrypi Yocto 2.7 Warrior
-# e811912 raspberrypi-firmware: upgrade to latest to fix vc4-fkms
-# bb6195b raspberrypi-firmware.inc: Update to 20190718
-# 35db3d2 raspberrypi-firmware: Update to 20190709
-# 004a1ef firmware: Rename firmware inc file to raspberrypi-firmware.inc
-# and upgraded to 20191021 on top of that https://github.com/agherzan/meta-raspberrypi/pull/514
+# Backported upgrade to 20191021 from Yocto 3.1 https://github.com/agherzan/meta-raspberrypi/pull/514
 
 RPIFW_DATE ?= "20191021"
 SRCREV ?= "ed238d3329e39a68bde03bbc2dfc293c0c3dc93a"
