@@ -40,6 +40,7 @@ PNBLACKLIST[man-db] ?= "BROKEN: without --disable-cache-owner: chown: invalid us
 PNBLACKLIST[hplip] ?= "BROKEN: configure: error: could not force soft-float and chgrp: invalid group: ‘lp’ http://caprica.lgsvl.com:8080/Errors/Details/1509153"
 PNBLACKLIST[gst-plugins-gl] ?= "GL/glew.h:1205:14: fatal error: GL/glu.h: No such file or directory http://caprica.lgsvl.com:8080/Errors/Details/1509152"
 PNBLACKLIST[poppler] ?= "fails to generate GIR http://caprica.lgsvl.com:8080/Errors/Details/1509140"
+PNBLACKLIST[cups-filters] ?= "depends on blacklisted poppler"
 PNBLACKLIST[s-suite] ?= "rdepends on blacklisted sysstat"
 PNBLACKLIST[mongodb] ?= "src/mongo/util/net/ssl_manager.cpp:557:70: error: invalid conversion from 'size_t*' {aka 'unsigned int*'} to 'long unsigned int*' [-fpermissive] http://caprica.lgsvl.com:8080/Errors/Details/1509767"
 PNBLACKLIST[netkit-rusers] ?= "BROKEN: fails to build rup.c:57:45: error: unknown type name 'statstime'; did you mean 'si_stime'? http://caprica.lgsvl.com:8080/Errors/Details/1530992"
@@ -214,12 +215,20 @@ PNBLACKLIST[remmina] ?= "Depends on blacklisted avahi-ui"
 PNBLACKLIST[telepathy-idle] ?= "Depends on blacklisted telepathy-glib"
 PNBLACKLIST[packagegroup-meta-multimedia] ?= "Depends on blacklisted gstd, gerbera, rygel"
 
-ERROR_QA_remove_pn-uthash = " src-uri-bad"
-ERROR_QA_remove_pn-libuv = " src-uri-bad"
-ERROR_QA_remove_pn-uhubctl = " src-uri-bad"
-ERROR_QA_remove_pn-firewalld = " src-uri-bad"
-ERROR_QA_remove_pn-python-matplotlib = " src-uri-bad"
-ERROR_QA_remove_pn-arno-iptables-firewall = " src-uri-bad"
-ERROR_QA_remove_pn-nana = " src-uri-bad"
-ERROR_QA_remove_pn-dumb-init = " src-uri-bad"
-ERROR_QA_remove_pn-crash = " src-uri-bad"
+# And few more in dunfell
+# meta-openembedded/meta-oe/recipes-support/hdf5/hdf5_1.8.21.bb:do_compile
+PNBLACKLIST[hdf5] ?= "ERROR: hdf5-1.8.21-r0 do_compile: hdf5/1.8.21-r0/hdf5-1.8.21/c++/src/H5Location.cpp:258:34: error: control reaches end of non-void function [-Werror=return-type]"
+# meta-openembedded/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.4.bb:do_package
+PNBLACKLIST[dlt-daemon] ?= "ERROR: dlt-daemon-2.18.4-r0 do_package: SYSTEMD_SERVICE_dlt-daemon value dlt.service does not exist"
+# meta-openembedded/meta-oe/recipes-support/libgusb/libgusb_git.bb:do_configure
+PNBLACKLIST[libgusb] ?= "ERROR: libgusb-0.3.0+gitAUTOINC+636efc0624-r0 do_configure: meson failed: gusb/meson.build:128:6: ERROR: Unknown variable libgusb_girtarget."
+# meta-openembedded/meta-oe/recipes-gnome/libpeas/libpeas_1.25.3.bb:do_configure
+PNBLACKLIST[libpeas] ?= "ERROR: libpeas-1.25.3-r0 do_configure: meson failed: tests/libpeas/introspection/meson.build:52:0: ERROR: Unknown variable libpeas_gir."
+# meta-openembedded/meta-networking/recipes-connectivity/netplan/netplan_0.98.bb:do_compile
+PNBLACKLIST[netplan] ?= "ERROR: netplan-0.98+gitAUTOINC+5d22e9d22c-r0 do_compile: oe_runmake failed: src/generate.c:24:10: fatal error: glib.h: No such file or directory"
+# meta-webosose/meta-webos/recipes-upstreamable/nodejs-module/nodejs-module-usocket_0.0.4.bb:do_compile
+PNBLACKLIST[nodejs-module-usocket] ?= "ERROR: nodejs-module-usocket-0.0.4-r2 do_compile: nan/nan_implementation_12_inl.h:103:42: error: cannot convert 'v8::Isolate*' to 'v8::Local<v8::Context>'"
+
+PNBLACKLIST[python3-h5py] ?= "Depends on blacklisted hdf5"
+PNBLACKLIST[mosquitto] ?= "Depends on blacklisted dlt-daemon"
+PNBLACKLIST[python3-keras-applications] ?= "Depends on blacklisted python3-h5py"
