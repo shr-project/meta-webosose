@@ -46,7 +46,7 @@ PNBLACKLIST[netkit-rusers] ?= "BROKEN: fails to build rup.c:57:45: error: unknow
 PNBLACKLIST[android-tools] ?= "Fails to build with thumb enabled http://caprica.lgsvl.com:8080/Errors/Details/1532133"
 PNBLACKLIST[paho-mqtt-c] ?= "Sometimes fails with cannot create build/VersionInfo.h: Directory nonexistent http://caprica.lgsvl.com:8080/Errors/Details/1530992"
 
-PNBLACKLIST[packagegroup-meta-oe] ?= "depends on blacklisted ndctl, android-tools, .."
+PNBLACKLIST[packagegroup-meta-oe] ?= "depends on blacklisted ndctl, .."
 
 # ERROR: QA Issue: ELF binary 'TOPDIR/BUILD/work/qemux86-webos-linux/x264/r2854+gitAUTOINC+e9a5903edf-r0/packages-split/x264/usr/lib/libx264.so.152' has relocations in .text [textrel] http://caprica.lgsvl.com:8080/Errors/Details/1509766
 INSANE_SKIP_${PN}_pn-x264 = "textrel"
@@ -213,3 +213,14 @@ PNBLACKLIST[xmlsec1] ?= "ERROR: xmlsec1-1.2.28-r0 do_configure: configure failed
 PNBLACKLIST[remmina] ?= "Depends on blacklisted avahi-ui"
 PNBLACKLIST[telepathy-idle] ?= "Depends on blacklisted telepathy-glib"
 PNBLACKLIST[packagegroup-meta-multimedia] ?= "Depends on blacklisted gstd, gerbera, rygel"
+
+ERROR_QA_remove_pn-uthash = " src-uri-bad"
+ERROR_QA_remove_pn-libuv = " src-uri-bad"
+ERROR_QA_remove_pn-opencv = " src-uri-bad"
+ERROR_QA_remove_pn-uhubctl = " src-uri-bad"
+ERROR_QA_remove_pn-firewalld = " src-uri-bad"
+ERROR_QA_remove_pn-python-matplotlib = " src-uri-bad"
+ERROR_QA_remove_pn-arno-iptables-firewall = " src-uri-bad"
+ERROR_QA_remove_pn-nana = " src-uri-bad"
+ERROR_QA_remove_pn-dumb-init = " src-uri-bad"
+ERROR_QA_remove_pn-crash = " src-uri-bad"
