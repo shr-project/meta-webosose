@@ -8,7 +8,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
 
 DEPENDS = "nyx-lib glib-2.0 luna-service2 openssl udev"
 
-RDEPENDS_${PN} = "lsb gzip"
+RDEPENDS_${PN} = "lsb-release gzip"
 
 WEBOS_VERSION = "7.1.0-2_2e899eaa138d63eec0330e881ea6577a33aa5082"
 PR = "r15"
