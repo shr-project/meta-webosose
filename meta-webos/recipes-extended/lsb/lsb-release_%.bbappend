@@ -12,9 +12,6 @@ WEBOS_TARGET_CORE_OS ?= "undefined"
 BUILD_INFO_FILE = "${DISTRO}-release"
 BUILD_DISTRIB_ID = "${@'${WEBOS_TARGET_CORE_OS}'.capitalize()}"
 
-# this might be needed by lsb_release (parent recipe says so), but lsbinitscripts conflict with our initscripts
-RDEPENDS_${PN}_remove = "lsbinitscripts"
-
 do_install_append() {
     # Remove lsb-release file and directory created by parent recipe.
     rm -f ${D}${sysconfdir}/lsb-release
