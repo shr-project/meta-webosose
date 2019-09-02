@@ -210,7 +210,7 @@ WEBOS_FOSS_MISSING_FROM_RDEPENDS = " \
     hunspell \
     icu \
     iproute2 \
-    lsb \
+    lsb-release \
     makedevs \
     ncurses \
     openssl \
