@@ -9,6 +9,4 @@ install_app_shell_append() {
      sed -i 's/export MSE_VIDEO_BUFFER_SIZE_LIMIT=52428800/export MSE_VIDEO_BUFFER_SIZE_LIMIT=15728640/' ${A_DIR}/run_app_shell
 }
 
-PACKAGECONFIG_remove_raspberrypi3-64 = "gstreamer umediaserver neva-media"
-PACKAGECONFIG_remove_raspberrypi4-64 = "gstreamer umediaserver neva-media"
-PACKAGECONFIG_remove_raspberrypi4 = "gstreamer umediaserver neva-media"
+PACKAGECONFIG_remove_rpi = "gstreamer umediaserver neva-media"
