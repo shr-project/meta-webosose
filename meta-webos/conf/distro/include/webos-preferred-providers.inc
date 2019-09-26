@@ -63,6 +63,8 @@ UPDATERCD_class-target = ""
 # Use --no-vmlinux option to opcontrol or install it manually if you need to see samples from kernel
 BAD_RECOMMENDATIONS_append_qemux86 = " kernel-vmlinux"
 
+PREFERRED_PROVIDER_virtual/docker = "docker-moby"
+
 # Define which modules should be built by nyx-modules by default.
 #
 # "webOS OSE" (defined by the meta-webos layer) builds only for the qemux86 emulator, therefore
