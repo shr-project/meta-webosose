@@ -335,6 +335,9 @@ APPEND_append_qemuall = " console=ttyS0 net.ifnames=0 biosdevname=0"
 #   mode of the display device
 # APPEND_append_qemuall = " console=tty0"
 
+require conf/distro/include/yocto-uninative.inc
+INHERIT += "uninative"
+
 MIRRORS =+ "\
 ftp://.*/.*      http://downloads.yoctoproject.org/mirror/sources/ \n \
 http://.*/.*     http://downloads.yoctoproject.org/mirror/sources/ \n \
