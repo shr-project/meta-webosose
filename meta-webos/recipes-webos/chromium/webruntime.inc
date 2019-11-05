@@ -164,6 +164,7 @@ EXTRA_OEGN_GOLD = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'use_go
 GN_ARGS += "${EXTRA_OEGN_GOLD}"
 
 GN_ARGS_append_arm = " target_cpu=\"arm\""
+GN_ARGS_append_qemux86-64 = " target_cpu=\"x64\""
 GN_ARGS_append_qemux86 = " target_cpu=\"x86\""
 GN_ARGS_append_aarch64 = " target_cpu=\"arm64\""
 
