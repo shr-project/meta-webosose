@@ -1,11 +1,10 @@
 # Copyright (c) 2014-2020 LG Electronics, Inc.
 
-EXTENDPRAUTO_append = "webos53"
+EXTENDPRAUTO_append = "webos54"
 
 FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 
-# Patches from 5.12.meta-webos.24 based on 5.12.meta-qt5.5
->>>>>>> 11f1550b... qtdeclarative=webos53: update for 5.12.9
+# Patches from 5.12.meta-webos.25 based on 5.12.meta-qt5.5
 SRC_URI_append_class-target = " \
     file://0001-LTTNG-tracing-support-in-Qt-Quick.patch \
     file://0002-Set-the-stencil-buffer-zone.patch \
@@ -33,3 +32,7 @@ SRC_URI_append_class-native = " file://qmllint-supplement.py"
 do_install_append_class-native() {
     install -m 755 ${WORKDIR}/qmllint-supplement.py ${D}${OE_QMAKE_PATH_QT_BINS}
 }
+
+SRC_URI_append = " \
+    file://0019-Use-python3-explicitly.patch \
+"
