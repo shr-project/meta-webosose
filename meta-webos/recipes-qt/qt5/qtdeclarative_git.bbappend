@@ -32,3 +32,6 @@ SRC_URI_append_class-target = " \
     file://0024-Allow-to-have-activeFocus-for-each-window.patch \
     file://0025-Fix-nullptr-handling-in-binding.patch \
 "
+SRC_URI_append = " \
+    file://0026-Use-python3-explicitly.patch \
+"
