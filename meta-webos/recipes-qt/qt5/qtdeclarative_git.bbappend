@@ -33,3 +33,6 @@ SRC_URI_append_class-target = " \
     file://0025-Allow-to-have-activeFocus-for-each-window.patch \
     file://0026-Allow-semicolon-after-property-declaration.patch \
 "
+SRC_URI_append = " \
+    file://0026-Use-python3-explicitly.patch \
+"
