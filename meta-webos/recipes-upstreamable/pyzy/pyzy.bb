@@ -22,7 +22,6 @@ SRC_URI = "git://github.com/pyzy/pyzy.git \
     file://0003-Add-pyzy-wrapper-for-webOS.patch \
     file://0004-Change-static-path-to-user-path.patch \
     file://0005-Change-edit_end_byte-position.patch \
+    file://0006-.py-use-python3-explicitly-and-migrate-with-2to3.patch \
 "
 S = "${WORKDIR}/git"
-
-
