@@ -46,3 +46,6 @@ EXTRA_OECMAKE += "-DAUDIOD_TEST_API:BOOLEAN=True"
 FILES_${PN} += "${datadir}/alsa/"
 FILES_${PN} += "/data"
 FILES_${PN} += "${webos_mediadir}/internal"
+
+# From http://gpro.lge.com/c/webosose/audiod-pro/+/266294
+SRC_URI += "file://0001-CMakeLists.txt-Drop-2nd-call-to-find_package-Boost.patch"
