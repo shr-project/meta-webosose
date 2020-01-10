@@ -60,3 +60,6 @@ SRC_URI += " \
 # but there is a lot of conflicts in old gn used by this webruntime and there are many other places also still using python(2) here
 # so lets use native python2 for now
 inherit pythonnative
+
+# Fix x86_64 builds with jsoncpp-1.7.7
+SRC_URI += "file://0001-Fix-build-with-jsoncpp-1.7.7.patch"

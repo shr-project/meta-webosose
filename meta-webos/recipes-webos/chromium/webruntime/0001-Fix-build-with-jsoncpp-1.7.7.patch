@@ -1,0 +1,109 @@
+From 25a308c8c1e33f6de9281a2950a3a6ed714910b9 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <martin.jansa@lge.com>
+Date: Fri, 10 Jan 2020 16:20:50 +0000
+Subject: [PATCH] Fix build with jsoncpp 1.7.7
+
+jsoncpp 1.7.7 changed API and ABI and Int64/UInt64 are
+now defined as int64_t/uint64_t instead of (unsigned) long long int:
+https://github.com/open-source-parsers/jsoncpp/issues/509
+https://github.com/open-source-parsers/jsoncpp/commit/b9afdf190dbccbf3a59a3aba86eb295c0fa07068
+
+That cause some Json::Value calls ambiguous
+src/media/base/neva/webos/umedia_info_util_webos.cc:101:24: error: conversion from 'int64_t' {aka 'long int'} to 'const Json::Value' is ambiguous
+src/media/base/neva/webos/umedia_info_util_webos.cc:150:54: error: conversion from 'const int64_t' {aka 'const long int'} to 'const Json::Value' is ambiguous
+src/media/base/neva/webos/umedia_info_util_webos_gmp.cc:117:32: error: conversion from 'const uint64_t' {aka 'const long unsigned int'} to 'const Json::Value' is ambiguous
+src/media/base/neva/webos/umedia_info_util_webos_gmp.cc:138:32: error: conversion from 'const uint64_t' {aka 'const long unsigned int'} to 'const Json::Value' is ambiguous
+src/media/base/neva/webos/umedia_info_util_webos_gmp.cc:37:51: error: conversion from 'std::vector<ums::program_info_t>::size_type' {aka 'long unsigned int'} to 'const Json::Value' is ambiguous
+src/media/base/neva/webos/umedia_info_util_webos_gmp.cc:56:60: error: conversion from 'const uint64_t' {aka 'const long unsigned int'} to 'const Json::Value' is ambiguous
+src/media/base/neva/webos/umedia_info_util_webos_gmp.cc:83:60: error: conversion from 'const uint64_t' {aka 'const long unsigned int'} to 'const Json::Value' is ambiguous
+src/media/blink/neva/webos/umediaclient_impl.cc:1570:44: error: conversion from 'int64_t' {aka 'long int'} to 'const Json::Value' is ambiguous
+---
+ src/media/base/neva/webos/umedia_info_util_webos.cc    |  4 ++--
+ .../base/neva/webos/umedia_info_util_webos_gmp.cc      | 10 +++++-----
+ src/media/blink/neva/webos/umediaclient_impl.cc        |  2 +-
+ 3 files changed, 8 insertions(+), 8 deletions(-)
+
+diff --git a/src/media/base/neva/webos/umedia_info_util_webos.cc b/src/media/base/neva/webos/umedia_info_util_webos.cc
+index 309884c7de..8fdd5ad86b 100644
+--- a/src/media/base/neva/webos/umedia_info_util_webos.cc
++++ b/src/media/base/neva/webos/umedia_info_util_webos.cc
+@@ -98,7 +98,7 @@ std::string ErrorInfoToJson(const std::string& media_id,
+   eventInfo["type"] = "error";
+   eventInfo["mediaId"] = media_id.c_str();
+ 
+-  error["errorCode"] = errorCode;
++  error["errorCode"] = Json::Value::Int64(errorCode);
+   error["errorText"] = errorText;
+ 
+   eventInfo["info"] = error;
+@@ -147,7 +147,7 @@ std::string MasterClockInfoToJson(
+ 
+   setMasterClockResult["result"] = masterClockInfo.result;
+   setMasterClockResult["port"] = masterClockInfo.port;
+-  setMasterClockResult["baseTime"] = masterClockInfo.baseTime;
++  setMasterClockResult["baseTime"] = Json::Value::Int64(masterClockInfo.baseTime);
+ 
+   eventInfo["info"] = setMasterClockResult;
+   return writer.write(eventInfo);
+diff --git a/src/media/base/neva/webos/umedia_info_util_webos_gmp.cc b/src/media/base/neva/webos/umedia_info_util_webos_gmp.cc
+index bd793821f9..bf02290a00 100644
+--- a/src/media/base/neva/webos/umedia_info_util_webos_gmp.cc
++++ b/src/media/base/neva/webos/umedia_info_util_webos_gmp.cc
+@@ -34,7 +34,7 @@ std::string SourceInfoToJson(const std::string& media_id,
+ 
+   sourceInfo["container"] = value.container.c_str();
+   sourceInfo["seekable"] = value.seekable;
+-  sourceInfo["numPrograms"] = value.programs.size();
++  sourceInfo["numPrograms"] = Json::Value::UInt64(value.programs.size());
+ 
+   Json::Value programInfos(Json::arrayValue);
+   for (int i = 0; i < value.programs.size(); i++) {
+@@ -53,7 +53,7 @@ std::string SourceInfoToJson(const std::string& media_id,
+       int asi = value.programs[i].audio_stream;
+ 
+       audioTrackInfo["codec"] = value.audio_streams[asi].codec.c_str();
+-      audioTrackInfo["bitRate"] = value.audio_streams[asi].bit_rate;
++      audioTrackInfo["bitRate"] = Json::Value::UInt64(value.audio_streams[asi].bit_rate);
+       audioTrackInfo["sampleRate"] = value.audio_streams[asi].sample_rate;
+ 
+       audioTrackInfos.append(audioTrackInfo);
+@@ -80,7 +80,7 @@ std::string SourceInfoToJson(const std::string& media_id,
+       videoTrackInfo["height"] = value.video_streams[vsi].height;
+       videoTrackInfo["frameRate"] = frame_rate;
+ 
+-      videoTrackInfo["bitRate"] = value.video_streams[vsi].bit_rate;
++      videoTrackInfo["bitRate"] = Json::Value::UInt64(value.video_streams[vsi].bit_rate);
+ 
+       videoTrackInfos.append(videoTrackInfo);
+     }
+@@ -114,7 +114,7 @@ std::string VideoInfoToJson(const std::string& media_id,
+   frameRate["den"] = value.frame_rate.den;
+   videoInfo["frameRate"] = frameRate;
+   videoInfo["codec"] = value.codec.c_str();
+-  videoInfo["bitRate"] = value.bit_rate;
++  videoInfo["bitRate"] = Json::Value::UInt64(value.bit_rate);
+ 
+   eventInfo["info"] = videoInfo;
+   res = writer.write(eventInfo);
+@@ -135,7 +135,7 @@ std::string AudioInfoToJson(const std::string& media_id,
+ 
+   audioInfo["sampleRate"] = value.sample_rate;
+   audioInfo["codec"] = value.codec.c_str();
+-  audioInfo["bitRate"] = value.bit_rate;
++  audioInfo["bitRate"] = Json::Value::UInt64(value.bit_rate);
+ 
+   eventInfo["info"] = audioInfo;
+   res = writer.write(eventInfo);
+diff --git a/src/media/blink/neva/webos/umediaclient_impl.cc b/src/media/blink/neva/webos/umediaclient_impl.cc
+index 9b524d405a..b2a2e003c9 100644
+--- a/src/media/blink/neva/webos/umediaclient_impl.cc
++++ b/src/media/blink/neva/webos/umediaclient_impl.cc
+@@ -1567,7 +1567,7 @@ std::string UMediaClientImpl::UpdateMediaOption(const std::string& mediaOption,
+ 
+   if (start)
+     media_option["option"]["transmission"]["playTime"]["start"] =
+-        static_cast<int64_t>(start * 1000.0);
++        Json::Value::Int64(static_cast<int64_t>(start * 1000.0));
+ 
+   // check contents type
+   if (!media_option.isMember("mediaTransportType")) {
