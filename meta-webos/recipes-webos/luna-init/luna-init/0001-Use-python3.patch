@@ -1,0 +1,63 @@
+From ef0e2266c9f4931321703633f4ded9461f04f05a Mon Sep 17 00:00:00 2001
+From: Martin Jansa <Martin.Jansa@gmail.com>
+Date: Thu, 23 Jan 2020 10:34:52 +0100
+Subject: [PATCH] Use python3
+
+Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+---
+ CMakeLists.txt             | 2 +-
+ src/extract-description.py | 2 +-
+ src/gen-ext-timezones.py   | 6 +++---
+ 3 files changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a2eec82..1ae36e0 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -27,7 +27,7 @@ webos_config_build_doxygen(doc Doxyfile)
+ add_custom_command(
+ 	OUTPUT ext-timezones.json
+ 	COMMAND echo "Generating ext-timezones.json"
+-	COMMAND python2
++	COMMAND python3
+ 		${CMAKE_SOURCE_DIR}/src/gen-ext-timezones.py
+ 		--white-list-only
+ 		-s ${CMAKE_SOURCE_DIR}/src
+diff --git a/src/extract-description.py b/src/extract-description.py
+index 57249d6..a3afd7b 100755
+--- a/src/extract-description.py
++++ b/src/extract-description.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python2
++#!/usr/bin/env python3
+ # Copyright (c) 2014-2018 LG Electronics, Inc.
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+diff --git a/src/gen-ext-timezones.py b/src/gen-ext-timezones.py
+index 219c9fc..caac2b3 100755
+--- a/src/gen-ext-timezones.py
++++ b/src/gen-ext-timezones.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python2
++#!/usr/bin/env python3
+ # Copyright (c) 2014-2018 LG Electronics, Inc.
+ #
+ # Licensed under the Apache License, Version 2.0 (the "License");
+@@ -56,7 +56,7 @@ def findDST(tz):
+ 	return (std, summer)
+ 
+ def genTimeZones(do_guess = True):
+-	for (cc, zoneIds) in pytz.country_timezones.items():
++	for (cc, zoneIds) in list(pytz.country_timezones.items()):
+ 		for zoneId in zoneIds:
+ 			tz = pytz.timezone(zoneId)
+ 			try:
+@@ -173,7 +173,7 @@ supplementOmittedTimeZones()
+ 
+ ### load natural timezones from pytz
+ timeZones = list(genTimeZones(do_guess = do_guess))
+-timeZones.sort(lambda x, y: cmp(x['offsetFromUTC'], y['offsetFromUTC']))
++timeZones.sort(key = (lambda x: x['offsetFromUTC']))
+ 
+ # gen Etc/* time-zones
+ sysZones = list(genSysZones())
