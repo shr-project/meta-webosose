@@ -197,7 +197,6 @@ RDEPENDS_${PN} = " \
 
 RDEPENDS_${PN}_append_webos = " \
     com.webos.app.mediaviewer \
-    crda \
     ${VIRTUAL-RUNTIME_com.webos.service.flowmanager} \
     ${WEBOS_PACKAGESET_SWUPDATER} \
 "
