@@ -10,7 +10,7 @@ PR = "r15"
 PACKAGE_ARCH = "${MACHINE_ARCH}"
 inherit packagegroup
 
-VIRTUAL-RUNTIME_umediaserver-python ?= "umediaserver-python"
+VIRTUAL-RUNTIME_umediaserver-python ?= ""
 VIRTUAL-RUNTIME_umediaserver-python_armv4 = ""
 VIRTUAL-RUNTIME_umediaserver-python_armv5 = ""
 
