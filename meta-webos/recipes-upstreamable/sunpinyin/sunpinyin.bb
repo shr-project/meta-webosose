@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://COPYING;md5=0fb040b9b86a214885e3285fe25d74bc"
 DEPENDS = "sqlite3"
 DEPENDS_append_class-target = " sunpinyin-native"
 
-inherit pkgconfig scons
+inherit pkgconfig scons perlnative
 
 BBCLASSEXTEND = "native"
 
