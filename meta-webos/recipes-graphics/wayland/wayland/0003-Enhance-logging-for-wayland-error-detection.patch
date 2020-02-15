@@ -1,4 +1,4 @@
-From 47251538a192c8b3a0d8109dfa63e63575e24e65 Mon Sep 17 00:00:00 2001
+From 5a389b3ee5990760fccb42f9cef0d437a1b90ad4 Mon Sep 17 00:00:00 2001
 From: "jaehak.lee" <jaehak.lee@lge.com>
 Date: Wed, 16 Sep 2015 13:40:36 +0900
 Subject: [PATCH] Enhance logging for wayland error detection
@@ -16,10 +16,10 @@ Upstream-Status: Inappropriate [webOS specific]
  4 files changed, 57 insertions(+), 10 deletions(-)
 
 diff --git a/Makefile.am b/Makefile.am
-index 741db5e..d76ec69 100644
+index cc87392..8902192 100644
 --- a/Makefile.am
 +++ b/Makefile.am
-@@ -44,6 +44,12 @@ libwayland_util_la_CFLAGS = $(AM_CFLAGS)
+@@ -45,6 +45,12 @@ libwayland_util_la_CFLAGS = $(AM_CFLAGS)
  libwayland_util_la_SOURCES =			\
  	src/wayland-util.c			\
  	src/wayland-util.h
@@ -32,10 +32,10 @@ index 741db5e..d76ec69 100644
  
  noinst_LTLIBRARIES = libwayland-util.la
  
-@@ -72,6 +78,10 @@ nodist_include_HEADERS =			\
+@@ -74,6 +80,10 @@ nodist_include_HEADERS =			\
  
  libwayland_server_la_CFLAGS = $(FFI_CFLAGS) $(AM_CFLAGS) -pthread
- libwayland_server_la_LIBADD = $(FFI_LIBS) libwayland-private.la libwayland-util.la -lrt -lm
+ libwayland_server_la_LIBADD = $(FFI_LIBS) libwayland-private.la libwayland-util.la $(RT_LIBS) -lm
 +if ENABLE_PMLOG
 +libwayland_server_la_CFLAGS += $(PMLOG_CFLAGS)
 +libwayland_server_la_LIBADD += $(PMLOG_LIBS)
@@ -43,10 +43,10 @@ index 741db5e..d76ec69 100644
  libwayland_server_la_LDFLAGS = -version-info 1:0:1
  libwayland_server_la_SOURCES =			\
  	src/wayland-server.c			\
-@@ -84,6 +94,10 @@ nodist_libwayland_server_la_SOURCES =		\
+@@ -86,6 +96,10 @@ nodist_libwayland_server_la_SOURCES =		\
  
  libwayland_client_la_CFLAGS = $(FFI_CFLAGS) $(AM_CFLAGS) -pthread
- libwayland_client_la_LIBADD = $(FFI_LIBS) libwayland-private.la libwayland-util.la -lrt -lm
+ libwayland_client_la_LIBADD = $(FFI_LIBS) libwayland-private.la libwayland-util.la $(RT_LIBS) -lm
 +if ENABLE_PMLOG
 +libwayland_client_la_CFLAGS += $(PMLOG_CFLAGS)
 +libwayland_client_la_LIBADD += $(PMLOG_LIBS)
@@ -55,10 +55,10 @@ index 741db5e..d76ec69 100644
  libwayland_client_la_SOURCES =			\
  	src/wayland-client.c
 diff --git a/configure.ac b/configure.ac
-index 102d258..ca347f4 100644
+index dda5e48..92e3bee 100644
 --- a/configure.ac
 +++ b/configure.ac
-@@ -93,6 +93,13 @@ AM_CONDITIONAL(USE_HOST_SCANNER, test "x$with_host_scanner" = xyes)
+@@ -99,6 +99,13 @@ AM_CONDITIONAL(USE_HOST_SCANNER, test "x$with_host_scanner" = xyes)
  
  AM_CONDITIONAL(ENABLE_LIBRARIES, test "x$enable_libraries" = xyes)
  
@@ -72,7 +72,7 @@ index 102d258..ca347f4 100644
  AC_ARG_WITH(icondir, [  --with-icondir=<dir>    Look for cursor icons here],
  		     [  ICONDIR=$withval],
  		     [  ICONDIR=${datadir}/icons])
-@@ -130,6 +137,11 @@ if test "x$enable_dtd_validation" = "xyes"; then
+@@ -126,6 +133,11 @@ if test "x$enable_dtd_validation" = "xyes"; then
  	AC_CONFIG_LINKS([src/wayland.dtd.embed:protocol/wayland.dtd])
  fi
  
@@ -85,10 +85,10 @@ index 102d258..ca347f4 100644
  AM_CONDITIONAL([HAVE_XSLTPROC], [test "x$XSLTPROC" != "x"])
  
 diff --git a/src/connection.c b/src/connection.c
-index a82d38e..53df260 100644
+index 52a83a7..0fc1c50 100644
 --- a/src/connection.c
 +++ b/src/connection.c
-@@ -67,17 +67,13 @@ static FILE* open_file()
+@@ -75,17 +75,13 @@ static FILE* open_file()
  	char proc_file[UNIX_PATH_MAX];
  	char filename[UNIX_PATH_MAX];
  	FILE *tmp_debug_fp = NULL;
@@ -111,7 +111,7 @@ index a82d38e..53df260 100644
  
  	if (!debug_path)
  		snprintf(filename, UNIX_PATH_MAX, "/tmp/wayland_%s.log",proc_name);
-@@ -1291,6 +1287,8 @@ wl_closure_print(struct wl_closure *closure, struct wl_object *target, int send)
+@@ -1313,6 +1309,8 @@ wl_closure_print(struct wl_closure *closure, struct wl_object *target, int send)
  	static FILE *debug_fp = NULL;
  	struct timeval  nowTv;
  	struct tm       nowTm;
@@ -120,7 +120,7 @@ index a82d38e..53df260 100644
  
  #ifdef NO_WEBOS_WAYLAND_DEBUG
  	clock_gettime(CLOCK_REALTIME, &tp);
-@@ -1359,10 +1357,15 @@ wl_closure_print(struct wl_closure *closure, struct wl_object *target, int send)
+@@ -1384,10 +1382,15 @@ wl_closure_print(struct wl_closure *closure, struct wl_object *target, int send)
  	}
  
  	get_time(&nowTv, &nowTm);
@@ -138,7 +138,7 @@ index a82d38e..53df260 100644
  			target->interface->name, target->id,
  			closure->message->name);
 diff --git a/src/wayland-util.c b/src/wayland-util.c
-index 3a471a8..fcbb409 100644
+index d5973bf..3cb23d8 100644
 --- a/src/wayland-util.c
 +++ b/src/wayland-util.c
 @@ -30,8 +30,12 @@
