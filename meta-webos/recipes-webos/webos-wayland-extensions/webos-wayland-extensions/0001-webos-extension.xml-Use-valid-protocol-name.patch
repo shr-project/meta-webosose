@@ -1,0 +1,28 @@
+From 7e1e31cfbd5b3a03e70d87f64cfb0814e605de93 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <martin.jansa@lge.com>
+Date: Sat, 15 Feb 2020 14:58:49 -0800
+Subject: [PATCH] webos-extension.xml: Use valid protocol name
+
+* newer wayland scanner is checking for valid identifiers and refuses to use webos-extension
+  because of the dash
+* see: https://gitlab.freedesktop.org/wayland/wayland/commit/6ce4bbb3dd86f8526331aa42916a120e39069bf1
+* fixes:
+  cd /jenkins/mjansa/build-ros/webos-dashing-dunfell/tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/webos-wayland-extensions/1.0.0-34-r2/build/server && /jenkins/mjansa/build-ros/webos-dashing-dunfell/tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/webos-wayland-extensions/1.0.0-34-r2/recipe-sysroot-native/usr/bin/wayland-scanner server-header < /jenkins/mjansa/build-ros/webos-dashing-dunfell/tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/webos-wayland-extensions/1.0.0-34-r2/git/protocol/webos-extension.xml > /jenkins/mjansa/build-ros/webos-dashing-dunfell/tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/webos-wayland-extensions/1.0.0-34-r2/build/server/include/wayland-webos-extension-server-protocol.h
+  <stdin>:2: error: 'webos-extension' is not a valid standalone identifier
+
+Signed-off-by: Martin Jansa <martin.jansa@lge.com>
+---
+ protocol/webos-extension.xml | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/protocol/webos-extension.xml b/protocol/webos-extension.xml
+index d01065f..da165af 100644
+--- a/protocol/webos-extension.xml
++++ b/protocol/webos-extension.xml
+@@ -1,5 +1,5 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+-<protocol name="webos-extension">
++<protocol name="webos_extension">
+ 
+   <copyright>
+     Copyright (c) 2013-2019 LG Electronics, Inc.
