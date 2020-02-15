@@ -20,3 +20,5 @@ SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
 S = "${WORKDIR}/git"
 
 FILES_${PN}-dev += "${datadir}/*"
+
+SRC_URI += "file://0001-webos-extension.xml-Use-valid-protocol-name.patch"
