@@ -1,4 +1,4 @@
-From 8a54d87ad336dc35b8ee8afde8d34ae548d18abf Mon Sep 17 00:00:00 2001
+From 3bb652a346dd8ea9819138d0537a96c3d74cabac Mon Sep 17 00:00:00 2001
 From: "hyunsook.park" <hyunsook.park@lge.com>
 Date: Tue, 27 Jan 2015 16:45:01 +0900
 Subject: [PATCH] Support dynamic turning on/off wayland debug
@@ -7,14 +7,14 @@ Use named pipe to command on a process
 
 Upstream-Status: Inappropriate [webOS specific]
 ---
- src/wayland-server.c | 70 ++++++++++++++++++++++++++++++++++++++++++++++++++++
+ src/wayland-server.c | 70 ++++++++++++++++++++++++++++++++++++++++++++
  1 file changed, 70 insertions(+)
 
 diff --git a/src/wayland-server.c b/src/wayland-server.c
-index eb1e500..d7b1400 100644
+index 3f48dfe..12a0464 100644
 --- a/src/wayland-server.c
 +++ b/src/wayland-server.c
-@@ -137,6 +137,7 @@ struct wl_protocol_logger {
+@@ -140,6 +140,7 @@ struct wl_protocol_logger {
  };
  
  static int debug_server = 0;
@@ -22,7 +22,7 @@ index eb1e500..d7b1400 100644
  
  static void
  log_closure(struct wl_resource *resource,
-@@ -989,6 +990,71 @@ bind_display(struct wl_client *client, struct wl_display *display)
+@@ -1031,6 +1032,71 @@ bind_display(struct wl_client *client, struct wl_display *display)
  	return 0;
  }
  
@@ -94,7 +94,7 @@ index eb1e500..d7b1400 100644
  /** Create Wayland display object.
   *
   * \return The Wayland display object. Null if failed to create
-@@ -1034,6 +1100,8 @@ wl_display_create(void)
+@@ -1076,6 +1142,8 @@ wl_display_create(void)
  
  	wl_array_init(&display->additional_shm_formats);
  
@@ -103,7 +103,7 @@ index eb1e500..d7b1400 100644
  	return display;
  }
  
-@@ -1103,6 +1171,8 @@ wl_display_destroy(struct wl_display *display)
+@@ -1145,6 +1213,8 @@ wl_display_destroy(struct wl_display *display)
  
  	wl_list_remove(&display->protocol_loggers);
  
