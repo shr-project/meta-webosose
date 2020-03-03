@@ -198,8 +198,6 @@ PNBLACKLIST[telepathy-idle] ?= "Depends on blacklisted telepathy-glib"
 PNBLACKLIST[packagegroup-meta-multimedia] ?= "Depends on blacklisted gstd, gerbera, rygel"
 
 # And few more in dunfell
-# meta-openembedded/meta-oe/recipes-support/hdf5/hdf5_1.8.21.bb:do_compile
-PNBLACKLIST[hdf5] ?= "ERROR: hdf5-1.8.21-r0 do_compile: hdf5/1.8.21-r0/hdf5-1.8.21/c++/src/H5Location.cpp:258:34: error: control reaches end of non-void function [-Werror=return-type]"
 # meta-openembedded/meta-oe/recipes-extended/dlt-daemon/dlt-daemon_2.18.4.bb:do_package
 PNBLACKLIST[dlt-daemon] ?= "ERROR: dlt-daemon-2.18.4-r0 do_package: SYSTEMD_SERVICE_dlt-daemon value dlt.service does not exist"
 # meta-openembedded/meta-oe/recipes-support/libgusb/libgusb_git.bb:do_configure
@@ -211,6 +209,4 @@ PNBLACKLIST[netplan] ?= "ERROR: netplan-0.98+gitAUTOINC+5d22e9d22c-r0 do_compile
 # meta-webosose/meta-webos/recipes-upstreamable/nodejs-module/nodejs-module-usocket_0.0.4.bb:do_compile
 PNBLACKLIST[nodejs-module-usocket] ?= "ERROR: nodejs-module-usocket-0.0.4-r2 do_compile: nan/nan_implementation_12_inl.h:103:42: error: cannot convert 'v8::Isolate*' to 'v8::Local<v8::Context>'"
 
-PNBLACKLIST[python3-h5py] ?= "Depends on blacklisted hdf5"
 PNBLACKLIST[mosquitto] ?= "Depends on blacklisted dlt-daemon"
-PNBLACKLIST[python3-keras-applications] ?= "Depends on blacklisted python3-h5py"
