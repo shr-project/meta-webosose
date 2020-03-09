@@ -339,8 +339,6 @@ require conf/distro/include/yocto-uninative.inc
 INHERIT += "uninative"
 
 SANITY_TESTED_DISTROS ?= " \
-    ubuntu-14.04 \n \
-    ubuntu-16.04 \n \
     ubuntu-18.04 \n \
 "
 
