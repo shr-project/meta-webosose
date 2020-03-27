@@ -21,7 +21,6 @@ SRC_URI += " \
     file://0009-Added-dbus-signal-for-MediaPlayRequest.patch \
     file://0010-avrcp-getting-remote-device-features-list.patch \
     file://0011-Fix-add-service-failure.patch \
-    file://0012-Fix-device-discovery-for-broadcast-role.patch \
     file://main.conf \
     file://brcm43438.service \
     file://obex.service \
