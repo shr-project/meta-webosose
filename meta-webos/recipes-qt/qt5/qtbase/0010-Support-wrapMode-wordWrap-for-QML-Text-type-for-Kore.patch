@@ -1,4 +1,4 @@
-From e2ab7c3c9c305adc88ab560d391fd2eb7591d8fe Mon Sep 17 00:00:00 2001
+From b49824eef1e512c5e5fc4d52b525da9422335ca4 Mon Sep 17 00:00:00 2001
 From: Alexey Turitsyn <alexey.turitsyn@lge.com>
 Date: Fri, 4 Sep 2015 10:17:56 +0300
 Subject: [PATCH] Support wrapMode=wordWrap for QML Text type for Korean

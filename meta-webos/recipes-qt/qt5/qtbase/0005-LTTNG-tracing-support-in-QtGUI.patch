@@ -1,4 +1,4 @@
-From a1513597992b3487fdfdcf693824900369b7f5d1 Mon Sep 17 00:00:00 2001
+From cd007d237dc81813b48cc3b2550b47b4964fa1fc Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jos=C3=A9=20Dapena=20Paz?= <jdapena@igalia.com>
 Date: Fri, 13 Jun 2014 18:48:49 +0200
 Subject: [PATCH] LTTNG tracing support in QtGUI
@@ -172,7 +172,7 @@ index cae3d516c4..439c9224ab 100644
  
      funcs.initializeOpenGLFunctions();
 diff --git a/src/gui/opengl/qopenglpaintengine.cpp b/src/gui/opengl/qopenglpaintengine.cpp
-index dc1619a7bc..ae78266abb 100644
+index dc086d4074..9aa49887e1 100644
 --- a/src/gui/opengl/qopenglpaintengine.cpp
 +++ b/src/gui/opengl/qopenglpaintengine.cpp
 @@ -87,6 +87,8 @@
