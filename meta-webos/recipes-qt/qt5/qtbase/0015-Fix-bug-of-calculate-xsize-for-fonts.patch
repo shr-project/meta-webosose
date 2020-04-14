@@ -1,4 +1,4 @@
-From 4412835631f5dbc647f2aee9c765ca5d97ee90ce Mon Sep 17 00:00:00 2001
+From 86f7a926858f126055b2c1c78dba40bc0a1ba159 Mon Sep 17 00:00:00 2001
 From: Gleb Manyagin <gleb.manyagin@lge.com>
 Date: Tue, 27 Feb 2018 12:12:59 +0300
 Subject: [PATCH] Fix bug of calculate xsize for fonts
