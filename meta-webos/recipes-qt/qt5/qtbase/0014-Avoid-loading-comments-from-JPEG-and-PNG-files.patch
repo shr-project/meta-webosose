@@ -1,4 +1,4 @@
-From 9a522144aaaea3f254ded8d6edc5210e08a34156 Mon Sep 17 00:00:00 2001
+From d227592d6aa71e43fe9abbfccc5cb2c50adb1169 Mon Sep 17 00:00:00 2001
 From: Elvis Lee <kwangwoong.lee@lge.com>
 Date: Wed, 26 Apr 2017 12:29:24 +0900
 Subject: [PATCH] Avoid loading comments from JPEG and PNG files
@@ -9,7 +9,7 @@ the memory.
 
 :Detailed Notes:
 JPEG or PNG file may have very large comments information in its header
-and there exist actual cases in webOS TV. (Some splash images require
+and there exist actual cases in webOS. (Some splash images require
 4MB+ each for comments information.)
 Assuming that there is no use case of this information in webOS, we'd
 better to skip reading the comments information and save the memory.
