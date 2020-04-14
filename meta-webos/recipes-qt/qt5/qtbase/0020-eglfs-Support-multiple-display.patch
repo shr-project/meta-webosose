@@ -1,4 +1,4 @@
-From 0c9fb73b7aa57aaad698662e7f85bbe213ade8f7 Mon Sep 17 00:00:00 2001
+From 08afc599e5b06b84a5a32c382f0a9b2fb5e98369 Mon Sep 17 00:00:00 2001
 From: Jaeyoon Jung <jaeyoon.jung@lge.com>
 Date: Mon, 2 Apr 2018 14:00:37 +0900
 Subject: [PATCH] eglfs: Support multiple display

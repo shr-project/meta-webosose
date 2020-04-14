@@ -1,4 +1,4 @@
-From fad8fa631f7c3a4622b23db736695d4e902d5963 Mon Sep 17 00:00:00 2001
+From 1131c41f37e74d22fe6a3a65f25a097983422ebf Mon Sep 17 00:00:00 2001
 From: Martin Jansa <Martin.Jansa@gmail.com>
 Date: Fri, 7 Feb 2014 04:58:14 +0100
 Subject: [PATCH] Decrease the size of QFontCache
