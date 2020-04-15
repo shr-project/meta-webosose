@@ -72,6 +72,8 @@ VIRTUAL-RUNTIME_browser_fonts ?= "webos-fonts"
 VIRTUAL-RUNTIME_settingsapp ?= "com.webos.app.settings"
 VIRTUAL-RUNTIME_settingsapp_armv4 = ""
 VIRTUAL-RUNTIME_settingsapp_armv5 = ""
+VIRTUAL-RUNTIME_settingsapp_x86 = ""
+VIRTUAL-RUNTIME_settingsapp_x86-64 = ""
 
 VIRTUAL-RUNTIME_umediaserver ?= "umediaserver"
 VIRTUAL-RUNTIME_umediaserver_armv4 = ""
@@ -80,18 +82,25 @@ VIRTUAL-RUNTIME_umediaserver_armv5 = ""
 VIRTUAL-RUNTIME_iotivity-node ?= "iotivity-node"
 VIRTUAL-RUNTIME_iotivity-node_armv4 = ""
 VIRTUAL-RUNTIME_iotivity-node_armv5 = ""
+VIRTUAL-RUNTIME_iotivity-node_x86 = ""
+VIRTUAL-RUNTIME_iotivity-node_x86-64 = ""
 
 VIRTUAL-RUNTIME_com.example.app.iotivity ?= "com.example.app.iotivity"
 VIRTUAL-RUNTIME_com.example.app.iotivity_armv4 = ""
 VIRTUAL-RUNTIME_com.example.app.iotivity_armv5 = ""
+VIRTUAL-RUNTIME_com.example.app.iotivity_x86 = ""
+VIRTUAL-RUNTIME_com.example.app.iotivity_x86-64 = ""
 
 VIRTUAL-RUNTIME_com.example.service.iotivity ?= "com.example.service.iotivity"
 VIRTUAL-RUNTIME_com.example.service.iotivity_armv4 = ""
 VIRTUAL-RUNTIME_com.example.service.iotivity_armv5 = ""
+VIRTUAL-RUNTIME_com.example.service.iotivity_x86 = ""
+VIRTUAL-RUNTIME_com.example.service.iotivity_x86-64 = ""
 
 VIRTUAL-RUNTIME_org.ocf.webossample ?= "org.ocf.webossample.occlientbasicops org.ocf.webossample.ocserverbasicops"
 VIRTUAL-RUNTIME_org.ocf.webossample_armv4 = ""
 VIRTUAL-RUNTIME_org.ocf.webossample_armv5 = ""
+VIRTUAL-RUNTIME_org.ocf.webossample_x86 = ""
 VIRTUAL-RUNTIME_org.ocf.webossample_x86-64 = ""
 
 VIRTUAL-RUNTIME_contextintentmgr ?= "com.webos.service.contextintentmgr"
@@ -113,6 +122,8 @@ VIRTUAL-RUNTIME_com.webos.service.flowmanager_armv5 = ""
 VIRTUAL-RUNTIME_com.webos.app.home ?= "com.webos.app.home"
 VIRTUAL-RUNTIME_com.webos.app.home_armv4 = ""
 VIRTUAL-RUNTIME_com.webos.app.home_armv5 = ""
+VIRTUAL-RUNTIME_com.webos.app.home_x86 = ""
+VIRTUAL-RUNTIME_com.webos.app.home_x86-64 = ""
 
 # This packageset controls which time zone packages should be included in webOS.
 # Since any application that uses localtime will indirectly depend on presence of
