@@ -37,5 +37,7 @@ COMPATIBLE_MACHINE_aarch64 = "(.*)"
 COMPATIBLE_MACHINE_armv6 = "(.*)"
 COMPATIBLE_MACHINE_armv7a = "(.*)"
 COMPATIBLE_MACHINE_armv7ve = "(.*)"
-COMPATIBLE_MACHINE_x86 = "(.*)"
-COMPATIBLE_MACHINE_x86-64 = "(.*)"
+# webruntime doesn't build for x86, x86-64 as well, because of:
+# PLAT-78282 mksnapshot from webruntime fails to run when host and target have different glibc version
+# COMPATIBLE_MACHINE_x86 = "(.*)"
+# COMPATIBLE_MACHINE_x86-64 = "(.*)"
