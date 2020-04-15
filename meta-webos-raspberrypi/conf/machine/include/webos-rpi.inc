@@ -29,9 +29,11 @@ PNBLACKLIST[omxplayer] ?= "not compatible with webOS Open components"
 PNBLACKLIST[packagegroup-rpi-test] ?= "rdepends on omxplayer"
 PNBLACKLIST[rpi-test-image] ?= "rdepends on packagegroup-rpi-test"
 
-MACHINE_EXTRA_RRECOMMENDS_remove_raspberrypi3 = "kernel-modules"
+MACHINE_EXTRA_RRECOMMENDS_remove_rpi = "kernel-modules"
+MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS_remove_rpi = "kernel-modules"
+MACHINE_ESSENTIAL_EXTRA_RRECOMMENDS_append_rpi = " ${RPI_KERNEL_MODULES}"
 
-MACHINE_EXTRA_RRECOMMENDS_append_raspberrypi3 = " \
+RPI_KERNEL_MODULES = " \
     kernel-module-bcm2835-gpiomem \
     kernel-module-bcm2835-wdt \
     kernel-module-bluetooth \
