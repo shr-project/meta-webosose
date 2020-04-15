@@ -269,8 +269,10 @@ COMPATIBLE_MACHINE_aarch64 = "(.*)"
 COMPATIBLE_MACHINE_armv6 = "(.*)"
 COMPATIBLE_MACHINE_armv7a = "(.*)"
 COMPATIBLE_MACHINE_armv7ve = "(.*)"
-COMPATIBLE_MACHINE_x86 = "(.*)"
-COMPATIBLE_MACHINE_x86-64 = "(.*)"
+# webruntime doesn't build for x86, x86-64 as well, because of:
+# PLAT-78282 mksnapshot from webruntime fails to run when host and target have different glibc version
+# COMPATIBLE_MACHINE_x86 = "(.*)"
+# COMPATIBLE_MACHINE_x86-64 = "(.*)"
 
 # http://caprica.lgsvl.com:8080/Errors/Details/1300370
 # iotivity/1.3.99+gitAUTOINC+179f1820ff-r1/recipe-sysroot/usr/include/features.h:381:4: error: #warning _FORTIFY_SOURCE requires compiling with optimization (-O) [-Werror=cpp]
