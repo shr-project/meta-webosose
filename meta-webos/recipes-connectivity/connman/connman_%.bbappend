@@ -15,8 +15,8 @@ SRC_URI += " \
     file://0007-Provide-station-information-when-AP-mode.patch \
     file://0008-Fix-compile-error-regarding-connman_tethering_get_st.patch \
     file://0009-Fix-the-wifi-connection-failure.patch \
-    file://0014-Implementing-the-configuration-options-related-to-P2.patch \
-    file://0015-Read-WpaSupplicantConfigFile-from-main-configuration.patch \
+    file://0010-Implementing-the-configuration-options-related-to-P2.patch \
+    file://0011-Read-WpaSupplicantConfigFile-from-main-configuration.patch \
 "
 
 do_install_append() {
