@@ -63,3 +63,5 @@ FILES_${PN}-perf += "${webos_testsdir}/${BPN}-perf"
 INSANE_SKIP_${PN}-ptest += "libdir"
 # luna-service2-dbg: found library in wrong location: /usr/opt/webos/tests/luna-service2/lib/.debug/libls-hublib-test.so
 INSANE_SKIP_${PN}-dbg += "libdir"
+
+SRC_URI += "file://0001-util.hpp-hub_service.hpp-include-string-to-fix-build.patch"
