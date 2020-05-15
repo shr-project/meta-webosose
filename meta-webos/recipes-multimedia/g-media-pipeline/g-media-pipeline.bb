@@ -39,3 +39,5 @@ S = "${WORKDIR}/git"
 
 FILES_SOLIBSDEV = ""
 FILES_${PN} += "${libdir}/*.so"
+
+SRC_URI += "file://0001-LunaServiceClient.cpp-include-string-to-fix-build-wi.patch"
