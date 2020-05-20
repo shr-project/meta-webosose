@@ -1,0 +1,32 @@
+diff --git a/configure.ac b/configure.ac
+index 8ffa5ab32..4c97458e1 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -251,7 +251,7 @@ fi
+ # PYTHON
+ # ---------------------------------------------------------------------
+ 
+-AC_CHECK_PROG(PYTHON_CHECK,python,yes)
++AC_CHECK_PROG(PYTHON_CHECK,python3,yes)
+ if test x"$PYTHON_CHECK" != x"yes" ; then
+     AC_MSG_ERROR([Please install python before installing.])
+ else
+@@ -259,7 +259,7 @@ else
+     PYTHON_MODULES="base64 datetime glob hashlib io itertools json math multiprocessing pickle pwd re shutil signal subprocess stat sys tarfile tempfile time"
+     for PYTHON_MODULE in $PYTHON_MODULES; do
+         AC_MSG_CHECKING([for the $PYTHON_MODULE python module])
+-	    python_module_result=`python -c "import $PYTHON_MODULE" 2>&1`
++	    python_module_result=`python3 -c "import $PYTHON_MODULE" 2>&1`
+ 	    if test -z "$python_module_result"; then
+ 		AC_MSG_RESULT([yes])
+ 	    else
+diff --git a/etc/configure_transform.py b/etc/configure_transform.py
+index a1ff5c427..9ec445d21 100755
+--- a/etc/configure_transform.py
++++ b/etc/configure_transform.py
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python
++#!/usr/bin/env python3
+ # 
+ # Copyright (c) 2017, SingularityWare, LLC. All rights reserved.
+ #
