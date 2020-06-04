@@ -30,3 +30,5 @@ S = "${WORKDIR}/git"
 PACKAGES =+ "${PN}-tests"
 ALLOW_EMPTY_${PN}-tests = "1"
 FILES_${PN}-tests = "${libexecdir}/tests/*"
+
+SRC_URI += "file://0001-Fix-build-with-boost-1.73.0.patch"
