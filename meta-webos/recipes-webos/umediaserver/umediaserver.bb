@@ -55,3 +55,5 @@ FILES_${PN}-python = "${libdir}/${PYTHON_DIR}/site-packages/uMediaServer/* ${dat
 #   char message[MAX_FT_SIZE]; snprintf(message, MAX_FT_SIZE, format, args...);
 #                              ~~~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 SECURITY_STRINGFORMAT = ""
+
+SRC_URI += "file://0001-Fix-build-with-boost-1.73.0.patch"
