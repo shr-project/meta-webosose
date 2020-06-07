@@ -1,4 +1,4 @@
-# Copyright (c) 2012-2019 LG Electronics, Inc.
+# Copyright (c) 2012-2020 LG Electronics, Inc.
 
 SUMMARY = "Sleep scheduling policy daemon"
 AUTHOR = "Sapna Todwal <sapna.todwal@lge.com>"
@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
 DEPENDS = "nyx-lib luna-service2 json-c libxml2 sqlite3 glib-2.0"
 
 WEBOS_VERSION = "2.0.0-5_4d9eb832b4b2ee57b40f3a68a2121fa999767493"
-PR = "r7"
+PR = "r8"
 
 inherit webos_component
 inherit webos_public_repo
@@ -20,3 +20,5 @@ inherit webos_system_bus
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
 S = "${WORKDIR}/git"
+
+SRC_URI += "file://0001-config.h-rename-to-sleepd_config.h-to-make-sure-the-.patch"
