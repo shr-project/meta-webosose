@@ -1,4 +1,4 @@
-From c87348bdb77c18a3e7fbcbf6d9630e86fbf436ee Mon Sep 17 00:00:00 2001
+From 62c90767b576a3147dce9c92b17e43cfb8fb3742 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jos=C3=A9=20Dapena=20Paz?= <jdapena@igalia.com>
 Date: Sat, 14 Jun 2014 00:57:58 +0200
 Subject: [PATCH] LTTNG tracing support in Qt Quick
@@ -35,10 +35,10 @@ Change-Id: Iadb777c9d8d34ad9bccd5e6582313467ef3f4cd6
  7 files changed, 37 insertions(+)
 
 diff --git a/src/quick/items/qquickwindow.cpp b/src/quick/items/qquickwindow.cpp
-index c55db0456..0e45500aa 100644
+index 3c97475e86..cc68739199 100644
 --- a/src/quick/items/qquickwindow.cpp
 +++ b/src/quick/items/qquickwindow.cpp
-@@ -84,6 +84,8 @@
+@@ -86,6 +86,8 @@
  #include <private/qdebug_p.h>
  #endif
  
@@ -47,7 +47,7 @@ index c55db0456..0e45500aa 100644
  QT_BEGIN_NAMESPACE
  
  Q_LOGGING_CATEGORY(DBG_TOUCH, "qt.quick.touch")
-@@ -418,6 +420,7 @@ void forceUpdate(QQuickItem *item)
+@@ -494,6 +496,7 @@ void forceUpdate(QQuickItem *item)
  
  void QQuickWindowPrivate::syncSceneGraph()
  {
@@ -55,7 +55,7 @@ index c55db0456..0e45500aa 100644
      QML_MEMORY_SCOPE_STRING("SceneGraph");
      Q_Q(QQuickWindow);
  
-@@ -453,6 +456,7 @@ void QQuickWindowPrivate::syncSceneGraph()
+@@ -529,6 +532,7 @@ void QQuickWindowPrivate::syncSceneGraph()
  
  void QQuickWindowPrivate::renderSceneGraph(const QSize &size)
  {
@@ -64,7 +64,7 @@ index c55db0456..0e45500aa 100644
      Q_Q(QQuickWindow);
      if (!renderer)
 diff --git a/src/quick/quick.pro b/src/quick/quick.pro
-index 0f5f5abca..6eaea6efa 100644
+index 0f5f5abca3..6eaea6efa8 100644
 --- a/src/quick/quick.pro
 +++ b/src/quick/quick.pro
 @@ -47,4 +47,7 @@ SOURCES += qtquick2.cpp
@@ -76,7 +76,7 @@ index 0f5f5abca..6eaea6efa 100644
 +
  load(qt_module)
 diff --git a/src/quick/scenegraph/qsgdefaultdistancefieldglyphcache.cpp b/src/quick/scenegraph/qsgdefaultdistancefieldglyphcache.cpp
-index c51358df7..b608fbb94 100644
+index c51358df7c..b608fbb947 100644
 --- a/src/quick/scenegraph/qsgdefaultdistancefieldglyphcache.cpp
 +++ b/src/quick/scenegraph/qsgdefaultdistancefieldglyphcache.cpp
 @@ -46,6 +46,7 @@
@@ -164,7 +164,7 @@ index c51358df7..b608fbb94 100644
  
          m_funcs->glPixelStorei(GL_UNPACK_ALIGNMENT, alignment); // restore to previous value
 diff --git a/src/quick/scenegraph/qsgdefaultrendercontext.cpp b/src/quick/scenegraph/qsgdefaultrendercontext.cpp
-index 73b79c630..d13de4893 100644
+index 73b79c6300..d13de4893f 100644
 --- a/src/quick/scenegraph/qsgdefaultrendercontext.cpp
 +++ b/src/quick/scenegraph/qsgdefaultrendercontext.cpp
 @@ -48,6 +48,8 @@
@@ -186,7 +186,7 @@ index 73b79c630..d13de4893 100644
          qsg_framerender_mutex.lock();
  
 diff --git a/src/quick/scenegraph/util/qsgatlastexture.cpp b/src/quick/scenegraph/util/qsgatlastexture.cpp
-index 921ed0c1f..5207c7ba8 100644
+index 921ed0c1fc..5207c7ba8c 100644
 --- a/src/quick/scenegraph/util/qsgatlastexture.cpp
 +++ b/src/quick/scenegraph/util/qsgatlastexture.cpp
 @@ -59,6 +59,8 @@
@@ -223,7 +223,7 @@ index 921ed0c1f..5207c7ba8 100644
  
  #if 0
 diff --git a/src/quick/scenegraph/util/qsgtexture.cpp b/src/quick/scenegraph/util/qsgtexture.cpp
-index d33bdffe7..b8ecd270c 100644
+index d33bdffe74..b8ecd270cf 100644
 --- a/src/quick/scenegraph/util/qsgtexture.cpp
 +++ b/src/quick/scenegraph/util/qsgtexture.cpp
 @@ -43,6 +43,7 @@
@@ -253,7 +253,7 @@ index d33bdffe7..b8ecd270c 100644
      qint64 uploadTime = 0;
      if (profileFrames)
 diff --git a/src/quick/scenegraph/util/qsgtexturematerial.cpp b/src/quick/scenegraph/util/qsgtexturematerial.cpp
-index 7b1d5abb2..ed34d00f5 100644
+index 7b1d5abb26..ed34d00f58 100644
 --- a/src/quick/scenegraph/util/qsgtexturematerial.cpp
 +++ b/src/quick/scenegraph/util/qsgtexturematerial.cpp
 @@ -44,6 +44,8 @@
