@@ -1,4 +1,4 @@
-From 5ebc328c2a76ab692ead9d7ec5cdec9fa2ce9221 Mon Sep 17 00:00:00 2001
+From 62c90767b576a3147dce9c92b17e43cfb8fb3742 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Jos=C3=A9=20Dapena=20Paz?= <jdapena@igalia.com>
 Date: Sat, 14 Jun 2014 00:57:58 +0200
 Subject: [PATCH] LTTNG tracing support in Qt Quick
@@ -35,10 +35,10 @@ Change-Id: Iadb777c9d8d34ad9bccd5e6582313467ef3f4cd6
  7 files changed, 37 insertions(+)
 
 diff --git a/src/quick/items/qquickwindow.cpp b/src/quick/items/qquickwindow.cpp
-index c55db04566..0e45500aad 100644
+index 3c97475e86..cc68739199 100644
 --- a/src/quick/items/qquickwindow.cpp
 +++ b/src/quick/items/qquickwindow.cpp
-@@ -84,6 +84,8 @@
+@@ -86,6 +86,8 @@
  #include <private/qdebug_p.h>
  #endif
  
@@ -47,7 +47,7 @@ index c55db04566..0e45500aad 100644
  QT_BEGIN_NAMESPACE
  
  Q_LOGGING_CATEGORY(DBG_TOUCH, "qt.quick.touch")
-@@ -418,6 +420,7 @@ void forceUpdate(QQuickItem *item)
+@@ -494,6 +496,7 @@ void forceUpdate(QQuickItem *item)
  
  void QQuickWindowPrivate::syncSceneGraph()
  {
@@ -55,7 +55,7 @@ index c55db04566..0e45500aad 100644
      QML_MEMORY_SCOPE_STRING("SceneGraph");
      Q_Q(QQuickWindow);
  
-@@ -453,6 +456,7 @@ void QQuickWindowPrivate::syncSceneGraph()
+@@ -529,6 +532,7 @@ void QQuickWindowPrivate::syncSceneGraph()
  
  void QQuickWindowPrivate::renderSceneGraph(const QSize &size)
  {

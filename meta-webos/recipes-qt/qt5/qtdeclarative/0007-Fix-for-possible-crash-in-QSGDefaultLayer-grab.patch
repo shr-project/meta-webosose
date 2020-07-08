@@ -1,4 +1,4 @@
-From 4aae2da4ad494fc000ee2c08fbed05e5a834db47 Mon Sep 17 00:00:00 2001
+From 7f7b06d4c635a676262c750c304faba7d3a6ab09 Mon Sep 17 00:00:00 2001
 From: Valery Volgutov <valery.volgutov@lge.com>
 Date: Tue, 12 Dec 2017 15:02:16 +0300
 Subject: [PATCH] Fix for possible crash in QSGDefaultLayer::grab
