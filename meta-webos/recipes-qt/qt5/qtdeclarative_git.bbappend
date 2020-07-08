@@ -26,6 +26,11 @@ SRC_URI_append_class-target = " \
     file://0018-Fix-QQuickKeyNavigationAttached-issue.patch \
 "
 
+# Temporary restore until luna-surfacemanager submissions/322 is in public OSE
+SRC_URI_append_class-target = " \
+    file://0009-QQuickWindow-Add-invalidateCursorItem.patch \
+"
+
 # Supplement tool for qmllint
 DEPENDS_append_class-native = " python3-regex-native"
 SRC_URI_append_class-native = " file://qmllint-supplement.py"
