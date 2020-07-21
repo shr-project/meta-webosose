@@ -21,7 +21,7 @@ PR = "r4"
 WEBOS_GIT_PARAM_BRANCH_raspberrypi4 = "@gav"
 WEBOS_VERSION_raspberrypi4 = "1.0.0-13.gav.3_43b95823c2493e1093b93db71726ece455b0b71c"
 
-DEPENDS = "boost gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad pkgconfig umediaserver media-resource-calculator com.webos.service.camera"
+DEPENDS = "boost gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad pkgconfig umediaserver media-resource-calculator com.webos.service.camera webos-wayland-extensions"
 DEPENDS_append_rpi = " userland"
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
