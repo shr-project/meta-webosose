@@ -94,3 +94,5 @@ pkg_prerm_${PNLIBSEGFAULT}() {
         rm -f $D${sysconfdir}/ld.so.preload
     fi
 }
+
+SRC_URI += "file://0001-Fix-build-with-glibc-2.32.patch"
