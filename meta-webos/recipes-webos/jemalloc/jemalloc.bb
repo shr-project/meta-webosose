@@ -17,3 +17,5 @@ inherit webos_library
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
 S = "${WORKDIR}/git"
+
+SRC_URI += "file://0001-Fix-build-with-glibc-2.32.patch"
