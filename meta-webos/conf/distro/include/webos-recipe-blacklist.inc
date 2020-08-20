@@ -45,6 +45,10 @@ PNBLACKLIST[man-db] ?= "BROKEN: without --disable-cache-owner: chown: invalid us
 
 # meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
 PNBLACKLIST[packagegroup-meta-oe] ?= "depends on blacklisted libsmi, phonet-utils, gradm, scsirastools, tomoyo-tools, s-suite, .."
+# meta-oe/recipes-support/libssh2/libssh2_1.9.0.bb
+PNBLACKLIST[libssh2] ?= "Depends on blacklisted man-db since https://git.openembedded.org/meta-openembedded/commit/?id=b3e9b51c9ba58b01e55c5b0a9a9bec3f7f06d07a"
+# meta-oe/recipes-support/libgit2/libgit2_1.0.1.bb
+PNBLACKLIST[libgit2] ?= "Depends on blacklisted libssh2 which depends on blacklisted man-db since https://git.openembedded.org/meta-openembedded/commit/?id=b3e9b51c9ba58b01e55c5b0a9a9bec3f7f06d07a"
 # meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
 PNBLACKLIST[s-suite] ?= "rdepends on blacklisted sysstat"
 
