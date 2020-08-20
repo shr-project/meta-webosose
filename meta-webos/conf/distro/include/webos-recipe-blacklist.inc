@@ -41,6 +41,7 @@ PNBLACKLIST[hplip] ?= "BROKEN: configure: error: could not force soft-float and 
 PNBLACKLIST[gst-plugins-gl] ?= "GL/glew.h:1205:14: fatal error: GL/glu.h: No such file or directory http://caprica.lgsvl.com:8080/Errors/Details/1509152"
 PNBLACKLIST[poppler] ?= "fails to generate GIR http://caprica.lgsvl.com:8080/Errors/Details/1509140"
 PNBLACKLIST[cups-filters] ?= "depends on blacklisted poppler"
+PNBLACKLIST[fbida] ?= "depends on blacklisted poppler"
 PNBLACKLIST[s-suite] ?= "rdepends on blacklisted sysstat"
 PNBLACKLIST[mongodb] ?= "src/mongo/util/net/ssl_manager.cpp:557:70: error: invalid conversion from 'size_t*' {aka 'unsigned int*'} to 'long unsigned int*' [-fpermissive] http://caprica.lgsvl.com:8080/Errors/Details/1509767"
 PNBLACKLIST[netkit-rusers] ?= "BROKEN: fails to build rup.c:57:45: error: unknown type name 'statstime'; did you mean 'si_stime'? http://caprica.lgsvl.com:8080/Errors/Details/1530992"
