@@ -7,6 +7,7 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/files:"
 SRC_URI += "${@bb.utils.contains('DISTRO_FEATURES', 'smack', '\
     file://0001-SMACK-add-loading-unconfined-label.patch \
     file://0001-meson-add-smack-default-process-label-option.patch \
+    file://0001-fileio.c-fix-build-with-smack-enabled.patch \
 ', '', d)}"
 
 SYSTEMD_SMACK_RUN_LABEL = "System"
