@@ -20,13 +20,12 @@ inherit python3native
 
 export PYTHON = "python"
 
-NODE_VERSION = "8.12.0"
+NODE_VERSION = "12.14.1"
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}.tar.xz;name=node \
 "
-SRC_URI[node.md5sum] = "8b3abd033dae96b6fadcb6a872a44d3c"
-SRC_URI[node.sha256sum] = "5a9dff58016c18fb4bf902d963b124ff058a550ebcd9840c677757387bce419a"
+SRC_URI[node.sha256sum] = "877b4b842318b0e09bc754faf7343f2f097f0fc4f88ab9ae57cf9944e88e7adb"
 S = "${WORKDIR}/git"
 
 do_configure() {
