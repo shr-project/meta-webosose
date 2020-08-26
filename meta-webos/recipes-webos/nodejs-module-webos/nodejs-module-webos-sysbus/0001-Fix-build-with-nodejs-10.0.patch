@@ -1,0 +1,47 @@
+From c010a8ad2bf81f25ffe8a5fa092f749611754195 Mon Sep 17 00:00:00 2001
+From: Christophe Chapuis <chris.chapuis@gmail.com>
+Date: Tue, 2 Apr 2019 16:44:41 +0000
+Subject: [PATCH] Fix build with nodejs 10.0
+
+There are still lots of warnings about deprecated methods, but at least
+it builds, and seems to work.
+
+Signed-off-by: Christophe Chapuis <chris.chapuis@gmail.com>
+---
+ src/node_ls2_call.cpp    | 2 +-
+ src/node_ls2_message.cpp | 7 ++++---
+ 2 files changed, 5 insertions(+), 4 deletions(-)
+
+diff --git a/src/node_ls2_call.cpp b/src/node_ls2_call.cpp
+index af189f9..c2f3ea1 100644
+--- a/src/node_ls2_call.cpp
++++ b/src/node_ls2_call.cpp
+@@ -63,7 +63,7 @@ Local<Object> LS2Call::NewForCall()
+     v8::Isolate* isolate = v8::Isolate::GetCurrent();
+     Local<FunctionTemplate> lCallTemplate = Local<FunctionTemplate>::New(isolate, gCallTemplate);
+     Local<Function> function = lCallTemplate->GetFunction();
+-    Local<Object> callObject = function->NewInstance();
++    Local<Object> callObject = function->NewInstance(isolate->GetCurrentContext()).ToLocalChecked();
+     return callObject;
+ }
+ 
+diff --git a/src/node_ls2_message.cpp b/src/node_ls2_message.cpp
+index 4cc3934..f8bca84 100644
+--- a/src/node_ls2_message.cpp
++++ b/src/node_ls2_message.cpp
+@@ -72,11 +72,12 @@ void LS2Message::Initialize (Handle<Object> target)
+ // LSMessage structure.
+ Local<Value> LS2Message::NewFromMessage(LSMessage* message)
+ {
+-    TryCatch try_catch;
+-
+     v8::Isolate* isolate = v8::Isolate::GetCurrent();
++    
++    TryCatch try_catch(isolate);
++
+     Local<Function> function = v8::Local<FunctionTemplate>::New(isolate, gMessageTemplate)->GetFunction();
+-    Local<Object> messageObject = function->NewInstance();
++    Local<Object> messageObject = function->NewInstance(isolate->GetCurrentContext()).ToLocalChecked();
+ 
+     // If we get an exception in LS2Message::New, then it will return
+     // v8::ThrowException which adds a pending exception.

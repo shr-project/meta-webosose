@@ -24,6 +24,7 @@ NODE_VERSION = "12.14.1"
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}.tar.xz;name=node \
+    file://0001-Fix-build-for-nodejs-12.patch \
 "
 SRC_URI[node.sha256sum] = "877b4b842318b0e09bc754faf7343f2f097f0fc4f88ab9ae57cf9944e88e7adb"
 S = "${WORKDIR}/git"
