@@ -57,6 +57,7 @@ SRC_URI = "\
     ${WEBOSOSE_GIT_REPO_COMPLETE};name=main \
     ${WEBOSOSE_GIT_REPO}/${WEBOS_REPO_NAME_V8};destsuffix=git/src/v8${WEBOS_GIT_BRANCH_V8};name=v8${WEBOSOSE_GIT_PROTOCOL} \
     file://0001-GCC-fix-includes-for-gcc-10.patch \
+    file://0001-Fix-bison-3.7.patch \
 "
 
 ## we don't include SRCPV in PV, so we have to manually include SRCREVs in do_fetch vardeps
