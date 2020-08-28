@@ -223,6 +223,8 @@ CBE_DATA_LOCALES_PATH = "${CBE_DATA_PATH}/neva_locales"
 INSANE_SKIP_${PN} = "textrel ldflags"
 INSANE_SKIP_${PN}-dbg += "libdir"
 
+INSANE_SKIP_${PN} += "host-user-contaminated"
+
 do_compile[progress] = "outof:^\[(\d+)/(\d+)\]\s+"
 do_compile() {
     if [ ! -f ${OUT_DIR}/${BUILD_TYPE}/build.ninja ]; then
@@ -476,7 +478,7 @@ RDEPENDS_${WAM_DEMO_APPLICATION} += "${VIRTUAL-RUNTIME_gpu-libs}"
 # The text relocations are intentional -- see comments in [GF-52468]
 # TODO: check if we need INSANE_SKIP on ldflags
 INSANE_SKIP_${MLPREFIX}${BROWSER_APPLICATION} += "libdir ldflags textrel"
-INSANE_SKIP_${MLPREFIX}${APP_SHELL_RUNTIME} += "libdir ldflags textrel"
+INSANE_SKIP_${MLPREFIX}${APP_SHELL_RUNTIME} += "libdir ldflags textrel host-user-contaminated"
 INSANE_SKIP_${MLPREFIX}${CHROMEDRIVER_RUNTIME} += "libdir ldflags textrel"
 INSANE_SKIP_${MLPREFIX}${WAM_DEMO_APPLICATION} += "libdir ldflags textrel"
 
