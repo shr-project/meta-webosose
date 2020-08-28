@@ -325,7 +325,7 @@ install_app_shell() {
     else
         cd ${OUT_DIR}/${BUILD_TYPE}
         xargs --arg-file=${SRC_DIR}/webos/install/app_shell/binary.list cp -R --no-dereference --preserve=mode,links -v --target-directory=${A_DIR}
-        xargs --arg-file=${SRC_DIR}/webos/install/app_shell/cbe_data.list cp --parents --target-directory=${D}${CBE_DATA_PATH}
+        xargs --arg-file=${SRC_DIR}/webos/install/app_shell/cbe_data.list cp --parents --no-dereference --preserve=mode,links -v --target-directory=${D}${CBE_DATA_PATH}
         cd ${SRC_DIR}
         xargs --arg-file=${SRC_DIR}/webos/install/app_shell/runtime.list cp -R --no-dereference --preserve=mode,links -v --target-directory=${A_DIR}
     fi
@@ -377,16 +377,16 @@ install_webruntime() {
         ${S}/depot_tools/ninja ${PARALLEL_MAKE} -C ${OUT_DIR}/${BUILD_TYPE} webos/install/weboswebruntime
     else
         cd ${SRC_DIR}
-        xargs --arg-file=${SRC_DIR}/webos/install/weboswebruntime/staging_inc.list cp --parents --target-directory=${D}${includedir}/${BPN}
+        xargs --arg-file=${SRC_DIR}/webos/install/weboswebruntime/staging_inc.list cp --parent--no-dereference --preserve=mode,links -v s --target-directory=${D}${includedir}/${BPN}
 
         cd ${OUT_DIR}/${BUILD_TYPE}
 
-        cp libcbe.so ${D}${libdir}/
+        cp --no-dereference --preserve=mode,links -v libcbe.so ${D}${libdir}/
         if [ "${WEBOS_LTTNG_ENABLED}" = "1" ]; then
           # use bindir if building non-cbe
-          cp ${LTTNG_PROVIDER} ${D}${libdir}/
+          cp --no-dereference --preserve=mode,links -v ${LTTNG_PROVIDER} ${D}${libdir}/
         fi
-        xargs --arg-file=${SRC_DIR}/webos/install/weboswebruntime/binary.list cp --parents --target-directory=${D}${CBE_DATA_PATH}
+        xargs --arg-file=${SRC_DIR}/webos/install/weboswebruntime/binary.list cp --parents --no-dereference --preserve=mode,links -v --target-directory=${D}${CBE_DATA_PATH}
         cat ${SRC_DIR}/webos/install/weboswebruntime/data_locales.list | xargs -I{} install -m 755 -p {} ${D}${CBE_DATA_LOCALES_PATH}
     fi
 
