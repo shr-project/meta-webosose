@@ -19,9 +19,7 @@ RDEPENDS_${PN} += "qtbase-plugins"
 VIRTUAL-RUNTIME_cpushareholder ?= "cpushareholder-stub"
 RDEPENDS_${PN} += "${VIRTUAL-RUNTIME_cpushareholder}"
 
-WEBOS_VERSION_MASTER = "1.0.2-43_2a3b866030e32ff8ee65b5471f3e434793017481"
-WEBOS_VERSION_CHR72 = "1.0.1-33.ose.chr72.1_df17aefedb696b1e9f69962a28aed7c69f0f1283"
-WEBOS_VERSION = "${@oe.utils.conditional('PREFERRED_VERSION_webruntime', '72.%', '${WEBOS_VERSION_CHR72}', '${WEBOS_VERSION_MASTER}', d)}"
+WEBOS_VERSION = "1.0.2-43_2a3b866030e32ff8ee65b5471f3e434793017481"
 PR = "r33"
 
 inherit webos_enhanced_submissions
@@ -99,10 +97,7 @@ do_configure_append() {
        sed -i '/--enable-aggressive-release-policy \\/a\   --ignore-touch-devices \\' ${B}/webapp-mgr.sh
     fi
 
-    # Extra added for chromium79
-    if [ "${PREFERRED_VERSION_webruntime}" = "79.%" ]; then
-        sed -i '/export WAM_COMMON_SWITCHES=\" \\/a\    --enable-pal-media-service \\' ${B}/webapp-mgr.sh
-    fi
+    sed -i '/export WAM_COMMON_SWITCHES=\" \\/a\    --enable-pal-media-service \\' ${B}/webapp-mgr.sh
 
     # enable platform encoding if PLATFORM_ENCODING_ENABLED is true
     if ${PLATFORM_ENCODER_ENABLED}; then
