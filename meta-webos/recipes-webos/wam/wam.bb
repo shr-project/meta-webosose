@@ -19,9 +19,7 @@ RDEPENDS_${PN} += "qtbase-plugins"
 VIRTUAL-RUNTIME_cpushareholder ?= "cpushareholder-stub"
 RDEPENDS_${PN} += "${VIRTUAL-RUNTIME_cpushareholder}"
 
-WEBOS_VERSION_MASTER = "1.0.2-40_b37b2a4bf34652ff40d996d19e5e105cd3a83b6c"
-WEBOS_VERSION_CHR72 = "1.0.1-33.ose.chr72.1_df17aefedb696b1e9f69962a28aed7c69f0f1283"
-WEBOS_VERSION = "${@oe.utils.conditional('PREFERRED_VERSION_webruntime', '72.%', '${WEBOS_VERSION_CHR72}', '${WEBOS_VERSION_MASTER}', d)}"
+WEBOS_VERSION = "1.0.2-40_b37b2a4bf34652ff40d996d19e5e105cd3a83b6c"
 PR = "r32"
 
 inherit webos_enhanced_submissions
@@ -96,10 +94,7 @@ do_configure_append() {
        sed -i '/--enable-aggressive-release-policy \\/a\   --ignore-touch-devices \\' ${B}/webapp-mgr.sh
     fi
 
-    # Extra added for chromium79
-    if [ "${PREFERRED_VERSION_webruntime}" = "79.%" ]; then
-        sed -i '/export WAM_COMMON_SWITCHES=\" \\/a\    --enable-pal-media-service \\' ${B}/webapp-mgr.sh
-    fi
+    sed -i '/export WAM_COMMON_SWITCHES=\" \\/a\    --enable-pal-media-service \\' ${B}/webapp-mgr.sh
 }
 
 do_configure_append_qemux86() {
