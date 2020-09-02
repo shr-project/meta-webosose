@@ -336,7 +336,7 @@ RDEPENDS:${PN}:append:qemux86 = " \
     com.webos.service.mediaindexer \
     com.webos.service.power2 \
     com.webos.service.storageaccess \
-    dhcp-client \
+    dhcpcd \
     ofono \
     v4l-utils \
     vmwgfx-layout \
@@ -350,7 +350,7 @@ RDEPENDS:${PN}:append:qemux86-64 = " \
     com.webos.service.mediaindexer \
     com.webos.service.power2 \
     com.webos.service.storageaccess \
-    dhcp-client \
+    dhcpcd \
     ofono \
     v4l-utils \
     vmwgfx-layout \
