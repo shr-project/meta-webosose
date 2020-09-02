@@ -296,7 +296,7 @@ RDEPENDS:${PN}:append:qemux86 = " \
     com.webos.service.location \
     com.webos.service.mediaindexer \
     com.webos.service.storageaccess \
-    dhcp-client \
+    dhcpcd \
     kernel-module-ac97-bus \
     kernel-module-snd-ac97-codec \
     kernel-module-snd-intel8x0 \
