@@ -44,6 +44,11 @@ WEBOS_ENACTJS_PACK_OVERRIDE = "\
 "
 
 do_compile_prepend() {
+    # this is needed to use user's gitconfig even after changing the HOME directory bellow
+    # need to check ${HOME}/.gitconfig existence not only because it might be missing in real HOME of given user
+    # but also HOME might be already changed to WORKDIR or some other directory somewhere else
+    [ "${HOME}" != "${WORKDIR}" -a -e ${HOME}/.gitconfig ] && cp ${HOME}/.gitconfig ${WORKDIR}
+
     # Portion of do_compile_prepend of webos_enactjs_env.bbclass,
     # since this prepend occurs before that and we need NPM usage
     export HOME=${WORKDIR}
