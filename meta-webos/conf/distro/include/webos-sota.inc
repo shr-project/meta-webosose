@@ -1,4 +1,4 @@
-# Copyright (c) 2019 LG Electronics, Inc.
+# Copyright (c) 2019-2020 LG Electronics, Inc.
 
 # Enable SOTA common setting
 #
@@ -7,6 +7,8 @@
 # So, we should possible to remove meta-updater layer without fixing
 # this file and that's why I use 'include' directive rather than 'require'.
 include conf/distro/sota.conf.inc
+
+inherit image-artifact-names
 
 # override OSTREE variables
 OSTREE_OSNAME = "${DISTRO}"
