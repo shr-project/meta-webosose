@@ -65,6 +65,10 @@ install_acg_configuration() {
 
 do_install_append() {
     install_acg_configuration
+
+    # Enact does something wrong in this case, chown to prevent host-user-contaminated QA issue
+    # but should be fixed in enactjs
+    chown root:root -R ${D}
 }
 
 FILES_${PN} += "${webos_applicationsdir}"
