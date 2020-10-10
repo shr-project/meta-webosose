@@ -1,0 +1,49 @@
+From 7f41b97b5e82e494a8bab614479e941645b94438 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <martin.jansa@lge.com>
+Date: Sat, 10 Oct 2020 08:31:28 -0700
+Subject: [PATCH] webos-features.prf: show which files were found before adding
+ them to INSTALL
+
+---
+ features/webos-service.prf | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/features/webos-service.prf b/features/webos-service.prf
+index b8d1c76..db65542 100644
+--- a/features/webos-service.prf
++++ b/features/webos-service.prf
+@@ -86,6 +86,7 @@ group.path = $$WEBOS_INSTALL_SYSBUS_GROUPDIR
+         for(type, SYSBUS_FILE_TYPES) {
+             found_files=$$files("$$WEBOS_SYSBUS_DIR/$$type-$$bus/*.in")
+             !isEmpty(found_files) {
++                message("Found SYSBUS_KINDS: $$found_files")
+                 warning("Deprecated layout for LS2 files. Please use new scheme with single LS2 bus instead.")
+                 QMAKE_SUBSTITUTES += $$found_files
+                 for(found_file, found_files) {
+@@ -101,6 +102,7 @@ group.path = $$WEBOS_INSTALL_SYSBUS_GROUPDIR
+     for(type, SYSBUS_FILE_TYPES) {
+         found_files=$$files("$$WEBOS_SYSBUS_DIR/$$type/*.in")
+         !isEmpty(found_files) {
++            message("Found SYSBUS_FILE_TYPES: $$found_files")
+             QMAKE_SUBSTITUTES += $$found_files
+             for(found_file, found_files) {
+                 # substituted files will be stored in shadowed location
+@@ -118,6 +120,7 @@ group.path = $$WEBOS_INSTALL_SYSBUS_GROUPDIR
+     for (type, SYSBUS_FILE_TYPE_IN) {
+         found_files = $$files("$$WEBOS_SYSBUS_DIR/*$$type*.in")
+         !isEmpty(found_files) {
++            message("Found SYSBUS_FILE_TYPE_IN: $$found_files")
+             QMAKE_SUBSTITUTES += $$found_files
+             for (found_file, found_files) {
+                 # substituted files will be stored in shadowed location
+@@ -131,6 +134,7 @@ group.path = $$WEBOS_INSTALL_SYSBUS_GROUPDIR
+     for (type, SYSBUS_FILE_TYPE) {
+         found_files = $$files("$$WEBOS_SYSBUS_DIR/*.$$type*.json")
+         !isEmpty(found_files) {
++            message("Found SYSBUS_FILE_TYPE: $$found_files")
+             for (found_file, found_files) {
+                 $${type}.files += $$found_file
+                 SYSBUS_FILES += $$found_file
+-- 
+2.17.1
+

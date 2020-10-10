@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = " \
 DEPENDS = "qtbase"
 
 WEBOS_VERSION = "1.0.0-45_3dc6514caffe88ee07537222ef53b43bc151bf70"
-PR = "r6"
+PR = "r7"
 
 inherit webos_qmake5
 inherit webos_enhanced_submissions
@@ -35,3 +35,5 @@ do_configure_class-native() {
 do_install_class-native() {
     oe_runmake install INSTALL_ROOT=${D}
 }
+
+SRC_URI += "file://0001-webos-features.prf-show-which-files-were-found-befor.patch"
