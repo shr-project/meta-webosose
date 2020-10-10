@@ -11,7 +11,7 @@ DEPENDS_remove_raspberrypi4 = " xproto"
 DEPENDS_append_raspberrypi4 = " xorgproto"
 
 WEBOS_VERSION = "5.12.4-158_dd9e02dd45bdd4e838ff56efc4a4c3185a178ffd"
-EXTENDPRAUTO_append = "webos20"
+EXTENDPRAUTO_append = "webos21"
 
 LIC_FILES_CHKSUM = " \
     file://LICENSE.LGPL3;md5=e6a600fd5e1d9cbde2d983680233ad02 \
@@ -65,3 +65,6 @@ EXTRA_QMAKEVARS_PRE += "DEFINES+=QT_COMPOSITOR_QUICK"
 
 # qtwayland-{plugins,qmlplugins} are not used in webOS
 RRECOMMENDS_${PN}_remove = "${PN}-plugins ${PN}-qmlplugins"
+
+FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
+SRC_URI += "file://0001-Don-t-try-to-inject-non-existent-generated-headers-f.patch"
