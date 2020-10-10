@@ -1,0 +1,55 @@
+From ee1fc4afcfd281ef611d7e2352d68e0cc2bfbd13 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <martin.jansa@lge.com>
+Date: Sat, 10 Oct 2020 08:44:10 -0700
+Subject: [PATCH] runner: move WEBOS_SYSBUS_DIR to not use it from runner-debug
+
+runner-debug includes runner.pri as well and was causing race condition
+in generated Makefile which resulted in host-user-contaminated QA issue
+or with newer Yocto also with pseudo abort() during do install which
+unfortunately is ignored because qmake generates QINSTALL call with leading
+dash.
+
+With added debug to qt-features-webos it's shown in log.do_configure:
+
+Project MESSAGE: Using WEBOS_SYSBUS_DIR: /OE/git/tools/runner/sysbus
+Project MESSAGE: Found SYSBUS_FILE_TYPE_IN: /OE/git/tools/runner/sysbus/com.webos.app.qmlrunner.role.json.in
+Project MESSAGE: Found SYSBUS_FILE_TYPE: /OE/git/tools/runner/sysbus/com.webos.app.qmlrunner.perm.json
+Project MESSAGE: Using WEBOS_SYSBUS_DIR: /OE/git/tools/runner/sysbus
+Project MESSAGE: Found SYSBUS_FILE_TYPE_IN: /OE/git/tools/runner/sysbus/com.webos.app.qmlrunner.role.json.in
+Project MESSAGE: Found SYSBUS_FILE_TYPE: /OE/git/tools/runner/sysbus/com.webos.app.qmlrunner.perm.json
+---
+ tools/runner/runner.pri | 3 +--
+ tools/runner/runner.pro | 3 +++
+ 2 files changed, 4 insertions(+), 2 deletions(-)
+
+diff --git a/tools/runner/runner.pri b/tools/runner/runner.pri
+index a9a28cd..aa3c092 100644
+--- a/tools/runner/runner.pri
++++ b/tools/runner/runner.pri
+@@ -20,8 +20,7 @@ CONFIG -= app_bundle
+ 
+ include(../../src/common/common.pri)
+ 
+-CONFIG += webos webos-service
+-WEBOS_SYSBUS_DIR = $$PWD/sysbus
++CONFIG += webos
+ 
+ SOURCES += \
+     $$PWD/main.cpp \
+diff --git a/tools/runner/runner.pro b/tools/runner/runner.pro
+index bbaf4a6..d208ed2 100644
+--- a/tools/runner/runner.pro
++++ b/tools/runner/runner.pro
+@@ -19,6 +19,9 @@ TARGET = qml-runner
+ 
+ include(runner.pri)
+ 
++CONFIG += webos-service
++WEBOS_SYSBUS_DIR = $$PWD/sysbus
++
+ target.path = $$WEBOS_INSTALL_BINS
+ 
+ INSTALLS += target
+-- 
+2.17.1
+
