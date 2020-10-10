@@ -18,7 +18,7 @@ RPROVIDES_${PN}-examples = " \
 "
 
 WEBOS_VERSION = "1.0.0-149_fba01df00eb406308e3d0434e3dfb31a881b6a22"
-PR = "r30"
+PR = "r31"
 
 inherit webos_qmake5
 inherit webos_enhanced_submissions
@@ -29,7 +29,9 @@ inherit webos_distro_variant_dep
 inherit webos_qmllint
 inherit webos_public_repo
 
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-runner-move-WEBOS_SYSBUS_DIR-to-not-use-it-from-runn.patch \
+"
 S = "${WORKDIR}/git"
 
 OE_QMAKE_PATH_HEADERS = "${OE_QMAKE_PATH_QT_HEADERS}"
