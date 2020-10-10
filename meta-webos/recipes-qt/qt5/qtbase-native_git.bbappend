@@ -11,4 +11,6 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 
 SRC_URI_append = " \
     file://0001-Add-webos-oe-g-and-webos-oe-clang-platforms.patch \
+    file://0001-Do-not-ignore-exit-codes-of-install-commands.patch \
+    file://0002-Do-not-ignore-exit-codes-when-installing-meta-files.patch \
 "
