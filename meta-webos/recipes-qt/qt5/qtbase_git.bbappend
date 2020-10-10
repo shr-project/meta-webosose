@@ -1,6 +1,6 @@
 # Copyright (c) 2013-2020 LG Electronics, Inc.
 
-EXTENDPRAUTO_append = "webos80"
+EXTENDPRAUTO_append = "webos81"
 
 # Remove LGPL3-only files
 python do_patch_append() {
@@ -112,3 +112,7 @@ SRC_URI_append_hardware = " \
 
 VIRTUAL-RUNTIME_gpu-libs ?= ""
 RDEPENDS_${PN} += "${VIRTUAL-RUNTIME_gpu-libs}"
+
+SRC_URI += "file://0001-Do-not-ignore-exit-codes-of-install-commands.patch \
+    file://0002-Do-not-ignore-exit-codes-when-installing-meta-files.patch \
+"
