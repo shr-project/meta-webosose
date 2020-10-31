@@ -10,8 +10,4 @@ FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
 
 SRC_URI_append_rpi = " \
     file://0001-Add-support-for-seamless-seek-trickplay.patch \
-    file://0001-elementfactory-add-GST-ELEMENT-FACTORY-TYPE-HARDWARE.patch \
 "
-
-
-
