@@ -1,4 +1,4 @@
-From ffd572dcb4f61ef5c617563c9075881ceb5f5109 Mon Sep 17 00:00:00 2001
+From 25db8f8eef31c970cf45c490790179581f43ebdf Mon Sep 17 00:00:00 2001
 From: JeongBong Seo <jb.seo@lge.com>
 Date: Wed, 17 Jul 2019 11:30:34 +0900
 Subject: [PATCH] Speed up boot by disable usb and enable bootcount
@@ -10,24 +10,24 @@ Subject: [PATCH] Speed up boot by disable usb and enable bootcount
 
     Convert CONFIG_USE_PREBOOT and CONFIG_PREBOOT to Kconfig
 ---
- configs/rpi_3_32b_defconfig | 7 +++++--
+ configs/rpi_3_32b_defconfig | 6 +++++-
+ configs/rpi_4_32b_defconfig | 5 +++++
  include/configs/rpi.h       | 6 +++---
- 2 files changed, 8 insertions(+), 5 deletions(-)
+ 3 files changed, 13 insertions(+), 4 deletions(-)
 
 diff --git a/configs/rpi_3_32b_defconfig b/configs/rpi_3_32b_defconfig
-index c2417a0ec9..98477f9c6a 100644
+index b8a3d17f43..d4f832ff8e 100644
 --- a/configs/rpi_3_32b_defconfig
 +++ b/configs/rpi_3_32b_defconfig
-@@ -7,8 +7,6 @@ CONFIG_SYS_MALLOC_F_LEN=0x2000
- CONFIG_NR_DRAM_BANKS=1
+@@ -9,7 +9,6 @@ CONFIG_ENV_SIZE=0x4000
+ CONFIG_DEFAULT_DEVICE_TREE="bcm2837-rpi-3-b"
  CONFIG_DISTRO_DEFAULTS=y
  CONFIG_OF_BOARD_SETUP=y
 -CONFIG_USE_PREBOOT=y
--CONFIG_PREBOOT="usb start"
  CONFIG_MISC_INIT_R=y
  # CONFIG_DISPLAY_CPUINFO is not set
  # CONFIG_DISPLAY_BOARDINFO is not set
-@@ -44,3 +42,8 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+@@ -45,3 +44,8 @@ CONFIG_SYS_WHITE_ON_BLACK=y
  CONFIG_CONSOLE_SCROLL_LINES=10
  CONFIG_PHYS_TO_BUS=y
  CONFIG_OF_LIBFDT_OVERLAY=y
@@ -36,11 +36,24 @@ index c2417a0ec9..98477f9c6a 100644
 +CONFIG_BOOTCOUNT_ENV=y
 +
 +CONFIG_BOOTDELAY=0
+diff --git a/configs/rpi_4_32b_defconfig b/configs/rpi_4_32b_defconfig
+index 4a88448e9d..ec6a6454bd 100644
+--- a/configs/rpi_4_32b_defconfig
++++ b/configs/rpi_4_32b_defconfig
+@@ -58,3 +58,8 @@ CONFIG_PHYS_TO_BUS=y
+ CONFIG_ADDR_MAP=y
+ CONFIG_SYS_NUM_ADDR_MAP=2
+ CONFIG_OF_LIBFDT_OVERLAY=y
++
++CONFIG_BOOTCOUNT_LIMIT=y
++CONFIG_BOOTCOUNT_ENV=y
++
++CONFIG_BOOTDELAY=0
 diff --git a/include/configs/rpi.h b/include/configs/rpi.h
-index 77d2d5458a..f8b6c707ce 100644
+index 834f1cd236..19498e879f 100644
 --- a/include/configs/rpi.h
 +++ b/include/configs/rpi.h
-@@ -86,9 +86,9 @@
+@@ -106,9 +106,9 @@
  
  /* Environment */
  #define ENV_DEVICE_SETTINGS \
@@ -53,6 +66,3 @@ index 77d2d5458a..f8b6c707ce 100644
  
  #ifdef CONFIG_ARM64
  #define FDT_HIGH "ffffffffffffffff"
--- 
-2.17.1
-
