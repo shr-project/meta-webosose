@@ -76,6 +76,8 @@ EXTRA_WEBOS_WERROR_pn-hdf5 = ""
 EXTRA_WEBOS_WERROR_pn-libev = ""
 # temporarily until https://lists.openembedded.org/g/openembedded-devel/message/85109 is resolved: git/meson.build:26:4: ERROR: C library 'argp' not found
 EXTRA_WEBOS_WERROR_pn-zchunk = ""
+# ERROR: python3-yarl-1.6.2-r0 do_compile: 'python3 setup.py build ' execution failed.; yarl/_quoting_c.c:10703:1: error: control reaches end of non-void function [-Werror=return-type]
+EXTRA_WEBOS_WERROR_pn-python3-yarl = ""
 
 TARGET_CC_ARCH_append = " ${EXTRA_WEBOS_WERROR}"
 
