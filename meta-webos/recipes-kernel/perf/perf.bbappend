@@ -1,4 +1,4 @@
-# Copyright (c) 2017-2019 LG Electronics, Inc.
+# Copyright (c) 2017-2022 LG Electronics, Inc.
 
 EXTENDPRAUTO:append = "webos2"
 
@@ -11,6 +11,8 @@ RDEPENDS:${PN}-archive:append:class-target = " ${VIRTUAL-RUNTIME_bash}"
 RDEPENDS:${PN}-archive:remove:class-target = "${@oe.utils.conditional('WEBOS_PREFERRED_PROVIDER_FOR_BASH', 'busybox', 'bash', '', d)}"
 RDEPENDS:${PN}-perl:append:class-target = " ${VIRTUAL-RUNTIME_bash}"
 RDEPENDS:${PN}-perl:remove:class-target = "${@oe.utils.conditional('WEBOS_PREFERRED_PROVIDER_FOR_BASH', 'busybox', 'bash', '', d)}"
+RDEPENDS:${PN}-tests:append:class-target = " ${VIRTUAL-RUNTIME_bash}"
+RDEPENDS:${PN}-tests:remove:class-target = "${@oe.utils.conditional('WEBOS_PREFERRED_PROVIDER_FOR_BASH', 'busybox', 'bash', '', d)}"
 
 # man-db is blacklisted in meta-webos
 RDEPENDS:${PN}-doc:remove = "man"
