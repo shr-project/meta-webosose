@@ -31,3 +31,6 @@ GN_ARGS_append = " \
 # TODO: qemux86 build fails
 PACKAGECONFIG_remove_qemux86 = "gstreamer umediaserver neva-media gav neva-webrtc"
 #END TODO
+
+# Temporary disable using gold because of issues in version 85
+EXTRA_OEGN_GOLD = "use_gold=false"
