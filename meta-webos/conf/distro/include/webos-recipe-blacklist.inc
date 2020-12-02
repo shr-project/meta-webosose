@@ -227,3 +227,6 @@ PNBLACKLIST[ceph] ?= "Depends on blacklisted xfsprogs"
 
 # all target python2 recipes from meta-python2 and meta-oe
 include conf/distro/include/python2-target-recipes-blacklist.inc
+
+# meta-rust/recipes-devtools/cargo/cargo_1.43.0.bb
+PNBLACKLIST[cargo] ?= "Depends on blacklisted libssh2"
