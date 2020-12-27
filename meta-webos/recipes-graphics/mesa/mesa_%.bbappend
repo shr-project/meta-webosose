@@ -1,6 +1,6 @@
-# Copyright (c) 2017-2019 LG Electronics, Inc.
+# Copyright (c) 2017-2020 LG Electronics, Inc.
 
-EXTENDPRAUTO_append = "webos5"
+EXTENDPRAUTO_append = "webos6"
 
 # Add gallium, gallium-llvmpipe, opengl and enable wayland even without wayland in DISTRO_FEATURES
 PACKAGECONFIG_qemuall = "opengl gbm egl gles dri wayland gallium gallium-llvm"
@@ -15,6 +15,3 @@ GALLIUMDRIVERS_LLVM_qemux86-64 = "virgl,svga"
 GALLIUMDRIVERS_qemuarm = "virgl"
 GALLIUMDRIVERS_LLVM_qemuarm = "virgl"
 DRIDRIVERS_qemuall = "swrast"
-
-# Enable wayland even without wayland in DISTRO_FEATURES
-PLATFORMS_qemuall = "drm,wayland"
