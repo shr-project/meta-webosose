@@ -1,8 +1,12 @@
 # Copyright (c) 2013-2020 LG Electronics, Inc.
 
 inherit qmake5
-inherit webos_qmake5_base
 inherit webos_filesystem_paths
+
+# Use webOS as platform.
+# Requires 9901-Add-webos-oe-g-and-webos-oe-clang-platforms.patch in qtbase.
+XPLATFORM = "webos-oe-g++"
+XPLATFORM_toolchain-clang = "webos-oe-clang"
 
 # These are used in the luna-sysmgr recipe
 export QT_CONFIGURE_PREFIX_PATH = "${OE_QMAKE_PATH_PREFIX}"
