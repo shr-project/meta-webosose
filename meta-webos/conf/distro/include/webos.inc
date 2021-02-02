@@ -78,6 +78,9 @@ EXTRA_WEBOS_WERROR_pn-libev = ""
 EXTRA_WEBOS_WERROR_pn-zchunk = ""
 # ERROR: python3-yarl-1.6.2-r0 do_compile: 'python3 setup.py build ' execution failed.; yarl/_quoting_c.c:10703:1: error: control reaches end of non-void function [-Werror=return-type]
 EXTRA_WEBOS_WERROR_pn-python3-yarl = ""
+# webkitgtk/2.30.4-r0/webkitgtk-2.30.4/Source/JavaScriptCore/assembler/AbstractMacroAssembler.h:930:5: error: control reaches end of non-void function [-Werror=return-type]
+# http://gecko.lge.com/Errors/Details/112515
+EXTRA_WEBOS_WERROR_pn-webkitgtk = ""
 
 TARGET_CC_ARCH_append = " ${EXTRA_WEBOS_WERROR}"
 
