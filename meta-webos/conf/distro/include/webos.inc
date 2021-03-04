@@ -81,6 +81,9 @@ EXTRA_WEBOS_WERROR_pn-python3-yarl = ""
 # webkitgtk/2.30.4-r0/webkitgtk-2.30.4/Source/JavaScriptCore/assembler/AbstractMacroAssembler.h:930:5: error: control reaches end of non-void function [-Werror=return-type]
 # http://gecko.lge.com/Errors/Details/112515
 EXTRA_WEBOS_WERROR_pn-webkitgtk = ""
+# mpich-3.4.1/src/mpl/src/sock/mpl_sockaddr.c:144:1: error: control reaches end of non-void function [-Werror=return-type]
+# http://gecko.lge.com/Errors/Details/126261
+EXTRA_WEBOS_WERROR_pn-mpich = ""
 
 TARGET_CC_ARCH_append = " ${EXTRA_WEBOS_WERROR}"
 
