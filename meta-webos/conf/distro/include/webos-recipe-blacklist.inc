@@ -222,4 +222,5 @@ PNBLACKLIST[pipewire] ?= "Doesn't like our old pulseaudio from meta-webos: meson
 # meta-virtualization/recipes-extended/ceph/ceph_15.2.0.bb
 PNBLACKLIST[ceph] ?= "Depends on blacklisted xfsprogs"
 
-PNBLACKLIST[python] ?= "python(2) is not supported, meta-python2 is included only for python-native needed for webruntime"
+# all target python2 recipes from meta-python2 and meta-oe
+include conf/distro/include/python2-target-recipes-blacklist.inc
