@@ -52,25 +52,6 @@ PNBLACKLIST[libgit2] ?= "Depends on blacklisted libssh2 which depends on blackli
 # meta-oe/recipes-benchmark/s-suite/s-suite_git.bb
 PNBLACKLIST[s-suite] ?= "rdepends on blacklisted sysstat"
 
-# nagios-* PNBLACKLIST upstreamed in:
-# https://lists.yoctoproject.org/g/meta-virtualization/message/6301
-# will probably get merged in hardknott
-# meta-virtualization/recipes-extended/nagios/nagios-core_4.4.6.bb
-PNBLACKLIST[nagios-core] ?= "${@bb.utils.contains('BBFILE_COLLECTIONS', 'webserver', '', 'Depends on apache2 from meta-webserver which is not included', d)}"
-# meta-virtualization/recipes-extended/nagios/nagios-plugins_2.2.1.bb
-PNBLACKLIST[nagios-plugins] ?= "${@bb.utils.contains('BBFILE_COLLECTIONS', 'webserver', '', 'Depends on nagios-core which depends on apache2 from meta-webserver which is not included', d)}"
-# meta-virtualization/recipes-extended/nagios/nagios-nrpe_4.0.2.bb
-PNBLACKLIST[nagios-nrpe] ?= "${@bb.utils.contains('BBFILE_COLLECTIONS', 'webserver', '', 'Depends on nagios-core which depends on apache2 from meta-webserver which is not included', d)}"
-# meta-virtualization/recipes-extended/nagios/nagios-nsca_2.9.2.bb
-PNBLACKLIST[nagios-nsca] ?= "${@bb.utils.contains('BBFILE_COLLECTIONS', 'webserver', '', 'Rdepends on nagios-base provided by nagios-core which depends on apache2 from meta-webserver which is not included', d)}"
-# ipxe fixes sent upstream in:
-# https://lists.yoctoproject.org/g/meta-virtualization/message/6302
-# https://lists.yoctoproject.org/g/meta-virtualization/message/6304
-# https://lists.yoctoproject.org/g/meta-virtualization/message/6305
-# will probably get merged in hardknott
-# meta-virtualization/recipes-extended/ipxe/ipxe_git.bb:do_compile
-PNBLACKLIST[ipxe] ?= "Doesn't match the COMPATIBLE_HOST restriction from syslinux: syslinux was skipped: incompatible with host arm-webos-linux-gnueabi (not in COMPATIBLE_HOST) and also fails with gold: ipxe-gitrAUTOINC+64b4452bca-r0 do_compile: Function failed: do_compile: Makefile.housekeeping:111: GNU gold is unsuitable for building iPXE"
-
 # meta-virtualization/recipes-containers/cri-o/cri-o_git.bb:do_compile
 PNBLACKLIST[cri-o] ?= "ERROR: cri-o-1.12.0+git774a29ecf6855f2dff266dc2aa2fe81d7d964465-r0 do_compile: Function failed: do_compile: | Makefile:112: recipe for target conmon/config.h failed"
 # meta-virtualization/recipes-core/kata-containers/kata-agent_git.bb:do_package_qa
@@ -83,15 +64,6 @@ PNBLACKLIST[kata-runtime] ?= "ERROR: kata-runtime-git-r0 do_compile: oe_runmake 
 PNBLACKLIST[kata-shim] ?= "ERROR: kata-shim-git-r0 do_package_qa: QA Issue: ELF binary kata-shim/git-r0/packages-split/kata-shim/usr/libexec/kata-containers/kata-shim has relocations in .text [textrel]"
 # meta-virtualization/recipes-core/runv/runv_git.bb:do_compile
 PNBLACKLIST[runv] ?= "ERROR: runv-0.4.0+gitb360a686abc6c6e896382990ef1b93ef07c7a677-r0 do_compile: Function failed: do_compile: src/import/vendor/src/github.com/hyperhq/runv/hypervisor/qemu/qemu.go:45:28: undefined: QEMU_SYSTEM_EXE"
-# dev86 fixes sent upstream in:
-# https://lists.yoctoproject.org/g/meta-virtualization/message/6306
-# https://lists.yoctoproject.org/g/meta-virtualization/message/6307
-# will probably get merged in hardknott
-# meta-virtualization/recipes-extended/dev86/dev86_0.16.20.bb:do_install
-PNBLACKLIST[dev86] ?= "ERROR: dev86-0.16.21-r0 do_package_qa: QA Issue: File * in package dev86 doesn't have GNU_HASH (didn't pass LDFLAGS?)"
-# kvmtool can be dropped in hardknott
-# meta-virtualization/recipes-extended/kvmtool/kvmtool.bb:do_compile
-PNBLACKLIST[kvmtool] ?= "ERROR: kvmtool-4.14.0+gitAUTOINC+0e1882a49f-r0 do_patch: Fuzz detected: Applying patch 0003-kvmtool-Werror-disabled.patch"
 # meta-virtualization/recipes-extended/seabios/seabios_1.11.2.bb:do_compile
 PNBLACKLIST[seabios] ?= "ERROR: seabios-1.11.2-r0 do_compile: Function failed: do_compile: i586-webos-linux-ld: error: out/rom16.strip.o: unsupported ELF file type 2"
 # meta-virtualization/recipes-extended/vgabios/biossums_0.7a.bb:do_package_qa
@@ -167,9 +139,6 @@ PNBLACKLIST[xen-tools] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold',
 PNBLACKLIST[xen-python2] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'Depends on blacklisted xen-tools', '', d)}"
 # meta-virtualization/recipes-extended/xen/xen_git.bb
 PNBLACKLIST[xen] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'Depends on blacklisted xen-tools', '', d)}"
-
-# meta-openembedded/meta-oe/recipes-multimedia/pipewire/pipewire_git.bb
-PNBLACKLIST[pipewire] ?= "Doesn't like our old pulseaudio from meta-webos: meson.build:234:2: ERROR: Invalid version of dependency, need 'libpulse' ['>= 11.1'] found '9.0-14-gdf81'."
 
 # the following python recipes are an exception, because they need to be blacklisted even when python(2) itself is unblacklisted with I_SWEAR_TO_MIGRATE_TO_PYTHON3
 # meta-python2/recipes-devtools/python/python-snimpy_0.8.13.bb
