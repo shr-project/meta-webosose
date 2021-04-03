@@ -44,7 +44,7 @@ PNBLACKLIST[sysstat] ?= "BROKEN: install: invalid group ‘man’ http://caprica
 PNBLACKLIST[man-db] ?= "BROKEN: without --disable-cache-owner: chown: invalid user: ?man:man? our passwd doesn't have man user and since http://git.openembedded.org/openembedded-core/commit/?id=7080df4b6bc50440eed600e81f2c6fa76a80623d it's needed http://caprica.lgsvl.com:8080/Errors/Details/1509154"
 
 # meta-oe/recipes-core/packagegroups/packagegroup-meta-oe.bb
-PNBLACKLIST[packagegroup-meta-oe] ?= "depends on blacklisted libsmi, phonet-utils, gradm, telepathy-idle, scsirastools, uml-utilities, tomoyo-tools, s-suite, .."
+PNBLACKLIST[packagegroup-meta-oe] ?= "depends on blacklisted gradm, scsirastools, tomoyo-tools, s-suite, .."
 # meta-oe/recipes-support/libssh2/libssh2_1.9.0.bb
 PNBLACKLIST[libssh2] ?= "Depends on blacklisted man-db since https://git.openembedded.org/meta-openembedded/commit/?id=b3e9b51c9ba58b01e55c5b0a9a9bec3f7f06d07a"
 # meta-oe/recipes-support/libgit2/libgit2_1.0.1.bb
@@ -84,17 +84,10 @@ PNBLACKLIST[cifs-utils] ?= "ERROR: cifs-utils-6.7-r0 do_package: QA Issue: cifs-
 PNBLACKLIST[linux-atm] ?= "ERROR: linux-atm-2.5.2-r0 do_package_qa: QA Issue: linux-atm package is not obeying usrmerge distro feature. /lib should be relocated to /usr. [usrmerge]"
 # meta-openembedded/meta-oe/recipes-connectivity/lirc/lirc_0.9.4d.bb:do_package
 PNBLACKLIST[lirc] ?= "ERROR: lirc-0.9.4d-r0 do_package: SYSTEMD_SERVICE_lirc value lircmd.service does not exist"
-# phonet-utils removal sent in:
-# https://lists.openembedded.org/g/openembedded-devel/message/90533
-# will probably get merged in hardknott
-# meta-openembedded/meta-oe/recipes-connectivity/phonet-utils/phonet-utils_git.bb:do_package_qa
-PNBLACKLIST[phonet-utils] ?= "ERROR: phonet-utils-0.0.0+gitrAUTOINC+4acfa720fd-r2 do_package_qa: QA Issue: phonet-utils package is not obeying usrmerge distro feature. /lib should be relocated to /usr. [usrmerge]"
 # meta-openembedded/meta-oe/recipes-extended/boinc/boinc-client_7.12.bb:do_package
 PNBLACKLIST[boinc-client] ?= "ERROR: boinc-client-7.12-r0 do_package: SYSTEMD_SERVICE_boinc-client value boinc-client.service does not exist"
 # meta-openembedded/meta-oe/recipes-extended/scsirastools/scsirastools_1.6.6.bb:do_package
 PNBLACKLIST[scsirastools] ?= "ERROR: scsirastools-1.6.6-r0 do_package: QA Issue: scsirastools: Files/directories were installed but not shipped in any package"
-# meta-openembedded/meta-oe/recipes-extended/uml-utilities/uml-utilities_20040406.bb:do_package
-PNBLACKLIST[uml-utilities] ?= "ERROR: uml-utilities-20040406-r1 do_package: QA Issue: uml-utilities: Files/directories were installed but not shipped in any package"
 # meta-openembedded/meta-oe/recipes-graphics/dietsplash/dietsplash_git.bb:do_package
 PNBLACKLIST[dietsplash] ?= "ERROR: dietsplash-0.3-r1 do_package: QA Issue: dietsplash: Files/directories were installed but not shipped in any package"
 # meta-openembedded/meta-oe/recipes-security/tomoyo-tools/tomoyo-tools_2.5.0.bb:do_package
@@ -103,11 +96,6 @@ PNBLACKLIST[tomoyo-tools] ?= "ERROR: tomoyo-tools-2.5.0-r0 do_package: QA Issue:
 PNBLACKLIST[tcsh] ?= "ERROR: tcsh-6.20.00-r0 do_install: Function failed: do_install: ln: failed to create symbolic link tmp-glibc/work/raspberrypi4-webos-linux-gnueabi/tcsh/6.20.00-r0/image/usr/bin/tcsh: File exists"
 # meta-openembedded/meta-oe/recipes-support/gradm/gradm_3.1.bb:do_package
 PNBLACKLIST[gradm] ?= "ERROR: gradm-3.1-r0 do_package: QA Issue: gradm: Files/directories were installed but not shipped in any package"
-# Fix sent upstream in:
-# https://lists.openembedded.org/g/openembedded-devel/message/90578
-# will probably get merged in hardknott
-# meta-openembedded/meta-oe/recipes-support/libsmi/libsmi_0.5.0.bb:do_package_qa
-PNBLACKLIST[libsmi] ?= "ERROR: libsmi-0.5.0-r0 do_package_qa: QA Issue: /usr/bin/smistrip contained in package libsmi requires /usr/bin/sh, but no providers found in RDEPENDS_libsmi? [file-rdeps]"
 # meta-raspberrypi/recipes-multimedia/omxplayer/omxplayer_git.bb:do_compile
 PNBLACKLIST[omxplayer] ?= "ERROR: omxplayer-git-r4 do_compile: Function failed: do_compile: DllAvFormat.h:117:51: error: ::avio_feof has not been declared"
 # meta-virtualization/recipes-containers/lxcfs/lxcfs_3.0.1.bb:do_package
@@ -117,15 +105,6 @@ PNBLACKLIST[lxcfs] ?= "ERROR: lxcfs-3.0.1-r0 do_package: SYSTEMD_SERVICE_lxcfs v
 PNBLACKLIST[wireguard-tools] ?= "Depends on blacklisted wireguard-module"
 # meta-oe/dynamic-layers/meta-python/recipes-extended/lcdproc/lcdproc_git.bb
 PNBLACKLIST[lcdproc] ?= "Depends on blacklisted lirc"
-
-# telepathy-glib fix sent in:
-# https://lists.openembedded.org/g/openembedded-devel/message/90534
-# will probably get merged in hardknott
-# meta-openembedded/meta-oe/recipes-connectivity/telepathy/telepathy-glib_0.24.1.bb:do_configure
-PNBLACKLIST[telepathy-glib] ?= "ERROR: telepathy-glib-0.24.1-r0 do_configure: configure failed: configure: error: GObject-Introspection must be enabled for Vala bindings"
-
-# telepathy-glib will probably get fixed in hardknott
-PNBLACKLIST[telepathy-idle] ?= "Depends on blacklisted telepathy-glib"
 
 # And few more in dunfell
 # meta-openembedded/meta-oe/recipes-support/libgusb/libgusb_git.bb:do_configure
@@ -139,11 +118,6 @@ PNBLACKLIST[xen-tools] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold',
 PNBLACKLIST[xen-python2] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'Depends on blacklisted xen-tools', '', d)}"
 # meta-virtualization/recipes-extended/xen/xen_git.bb
 PNBLACKLIST[xen] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'Depends on blacklisted xen-tools', '', d)}"
-
-# the following python recipes are an exception, because they need to be blacklisted even when python(2) itself is unblacklisted with I_SWEAR_TO_MIGRATE_TO_PYTHON3
-# meta-python2/recipes-devtools/python/python-snimpy_0.8.13.bb
-# libsmi should be unblacklisted in hardknott
-PNBLACKLIST[python-snimpy] ?= "Depends on blacklisted libsmi"
 
 # all target python2 recipes from meta-python2 and meta-oe
 require conf/distro/include/python2-target-recipes-blacklist.inc
