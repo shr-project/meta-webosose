@@ -41,3 +41,5 @@ S = "${WORKDIR}/git"
 #  g_print(g_variant_get_type_string(arguments));
 #                                              ^
 SECURITY_STRINGFORMAT = ""
+
+SRC_URI += "file://0001-bluez5meshadvprovisioner.h-don-t-include-freedesktop.patch"
