@@ -84,6 +84,14 @@ EXTRA_WEBOS_WERROR_pn-webkitgtk = ""
 # mpich-3.4.1/src/mpl/src/sock/mpl_sockaddr.c:144:1: error: control reaches end of non-void function [-Werror=return-type]
 # http://gecko.lge.com/Errors/Details/126261
 EXTRA_WEBOS_WERROR_pn-mpich = ""
+# audit/3.0.1-r0/git/src/libev/ev_iouring.c:300:1: error: no return statement in function returning non-void [-Werror=return-type]
+# http://gecko.lge.com/Errors/Details/175789
+EXTRA_WEBOS_WERROR_pn-audit = ""
+# mtools-4.0.29/mk_direntry.c:308:1: error: control reaches end of non-void function [-Werror=return-type]
+# introduced in:
+# https://git.openembedded.org/openembedded-core/commit/?id=4d117a12bf0d25848c18ccda17e047b60af8bb67
+# http://gecko.lge.com/Errors/Details/186495
+EXTRA_WEBOS_WERROR_pn-mtools = ""
 
 TARGET_CC_ARCH_append = " ${EXTRA_WEBOS_WERROR}"
 
