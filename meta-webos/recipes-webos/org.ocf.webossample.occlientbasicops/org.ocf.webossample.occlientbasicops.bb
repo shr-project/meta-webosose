@@ -34,6 +34,7 @@ SRC_URI += " \
     file://0002-webOS-Fix-build-error-detected-by-gcc8.patch \
     file://0001-webOS-Apply-new-ACG-policy-in-test-applications.patch \
     file://0001-webOS-Apply-proper-ACG-group-name-in-test-appl.patch \
+    file://0001-UnpackAll.py-fix-compatibility-with-SCons-4.patch \
 "
 
 EXTRA_OESCONS += " \
