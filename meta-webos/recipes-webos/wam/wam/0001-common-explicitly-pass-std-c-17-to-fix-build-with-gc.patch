@@ -1,0 +1,47 @@
+From 8cb939c8dce652675cd856ff75d4e1088cabfcee Mon Sep 17 00:00:00 2001
+From: Martin Jansa <martin.jansa@lge.com>
+Date: Sun, 20 Jun 2021 04:42:23 -0700
+Subject: [PATCH] common: explicitly pass -std=c++17 to fix build with gcc-11
+
+:Release Notes:
+
+:Detailed Notes:
+Fixes:
+NOTE: recipe wam-1.0.2-51-r38: task do_compile: Started
+ERROR: wam-1.0.2-51-r38 do_compile: oe_runmake failed
+...
+i686-webos-linux-g++  -m32 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security -Werror=return-type --sysroot=/jenkins/mjansa/build/webos/honister/BUILD/work/qemux86-webos-linux/wam/1.0.2-51-r38/recipe-sysroot -c -pipe -O2 -pipe -g -feliminate-unused-debug-types -fmacro-prefix-map=/jenkins/mjansa/build/webos/honister/BUILD/work/qemux86-webos-linux/wam/1.0.2-51-r38=/usr/src/debug/wam/1.0.2-51-r38                      -fdebug-prefix-map=/jenkins/mjansa/build/webos/honister/BUILD/work/qemux86-webos-linux/wam/1.0.2-51-r38=/usr/src/debug/wam/1.0.2-51-r38                      -fdebug-prefix-map=/jenkins/mjansa/build/webos/honister/BUILD/work/qemux86-webos-linux/wam/1.0.2-51-r38/recipe-sysroot=                      -fdebug-prefix-map=/jenkins/mjansa/build/webos/honister/BUILD/work/qemux86-webos-linux/wam/1.0.2-51-r38/recipe-sysroot-native=  -fvisibility-inlines-hidden  -fno-rtti -fno-exceptions -Wall -fpermissive -funwind-tables -std=c++14 -Wno-psabi -Werror -O2 -D_REENTRANT -fPIC -DWAM_DATA_DIR=/media/cryptofs/.webappmanager/ -DPLATFORM_WEBOS -DQT_NO_DEBUG -DQT_CORE_LIB -I../git -I. -I../git/src -I../git/src/core -I../git/src/platform -I../git/src/platform/webengine -I../git/src/plugin -I../git/src/util -I../git/src/webos -I../recipe-sysroot/usr/include/webruntime -I../recipe-sysroot/usr/include/json-c -I../recipe-sysroot/usr/include/glib-2.0 -I../recipe-sysroot/usr/lib/glib-2.0/include -I../recipe-sysroot/usr/include/QtCore -Irelease-qemux86/.moc -I../recipe-sysroot/usr/lib/mkspecs/linux-oe-g++ -o release-qemux86/.obj/moc_WebPageBase.o release-qemux86/.moc/moc_WebPageBase.cpp
+In file included from /jenkins/mjansa/build/webos/honister/BUILD/work/qemux86-webos-linux/wam/1.0.2-51-r38/recipe-sysroot/usr/include/QtCore/qchar.h:43,
+                 from ../recipe-sysroot/usr/include/QtCore/qstring.h:50,
+                 from ../recipe-sysroot/usr/include/QtCore/QString:1,
+                 from ../git/src/core/PlugInService.h:20,
+                 from ../git/src/core/PlugInService.cpp:17:
+/jenkins/mjansa/build/webos/honister/BUILD/work/qemux86-webos-linux/wam/1.0.2-51-r38/recipe-sysroot/usr/include/QtCore/qglobal.h:96:6: error: #error "Qt requires a C++17 compiler"
+   96 | #    error "Qt requires a C++17 compiler"
+      |      ^~~~~
+
+:Testing Performed:
+Only build tested.
+
+:QA Notes:
+No change to image.
+
+:Issues Addressed:
+[PLAT-141293] Create GPVB with Yocto 3.4 Honister
+---
+ common.pri | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/common.pri b/common.pri
+index c46e8a1..aea3438 100644
+--- a/common.pri
++++ b/common.pri
+@@ -92,7 +92,7 @@ isEmpty(CHROMIUM_SRC_DIR) {
+ INCLUDEPATH += $${CHROMIUM_SRC_DIR}
+ 
+ QMAKE_CXXFLAGS += -fno-rtti -fno-exceptions -Wall -fpermissive -funwind-tables
+-QMAKE_CXXFLAGS += -std=c++14
++QMAKE_CXXFLAGS += -std=c++17
+ QMAKE_LFLAGS += -rdynamic
+ 
+ QMAKE_CFLAGS += -Wno-psabi
