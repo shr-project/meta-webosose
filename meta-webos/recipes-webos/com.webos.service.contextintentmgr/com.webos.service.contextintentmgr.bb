@@ -10,16 +10,16 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
 DEPENDS = "nodejs-module-node-red"
 
 COMPATIBLE_MACHINE = "^raspberrypi3$|^raspberrypi4$"
-COMPATIBLE_MACHINE_raspberrypi3-64 = "^$"
-COMPATIBLE_MACHINE_raspberrypi4-64 = "^$"
+COMPATIBLE_MACHINE:raspberrypi3-64 = "^$"
+COMPATIBLE_MACHINE:raspberrypi4-64 = "^$"
 
 WEBOS_VERSION = "1.0.0-15_164dac6257c940674dd1e00657d40bdc200144f2"
 PR = "r3"
 
 # The same restrition as nodejs (and nodejs-module-node-red)
-COMPATIBLE_MACHINE_armv4 = "(!.*armv4).*"
-COMPATIBLE_MACHINE_armv5 = "(!.*armv5).*"
-COMPATIBLE_MACHINE_mips64 = "(!.*mips64).*"
+COMPATIBLE_MACHINE:armv4 = "(!.*armv4).*"
+COMPATIBLE_MACHINE:armv5 = "(!.*armv5).*"
+COMPATIBLE_MACHINE:mips64 = "(!.*mips64).*"
 
 inherit systemd
 inherit webos_public_repo
@@ -32,10 +32,10 @@ inherit webos_machine_impl_dep
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
 S = "${WORKDIR}/git"
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${sysconfdir}/systemd/system/scripts
     install -v -m 744 ${S}/files/systemd/scripts/contextintentmgr.sh ${D}${sysconfdir}/systemd/system/scripts/
 }
 
-FILES_${PN} += "${webos_servicesdir} ${webos_sysconfdir}"
-SYSTEMD_SERVICE_${PN} = "contextintentmgr.service"
+FILES:${PN} += "${webos_servicesdir} ${webos_sysconfdir}"
+SYSTEMD_SERVICE:${PN} = "contextintentmgr.service"
