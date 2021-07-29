@@ -1,7 +1,7 @@
 # Copyright (c) 2019-2020 LG Electronics, Inc.
 
-EXTENDPRAUTO_append = "webosvirt1"
+EXTENDPRAUTO:append = "webosvirt1"
 
-RDEPENDS_${PN}_append = " \
+RDEPENDS:${PN}:append = " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'virtualization', 'docker-moby', '', d)} \
 "
