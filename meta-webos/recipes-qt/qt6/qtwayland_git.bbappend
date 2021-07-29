@@ -2,9 +2,9 @@
 
 inherit webos_qt_global
 
-EXTENDPRAUTO_append = "webos25"
+EXTENDPRAUTO:append = "webos25"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
 # More options for fine-tuned configuration
 PACKAGECONFIG[brcm] = "-DFEATURE_wayland_brcm=ON,-DFEATURE_wayland_brcm=OFF,"
@@ -21,9 +21,9 @@ PACKAGECONFIG[client-xdg-shell] = "-DFEATURE_wayland_client_xdg_shell=ON,-DFEATU
 PACKAGECONFIG = "wayland-server wayland-client client-wl-shell"
 
 # qtwayland-qmlplugins is not used in webos
-RRECOMMENDS_${PN}_remove = "${PN}-qmlplugins"
+RRECOMMENDS:${PN}:remove = "${PN}-qmlplugins"
 
-do_install_append() {
+do_install:append() {
     # Remove files unnecessary or conflict with qtwayland-webos
     rm -rf ${D}${QT6_INSTALL_PLUGINSDIR}/platforms \
         ${D}${QT6_INSTALL_PLUGINSDIR}/{wayland-decoration-client,wayland-graphics-integration-client} \
