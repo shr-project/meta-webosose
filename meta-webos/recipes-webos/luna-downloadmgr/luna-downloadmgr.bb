@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=89aea4e17d99a7cacdbeed46a0096b10 \
 "
 
 DEPENDS = "libpbnjson luna-service2 sqlite3 curl uriparser pmloglib jemalloc luna-prefs boost glib-2.0"
-RDEPENDS_${PN} = "applicationinstallerutility"
+RDEPENDS:${PN} = "applicationinstallerutility"
 
 WEBOS_VERSION = "4.0.0-10_377c6231315315aa1389fe66f2fe1af32d51a06d"
 PR = "r11"

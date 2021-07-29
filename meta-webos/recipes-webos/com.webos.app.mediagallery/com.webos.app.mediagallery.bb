@@ -15,9 +15,9 @@ LIC_FILES_CHKSUM = " \
 "
 
 DEPENDS = "qtdeclarative pmloglib luna-service2 libpbnjson"
-DEPENDS_append = " ${@ 'qtshadertools-native' if d.getVar('QT_VERSION', True) == '6' else '' }"
+DEPENDS:append = " ${@ 'qtshadertools-native' if d.getVar('QT_VERSION', True) == '6' else '' }"
 
-RDEPENDS_${PN} += "qml-webos-framework qml-webos-bridge"
+RDEPENDS:${PN} += "qml-webos-framework qml-webos-bridge"
 
 WEBOS_VERSION = "1.0.0-15_2726294995afb54941df42713727f6ba9d86fcba"
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
@@ -35,4 +35,4 @@ inherit webos_app
 QMAKE_PROFILES = "${S}/com.webos.app.mediagallery.pro"
 QE_QMAKE_PATH_HEADERS = "${QE_QMAKE_PATH_QT_HEADERS}"
 
-FILES_${PN} += "${webos_applicationsdir}"
+FILES:${PN} += "${webos_applicationsdir}"
