@@ -1,6 +1,6 @@
 # Copyright (c) 2021 LG Electronics, Inc.
 
-EXTENDPRAUTO_append = "webos1"
+EXTENDPRAUTO:append = "webos1"
 
 # this is missing in the upstream recipe, it detects that pkgconfig is missing:
 # -- Could NOT find PkgConfig (missing: PKG_CONFIG_EXECUTABLE)

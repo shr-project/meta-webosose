@@ -29,9 +29,9 @@ inherit webos_prerelease_dep
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
 S = "${WORKDIR}/git"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
-SRC_URI_append_qemux86 = " \
+SRC_URI:append:qemux86 = " \
     file://0001-display-count-check-for-emulator.patch \
 "
 

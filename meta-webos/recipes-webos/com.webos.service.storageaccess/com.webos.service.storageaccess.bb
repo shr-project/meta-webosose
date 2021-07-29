@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327 \
 DEPENDS= "glib-2.0 libxml2 luna-service2 pmloglib libgdrive libpbnjson curl gupnp"
 
 COMPATIBLE_MACHINE = "^raspberrypi4$|^qemux86$"
-COMPATIBLE_MACHINE_raspberrypi4-64 = "^$"
+COMPATIBLE_MACHINE:raspberrypi4-64 = "^$"
 
 WEBOS_VERSION = "1.0.0-16_20342cce50681c0c5b56dd9f4bdce56d9084656d"
 PR = "r4"
