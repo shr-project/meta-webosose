@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
 DEPENDS= "glib-2.0 libxml2 luna-service2 pmloglib libgdrive libpbnjson curl gupnp"
 
 COMPATIBLE_MACHINE = "^raspberrypi4$|^qemux86$"
-COMPATIBLE_MACHINE_raspberrypi4-64 = "^$"
+COMPATIBLE_MACHINE:raspberrypi4-64 = "^$"
 
 WEBOS_VERSION = "1.0.0-14_1367866c96eecbbdebe8f47ff075a1d7b06a2d78"
 PR = "r3"

@@ -8,13 +8,13 @@ PROVIDES = "virtual/webruntime"
 
 PR = "${INC_PR}.0"
 
-GN_ARGS_append = " use_x11=false"
+GN_ARGS:append = " use_x11=false"
 
 PACKAGECONFIG[debug] = "symbol_level=2,symbol_level=0"
 PACKAGECONFIG[debug-blink] = "blink_symbol_level=1,blink_symbol_level=0"
 
 # Since _remove is always applied LAST, we cannot implement
-# GN_ARGS_remove = "ozone_platform_wayland_external=true" here
+# GN_ARGS:remove = "ozone_platform_wayland_external=true" here
 # but thanks gn it overrides former gn args values with later ones
 # so we just add appropriate args to the end of its list:
 PACKAGECONFIG[google_ozone_wayland] = "\
@@ -24,9 +24,9 @@ PACKAGECONFIG[google_ozone_wayland] = "\
 
 PACKAGECONFIG[v8_lite] = "v8_enable_lite_mode=true,v8_enable_lite_mode=false"
 
-PACKAGECONFIG_remove="jumbo"
+PACKAGECONFIG:remove="jumbo"
 
-GN_ARGS_append = " \
+GN_ARGS:append = " \
   libdir=\"${libdir}\"\
   includedir=\"${includedir}\"\
   enable_mojom_closure_compile=false\

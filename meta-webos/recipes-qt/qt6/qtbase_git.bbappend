@@ -2,10 +2,10 @@
 
 inherit webos_qt_global
 
-EXTENDPRAUTO_append = "webos89"
+EXTENDPRAUTO:append = "webos89"
 
 # Remove LGPL3-only files
-python do_patch_append() {
+python do_patch:append() {
     bb.build.exec_func('remove_LGPL3', d)
 }
 
@@ -14,60 +14,60 @@ remove_LGPL3() {
 }
 
 # Disable features we don't use in all webOS products
-PACKAGECONFIG_DEFAULT_remove = "dbus"
+PACKAGECONFIG_DEFAULT:remove = "dbus"
 
 # Enable accessibility for qtquickcontrols
-PACKAGECONFIG_append = " accessibility"
+PACKAGECONFIG:append = " accessibility"
 
 # Disable widget features
-PACKAGECONFIG_remove = "widgets"
+PACKAGECONFIG:remove = "widgets"
 
 # Configure to use platform harfbuzz
-PACKAGECONFIG_append = " harfbuzz"
+PACKAGECONFIG:append = " harfbuzz"
 
 # Configure to compile with GL ES2 instead of default desktop GL
 PACKAGECONFIG_GL = "gles2"
 # We had this enabled in our old gpro/meta-qt5 recipe
-PACKAGECONFIG_append = " icu"
+PACKAGECONFIG:append = " icu"
 # We had this enabled in our old gpro/meta-qt5 recipe
-PACKAGECONFIG_append = " glib"
+PACKAGECONFIG:append = " glib"
 # We had this enabled in our old gpro/meta-qt5 recipe
-PACKAGECONFIG_append = " fontconfig"
+PACKAGECONFIG:append = " fontconfig"
 # We had this enabled in our old gpro/meta-qt5 recipe
-PACKAGECONFIG_append = " sql-sqlite"
+PACKAGECONFIG:append = " sql-sqlite"
 # No longer added automatically
 PACKAGECONFIG[gif] = "-DFEATURE_gif=ON,-DFEATURE_gif=OFF"
-PACKAGECONFIG_append = " gif"
+PACKAGECONFIG:append = " gif"
 # Needed since qtwayland 5.12
-PACKAGECONFIG_append_class-target = " xkbcommon"
+PACKAGECONFIG:append:class-target = " xkbcommon"
 # Disable loading text in image metadata
 PACKAGECONFIG[no-imageio-text-loading] = "-DFEATURE_imageio_text_loading=OFF,-DFEATURE_imageio_text_loading=ON"
-PACKAGECONFIG_append = " no-imageio-text-loading"
+PACKAGECONFIG:append = " no-imageio-text-loading"
 
 PACKAGECONFIG[linuxfb] = "-DFEATURE_linuxfb=ON,-DFEATURE_linuxfb=OFF"
-PACKAGECONFIG_remove = "linuxfb"
+PACKAGECONFIG:remove = "linuxfb"
 
 PACKAGECONFIG[ico] = "-DFEATURE_ico=ON,-DFEATURE_ico=OFF"
-PACKAGECONFIG_remove = "ico"
+PACKAGECONFIG:remove = "ico"
 
 PACKAGECONFIG[sessionmanager] = "-DFEATURE_sessionmanager=ON,-DFEATURE_sessionmanager=OFF"
-PACKAGECONFIG_remove = "sessionmanager"
+PACKAGECONFIG:remove = "sessionmanager"
 
 PACKAGECONFIG[xlib] = "-DFEATURE_xlib=ON,-DFEATURE_xlib=OFF"
-PACKAGECONFIG_remove = "xlib"
+PACKAGECONFIG:remove = "xlib"
 
 PACKAGECONFIG[eglfs-egldevice] = "-DFEATURE_eglfs_egldevice=ON,-DFEATURE_eglfs_egldevice=OFF"
-PACKAGECONFIG_remove = "eglfs-egldevice"
+PACKAGECONFIG:remove = "eglfs-egldevice"
 
 PACKAGECONFIG[system-sqlite] = "-DFEATURE_system_sqlite=ON,-DFEATURE_system_sqlite=OFF"
-PACKAGECONFIG_append = " system-sqlite"
+PACKAGECONFIG:append = " system-sqlite"
 
 PACKAGECONFIG[system-pcre2] = "-DFEATURE_system_pcre2=ON,-DFEATURE_system_pcre2=OFF"
-PACKAGECONFIG_remove = "system-pcre2"
+PACKAGECONFIG:remove = "system-pcre2"
 
-PACKAGECONFIG_remove = "libinput"
+PACKAGECONFIG:remove = "libinput"
 
-PACKAGECONFIG_append = " kms"
+PACKAGECONFIG:append = " kms"
 
 # Depending on whether LTTNG support is enabled or not for the build we need to
 # depend on the LTTNG providers to not let the build fail
@@ -76,30 +76,30 @@ inherit webos_lttng
 #PACKAGECONFIG_append = "${@ ' lttng' if '${WEBOS_LTTNG_ENABLED}' == '1' else '' }"
 
 # Do not build tests/ in webos
-PACKAGECONFIG_remove = "tests"
+PACKAGECONFIG:remove = "tests"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
 # Upstream-Status: Backport
-SRC_URI_append = " \
+SRC_URI:append = " \
     file://0001-Fix-binding-functor-addressing-in-QProperty.patch \
 "
 
 # Upstream-Status: Inappropriate
-SRC_URI_append = " \
+SRC_URI:append = " \
     file://9901-Disable-Faux-bolding-in-Qts-FreeType-FontEngine.patch \
 "
 
 # TODO: qtbase-native fails to build with g++ from hosttools(7.5.0)
 # Drop this once our build host has a newer version of g++.
-SRC_URI_append_class-native = " \
+SRC_URI:append:class-native = " \
     file://0001-Fix-compile-error-with-g-7.5.0.patch \
 "
 
 # Flags needed for webOS
-TARGET_CXXFLAGS_append = " \
+TARGET_CXXFLAGS:append = " \
     -DQFONTCACHE_MIN_COST=512 \
 "
 
 VIRTUAL-RUNTIME_gpu-libs ?= ""
-RDEPENDS_${PN} += "${VIRTUAL-RUNTIME_gpu-libs}"
+RDEPENDS:${PN} += "${VIRTUAL-RUNTIME_gpu-libs}"

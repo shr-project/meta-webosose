@@ -10,7 +10,7 @@ file://oss-pkg-info.yaml;md5=2bdfe040dcf81b4038370ae96036c519 \
 "
 
 DEPENDS = "glib-2.0 libpbnjson luna-service2 pmloglib luna-prefs boost pulseaudio"
-RDEPENDS_${PN} = "\
+RDEPENDS:${PN} = "\
     libasound \
     libasound-module-pcm-pulse \
     libpulsecore \
@@ -46,6 +46,6 @@ EXTRA_OECMAKE += "${@bb.utils.contains('WEBOS_LTTNG_ENABLED', '1', '-DWEBOS_LTTN
 EXTRA_OECMAKE += "-DAUDIOD_PALM_LEGACY:BOOLEAN=True"
 EXTRA_OECMAKE += "-DAUDIOD_TEST_API:BOOLEAN=True"
 
-FILES_${PN} += "${datadir}/alsa/"
-FILES_${PN} += "/data"
-FILES_${PN} += "${webos_mediadir}/internal"
+FILES:${PN} += "${datadir}/alsa/"
+FILES:${PN} += "/data"
+FILES:${PN} += "${webos_mediadir}/internal"

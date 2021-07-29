@@ -19,11 +19,11 @@ TARGET = "v8_snapshot_clang_${TARGET_CPU}/mksnapshot"
 
 DEPENDS = "glib-2.0-native python-native gcc-runtime"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
 file://0001-op-ds-build-Added-mksnapshot.gn-for-mksnapshot-targe.patch \
 "
 
-GN_ARGS_append = "\
+GN_ARGS:append = "\
     use_pmlog=false \
 "
 
