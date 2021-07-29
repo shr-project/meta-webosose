@@ -14,10 +14,10 @@ DEPENDS = "systemd"
 
 VIRTUAL-RUNTIME_rdx-utils ?= "rdxd"
 VIRTUAL-RUNTIME_bash ?= "bash"
-RDEPENDS_${PN} = "${VIRTUAL-RUNTIME_init_manager} ${VIRTUAL-RUNTIME_rdx-utils} ${VIRTUAL-RUNTIME_bash} python3"
+RDEPENDS:${PN} = "${VIRTUAL-RUNTIME_init_manager} ${VIRTUAL-RUNTIME_rdx-utils} ${VIRTUAL-RUNTIME_bash} python3"
 
 PROVIDES = "initscripts"
-RPROVIDES_${PN} = "initscripts initd-functions"
+RPROVIDES:${PN} = "initscripts initd-functions"
 
 WEBOS_VERSION = "3.0.0-72_03106cb131a172998eae45833a79187400ba7283"
 PR = "r16"
@@ -34,4 +34,4 @@ S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += "-DWEBOS_QTTESTABILITY_ENABLED:BOOL=${@ '1' if d.getVar('WEBOS_DISTRO_PRERELEASE',True) != '' else '0'}"
 
-FILES_${PN} += "${base_libdir}"
+FILES:${PN} += "${base_libdir}"
