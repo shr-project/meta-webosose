@@ -10,12 +10,12 @@ LIC_FILES_CHKSUM = " \
 "
 
 DEPENDS = "glib-2.0 pmloglib glib-2.0-native"
-RDEPENDS_${PN} += "bluez5"
+RDEPENDS:${PN} += "bluez5"
 
 # Handle case where it hasn't been set in DISTRO.conf/MACHINE.conf .
 WEBOS_BLUETOOTH_ENABLED_SERVICE_CLASSES ??= ""
 # Add runtime dependency on bluez5 OBEX service when we have to support FTP
-RDEPENDS_${PN} += "${@ bb.utils.contains('WEBOS_BLUETOOTH_ENABLED_SERVICE_CLASSES', 'FTP', 'bluez5-obex', '', d)}"
+RDEPENDS:${PN} += "${@ bb.utils.contains('WEBOS_BLUETOOTH_ENABLED_SERVICE_CLASSES', 'FTP', 'bluez5-obex', '', d)}"
 
 WEBOS_VERSION = "0.1.0-75_a9d9cb0483288289f2911c809b112f13ddf01b02"
 PR = "r3"

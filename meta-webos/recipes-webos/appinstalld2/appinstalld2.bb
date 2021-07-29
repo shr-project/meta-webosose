@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=89aea4e17d99a7cacdbeed46a0096b10 \
 "
 
 DEPENDS = "glib-2.0 luna-service2 libpbnjson pmloglib pmtrace boost icu"
-RDEPENDS_${PN} = "applicationinstallerutility ecryptfs-utils librolegen"
+RDEPENDS:${PN} = "applicationinstallerutility ecryptfs-utils librolegen"
 
 WEBOS_VERSION = "1.0.0-35_7fadf021243881a8d371fcb336971b5787faabb9"
 PR = "r4"

@@ -29,20 +29,20 @@ COMPATIBLE_MACHINE = "^qemux86$|^raspberrypi3$|^raspberrypi3-64$|^raspberrypi4$|
 # raspberrypi4 and qemux86 uses @gav branch
 PR = "r9"
 DEPENDS = "boost gstreamer1.0 gstreamer1.0-plugins-base gstreamer1.0-plugins-bad umediaserver media-resource-calculator webos-wayland-extensions"
-DEPENDS_append_rpi = " virtual/libomxil"
+DEPENDS:append:rpi = " virtual/libomxil"
 
 WEBOS_GIT_PARAM_BRANCH = "@gav"
 WEBOS_VERSION = "1.0.0-21.gav.22_bfda47abcd88d2f27e4682ea85786464439b6144"
-SRC_URI_append = " file://0001-LunaServiceClient.cpp-include-string-to-fix-build-wi.patch"
+SRC_URI:append = " file://0001-LunaServiceClient.cpp-include-string-to-fix-build-wi.patch"
 
 # raspberrypi3 uses @21.master branch
-DEPENDS_remove_raspberrypi3 = "webos-wayland-extensions"
-WEBOS_GIT_PARAM_BRANCH_raspberrypi3 = "@21.master"
-WEBOS_VERSION_raspberrypi3 = "1.0.0-21.master.1_5780fa2b8466405a9873df1e64621f5930e00686"
-SRC_URI_remove_raspberrypi3 = " file://0001-LunaServiceClient.cpp-include-string-to-fix-build-wi.patch"
+DEPENDS:remove:raspberrypi3 = "webos-wayland-extensions"
+WEBOS_GIT_PARAM_BRANCH:raspberrypi3 = "@21.master"
+WEBOS_VERSION:raspberrypi3 = "1.0.0-21.master.1_5780fa2b8466405a9873df1e64621f5930e00686"
+SRC_URI:remove:raspberrypi3 = " file://0001-LunaServiceClient.cpp-include-string-to-fix-build-wi.patch"
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
 S = "${WORKDIR}/git"
 
 FILES_SOLIBSDEV = ""
-FILES_${PN} += "${libdir}/*.so"
+FILES:${PN} += "${libdir}/*.so"
