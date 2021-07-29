@@ -2,9 +2,9 @@
 
 require gstreamer1.0-webos-common.inc
 
-EXTENDPRAUTO_append_rpi = "webosrpi1"
+EXTENDPRAUTO:append:rpi = "webosrpi1"
 
-WEBOS_REPO_NAME_rpi = "gst-libav"
+WEBOS_REPO_NAME:rpi = "gst-libav"
 
 #WEBOS_VERSION_rpi = "1.14.4-2_6910361bc5b2fd4b98bd3af8f1674918d755f60c"
 

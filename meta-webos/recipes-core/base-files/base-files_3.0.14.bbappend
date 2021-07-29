@@ -5,7 +5,7 @@ AUTHOR = "Herb Kuta <herb.kuta@lge.com>"
 inherit webos_filesystem_paths
 inherit webos_machine_impl_dep
 
-EXTENDPRAUTO_append = "webos13"
+EXTENDPRAUTO:append = "webos13"
 
 dirs700 = " \
     ${webos_db8datadir} \
@@ -25,7 +25,7 @@ dirs777 = " \
     ${webos_mountablestoragedir} \
 "
 
-do_install_prepend() {
+do_install:prepend() {
     local d
     for d in ${dirs700}; do
         install -v -m 0700 -d ${D}$d
@@ -38,7 +38,7 @@ do_install_prepend() {
     fi
 }
 
-do_install_append() {
+do_install:append() {
     # additional entries for fstab
     bbnote "Adding entries to ${sysconfdir}/fstab"
     generate_fstab_entries >> ${D}${sysconfdir}/fstab
@@ -55,7 +55,7 @@ do_install_append() {
         || bbfatal "Found records in fstab with identical mount-points: $collisions"
 }
 
-do_install_append_hardware() {
+do_install:append:hardware() {
     # For coredump handling
     if ${@oe.utils.conditional('DISTRO', 'webos', 'true', 'false', d)} ; then
         echo "" >> ${D}${sysconfdir}/profile

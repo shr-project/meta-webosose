@@ -10,8 +10,8 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
 DEPENDS = "glib-2.0 luna-service2 libpbnjson pmloglib json-c pulseaudio googleapis grpc"
 
 COMPATIBLE_MACHINE = "^raspberrypi3$|^raspberrypi4$"
-COMPATIBLE_MACHINE_raspberrypi3-64 = "^$"
-COMPATIBLE_MACHINE_raspberrypi4-64 = "^$"
+COMPATIBLE_MACHINE:raspberrypi3-64 = "^$"
+COMPATIBLE_MACHINE:raspberrypi4-64 = "^$"
 
 WEBOS_VERSION = "1.0.0-18_8c53a4bfdc7a115456dc2e06eb9a06c74eadc4ca"
 PR = "r3"
@@ -27,4 +27,4 @@ S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += "-DGOOGLEAPIS_PATH=${STAGING_INCDIR}/google"
 
-FILES_${PN} += "${webos_sysbus_datadir}"
+FILES:${PN} += "${webos_sysbus_datadir}"

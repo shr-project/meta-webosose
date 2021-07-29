@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
 # Dependencies:
 #   - nodejs-native to get node & npm
 #   - coreutils-native to use timeout utility to prevent frozen NPM processes
-DEPENDS_append = " nodejs-native coreutils-native"
+DEPENDS:append = " nodejs-native coreutils-native"
 
 inherit webos_enact_repo
 inherit webos_npm_env
@@ -77,7 +77,7 @@ do_install() {
     cp -R --no-dereference --preserve=mode,links -v ${S}/* ${D}${base_prefix}/opt
 }
 
-sysroot_stage_all_append() {
+sysroot_stage_all:append() {
     # files installed to /opt don't get staged by default so we must force /opt to be staged
     sysroot_stage_dir ${D}${base_prefix}/opt ${SYSROOT_DESTDIR}${base_prefix}/opt
 }
