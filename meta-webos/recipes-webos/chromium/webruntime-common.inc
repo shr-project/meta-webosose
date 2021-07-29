@@ -43,7 +43,7 @@ WEBOSOSE_GIT_REPO_COMPLETE_V8 ?= "${WEBOSOSE_GIT_REPO}/${WEBOS_REPO_NAME_V8}${WE
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE};name=main"
 
-SRC_URI_append = "\
+SRC_URI:append = "\
     ${WEBOSOSE_GIT_REPO_COMPLETE_V8};destsuffix=git/src/v8;name=v8 \
 "
 
@@ -100,28 +100,28 @@ EXTRA_OEGN_GOLD = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'use_go
 GN_ARGS += "${EXTRA_OEGN_GOLD}"
 
 TARGET_CPU = "${@gn_arch_name(TARGET_ARCH)}"
-GN_ARGS_append = " target_cpu=\"${TARGET_CPU}\""
+GN_ARGS:append = " target_cpu=\"${TARGET_CPU}\""
 
 # ARM builds need special additional flags (see ${S}/build/config/arm.gni).
 ARM_FLOAT_ABI = "${@bb.utils.contains('TUNE_FEATURES', 'callconvention-hard', 'hard', 'softfp', d)}"
-GN_ARGS_append_armv6 = " arm_arch=\"armv6\" arm_version=6 arm_float_abi=\"${ARM_FLOAT_ABI}\""
-GN_ARGS_append_armv7a = " arm_arch=\"armv7-a\" arm_version=7 arm_float_abi=\"${ARM_FLOAT_ABI}\""
-GN_ARGS_append_armv7ve = " arm_arch=\"armv7ve\" arm_version=7 arm_float_abi=\"${ARM_FLOAT_ABI}\""
+GN_ARGS:append:armv6 = " arm_arch=\"armv6\" arm_version=6 arm_float_abi=\"${ARM_FLOAT_ABI}\""
+GN_ARGS:append:armv7a = " arm_arch=\"armv7-a\" arm_version=7 arm_float_abi=\"${ARM_FLOAT_ABI}\""
+GN_ARGS:append:armv7ve = " arm_arch=\"armv7ve\" arm_version=7 arm_float_abi=\"${ARM_FLOAT_ABI}\""
 # tcmalloc's atomicops-internals-arm-v6plus.h uses the "dmb" instruction that
 # is not available on (some?) ARMv6 models, which causes the build to fail.
-GN_ARGS_append_armv6 += 'use_allocator="none"'
+GN_ARGS:append:armv6 += 'use_allocator="none"'
 # The WebRTC code fails to build on ARMv6 when NEON is enabled.
 # https://bugs.chromium.org/p/webrtc/issues/detail?id=6574
-GN_ARGS_append_armv6 += 'arm_use_neon=false'
+GN_ARGS:append:armv6 += 'arm_use_neon=false'
 
 # Doesn't build for armv[45]*
 COMPATIBLE_MACHINE = "(-)"
-COMPATIBLE_MACHINE_aarch64 = "(.*)"
-COMPATIBLE_MACHINE_armv6 = "(.*)"
-COMPATIBLE_MACHINE_armv7a = "(.*)"
-COMPATIBLE_MACHINE_armv7ve = "(.*)"
-COMPATIBLE_MACHINE_x86 = "(.*)"
-COMPATIBLE_MACHINE_x86-64 = "(.*)"
+COMPATIBLE_MACHINE:aarch64 = "(.*)"
+COMPATIBLE_MACHINE:armv6 = "(.*)"
+COMPATIBLE_MACHINE:armv7a = "(.*)"
+COMPATIBLE_MACHINE:armv7ve = "(.*)"
+COMPATIBLE_MACHINE:x86 = "(.*)"
+COMPATIBLE_MACHINE:x86-64 = "(.*)"
 
 do_configure() {
     export GYP_CHROMIUM_NO_ACTION=1

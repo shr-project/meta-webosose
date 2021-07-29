@@ -13,8 +13,8 @@ DEPENDS = "glib-2.0 luna-service2 json-c pmloglib libgoogleassistant"
 
 # libgoogleassistant contains prebuilt binaries useful only on raspberrypi3
 COMPATIBLE_MACHINE = "^raspberrypi3$|^raspberrypi4$"
-COMPATIBLE_MACHINE_raspberrypi3-64 = "^$"
-COMPATIBLE_MACHINE_raspberrypi4-64 = "^$"
+COMPATIBLE_MACHINE:raspberrypi3-64 = "^$"
+COMPATIBLE_MACHINE:raspberrypi4-64 = "^$"
 
 WEBOS_VERSION = "1.0.0-10_bca8a9b3669caae7173ea6196cdbfd86a88bb666"
 PR = "r4"
