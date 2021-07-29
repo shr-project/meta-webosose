@@ -1,7 +1,7 @@
 # Copyright (c) 2020 LG Electronics, Inc.
 
-EXTENDPRAUTO_append = "webosrpi4"
+EXTENDPRAUTO:append = "webosrpi4"
 
-DEPENDS_append = " nmeaparser"
+DEPENDS:append = " nmeaparser"
 
-NYX_MODULES_REQUIRED_append = "NYXMOD_OW_GPS;"
+NYX_MODULES_REQUIRED:append = "NYXMOD_OW_GPS;"
