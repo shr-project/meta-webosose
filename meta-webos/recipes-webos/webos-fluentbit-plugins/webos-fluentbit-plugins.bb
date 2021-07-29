@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://LICENSE;md5=89aea4e17d99a7cacdbeed46a0096b10 \
 "
 
 DEPENDS = "glib-2.0 luna-service2 libpbnjson fluentbit"
-RDEPENDS_${PN} = "nyx-utils python3-core python3-requests python3-atlassian-python-api"
+RDEPENDS:${PN} = "nyx-utils python3-core python3-requests python3-atlassian-python-api"
 
 WEBOS_VERSION = "1.0.0-20_c85f2e8912ee45fdad054925257990002528ae39"
 PR = "r3"
