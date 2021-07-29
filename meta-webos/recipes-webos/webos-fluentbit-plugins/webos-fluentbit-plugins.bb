@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
 "
 
 DEPENDS = "glib-2.0 luna-service2 json-c libpbnjson fluentbit"
-RDEPENDS_${PN} = "python3-core python3-requests python3-atlassian-python-api"
+RDEPENDS:${PN} = "python3-core python3-requests python3-atlassian-python-api"
 
 WEBOS_VERSION = "1.0.0-10_7f9a2001eb150547d16379be3029c23090d3f759"
 PR = "r1"
