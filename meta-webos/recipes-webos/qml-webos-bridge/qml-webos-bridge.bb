@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = " \
 "
 
 DEPENDS = "qtdeclarative luna-service2 glib-2.0"
-RDEPENDS_${PN} += "qml-webos-components"
+RDEPENDS:${PN} += "qml-webos-components"
 
 WEBOS_VERSION = "1.0.0-126_5279a79c5525127f6ab5d865343f418cad6dbfb7"
 PR = "r18"
@@ -29,4 +29,4 @@ OE_QMAKE_PATH_HEADERS = "${OE_QMAKE_PATH_QT_HEADERS}"
 # Perform extra QML validation
 WEBOS_QMLLINT_EXTRA_VALIDATION = "1"
 
-FILES_${PN} += "${OE_QMAKE_PATH_QML}/WebOSServices/*"
+FILES:${PN} += "${OE_QMAKE_PATH_QML}/WebOSServices/*"
