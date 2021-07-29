@@ -10,14 +10,14 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7ca
 "
 
 PNLIBSEGFAULT = "libsegfault-webos"
-SUMMARY_${PNLIBSEGFAULT} = "webOS edition of libSegFault.so that is universally preloaded"
+SUMMARY:${PNLIBSEGFAULT} = "webOS edition of libSegFault.so that is universally preloaded"
 
 DEPENDS = "librdx pmloglib glib-2.0 libunwind"
 PROVIDES = "libsegfault"
-RDEPENDS_${PN} = "${PNLIBSEGFAULT} gzip"
-RPROVIDES_${PNLIBSEGFAULT} = "libsegfault"
-RREPLACES_${PNLIBSEGFAULT} = "libsegfault"
-RCONFLICTS_${PNLIBSEGFAULT} = "libsegfault"
+RDEPENDS:${PN} = "${PNLIBSEGFAULT} gzip"
+RPROVIDES:${PNLIBSEGFAULT} = "libsegfault"
+RREPLACES:${PNLIBSEGFAULT} = "libsegfault"
+RCONFLICTS:${PNLIBSEGFAULT} = "libsegfault"
 
 WEBOS_VERSION = "1.2.5-4_bfc3dd73a27b474eaf6051bb358a40bd1593ddc2"
 PR = "r13"
@@ -42,7 +42,7 @@ EXTRA_OECMAKE += "-DENABLE_CORE_DUMP:STRING=${@bb.utils.contains('WEBOS_DISTRO_P
 # installation into ${base_libdir}. It also doesn't support building unversioned
 # libraries, which libSegFault.so should be. Fix up the filename name so that it
 # doesn't look like it's versioned, even though its SONAME is (benignly).
-do_install_append() {
+do_install:append() {
     # If a versioned library has been built, libSegFault.so will always be a symlink
     if [ -L ${D}${libdir}/libSegFault.so ]; then
         rm -vf ${D}${libdir}/libSegFault.so
@@ -57,19 +57,19 @@ do_install_append() {
 PACKAGES =+ "${PNLIBSEGFAULT}"
 # Without this, the package is named libsegfault1. Note that libSegFault.so is
 # always unversioned.
-DEBIANNAME_${PNLIBSEGFAULT} = "${PNLIBSEGFAULT}"
+DEBIANNAME:${PNLIBSEGFAULT} = "${PNLIBSEGFAULT}"
 
 # In order to keep in sync with glibc's libSegFault.so, an unversioned
-# libSegFault.so (without a SONAME) symlink needs to go into FILES_${PNLIBSEGFAULT}
-FILES_${PNLIBSEGFAULT} = "${base_libdir}/*.so*"
+# libSegFault.so (without a SONAME) symlink needs to go into FILES:${PNLIBSEGFAULT}
+FILES:${PNLIBSEGFAULT} = "${base_libdir}/*.so*"
 FILES_SOLIBSDEV = ""
 
 # Disable QA insanity checks that don't apply to this component
 #
 # dev-so: Suppress error when *.so is not a link to versioned equivalent
-INSANE_SKIP_${PNLIBSEGFAULT} = "dev-so"
+INSANE_SKIP:${PNLIBSEGFAULT} = "dev-so"
 
-pkg_postinst_${PNLIBSEGFAULT}() {
+pkg_postinst:${PNLIBSEGFAULT}() {
     if [ -e $D${sysconfdir}/ld.so.preload -a -s $D${sysconfdir}/ld.so.preload ]; then
         # remove old libSegFault entries
         sed -i '/libSegFault/d' $D${sysconfdir}/ld.so.preload
@@ -87,7 +87,7 @@ ${libdir}/libSegFault.so" $D${sysconfdir}/ld.so.preload
     fi
 }
 
-pkg_prerm_${PNLIBSEGFAULT}() {
+pkg_prerm:${PNLIBSEGFAULT}() {
     # remove libSegFault entry from /etc/ld.so.preload
     sed -i '/libSegFault/d' $D${sysconfdir}/ld.so.preload
     if [ ! -s $D${sysconfdir}/ld.so.preload ]; then
