@@ -2,31 +2,31 @@
 
 inherit webos_qt_global
 
-EXTENDPRAUTO_append = "webos73"
+EXTENDPRAUTO:append = "webos73"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
 # Upstream-Status: Backport, Submitted
-SRC_URI_append_class-target = " \
+SRC_URI:append:class-target = " \
     file://0001-Check-if-a-device-in-knownPointingDevices-is-destroy.patch \
 "
 
 # Upstream-Status: Inappropriate
-SRC_URI_append = " \
+SRC_URI:append = " \
     file://0001-Revert-use-boolean-for-when-property.patch \
     file://0002-Revert-Don-t-hide-the-inputMethod-when-finishing-the.patch \
 "
 
 # Needed to workaround qmllint error
-SRC_URI_append_class-native = " \
+SRC_URI:append:class-native = " \
     file://0001-Allow-warnings-from-qmllint.patch \
 "
 
 # Supplement tool for qmllint
 inherit webos_qmake6_paths
-DEPENDS_append_class-native = " python3-regex-native"
-SRC_URI_append_class-native = " file://qmllint-supplement.py"
-do_install_append_class-native() {
+DEPENDS:append:class-native = " python3-regex-native"
+SRC_URI:append:class-native = " file://qmllint-supplement.py"
+do_install:append:class-native() {
     install -m 755 ${WORKDIR}/qmllint-supplement.py ${D}${OE_QMAKE_PATH_QT_BINS}
 }
 
@@ -36,7 +36,7 @@ do_install_append_class-native() {
 # ".../recipe-sysroot/usr/libexec/qmltyperegistrar"
 # The imported target "Qt6::qmldom" references the file
 # ".../recipe-sysroot/usr/bin/qmldom"
-SYSROOT_DIRS_append = " \
+SYSROOT_DIRS:append = " \
     ${bindir} \
     ${libexecdir} \
 "
