@@ -1,12 +1,12 @@
 # Copyright (c) 2021 LG Electronics, Inc.
 
-EXTENDPRAUTO_append_rpi = "webosrpi1"
+EXTENDPRAUTO:append:rpi = "webosrpi1"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
-PACKAGECONFIG_append_rpi = " dmabuf-client-buffer"
+PACKAGECONFIG:append:rpi = " dmabuf-client-buffer"
 
 # Upstream-Status: Inappropriate
-SRC_URI_append_rpi = " \
+SRC_URI:append:rpi = " \
     file://0001-Fix-build-error-when-finding-libdrm.patch \
 "

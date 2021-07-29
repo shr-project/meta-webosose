@@ -10,14 +10,14 @@ DEPENDS = "virtual/webruntime qtbase luna-service2 sqlite3 librolegen nyx-lib op
 PROVIDES = "webappmanager-webos"
 
 # webappmgr's upstart conf expects to be able to LD_PRELOAD ptmalloc3
-RDEPENDS_${PN} = "ptmalloc3"
+RDEPENDS:${PN} = "ptmalloc3"
 # webappmgr's upstart conf expects to have ionice available. Under OE-core, this is supplied by util-linux.
-RDEPENDS_${PN} += "util-linux"
-RDEPENDS_${PN} += "qtbase-plugins"
+RDEPENDS:${PN} += "util-linux"
+RDEPENDS:${PN} += "qtbase-plugins"
 
 #  webappmgr2's upstart conf expects setcpushares-task to be available
 VIRTUAL-RUNTIME_cpushareholder ?= "cpushareholder-stub"
-RDEPENDS_${PN} += "${VIRTUAL-RUNTIME_cpushareholder}"
+RDEPENDS:${PN} += "${VIRTUAL-RUNTIME_cpushareholder}"
 
 WEBOS_VERSION = "1.0.2-51_aa61db4d5d16060fc50018b9d0c56252259837c5"
 PR = "r39"
@@ -57,12 +57,12 @@ EXTRA_QMAKEVARS_PRE += "PLATFORM=${@'PLATFORM_' + '${DISTRO}'.upper().replace('-
 
 # chromium doesn't build for armv[45]*
 COMPATIBLE_MACHINE = "(-)"
-COMPATIBLE_MACHINE_aarch64 = "(.*)"
-COMPATIBLE_MACHINE_armv6 = "(.*)"
-COMPATIBLE_MACHINE_armv7a = "(.*)"
-COMPATIBLE_MACHINE_armv7ve = "(.*)"
-COMPATIBLE_MACHINE_x86 = "(.*)"
-COMPATIBLE_MACHINE_x86-64 = "(.*)"
+COMPATIBLE_MACHINE:aarch64 = "(.*)"
+COMPATIBLE_MACHINE:armv6 = "(.*)"
+COMPATIBLE_MACHINE:armv7a = "(.*)"
+COMPATIBLE_MACHINE:armv7ve = "(.*)"
+COMPATIBLE_MACHINE:x86 = "(.*)"
+COMPATIBLE_MACHINE:x86-64 = "(.*)"
 
 WAM_ERROR_SCRIPTS_PATH = "${S}/html-ose"
 
@@ -75,14 +75,14 @@ PLATFORM_DECODER_ENABLED ?= "true"
 # Flag to control runtime flag for platform encoder
 PLATFORM_ENCODER_ENABLED ?= "true"
 
-do_configure_prepend() {
+do_configure:prepend() {
     if [ -f "${S}/files/launch/systemd/webapp-mgr.sh.in" ]; then
       cp ${S}/files/launch/systemd/webapp-mgr.sh.in ${B}/webapp-mgr.sh
     fi
     cp ${S}/files/launch/systemd/webapp-mgr.service ${B}/webapp-mgr.service
 }
 
-do_configure_append() {
+do_configure:append() {
     sed -i -e "s/NETWORK_STABLE_TIMEOUT/NETWORK_QUIET_TIMEOUT/gI" -e "s/network-stable-timeout/network-quiet-timeout/gI" ${B}/webapp-mgr.sh
     sed -i '/export WAM_COMMON_SWITCHES=\" \\/a\    --disable-in-process-stack-traces \\' ${B}/webapp-mgr.sh
     sed -i '/export ENABLE_BLINK_FEATURES=/ s/$/,LocalResourceCodeCache,CustomEventExtension/' ${B}/webapp-mgr.sh
@@ -124,7 +124,7 @@ do_configure_append() {
     sed -i '/export WAM_COMMON_SWITCHES=\" \\/a\    --enable-accurate-seek \\' ${B}/webapp-mgr.sh
 }
 
-do_configure_append_qemux86() {
+do_configure:append:qemux86() {
     # Remove this condition once webos wam is synchronized to get systemd initscripts
     if [ -f "${B}/webapp-mgr.sh" ]; then
         # Disable media hardware acceleration
@@ -132,7 +132,7 @@ do_configure_append_qemux86() {
     fi
 }
 
-do_install_append() {
+do_install:append() {
     install -d ${D}${sysconfdir}/pmlog.d
     install -d ${D}${sysconfdir}/wam
     install -d ${D}${WAM_DATA_DIR}
@@ -145,7 +145,7 @@ do_install_append() {
     cp -vf ${WAM_ERROR_SCRIPTS_PATH}/* ${D}${datadir}/localization/${BPN}/
 }
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${sysconfdir}/pmlog.d \
     ${SYSTEMD_INSTALL_PATH} \
     ${sysconfdir}/wam \
