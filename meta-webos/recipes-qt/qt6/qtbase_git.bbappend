@@ -44,7 +44,7 @@ PACKAGECONFIG:append:class-target = " xkbcommon"
 PACKAGECONFIG[no-imageio-text-loading] = "-DFEATURE_imageio_text_loading=OFF,-DFEATURE_imageio_text_loading=ON"
 PACKAGECONFIG:append = " no-imageio-text-loading"
 
-PACKAGECONFIG[linuxfb] = "-DFEATURE:linuxfb=ON,-DFEATURE:linuxfb=OFF"
+PACKAGECONFIG[linuxfb] = "-DFEATURE_linuxfb=ON,-DFEATURE_linuxfb=OFF"
 PACKAGECONFIG:remove = "linuxfb"
 
 PACKAGECONFIG[ico] = "-DFEATURE_ico=ON,-DFEATURE_ico=OFF"
