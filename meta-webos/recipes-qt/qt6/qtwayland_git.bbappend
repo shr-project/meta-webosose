@@ -2,11 +2,11 @@
 
 inherit webos_qt_global
 
-EXTENDPRAUTO_append = "webos24"
+EXTENDPRAUTO:append = "webos24"
 
-FILESEXTRAPATHS_prepend := "${THISDIR}/${BPN}:"
+FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
-SRC_URI_append = " \
+SRC_URI:append = " \
     file://0001-Add-option-for-more-features.patch \
 "
 
@@ -30,4 +30,4 @@ PACKAGECONFIG[decoration-plugins] = "-DFEATURE_wayland_decoration_plugins=ON,-DF
 PACKAGECONFIG = "wayland-server wayland-client client-wl-shell"
 
 # qtwayland-qmlplugins is not used in webos
-RRECOMMENDS_${PN}_remove = "${PN}-qmlplugins"
+RRECOMMENDS:${PN}:remove = "${PN}-qmlplugins"
