@@ -28,7 +28,7 @@ PACKAGECONFIG ??= ""
 
 # Emulator
 PACKAGECONFIG[emulator] = "CONFIG+=emulator,,nyx-lib"
-PACKAGECONFIG_append_emulator = " emulator"
+PACKAGECONFIG:append:emulator = " emulator"
 
 # Multi-plane composition
 PACKAGECONFIG[plane-composition] = "CONFIG+=plane_composition,,"
@@ -36,6 +36,6 @@ PACKAGECONFIG[plane-composition] = "CONFIG+=plane_composition,,"
 # EGL Protected content
 PACKAGECONFIG[egl-protected-content] = "CONFIG+=egl_protected_content,,"
 
-FILES_${PN} += " \
+FILES:${PN} += " \
     ${OE_QMAKE_PATH_PLUGINS}/ \
 "
