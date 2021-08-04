@@ -17,4 +17,5 @@ SRC_URI_append_aarch64 = "\
 "
 SRC_URI_append = "\
     file://0001-Fix-build-with-gcc-11.patch \
+    file://0002-breakpad-fix-build-with-glibc-2.34.patch \
 "
