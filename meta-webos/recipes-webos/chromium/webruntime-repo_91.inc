@@ -10,3 +10,9 @@ WEBOS_GIT_PARAM_BRANCH_V8 = "@chromium91"
 WEBOS_VERSION_V8 = "8.7.220.29-chromium91.3_7e5684397e1522f3b5b7ea8155c2f1e22fa1cdd2"
 SRCREV_v8 = "b958ec542dcb086f422a1216a959be38a4cc0339"
 
+# http://gpro.lge.com/c/webosose/chromium91/+/320736 [op][ups][build] abseil-cpp: fix build with glibc-2.34
+# http://gpro.lge.com/c/webosose/chromium91/+/320737 [op][upsable][build] breakpad: fix build with glibc-2.34
+SRC_URI += " \
+    file://0001-op-ups-build-abseil-cpp-fix-build-with-glibc-2.34.patch \
+    file://0002-op-upsable-build-breakpad-fix-build-with-glibc-2.34.patch \
+"
