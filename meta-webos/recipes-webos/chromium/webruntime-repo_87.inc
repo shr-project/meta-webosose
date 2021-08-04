@@ -15,4 +15,6 @@ SRC_URI += " \
     file://0001-absei-cpp-Fix-build-with-gcc-11.patch \
     file://0002-perfetto-Fix-build-with-gcc-11.patch \
     file://0003-net-Fix-build-with-gcc-11.patch \
+    file://0001-abseil-cpp-fix-build-with-glibc-2.34.patch \
+    file://0002-breakpad-fix-build-with-glibc-2.34.patch \
 "
