@@ -85,6 +85,11 @@ SRC_URI_append = " \
     file://0001-Fix-compilation-error-in-QDateTime.patch \
 "
 
+# Upstream-Status: Pending (Please upstream this)
+SRC_URI_append = " \
+    file://0001-catch_p_p.h-don-t-use-MINSIGSTKSZ.patch \
+"
+
 # Upstream-Status: Inappropriate
 SRC_URI_append = " \
     file://9901-Disable-Faux-bolding-in-Qts-FreeType-FontEngine.patch \
