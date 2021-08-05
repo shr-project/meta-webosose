@@ -58,3 +58,4 @@ BBCLASSEXTEND = "native"
 
 # From http://gpro.lgsvl.com/190951
 SRC_URI += "file://0001-CMakeLists.txt-explicitly-link-with-libatomic-to-fix.patch"
+SRC_URI += "file://0001-MojOsInternal.h-update-for-glibc-2.34.patch"
