@@ -5,8 +5,6 @@ do_exportbuildscript () {
 # This script was generated from webOS build.
 # DISTRO = "${DISTRO}"
 # MACHINE = "${MACHINE}"
-# WEBOS_DISTRO_TOPDIR_DESCRIBE = "${WEBOS_DISTRO_TOPDIR_DESCRIBE}"
-# WEBOS_DISTRO_TOPDIR_REVISION = "${WEBOS_DISTRO_TOPDIR_REVISION}"
 #
 # PN = ${PN}
 # DEPENDS = "${DEPENDS}"
@@ -144,4 +142,4 @@ EOF
     chmod +x $filename
 }
 
-addtask do_exportbuildscript before do_compile after do_configure
+addtask do_exportbuildscript before do_build after do_configure
