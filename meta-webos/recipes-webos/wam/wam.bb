@@ -28,6 +28,7 @@ inherit webos_enhanced_submissions
 inherit webos_system_bus
 inherit webos_machine_dep
 inherit ${WAM_BUILD_SYSTEM}
+inherit webos_pkgconfig
 inherit webos_lttng
 inherit webos_distro_variant_dep
 inherit webos_distro_dep
