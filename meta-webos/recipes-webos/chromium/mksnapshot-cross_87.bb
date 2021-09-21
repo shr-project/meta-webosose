@@ -1,6 +1,7 @@
 # Copyright (c) 2021 LG Electronics, Inc.
 
 inherit cross
+inherit pkgconfig
 
 WEBRUNTIME_REPO_VERSION = "87"
 require webruntime-common.inc
