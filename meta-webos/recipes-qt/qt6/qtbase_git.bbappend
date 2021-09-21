@@ -75,6 +75,14 @@ inherit webos_lttng
 # Disable lttng until wam eliminates dependency to qtbase (See PLAT-139794 for details)
 #PACKAGECONFIG_append = "${@ ' lttng' if '${WEBOS_LTTNG_ENABLED}' == '1' else '' }"
 
+# this is missing in the upstream recipe, it detects that pkgconfig is missing:
+# -- Could NOT find PkgConfig (missing: PKG_CONFIG_EXECUTABLE)
+# and then fails because ZSTD isn't detected:
+# -- Could NOT find ZSTD: Found unsuitable version "", but required is at least "1.3" (found TOPDIR/BUILD/work/qemux86-webos-linux/qtbase/6.2.0-r0/recipe-sysroot/usr/lib/libzstd.so)
+# and libudev which are both enabled by PKGCONFIG, but not detected correctly
+# due to missing pkgconfig-native dependency
+inherit pkgconfig
+
 # Do not build tests/ in webos
 PACKAGECONFIG_remove = "tests"
 
