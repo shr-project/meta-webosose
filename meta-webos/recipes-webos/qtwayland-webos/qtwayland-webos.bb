@@ -15,6 +15,7 @@ WEBOS_VERSION = "2.0.0-68_629f78182cb8c075dbe88377479658b3bba6cefe"
 PR = "r14"
 
 inherit webos_qmake6
+inherit webos_pkgconfig
 inherit webos_enhanced_submissions
 inherit webos_lttng
 inherit webos_public_repo
