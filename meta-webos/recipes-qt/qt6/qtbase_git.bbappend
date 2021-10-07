@@ -88,6 +88,10 @@ PACKAGECONFIG:remove = "tests"
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
+# Upstream-Status: Backport [8f984c5ee624cb0b6f1b9fdfec8c1f8da8a443ca]
+SRC_URI:append = " \
+    file://0001-Revert-CMake-Warn-if-cmake_minimum_required-has-an-u.patch \
+"
 # Upstream-Status: Inappropriate
 SRC_URI:append = " \
     file://9901-Disable-Faux-bolding-in-Qts-FreeType-FontEngine.patch \

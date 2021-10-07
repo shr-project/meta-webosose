@@ -1,0 +1,272 @@
+From 8f984c5ee624cb0b6f1b9fdfec8c1f8da8a443ca Mon Sep 17 00:00:00 2001
+From: Alexandru Croitor <alexandru.croitor@qt.io>
+Date: Mon, 4 Oct 2021 12:20:26 +0200
+Subject: [PATCH] Revert "CMake: Warn if cmake_minimum_required has an
+ unsupported low version"
+
+This reverts commit 657525965b86cfa135bb5a814a537443163acb14.
+
+The change relied on reading the last value of the
+CMAKE_MINIMUM_REQUIRED_VERSION variable before one of the Qt packages
+is found to use it for the version check.
+
+Even if a user project has a cmake_minimum_required() right at
+the beginning of the project with a supported version specified,
+the first project() call which loads a CMake toolchain file could
+contain another cmake_minimum_required() call with a lower
+(unsupported) version and that version would be used for the check,
+failing the project configuration.
+
+The Android NDK ships such a toolchain file, which requires version
+'3.6'.
+
+Thus, relying on the last value of CMAKE_MINIMUM_REQUIRED_VERSION is
+not robust enough.
+
+Task-number: QTBUG-95018
+Task-number: QTBUG-95832
+Change-Id: Iff3cb0a46e6e878569dce9c5fe915a714a034904
+Reviewed-by: Joerg Bornemann <joerg.bornemann@qt.io>
+(cherry picked from commit 99899dd299eccc0a2133b45a04d80cb0e438f773)
+Reviewed-by: Qt Cherry-pick Bot <cherrypick_bot@qt-project.org>
+---
+ .cmake.conf                             | 12 +----
+ cmake/QtBaseGlobalTargets.cmake         |  7 ---
+ cmake/QtCMakeVersionHelpers.cmake       | 36 ---------------
+ cmake/QtConfig.cmake.in                 |  4 --
+ cmake/QtConfigExtras.cmake.in           |  5 ---
+ cmake/QtModuleConfig.cmake.in           |  4 --
+ cmake/QtPublicCMakeVersionHelpers.cmake | 58 -------------------------
+ 7 files changed, 2 insertions(+), 124 deletions(-)
+
+diff --git a/.cmake.conf b/.cmake.conf
+index 5afc98ce62..6ffaef2029 100644
+--- a/.cmake.conf
++++ b/.cmake.conf
+@@ -1,24 +1,16 @@
+ set(QT_REPO_MODULE_VERSION "6.2.0")
+ set(QT_REPO_MODULE_PRERELEASE_VERSION_SEGMENT "")
+ 
+-# Minimum required CMake version for building Qt.
++# Minimum requirement for building Qt
+ set(QT_SUPPORTED_MIN_CMAKE_VERSION_FOR_BUILDING_QT_SHARED "3.16")
+ set(QT_SUPPORTED_MIN_CMAKE_VERSION_FOR_BUILDING_QT_STATIC "3.21")
+ 
+-# Minimum required CMake version for using Qt in a user project.
++# Minimum requirement for consuming Qt in a user project.
+ # This might be different in the future, e.g. be lower than the requirement for
+ # building Qt.
+ set(QT_SUPPORTED_MIN_CMAKE_VERSION_FOR_USING_QT_SHARED "3.16")
+ set(QT_SUPPORTED_MIN_CMAKE_VERSION_FOR_USING_QT_STATIC "3.21")
+ 
+-# Minimum CMake version that needs to appear in the cmake_minimum_required() call of a Qt user
+-# project, so that all policies defined up to the specified CMake version are using NEW behavior.
+-# With a value of 3.16, all policies CMP0000-CMP0097 will use NEW behavior.
+-#
+-# For now, both shared and static Qt builds share the same minimum.
+-set(QT_SUPPORTED_MIN_CMAKE_VERSION_FOR_USING_QT_SHARED_IN_CMAKE_MIN_REQUIRED "3.16")
+-set(QT_SUPPORTED_MIN_CMAKE_VERSION_FOR_USING_QT_STATIC_IN_CMAKE_MIN_REQUIRED "3.16")
+-
+ # Policy settings for commands defined by qtbase. These will also be injected
+ # into the top level policy scope of each Qt module when building Qt so that
+ # modules have the same policy settings as qtbase by default. They can be
+diff --git a/cmake/QtBaseGlobalTargets.cmake b/cmake/QtBaseGlobalTargets.cmake
+index 213d5954c9..a660434a86 100644
+--- a/cmake/QtBaseGlobalTargets.cmake
++++ b/cmake/QtBaseGlobalTargets.cmake
+@@ -153,13 +153,6 @@ qt_internal_export_modern_cmake_config_targets_file(TARGETS ${__export_targets}
+ qt_internal_get_supported_min_cmake_version_for_using_qt(supported_min_version_for_using_qt)
+ qt_internal_get_computed_min_cmake_version_for_using_qt(computed_min_version_for_using_qt)
+ 
+-# Save the minimum required CMake version to use Qt that should appear in a project's
+-# cmake_minimum_required() call.
+-qt_internal_get_supported_min_cmake_version_for_using_qt_in_cmake_min_required(
+-    supported_min_version_for_using_qt_in_cmake_min_required)
+-qt_internal_get_computed_min_cmake_version_for_using_qt_in_cmake_min_required(
+-    computed_min_version_for_using_qt_in_cmake_min_required)
+-
+ # Get the lower and upper policy range to embed into the Qt6 config file.
+ qt_internal_get_min_new_policy_cmake_version(min_new_policy_version)
+ qt_internal_get_max_new_policy_cmake_version(max_new_policy_version)
+diff --git a/cmake/QtCMakeVersionHelpers.cmake b/cmake/QtCMakeVersionHelpers.cmake
+index 52f65ebc12..a42e1a523f 100644
+--- a/cmake/QtCMakeVersionHelpers.cmake
++++ b/cmake/QtCMakeVersionHelpers.cmake
+@@ -36,25 +36,6 @@ function(qt_internal_get_supported_min_cmake_version_for_using_qt out_var)
+     set(${out_var} "${supported_version}" PARENT_SCOPE)
+ endfunction()
+ 
+-# Returns the minimum CMake version that needs to be specified in the cmake_minimum_required() call
+-# of a Qt user project as originally advertised by Qt.
+-function(qt_internal_get_supported_min_cmake_version_for_using_qt_in_cmake_min_required out_var)
+-    if(NOT DEFINED BUILD_SHARED_LIBS)
+-        message(FATAL_ERROR "BUILD_SHARED_LIBS is needed to decide the minimum CMake version. "
+-            "It should have been set by this point.")
+-    endif()
+-
+-    if(BUILD_SHARED_LIBS)
+-        set(supported_version
+-            "${QT_SUPPORTED_MIN_CMAKE_VERSION_FOR_USING_QT_SHARED_IN_CMAKE_MIN_REQUIRED}")
+-    else()
+-        set(supported_version
+-            "${QT_SUPPORTED_MIN_CMAKE_VERSION_FOR_USING_QT_STATIC_IN_CMAKE_MIN_REQUIRED}")
+-    endif()
+-
+-    set(${out_var} "${supported_version}" PARENT_SCOPE)
+-endfunction()
+-
+ # Returns the computed minimum supported CMake version required to /build/ Qt.
+ function(qt_internal_get_computed_min_cmake_version_for_building_qt out_var)
+     # An explicit override for those that take it upon themselves to fix the build system
+@@ -93,23 +74,6 @@ function(qt_internal_get_computed_min_cmake_version_for_using_qt out_var)
+     set(${out_var} "${computed_min_version}" PARENT_SCOPE)
+ endfunction()
+ 
+-# Returns the computed minimum CMake version that needs to be specified in the
+-# cmake_minimum_required() call of a Qt user project.
+-function(qt_internal_get_computed_min_cmake_version_for_using_qt_in_cmake_min_required out_var)
+-    # Allow overriding the version for user projects, without forcing
+-    # each project developer to have to override it manually.
+-    if(QT_FORCE_MIN_CMAKE_VERSION_FOR_USING_QT_IN_CMAKE_MIN_REQUIRED)
+-        set(computed_min_version "${QT_FORCE_MIN_CMAKE_VERSION_FOR_USING_QT_IN_CMAKE_MIN_REQUIRED}")
+-
+-    # No override was given, thus initialize with the default minimum.
+-    else()
+-        qt_internal_get_supported_min_cmake_version_for_using_qt_in_cmake_min_required(
+-            min_supported_version)
+-        set(computed_min_version "${min_supported_version}")
+-    endif()
+-    set(${out_var} "${computed_min_version}" PARENT_SCOPE)
+-endfunction()
+-
+ # Returns the oldest CMake version for which NEW policies should be enabled.
+ # It can be older than the minimum supported or computed CMake version, as it
+ # is only used for policy settings. The currently running CMake must not be
+diff --git a/cmake/QtConfig.cmake.in b/cmake/QtConfig.cmake.in
+index 8b455b0bb6..75e15226dd 100644
+--- a/cmake/QtConfig.cmake.in
++++ b/cmake/QtConfig.cmake.in
+@@ -1,9 +1,5 @@
+ @PACKAGE_INIT@
+ 
+-# Used by __qt_internal_warn_if_project_min_cmake_version_is_not_met
+-if(NOT _qt_project_last_cmake_minimum_required_version)
+-    set(_qt_project_last_cmake_minimum_required_version "${CMAKE_MINIMUM_REQUIRED_VERSION}")
+-endif()
+ cmake_minimum_required(VERSION @min_new_policy_version@...@max_new_policy_version@)
+ 
+ include("${CMAKE_CURRENT_LIST_DIR}/@INSTALL_CMAKE_NAMESPACE@ConfigExtras.cmake")
+diff --git a/cmake/QtConfigExtras.cmake.in b/cmake/QtConfigExtras.cmake.in
+index 627d326569..bde3460cdc 100644
+--- a/cmake/QtConfigExtras.cmake.in
++++ b/cmake/QtConfigExtras.cmake.in
+@@ -1,7 +1,2 @@
+ set(QT_SUPPORTED_MIN_CMAKE_VERSION_FOR_USING_QT "@supported_min_version_for_using_qt@")
+ set(QT_COMPUTED_MIN_CMAKE_VERSION_FOR_USING_QT "@computed_min_version_for_using_qt@")
+-
+-set(QT_SUPPORTED_MIN_CMAKE_VERSION_FOR_USING_QT_IN_CMAKE_MIN_REQUIRED
+-    "@supported_min_version_for_using_qt_in_cmake_min_required@")
+-set(QT_COMPUTED_MIN_CMAKE_VERSION_FOR_USING_QT_IN_CMAKE_MIN_REQUIRED
+-    "@computed_min_version_for_using_qt_in_cmake_min_required@")
+diff --git a/cmake/QtModuleConfig.cmake.in b/cmake/QtModuleConfig.cmake.in
+index 66e90fc6b1..76fde2dc1f 100644
+--- a/cmake/QtModuleConfig.cmake.in
++++ b/cmake/QtModuleConfig.cmake.in
+@@ -1,9 +1,5 @@
+ @PACKAGE_INIT@
+ 
+-# Used by __qt_internal_warn_if_project_min_cmake_version_is_not_met
+-if(NOT _qt_project_last_cmake_minimum_required_version)
+-    set(_qt_project_last_cmake_minimum_required_version "${CMAKE_MINIMUM_REQUIRED_VERSION}")
+-endif()
+ cmake_minimum_required(VERSION @min_new_policy_version@...@max_new_policy_version@)
+ 
+ include(CMakeFindDependencyMacro)
+diff --git a/cmake/QtPublicCMakeVersionHelpers.cmake b/cmake/QtPublicCMakeVersionHelpers.cmake
+index 638c9edc2d..2b3c697f4c 100644
+--- a/cmake/QtPublicCMakeVersionHelpers.cmake
++++ b/cmake/QtPublicCMakeVersionHelpers.cmake
+@@ -4,12 +4,6 @@ function(__qt_internal_get_supported_min_cmake_version_for_using_qt out_var)
+     set(${out_var} "${supported_version}" PARENT_SCOPE)
+ endfunction()
+ 
+-function(__qt_internal_get_supported_min_cmake_version_for_using_qt_in_cmake_min_required out_var)
+-    # This is recorded in Qt6ConfigExtras.cmake
+-    set(supported_version "${QT_SUPPORTED_MIN_CMAKE_VERSION_FOR_USING_QT_IN_CMAKE_MIN_REQUIRED}")
+-    set(${out_var} "${supported_version}" PARENT_SCOPE)
+-endfunction()
+-
+ function(__qt_internal_get_computed_min_cmake_version_for_using_qt out_var)
+     # Allow override when configuring user project.
+     if(QT_FORCE_MIN_CMAKE_VERSION_FOR_USING_QT)
+@@ -26,23 +20,6 @@ function(__qt_internal_get_computed_min_cmake_version_for_using_qt out_var)
+     set(${out_var} "${computed_min_version}" PARENT_SCOPE)
+ endfunction()
+ 
+-function(__qt_internal_get_computed_min_cmake_version_for_using_qt_in_cmake_min_required out_var)
+-    # Allow override when configuring user project.
+-    if(QT_FORCE_MIN_CMAKE_VERSION_FOR_USING_QT_IN_CMAKE_MIN_REQUIRED)
+-        set(computed_min_version "${QT_FORCE_MIN_CMAKE_VERSION_FOR_USING_QT_IN_CMAKE_MIN_REQUIRED}")
+-
+-    # Set in QtConfigExtras.cmake.
+-    elseif(QT_COMPUTED_MIN_CMAKE_VERSION_FOR_USING_QT_IN_CMAKE_MIN_REQUIRED)
+-        set(computed_min_version
+-            "${QT_COMPUTED_MIN_CMAKE_VERSION_FOR_USING_QT_IN_CMAKE_MIN_REQUIRED}")
+-    else()
+-        message(FATAL_ERROR
+-            "Qt Developer error: Can't compute the version that should appear in cmake_minimum_required to use this Qt.")
+-    endif()
+-
+-    set(${out_var} "${computed_min_version}" PARENT_SCOPE)
+-endfunction()
+-
+ function(__qt_internal_warn_if_min_cmake_version_not_met)
+     __qt_internal_get_supported_min_cmake_version_for_using_qt(min_supported_version)
+     __qt_internal_get_computed_min_cmake_version_for_using_qt(computed_min_version)
+@@ -57,22 +34,6 @@ function(__qt_internal_warn_if_min_cmake_version_not_met)
+     endif()
+ endfunction()
+ 
+-function(__qt_internal_warn_if_project_min_cmake_version_is_not_met)
+-    __qt_internal_get_supported_min_cmake_version_for_using_qt_in_cmake_min_required(
+-        min_supported_version)
+-    __qt_internal_get_computed_min_cmake_version_for_using_qt_in_cmake_min_required(
+-        computed_min_version)
+-
+-    if(computed_min_version VERSION_LESS min_supported_version)
+-        message(WARNING
+-           "To use this Qt, the minimum CMake version that should appear in the project's "
+-           "cmake_minimum_required() call should be: '${min_supported_version}'. "
+-           "You have explicitly chosen to require a lower version: '${computed_min_version}'. "
+-           "Using Qt with this version is not officially supported. Use at your own risk."
+-        )
+-    endif()
+-endfunction()
+-
+ function(__qt_internal_require_suitable_cmake_version_for_using_qt)
+     # Skip the public project check if we're building a Qt repo because it's too early to do
+     # it at find_package(Qt6) time.
+@@ -105,23 +66,4 @@ function(__qt_internal_require_suitable_cmake_version_for_using_qt)
+             "project. Using Qt with this CMake version is not officially supported. "
+             "Use at your own risk.")
+     endif()
+-
+-
+-    # Check that the project has a supported version specified in the last cmake_minimum_required
+-    # call before the Qt6 package was found.
+-    __qt_internal_warn_if_project_min_cmake_version_is_not_met()
+-    __qt_internal_get_computed_min_cmake_version_for_using_qt_in_cmake_min_required(
+-        computed_min_version)
+-
+-    if(_qt_project_last_cmake_minimum_required_version VERSION_LESS computed_min_version)
+-        message(FATAL_ERROR
+-            "The last cmake_minimum_required() call before the Qt package was found had the "
+-            "following version specified: '${_qt_project_last_cmake_minimum_required_version}' but "
+-            "it needs to be ${computed_min_version} or higher to use Qt. "
+-            "You can reduce the error into a warning by passing "
+-            "-DQT_FORCE_MIN_CMAKE_VERSION_FOR_USING_QT_IN_CMAKE_MIN_REQUIRED=${_qt_project_last_cmake_minimum_required_version} "
+-            "when configuring the project, but you do so at your own risk (it is not an officially "
+-            "supported way of building Qt projects)."
+-        )
+-    endif()
+ endfunction()
