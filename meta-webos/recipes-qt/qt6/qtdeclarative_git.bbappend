@@ -9,7 +9,6 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 # Upstream-Status: Submitted
 SRC_URI:append:class-target = " \
     file://0001-Check-if-a-device-in-knownPointingDevices-is-destroy.patch \
-    file://0002-qqmllistmodel-Fix-QObjects-setting-indestructible.patch \
 "
 
 # Upstream-Status: Inappropriate
