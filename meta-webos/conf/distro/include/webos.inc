@@ -396,8 +396,6 @@ SANITY_TESTED_DISTROS ?= " \
     ubuntu-22.10 \n \
 "
 
-INHERIT += "reproducible_build_simple"
-
 # Override setting in upstream fontcache.bbclass and fontconfig recipe
 FONTCONFIG_CACHE_DIR = "${datadir}/fontconfig/cache"
 FONTCONFIG_CACHE_ENV = "FC_DEBUG=16"
