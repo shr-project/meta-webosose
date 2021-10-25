@@ -114,7 +114,7 @@ VIRTUAL-RUNTIME_nodejs-module-node-red ?= "nodejs-module-node-red"
 VIRTUAL-RUNTIME_nodejs-module-node-red:armv4 = ""
 VIRTUAL-RUNTIME_nodejs-module-node-red:armv5 = ""
 
-VIRTUAL-RUNTIME_mojoservicelauncher ?= "mojoservicelauncher"
+VIRTUAL-RUNTIME_mojoservicelauncher ?= ""
 VIRTUAL-RUNTIME_mojoservicelauncher:armv4 = ""
 VIRTUAL-RUNTIME_mojoservicelauncher:armv5 = ""
 
