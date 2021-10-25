@@ -118,7 +118,7 @@ VIRTUAL-RUNTIME_contextintentmgr:armv4 = ""
 VIRTUAL-RUNTIME_contextintentmgr:armv5 = ""
 VIRTUAL-RUNTIME_contextintentmgr:mips64 = ""
 
-VIRTUAL-RUNTIME_mojoservicelauncher ?= "mojoservicelauncher"
+VIRTUAL-RUNTIME_mojoservicelauncher ?= ""
 VIRTUAL-RUNTIME_mojoservicelauncher:armv4 = ""
 VIRTUAL-RUNTIME_mojoservicelauncher:armv5 = ""
 
