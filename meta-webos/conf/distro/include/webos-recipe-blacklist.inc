@@ -128,6 +128,8 @@ PNBLACKLIST[sysdig] ?= "Doesn't build with jsoncpp with exceptions disabled, met
 PNBLACKLIST[xen-python2] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'Depends on blacklisted xen-tools', '', d)}"
 # meta-virtualization/recipes-extended/xen/xen_git.bb
 PNBLACKLIST[xen] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'Depends on blacklisted xen-tools', '', d)}"
+# meta-virtualization/recipes-extended/xen/xtf_git.bb
+PNBLACKLIST[xtf] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'Depends on blacklisted xen-tools', '', d)}"
 
 # all target python2 recipes from meta-python2 and meta-oe
 require conf/distro/include/python2-target-recipes-blacklist.inc
