@@ -15,7 +15,7 @@ PR = "r2"
 SRCREV = "997e27bdef8e2bd4504fad1afb7cfd0b5b4eef68"
 
 SRC_URI = " \
-    git://github.com/markoa/${BPN}.git \
+    git://github.com/markoa/${BPN}.git;branch=master;protocol=https \
     file://0001-configure-add-option-to-disable-building-gtkmm-utils.patch \
     file://0002-Fix-includes-with-newer-glib.patch \
     file://0003-Fix-log-definition.patch \
