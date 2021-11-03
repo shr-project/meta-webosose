@@ -1,4 +1,4 @@
 # Copyright (c) 2020 LG Electronics, Inc.
 
 SRCREV = "${AUTOREV}"
-SRC_URI = "git://github.com/namhyung/${BPN}"
+SRC_URI = "git://github.com/namhyung/${BPN};branch=master;protocol=https"

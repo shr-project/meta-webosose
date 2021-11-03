@@ -11,7 +11,7 @@ PR = "r0"
 
 DEPENDS = "grpc-native"
 
-SRC_URI = "git://github.com/googleapis/googleapis.git"
+SRC_URI = "git://github.com/googleapis/googleapis.git;branch=master;protocol=https"
 SRCREV = "9efcd835514288b21ce37182d75cc75c18b16541"
 
 S = "${WORKDIR}/git"
