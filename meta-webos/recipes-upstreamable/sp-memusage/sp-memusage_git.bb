@@ -13,7 +13,7 @@ PV = "1.3.2+git${SRCPV}"
 
 inherit autotools-brokensep
 
-SRC_URI = "git://github.com/maemo-tools-old/${BPN}.git \
+SRC_URI = "git://github.com/maemo-tools-old/${BPN}.git;branch=master;protocol=https \
     file://build-fixes.patch \
 "
 S = "${WORKDIR}/git"
