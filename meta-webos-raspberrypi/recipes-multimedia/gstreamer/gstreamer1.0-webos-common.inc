@@ -2,7 +2,7 @@
 
 # inherit ${@'webos_public_repo webos_enhanced_submissions' if '${MACHINE}'.startswith('raspberrypi3') or '${MACHINE}'.startswith('raspberrypi4') else ''}
 
-# GST_COMMON_GIT:rpi = "git://anongit.freedesktop.org/gstreamer/common"
+# GST_COMMON_GIT:rpi = "git://anongit.freedesktop.org/gstreamer/common;branch=master"
 # SRCREV_common:rpi = "46d420818ed8172022caf4503894076b18b1e153"
 # SRCREV_FORMAT:rpi = "main_common"
 
