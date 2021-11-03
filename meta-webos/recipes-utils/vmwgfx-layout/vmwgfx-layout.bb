@@ -13,7 +13,7 @@ SRCREV = "8e43168d508abc2702a97f8b264ab08330465608"
 inherit systemd
 inherit webos_cmake
 
-SRC_URI = "git://github.com/sparkleholic/vmwgfx-layout.git;branch=master;protocol=http \
+SRC_URI = "git://github.com/sparkleholic/vmwgfx-layout.git;branch=master;protocol=https \
            file://0001-Set-2-outputs-to-call-DRM_IOCTL_VMW_UPDATE_LAYOUT-fo.patch \
 "
 S = "${WORKDIR}/git"
