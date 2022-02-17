@@ -24,13 +24,13 @@ do_install() {
     sed -i '/\[Install\]/,+2d' ${D}${sysconfdir}/systemd/system/docker-simple-webserver.service
 
     # install docker daemon file to access webosdev.lge.com regisgry
-    install -d ${D}${webos_mountablestoragedir}/docker
-    install -m 644 ${S}/daemon.json ${D}${webos_mountablestoragedir}/docker
+    install -d ${D}${sysconfdir}/docker
+    install -m 644 ${S}/daemon.json ${D}${sysconfdir}/docker
 
     # copy docker-compose file and related files
     install -d ${D}${datadir}
     cp -rv ${S}/docker-simple-webserver ${D}${datadir}
 }
 
-FILES:${PN} += "${webos_mountablestoragedir}"
+FILES:${PN} += "${sysconfdir}"
 SYSTEMD_SERVICE:${PN} = "docker-simple-webserver.service"
