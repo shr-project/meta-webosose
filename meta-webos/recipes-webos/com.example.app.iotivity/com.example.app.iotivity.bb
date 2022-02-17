@@ -44,3 +44,6 @@ COMPATIBLE_MACHINE:x86 = "(.*)"
 COMPATIBLE_MACHINE:x86-64 = "(.*)"
 
 SRC_URI += "file://0001-webOS-Fix-UI-bug-in-iotivity-sampler.patch"
+
+# Workaround for network access issue during do_compile task
+do_compile[network] = "1"
