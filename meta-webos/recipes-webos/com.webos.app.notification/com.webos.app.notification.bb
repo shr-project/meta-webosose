@@ -21,3 +21,6 @@ inherit webos_public_repo
 WEBOS_ENACTJS_SHRINKWRAP_OVERRIDE = "false"
 
 WEBOS_ENACTJS_APP_ID = "com.webos.app.notification"
+
+# Workaround for network access issue during do_compile task
+do_compile[network] = "1"
