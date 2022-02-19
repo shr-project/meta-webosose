@@ -18,3 +18,6 @@ PACKAGECONFIG:append = " openssl"
 PACKAGECONFIG:append = " rtsp"
 
 PACKAGECONFIG:append = " dict gopher imap pop3 smtp telnet tftp"
+
+# Work around https://github.com/uptane/meta-updater/pull/25
+PACKAGECONFIG:remove = "ssl"
