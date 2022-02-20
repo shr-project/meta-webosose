@@ -24,8 +24,6 @@ PACKAGECONFIG[google_ozone_wayland] = "\
 
 PACKAGECONFIG[v8_lite] = "v8_enable_lite_mode=true,v8_enable_lite_mode=false"
 
-PACKAGECONFIG_remove="jumbo"
-
 GN_ARGS_append = " \
   libdir=\"${libdir}\"\
   includedir=\"${includedir}\"\
