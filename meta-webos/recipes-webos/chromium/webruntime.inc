@@ -97,10 +97,6 @@ GN_ARGS += "\
     use_pulseaudio=false\
 "
 
-# Disable closure_compile
-# Else we need HOSTTOOLS += "java"
-GN_ARGS_append = " closure_compile=false"
-
 # TODO: drop this after we migrate to ubuntu 16.04 or above
 GN_ARGS += "\
     fatal_linker_warnings=false\
