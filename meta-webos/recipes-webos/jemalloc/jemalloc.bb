@@ -3,7 +3,7 @@
 SUMMARY = "webOS of the open-source FreeBSD memory allocation library"
 AUTHOR = "Rama Krishna <rama.krishna@lge.com>"
 SECTION = "libs"
-LICENSE = "BSD"
+LICENSE = "BSD-2-Clause"
 LIC_FILES_CHKSUM = "file://README.md;beginline=94;md5=b159f6c7121460dba2c5965602bc3268 \
                     file://oss-pkg-info.yaml;md5=2bdfe040dcf81b4038370ae96036c519 \
 "
