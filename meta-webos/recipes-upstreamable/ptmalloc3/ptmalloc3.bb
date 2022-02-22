@@ -3,7 +3,7 @@
 SECTION = "libs"
 DESCRIPTION = "Multi-thread malloc implementation"
 HOMEPAGE = "http://www.malloc.de/en/"
-LICENSE = "LGPLv2"
+LICENSE = "LGPL-2.0-only"
 LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/BSD;md5=3775480a712fc46a69647678acb234cb"
 
 PR = "r4"

@@ -2,12 +2,12 @@
 
 EXTENDPRAUTO:append = "webos7"
 
-LICENSE += "& BSD"
+LICENSE += "& BSD & GPL-2.0-only & LGPL-2.1-only"
 
 # Add missing dependency on BSD license for
-LICENSE:eglibc-extra-nss = "GPLv2 & LGPLv2.1 & BSD"
-LICENSE:${PN}-dbg = "GPLv2 & LGPLv2.1 & BSD"
-LICENSE:${PN}-dev = "GPLv2 & LGPLv2.1 & BSD"
-LICENSE:${PN} = "GPLv2 & LGPLv2.1 & BSD"
-LICENSE:${PN}-staticdev = "GPLv2 & LGPLv2.1 & BSD"
-LICENSE:${PN}-utils = "GPLv2 & LGPLv2.1 & BSD"
+LICENSE:eglibc-extra-nss = "GPL-2.0-only & LGPL-2.1-only & BSD"
+LICENSE:${PN}-dbg = "GPL-2.0-only & LGPL-2.1-only & BSD"
+LICENSE:${PN}-dev = "GPL-2.0-only & LGPL-2.1-only & BSD"
+LICENSE:${PN} = "GPL-2.0-only & LGPL-2.1-only & BSD"
+LICENSE:${PN}-staticdev = "GPL-2.0-only & LGPL-2.1-only & BSD"
+LICENSE:${PN}-utils = "GPL-2.0-only & LGPL-2.1-only & BSD"
