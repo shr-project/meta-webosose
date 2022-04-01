@@ -1,4 +1,4 @@
-# Copyright (c) 2018-2021 LG Electronics, Inc.
+# Copyright (c) 2018-2022 LG Electronics, Inc.
 
 SUMMARY = "webOS text to speech service"
 SECTION = "webos/base"
@@ -19,7 +19,9 @@ inherit webos_cmake
 inherit webos_pkgconfig
 inherit webos_system_bus
 
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-google-link-with-libgrpc-as-well.patch \
+"
 S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += "-DGOOGLEAPIS_PATH=${STAGING_INCDIR}/google"
