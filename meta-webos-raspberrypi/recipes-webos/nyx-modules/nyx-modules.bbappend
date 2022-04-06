@@ -4,7 +4,7 @@ EXTENDPRAUTO:append = "webosrpi5"
 
 DEPENDS:append = " nmeaparser"
 
-RDEPENDS:${PN} += "libcec-tools"
+RDEPENDS:${PN} += "libcec-examples"
 
 WEBOS_VERSION = "7.1.0-20_7927148603cb9869421a7a3c35eef273cf085b21"
 
