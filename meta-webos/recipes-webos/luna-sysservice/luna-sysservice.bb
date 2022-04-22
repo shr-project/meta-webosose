@@ -25,7 +25,9 @@ inherit webos_machine_dep
 inherit webos_daemon
 inherit webos_cmake_qt6
 
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-CMakeLists.txt-use-native-qmake.patch \
+"
 S = "${WORKDIR}/git"
 
 do_install:append() {
