@@ -1,0 +1,184 @@
+From 46eedd0a5eb31ed1cdd94d2ce9c9dfe0248a65f1 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <martin.jansa@lge.com>
+Date: Fri, 22 Apr 2022 15:13:39 +0000
+Subject: [PATCH] CMakeLists.txt: use native qmake
+
+In one of my builds I've noticed luna-syservice failing in do_configure with:
+
+| -- Checking for module 'Qt5Gui'
+| --   No package 'Qt5Gui' found
+| CMake Error at /OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot-native/usr/share/cmake-3.22/Modules/FindPkgConfig.cmake:603 (message):
+|   A required package was not found
+Even when I was building with qtbase-6.2.4 and It shouldn't be looking for Qt5Gui at all.
+
+I've added small debug output to see what's going on.
+
+And that has shown:
+
+-- WEBOS_API_VERSION_MAJOR: 4
+-- Found qmake /OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot/usr/bin/qmake and '/OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot/usr/bin/qmake -query QT_VERSION' returns
+-- Checking for module 'Qt5Gui'
+--   No package 'Qt5Gui' found
+CMake Error at /OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot-native/usr/share/cmake-3.22/Modules/FindPkgConfig.cmake:603 (message):
+  A required package was not found
+Call Stack (most recent call first):
+  /OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot-native/usr/share/cmake-3.22/Modules/FindPkgConfig.cmake:825 (_pkg_check_modules_internal)
+  CMakeLists.txt:81 (pkg_check_modules)
+Which looks almost correct, but the qmake is from recipe-sysroot and should be from recipe-sysroot-native.
+
+The issue is the target loader in target qmake (/lib/ld-linux-x86-64.so.2) doesn't exist on my builder (which uses /lib64/ld-linux-x86-64.so.2), qmake from qtbase-native is fine as it uses uninative loader (/OE/lge/build/webosose/kirkstone/BUILD/sysroots-uninative/x86_64-linux/lib/ld-linux-x86-64.so.2):
+
+docker-lge @ ~/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9 $ /OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot/usr/bin/qmake -query QT_VERSION
+bash: /OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot/usr/bin/qmake: No such file or directory
+
+docker-lge @ ~/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9 $ ls -lah /OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot/usr/bin/qmake
+-rwxr-xr-x 6 bitbake bitbake 1.7M Apr 22 12:07 /OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot/usr/bin/qmake
+
+docker-lge @ ~/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9 $ file /OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot/usr/bin/qmake
+/OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot/usr/bin/qmake: ELF 64-bit LSB pie executable, x86-64, version 1 (GNU/Linux), dynamically linked, interpreter /lib/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=c5019a1ee3d535b01faeb99d41b791c420c4240a, stripped
+docker-lge @ ~/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9 $ ll /lib/ld-linux-x86-64.so.2
+ls: cannot access '/lib/ld-linux-x86-64.so.2': No such file or directory
+
+docker-lge @ ~/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/git $ ls -lah /lib64/ld-linux-x86-64.so.2
+lrwxrwxrwx 1 root root 42 Mar  4 02:54 /lib64/ld-linux-x86-64.so.2 -> /lib/x86_64-linux-gnu/ld-linux-x86-64.so.2
+docker-lge @ ~/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/git $ ls -lah /lib/ld-linux.so.2
+lrwxrwxrwx 1 root root 20 Mar  4 02:54 /lib/ld-linux.so.2 -> /lib32/ld-linux.so.2
+
+docker-lge @ ~/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9 $ find . -name qmake
+./recipe-sysroot-native/usr/bin/qmake
+./recipe-sysroot/usr/bin/qmake
+
+docker-lge @ ~/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9 $ file /OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot-native/usr/bin/qmake
+/OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot-native/usr/bin/qmake: ELF 64-bit LSB pie executable, x86-64, version 1 (GNU/Linux), dynamically linked, interpreter /OE/lge/build/webosose/kirkstone/BUILD/sysroots-uninative/x86_64-linux/lib/ld-linux-x86-64.so.2, for GNU/Linux 3.2.0, BuildID[sha1]=92e321b74b48205b6e634d36015e69d2a84bd0af, stripped
+
+docker-lge @ ~/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/git $ /OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot-native/usr/bin/qmake
+ -query QT_VERSION
+6.2.4
+Please fix CMakeLists.txt to find proper qmake in:
+
+find_program(QMAKE_EXECUTABLE NAMES qmake HINTS ${QTDIR} ENV QTDIR PATH_SUFFIXES bin)
+execute_process(COMMAND ${QMAKE_EXECUTABLE} -query QT_VERSION OUTPUT_VARIABLE QT_VERSION)
+
+The important difference why this is happening with latest 6.2 branch of meta-qt5 and not with older or with 6.3.0 is this change:
+https://code.qt.io/cgit/yocto/meta-qt6.git/commit/?id=9334145f37bf1eaedca7ed0672d5dc2fdb613861
+
+which allows qmake to be staged in sysroot from target qtbase build as shown in bitbake -e:
+With 6.2.4:
+{noformat}
+  # $SYSROOT_DIRS [6 operations]
+  #   set /OE/lge/build/webosose/kirkstone/oe-core/meta/classes/staging.bbclass:9
+  #     "     ${includedir}     ${libdir}     ${base_libdir}     ${nonarch_base_libdir}     ${datadir}     /sysroot-only "
+  #   :append[class-native] /OE/lge/build/webosose/kirkstone/oe-core/meta/classes/staging.bbclass:22
+  #     " ${SYSROOT_DIRS_NATIVE}"
+  #   :append[class-cross] /OE/lge/build/webosose/kirkstone/oe-core/meta/classes/staging.bbclass:23
+  #     " ${SYSROOT_DIRS_NATIVE}"
+  #   :append[class-crosssdk] /OE/lge/build/webosose/kirkstone/oe-core/meta/classes/staging.bbclass:24
+  #     " ${SYSROOT_DIRS_NATIVE}"
+  #   append /OE/lge/build/webosose/kirkstone/meta-qt6/recipes-qt/qt6/qt6.inc:40
+  #     "${QT6_INSTALL_BINDIR} ${QT6_INSTALL_LIBEXECDIR}"
+  #   append /OE/lge/build/webosose/kirkstone/meta-qt6/recipes-qt/qt6/qtbase_git.bb:141
+  #     "${QT6_INSTALL_MKSPECSDIR}"
+  # pre-expansion value:
+  #   "     ${includedir}     ${libdir}     ${base_libdir}     ${nonarch_base_libdir}     ${datadir}     /sysroot-only  ${QT6_INSTALL_BINDIR} ${QT6_INSTALL_LIBEXECDIR} ${QT6_INSTALL_MKSPECSDIR}"
+SYSROOT_DIRS="     /usr/include     /usr/lib     /lib     /lib     /usr/share     /sysroot-only  /usr/bin /usr/libexec /usr/lib/mkspecs"
+{noformat}
+
+With 6.3.0:
+{noformat}
+  # $SYSROOT_DIRS [6 operations]
+  #   set /OE/lge/build/webos/kirkstone/oe-core/meta/classes/staging.bbclass:9
+  #     "     ${includedir}     ${libdir}     ${base_libdir}     ${nonarch_base_libdir}     ${datadir}     /sysroot-only "
+  #   :append[class-native] /OE/lge/build/webos/kirkstone/oe-core/meta/classes/staging.bbclass:22
+  #     " ${SYSROOT_DIRS_NATIVE}"
+  #   :append[class-cross] /OE/lge/build/webos/kirkstone/oe-core/meta/classes/staging.bbclass:23
+  #     " ${SYSROOT_DIRS_NATIVE}"
+  #   :append[class-crosssdk] /OE/lge/build/webos/kirkstone/oe-core/meta/classes/staging.bbclass:24
+  #     " ${SYSROOT_DIRS_NATIVE}"
+  #   :append[mingw32] /OE/lge/build/webos/kirkstone/meta-qt6/recipes-qt/qt6/qt6.inc:40
+  #     " ${QT6_INSTALL_BINDIR}"
+  #   append /OE/lge/build/webos/kirkstone/meta-qt6/recipes-qt/qt6/qtbase_git.bb:141
+  #     "${QT6_INSTALL_MKSPECSDIR}"
+  # pre-expansion value:
+  #   "     ${includedir}     ${libdir}     ${base_libdir}     ${nonarch_base_libdir}     ${datadir}     /sysroot-only  ${QT6_INSTALL_MKSPECSDIR}"
+SYSROOT_DIRS="     /usr/include     /usr/lib     /lib     /lib     /usr/share     /sysroot-only  /usr/lib/mkspecs"
+{noformat}
+
+With 6.2.4:
+{noformat}
+webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/qtbase/6.2.4-r0/sysroot-destdir/usr/:
+bin  include  lib  libexec  share
+{noformat}
+
+With 6.3.0:
+{noformat}
+webos/kirkstone/BUILD/work/qemux86_64-webos-linux/qtbase/6.3.0-r0/sysroot-destdir/usr/:
+include  lib  share
+{noformat}
+
+but the issue is in luna-sysservice and should be fixed there (before meta-qt6 is updated to newer 6.3 branch which has the same change as 6.2 now, see https://codereview.qt-project.org/q/I3326e7b8f970952f6d18591204cb78e5a0defcf5)
+
+One option is to use NO_CMAKE_FIND_ROOT_PATH which I've used here:
+
+CMake Debug Log at CMakeLists.txt:30 (find_program):
+  find_program called with the following settings:
+
+    VAR: QMAKE_EXECUTABLE
+    NAMES: "qmake"
+    Documentation: Path to a program.
+    Framework
+      Only Search Frameworks: 0
+      Search Frameworks Last: 0
+      Search Frameworks First: 0
+    AppBundle
+      Only Search AppBundle: 0
+      Search AppBundle Last: 0
+      Search AppBundle First: 0
+    CMAKE_FIND_USE_CMAKE_PATH: 1
+    CMAKE_FIND_USE_CMAKE_ENVIRONMENT_PATH: 1
+    CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH: 1
+    CMAKE_FIND_USE_CMAKE_SYSTEM_PATH: 1
+
+  find_program considered the following locations:
+
+    /qmake
+    /OE/lge/build/webosose/kirkstone/BUILD/sysroots-uninative/x86_64-linux/usr/bin/qmake
+    /OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot-native/usr/bin/python3-native/qmake
+    /OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot-native/usr/bin/perl-native/qmake
+    /OE/lge/build/webosose/kirkstone/meta-webosose/meta-webos/scripts/qmake
+    /OE/lge/build/webosose/kirkstone/oe-core/scripts/qmake
+    /OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot-native/usr/bin/x86_64-webos-linux/qmake
+    /OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot/usr/bin/crossscripts/qmake
+    /OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot-native/usr/sbin/qmake
+
+  The item was found at
+
+    /OE/lge/build/webosose/kirkstone/BUILD/work/qemux86_64-webos-linux/luna-sysservice/4.4.0-20-r9/recipe-sysroot-native/usr/bin/qmake
+
+---
+ CMakeLists.txt | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 43c0408..116fd9e 100755
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -26,7 +26,8 @@ webos_component(4 4 0)
+ 
+ include(FindPkgConfig)
+ 
+-find_program(QMAKE_EXECUTABLE NAMES qmake HINTS ${QTDIR} ENV QTDIR PATH_SUFFIXES bin)
++set(CMAKE_FIND_DEBUG_MODE TRUE)
++find_program(QMAKE_EXECUTABLE NAMES qmake HINTS ${QTDIR} ENV QTDIR PATH_SUFFIXES bin NO_CMAKE_FIND_ROOT_PATH)
+ execute_process(COMMAND ${QMAKE_EXECUTABLE} -query QT_VERSION OUTPUT_VARIABLE QT_VERSION)
+ 
+ # -- check for glib 2.0
+@@ -68,7 +69,9 @@ if (DESKTOP)
+ endif()
+ 
+ # -- Check for Qt5, Qt5Gui implicitly links to Qt5Core
++message(STATUS "Found qmake ${QMAKE_EXECUTABLE} and '-query QT_VERSION' returns '${QT_VERSION}'")
+ if (QT_VERSION VERSION_GREATER_EQUAL 6.0.0)
++    message(STATUS "Found QT_VERSION ${QT_VERSION} greater equel 6.0.0")
+     find_package(Qt6 6.0.0 CONFIG REQUIRED COMPONENTS BuildInternals Core Gui)
+     include_directories(
+         ${Qt6Core_INCLUDE_DIRS}
