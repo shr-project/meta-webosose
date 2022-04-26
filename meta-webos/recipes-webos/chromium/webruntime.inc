@@ -1,4 +1,4 @@
-# Copyright (c) 2018-2021 LG Electronics, Inc.
+# Copyright (c) 2018-2022 LG Electronics, Inc.
 
 SUMMARY = "Chromium webruntime for webOS"
 AUTHOR = "Lokesh Kumar Goel <lokeshkumar.goel@lge.com>"
