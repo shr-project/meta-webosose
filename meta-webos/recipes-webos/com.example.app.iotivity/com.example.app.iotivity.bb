@@ -47,3 +47,10 @@ SRC_URI += "file://0001-webOS-Fix-UI-bug-in-iotivity-sampler.patch"
 
 # Workaround for network access issue during do_compile task
 do_compile[network] = "1"
+
+do_install:prepend() {
+    export NODE_OPTIONS="--openssl-legacy-provider"
+    # work around nodejs trying to load openssl's legacy.so from openssl WORKDIR which might be already removed by rm-work
+    # see https://lists.openembedded.org/g/openembedded-devel/message/96799
+    export OPENSSL_MODULES="${STAGING_LIBDIR_NATIVE}/ossl-modules/"
+}
