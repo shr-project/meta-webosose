@@ -22,8 +22,6 @@ SRC_URI += " \
     file://0019-Fix-connman-crash.patch \
     file://0020-Fix-connman-crash-when-interface-removed.patch \
     file://0021-Fix-bug-p2p-findservice-luna-fail.patch \
-    file://0022-Fix-connman-crash.patch \
-    file://0023-Fix-connman-crash-on-p2p-connect.patch \
 "
 
 do_install:append() {
