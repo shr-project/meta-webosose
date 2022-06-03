@@ -19,7 +19,7 @@ inherit webos_enhanced_submissions
 inherit webos_public_repo
 
 DEPENDS = " \
-    msgpack-c \
+    msgpack-cpp \
     rapidjson \
     flatbuffers \
     opencv \
