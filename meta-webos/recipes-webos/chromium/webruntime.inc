@@ -43,7 +43,7 @@ WEBOS_SYSTEM_BUS_MANIFEST_TYPE = "PASS"
 
 PACKAGECONFIG_NEVA_WEBRTC ?= "neva-webrtc"
 PACKAGECONFIG_MEDIA ?= "neva-media gstreamer umediaserver gav"
-PACKAGECONFIG ?= ""
+PACKAGECONFIG ?= "gbm platform-drm"
 PACKAGECONFIG:append:hardware = " ${PACKAGECONFIG_MEDIA} ${PACKAGECONFIG_NEVA_WEBRTC}"
 PACKAGECONFIG[gstreamer] = "use_gst_media=true enable_webm_video_codecs=false,use_gst_media=false,g-media-pipeline"
 PACKAGECONFIG[umediaserver] = ",,umediaserver"
@@ -55,7 +55,11 @@ PACKAGECONFIG[neva-media] = "use_neva_media=true, use_neva_media=false"
 PACKAGECONFIG[av1-codec] = "enable_av1_decoder=true, enable_av1_decoder=false"
 PACKAGECONFIG[gav] = "use_gav=true,use_gav=false"
 PACKAGECONFIG[neva-webrtc] = "use_neva_webrtc=true,use_neva_webrtc=false,media-codec-interface,media-codec-interface"
-
+PACKAGECONFIG[platform-drm] = "ozone_platform_drm=true,ozone_platform_drm=false"
+PACKAGECONFIG[platform-xcb] = "ozone_platform_xcb=true,ozone_platform_xcb=false"
+PACKAGECONFIG[platform-x11] = "ozone_platform_x11=true,ozone_platform_x11=false"
+PACKAGECONFIG[auto-platforms] = "ozone_auto_platforms=true,ozone_auto_platforms=false"
+PACKAGECONFIG[gbm] = "use_wayland_gbm=true,use_wayland_gbm=false"
 PACKAGECONFIG:append = " ${@bb.utils.contains('WEBOS_LTTNG_ENABLED', '1', 'lttng', '', d)}"
 PACKAGECONFIG[lttng] = "use_lttng=true,use_lttng=false,lttng-ust,lttng-tools lttng-modules babeltrace"
 
@@ -63,7 +67,6 @@ GN_ARGS:append = " \
     enable_memorymanager_webapi=true\
     ffmpeg_branding=\"Chrome\"\
     is_app_shell_cbe=true\
-    ozone_auto_platforms=false\
     proprietary_codecs=true\
     use_bundled_fontconfig=false\
     use_cbe=true\

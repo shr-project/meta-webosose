@@ -1,0 +1,23 @@
+From 7c3b56bc7df87fb93c3680f89f2b56e6db9f2206 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <martin2.jansa@lgepartner.com>
+Date: Mon, 13 Jun 2022 17:25:25 +0000
+Subject: [PATCH] desktop_aura: use only 'wayland' instead of whole
+ platform_list_txt_file
+
+---
+ src/ui/ozone/generate_constructor_list.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/ui/ozone/generate_constructor_list.py b/src/ui/ozone/generate_constructor_list.py
+index 04fa18e93d..333c3e8c61 100755
+--- a/src/ui/ozone/generate_constructor_list.py
++++ b/src/ui/ozone/generate_constructor_list.py
+@@ -159,7 +159,7 @@ def main(argv):
+   usings = list(options.using)
+ 
+   if options.platform_list:
+-    platforms = open(options.platform_list, 'r').read().strip().split('\n')
++    platforms = ['headless']
+ 
+   if not platforms:
+     sys.stderr.write('No platforms are selected!')

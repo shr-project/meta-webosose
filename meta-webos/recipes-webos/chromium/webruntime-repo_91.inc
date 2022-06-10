@@ -43,4 +43,5 @@ SRC_URI += " \
     file://0032-Py2-Py3-fixup-for-dom_distiller_js.patch \
     file://0033-catapult-use-python3-for-rcssmin.patch \
     file://0034-build-Convert-third_party-opus-BUILD.gn-to-py3.patch \
+    file://0001-desktop_aura-use-only-wayland-instead-of-whole-platf.patch \
 "
