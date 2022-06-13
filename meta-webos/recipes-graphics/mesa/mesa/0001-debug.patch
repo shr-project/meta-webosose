@@ -1,0 +1,236 @@
+From 9821348a3ac3dafb238fce031529d230334473ae Mon Sep 17 00:00:00 2001
+From: Martin Jansa <martin2.jansa@lgepartner.com>
+Date: Fri, 10 Jun 2022 17:01:47 +0000
+Subject: [PATCH] debug
+
+---
+ src/egl/drivers/dri2/egl_dri2.c         |  6 ++++++
+ src/egl/drivers/dri2/platform_device.c  |  1 +
+ src/egl/drivers/dri2/platform_drm.c     |  3 +++
+ src/egl/drivers/dri2/platform_wayland.c | 16 ++++++++++++----
+ src/gbm/backends/dri/gbm_dri.c          |  1 +
+ src/gbm/main/backend.c                  |  2 ++
+ src/glx/dri_common.c                    |  1 +
+ src/loader/loader.c                     |  2 ++
+ 8 files changed, 28 insertions(+), 4 deletions(-)
+
+diff --git a/src/egl/drivers/dri2/egl_dri2.c b/src/egl/drivers/dri2/egl_dri2.c
+index 93e3af618f9..58439153fcc 100644
+--- a/src/egl/drivers/dri2/egl_dri2.c
++++ b/src/egl/drivers/dri2/egl_dri2.c
+@@ -803,6 +803,7 @@ dri2_open_driver(_EGLDisplay *disp)
+       NULL,
+    };
+ 
++   _eglLog(_EGL_WARNING, "MJ: dri2_open_driver from _EGLDisplay %s", dri2_dpy->driver_name);
+    return loader_open_driver(dri2_dpy->driver_name,
+                              &dri2_dpy->driver,
+                              search_path_vars);
+@@ -834,18 +835,21 @@ dri2_load_driver_common(_EGLDisplay *disp,
+ EGLBoolean
+ dri2_load_driver(_EGLDisplay *disp)
+ {
++   _eglLog(_EGL_WARNING, "MJ: dri2_load_driver");
+    return dri2_load_driver_common(disp, dri2_driver_extensions);
+ }
+ 
+ EGLBoolean
+ dri2_load_driver_dri3(_EGLDisplay *disp)
+ {
++   _eglLog(_EGL_WARNING, "MJ: dri2_load_driver_dri3");
+    return dri2_load_driver_common(disp, dri3_driver_extensions);
+ }
+ 
+ EGLBoolean
+ dri2_load_driver_swrast(_EGLDisplay *disp)
+ {
++   _eglLog(_EGL_WARNING, "MJ: dri2_load_driver_swrast");
+    return dri2_load_driver_common(disp, swrast_driver_extensions);
+ }
+ 
+@@ -1146,6 +1150,7 @@ dri2_initialize(_EGLDisplay *disp)
+ {
+    EGLBoolean ret = EGL_FALSE;
+    struct dri2_egl_display *dri2_dpy = dri2_egl_display(disp);
++   _eglLog(_EGL_WARNING, "MJ: dri2_initialize");
+ 
+    /* In the case where the application calls eglMakeCurrent(context1),
+     * eglTerminate, then eglInitialize again (without a call to eglReleaseThread
+@@ -1195,6 +1200,7 @@ dri2_initialize(_EGLDisplay *disp)
+       return EGL_FALSE;
+ 
+    dri2_dpy = dri2_egl_display(disp);
++   _eglLog(_EGL_WARNING, "MJ: dri2_initialize2 %s", dri2_dpy->driver_name);
+    dri2_dpy->ref_count++;
+ 
+    return EGL_TRUE;
+diff --git a/src/egl/drivers/dri2/platform_device.c b/src/egl/drivers/dri2/platform_device.c
+index 30f6f7e6b8b..97fa2ebb6dc 100644
+--- a/src/egl/drivers/dri2/platform_device.c
++++ b/src/egl/drivers/dri2/platform_device.c
+@@ -336,6 +336,7 @@ dri2_initialize_device(_EGLDisplay *disp)
+    const char* err;
+ 
+    dri2_dpy = calloc(1, sizeof *dri2_dpy);
++   _eglLog(_EGL_WARNING, "MJ: dri2_initialize_device");
+    if (!dri2_dpy)
+       return _eglError(EGL_BAD_ALLOC, "eglInitialize");
+ 
+diff --git a/src/egl/drivers/dri2/platform_drm.c b/src/egl/drivers/dri2/platform_drm.c
+index 6aada724a54..6d334f13173 100644
+--- a/src/egl/drivers/dri2/platform_drm.c
++++ b/src/egl/drivers/dri2/platform_drm.c
+@@ -687,6 +687,7 @@ dri2_initialize_drm(_EGLDisplay *disp)
+    struct gbm_device *gbm;
+    const char *err;
+ 
++   _eglLog(_EGL_WARNING, "MJ: dri2_initialize_drm");
+    dri2_dpy = calloc(1, sizeof *dri2_dpy);
+    if (!dri2_dpy)
+       return _eglError(EGL_BAD_ALLOC, "eglInitialize");
+@@ -714,8 +715,10 @@ dri2_initialize_drm(_EGLDisplay *disp)
+       }
+    }
+    dri2_dpy->gbm_dri = gbm_dri_device(gbm);
++   _eglLog(_EGL_WARNING, "MJ: gbm_device_get_backend_name %s", gbm_device_get_backend_name(gbm));
+ 
+    if (strcmp(gbm_device_get_backend_name(gbm), "drm") != 0) {
++      _eglLog(_EGL_WARNING, "MJ: gbm_device_get_backend_name %s", gbm_device_get_backend_name(gbm));
+       err = "DRI2: gbm device using incorrect/incompatible backend";
+       goto cleanup;
+    }
+diff --git a/src/egl/drivers/dri2/platform_wayland.c b/src/egl/drivers/dri2/platform_wayland.c
+index 5ff83cce08a..9ff69dcd674 100644
+--- a/src/egl/drivers/dri2/platform_wayland.c
++++ b/src/egl/drivers/dri2/platform_wayland.c
+@@ -2047,7 +2047,7 @@ dri2_initialize_wayland_drm(_EGLDisplay *disp)
+ 
+    if (dri2_wl_formats_init(&dri2_dpy->formats) < 0)
+       goto cleanup;
+-
++   _eglLog(_EGL_WARNING, "MJ: dri2_initialize_wayland_drm");
+    dri2_dpy->fd = -1;
+    disp->DriverData = (void *) dri2_dpy;
+    if (disp->PlatformDisplay == NULL) {
+@@ -2058,10 +2058,12 @@ dri2_initialize_wayland_drm(_EGLDisplay *disp)
+    } else {
+       dri2_dpy->wl_dpy = disp->PlatformDisplay;
+    }
++   _eglLog(_EGL_WARNING, "MJ: before wl_display_create_queue %d", dri2_dpy->fd);
+ 
+    dri2_dpy->wl_queue = wl_display_create_queue(dri2_dpy->wl_dpy);
+ 
+    dri2_dpy->wl_dpy_wrapper = wl_proxy_create_wrapper(dri2_dpy->wl_dpy);
++   _eglLog(_EGL_WARNING, "MJ: wl_proxy_create_wrapper %d", dri2_dpy->fd);
+    if (dri2_dpy->wl_dpy_wrapper == NULL)
+       goto cleanup;
+ 
+@@ -2076,8 +2078,10 @@ dri2_initialize_wayland_drm(_EGLDisplay *disp)
+                             &registry_listener_drm, dri2_dpy);
+ 
+    /* The compositor must expose the dma-buf interface. */
+-   if (roundtrip(dri2_dpy) < 0 || dri2_dpy->wl_dmabuf == NULL)
++   if (roundtrip(dri2_dpy) < 0 || dri2_dpy->wl_dmabuf == NULL) {
++      _eglLog(_EGL_WARNING, "MJ: dma-buf interface %d", dri2_dpy->fd);
+       goto cleanup;
++   }
+ 
+    /* Get default dma-buf feedback */
+    if (zwp_linux_dmabuf_v1_get_version(dri2_dpy->wl_dmabuf) >=
+@@ -2099,6 +2103,7 @@ dri2_initialize_wayland_drm(_EGLDisplay *disp)
+       dri2_dpy->wl_dmabuf_feedback = NULL;
+       dmabuf_feedback_format_table_fini(&dri2_dpy->format_table);
+    }
++   _eglLog(_EGL_WARNING, "MJ: before wl_drm %d", dri2_dpy->fd);
+ 
+    /* We couldn't retrieve a render node from the dma-buf feedback (or the
+     * feedback was not advertised at all), so we must fallback to wl_drm. */
+@@ -2117,6 +2122,7 @@ dri2_initialize_wayland_drm(_EGLDisplay *disp)
+           (roundtrip(dri2_dpy) < 0 || !dri2_dpy->authenticated))
+          goto cleanup;
+    }
++   _eglLog(_EGL_WARNING, "MJ: user_preferred_fd %d", dri2_dpy->fd);
+ 
+    dri2_dpy->fd = loader_get_user_preferred_fd(dri2_dpy->fd,
+                                                &dri2_dpy->is_different_gpu);
+@@ -2650,6 +2656,7 @@ dri2_initialize_wayland_swrast(_EGLDisplay *disp)
+       goto cleanup;
+ 
+    dri2_dpy->driver_name = strdup("swrast");
++   _eglLog(_EGL_WARNING, "MJ: dri2_load_driver_swrast next");
+    if (!dri2_load_driver_swrast(disp))
+       goto cleanup;
+ 
+@@ -2685,9 +2692,10 @@ dri2_initialize_wayland_swrast(_EGLDisplay *disp)
+ EGLBoolean
+ dri2_initialize_wayland(_EGLDisplay *disp)
+ {
+-   if (disp->Options.ForceSoftware)
++   if (disp->Options.ForceSoftware) {
++      _eglLog(_EGL_WARNING, "MJ: forced software");
+       return dri2_initialize_wayland_swrast(disp);
+-   else
++   } else
+       return dri2_initialize_wayland_drm(disp);
+ }
+ 
+diff --git a/src/gbm/backends/dri/gbm_dri.c b/src/gbm/backends/dri/gbm_dri.c
+index 560b97f2b70..c5b4e9d5b62 100644
+--- a/src/gbm/backends/dri/gbm_dri.c
++++ b/src/gbm/backends/dri/gbm_dri.c
+@@ -353,6 +353,7 @@ dri_open_driver(struct gbm_dri_device *dri)
+       "LIBGL_DRIVERS_PATH",
+       NULL
+    };
++   fprintf(stderr, "MJ: dri_open_driver: loader_open_driver: libglapi.so.0");
+    return loader_open_driver(dri->driver_name, &dri->driver, search_path_vars);
+ }
+ 
+diff --git a/src/gbm/main/backend.c b/src/gbm/main/backend.c
+index 974d0a76a4e..b59c70329a9 100644
+--- a/src/gbm/main/backend.c
++++ b/src/gbm/main/backend.c
+@@ -163,6 +163,7 @@ find_backend(const char *name, int fd)
+    }
+ 
+    if (name && !dev) {
++      fprintf(stderr, "MJ: find_backend: loader_open_driver_lib1");
+       lib = loader_open_driver_lib(name, BACKEND_LIB_SUFFIX,
+                                    backend_search_path_vars,
+                                    DEFAULT_BACKENDS_PATH,
+@@ -198,6 +199,7 @@ backend_from_driver_name(int fd)
+    if (!v)
+       return NULL;
+ 
++      fprintf(stderr, "MJ: find_backend: loader_open_driver_lib2");
+    lib = loader_open_driver_lib(v->name, BACKEND_LIB_SUFFIX,
+                                 backend_search_path_vars,
+                                 DEFAULT_BACKENDS_PATH,
+diff --git a/src/glx/dri_common.c b/src/glx/dri_common.c
+index 27e78fb3799..b9bbd19455a 100644
+--- a/src/glx/dri_common.c
++++ b/src/glx/dri_common.c
+@@ -83,6 +83,7 @@ driOpenDriver(const char *driverName, void **out_driver_handle)
+       NULL
+    };
+ 
++   fprintf(stderr, "MJ: driOpenDriver: loader_open_driver");
+    const __DRIextension **extensions =
+       loader_open_driver(driverName, out_driver_handle, search_path_vars);
+ 
+diff --git a/src/loader/loader.c b/src/loader/loader.c
+index c9a499c6fc2..5e425d4371a 100644
+--- a/src/loader/loader.c
++++ b/src/loader/loader.c
+@@ -545,6 +545,8 @@ loader_get_driver_for_fd(int fd)
+     */
+    if (geteuid() == getuid()) {
+       driver = getenv("MESA_LOADER_DRIVER_OVERRIDE");
++      log_(driver ? _LOADER_DEBUG : _LOADER_WARNING,
++         "MJ: driver from getenv: %s\n", driver);
+       if (driver)
+          return strdup(driver);
+    }
+-- 
+2.36.1
+

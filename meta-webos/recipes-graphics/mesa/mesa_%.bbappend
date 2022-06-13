@@ -9,3 +9,6 @@ PACKAGECONFIG:append:qemuall = " gallium-llvm"
 # mesa-20.0.2/src/gallium/winsys/svga/drm/vmw_msg.c:90:4: error: impossible constraint in 'asm'
 # http://caprica.lgsvl.com:8080/Errors/Details/1472308
 GALLIUMDRIVERS_LLVM:qemuarm = "r300,nouveau"
+
+FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
+SRC_URI += "file://0001-debug.patch"
