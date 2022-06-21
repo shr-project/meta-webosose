@@ -18,12 +18,18 @@ inherit webos_enhanced_submissions
 inherit webos_enactjs_app
 inherit webos_public_repo
 
-WEBOS_ENACTJS_SHRINKWRAP_OVERRIDE = "false"
-
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
 S = "${WORKDIR}/git"
 
 WEBOS_ENACTJS_APP_ID = "com.webos.app.camera"
+WEBOS_ENACTJS_SHRINKWRAP_OVERRIDE = "false"
 
 # Workaround for network access issue during do_compile task
 do_compile[network] = "1"
+
+do_install:prepend() {
+    export NODE_OPTIONS="--openssl-legacy-provider"
+    # work around nodejs trying to load openssl's legacy.so from openssl WORKDIR which might be already removed by rm-work
+    # see https://lists.openembedded.org/g/openembedded-devel/message/96799
+    export OPENSSL_MODULES="${STAGING_LIBDIR_NATIVE}/ossl-modules/"
+}
