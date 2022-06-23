@@ -26,6 +26,8 @@ PR = "r5"
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE};name=main"
 
+SRC_URI:append:raspberrypi3 = " file://0001-requestor.cpp-remove-ResourceMediaClient-notifyPipel.patch"
+
 USE_ENCODER ?= "GST"
 EXTRA_OECMAKE += "-DUSE_ENCODER_BUILD:STRING=${USE_ENCODER}"
 

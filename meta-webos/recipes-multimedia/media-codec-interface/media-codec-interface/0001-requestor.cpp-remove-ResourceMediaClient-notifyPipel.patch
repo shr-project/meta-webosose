@@ -1,0 +1,76 @@
+From 960eca75f0e839fac11bab4a735e52bb26a10469 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <martin2.jansa@lgepartner.com>
+Date: Thu, 23 Jun 2022 13:14:44 +0000
+Subject: [PATCH] requestor.cpp: remove
+ ResourceMediaClient::notifyPipelineStatus() call
+
+:Release Notes:
+This is just WIP before media team resolves it correctly.
+
+:Detailed Notes:
+ResourceMediaClient::notifyPipelineStatus() API was added in
+umediaserver with:
+  commit 4a5b10357c533c8917c550c5992a78faff8b166d (tag: submissions/24.gav.1)
+  Author: Pankaj Maharana <pankaj.maharana@lge.com>
+  Date:   Tue Dec 17 20:40:39 2019 +0530
+  Subject: Import GAV implementation to OSE for raspberrypi4
+
+    :Release Notes:
+    Import GAV specific implementation for raspberrypi4 to OSE
+
+    :Detailed Notes:
+    With this commit we import all the changes done for GAV specific to
+    raspberrypi4 board for OSE 2.0
+
+but raspberrypi3(-64) is using submissions/27 from master branch:
+
+WEBOS_GIT_PARAM_BRANCH = "@gav"
+WEBOS_VERSION = "1.0.0-24.gav.23_5d41cd48631da6f41506845248e1201600037ed5"
+
+WEBOS_GIT_PARAM_BRANCH:raspberrypi3 = "master"
+WEBOS_VERSION:raspberrypi3 = "1.0.0-27_dad33357ba323a69885bc11661330ab07296b0c8"
+
+which doesn't have this API, leading to:
+
+FAILED: src/CMakeFiles/media-codec-interface.dir/resource/requestor.cpp.o
+/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5/recipe-sysroot-native/usr/bin/aarch64-webos-linux/aarch64-webos-linux-g++ -DUSE_GST_ENCODER -Dmedia_codec_interface_EXPORTS -I/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5/recipe-sysroot/usr/include/gstreamer-1.0 -I/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5/recipe-sysroot/usr/include/orc-0.4 -I/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5/recipe-sysroot/usr/include/glib-2.0 -I/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5/recipe-sysroot/usr/lib/glib-2.0/include -I/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5/build/src -I/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5/git/src/. -I/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5/git/src/./api -I/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5/git/src/./base -I/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5/git/src/./impl -I/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5/git/src/./resource -I/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5/recipe-sysroot/usr/include/media-resource-calculator -mcpu=cortex-a53 -march=armv8-a+crc -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security -Werror=return-type  --sysroot=/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5/recipe-sysroot  -O2 -pipe -g -feliminate-unused-debug-types -fmacro-prefix-map=/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5=/usr/src/debug/media-codec-interface/1.0.0-7-r5                      -fdebug-prefix-map=/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5=/usr/src/debug/media-codec-interface/1.0.0-7-r5                      -fdebug-prefix-map=/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5/recipe-sysroot=                      -fdebug-prefix-map=/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5/recipe-sysroot-native=  -fvisibility-inlines-hidden  -std=c++14 -DNDEBUG -fPIC -MD -MT src/CMakeFiles/media-codec-interface.dir/resource/requestor.cpp.o -MF src/CMakeFiles/media-codec-interface.dir/resource/requestor.cpp.o.d -o src/CMakeFiles/media-codec-interface.dir/resource/requestor.cpp.o -c /OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5/git/src/resource/requestor.cpp
+/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5/git/src/resource/requestor.cpp: In member function 'bool mcil::ResourceRequestor::NotifyPipelineStatus(const string&) const':
+/OE/lge/build/webos/kirkstone/BUILD/work/raspberrypi3_64-webos-linux/media-codec-interface/1.0.0-7-r5/git/src/resource/requestor.cpp:200:12: error: 'using element_type = class uMediaServer::ResourceManagerClient' {aka 'class uMediaServer::ResourceManagerClient'} has no member named 'notifyPipelineStatus'
+  200 |   umsRMC_->notifyPipelineStatus(status);
+      |            ^~~~~~~~~~~~~~~~~~~~
+
+http://gecko.lge.com/jenkins/job/clean-engineering-webos-raspberrypi3-64-build/20026/console
+http://gecko.lge.com:8000/Errors/Details/423683
+
+:Testing Performed:
+Build tested.
+
+:QA Notes:
+N/A
+
+:Issues Addressed:
+[WRO-4776] Implement WebOSVideoEncodeAccelerator for webOS
+[WRO-6349] Implement WebOSVideoDecodeAccelerator for webOS
+[WRO-1909] Add support for enableWebOSVDA property in appinfo json
+[WRO-4014] [RDX_CRASH][webos] /usr/bin/WebAppMgr in raise (libc.so.6
+            + 0x3681c)
+[WRO-6168] Address Site filter, Popup blocker and Cookie Manager
+           review comments for browser service
+[WRO-6499] CCC: media-codec-interface=7-r5webosrpi1 wam=59-r45
+           webruntime_91=19-r54
+---
+ src/resource/requestor.cpp | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/src/resource/requestor.cpp b/src/resource/requestor.cpp
+index cafaf7f..2f7ec46 100644
+--- a/src/resource/requestor.cpp
++++ b/src/resource/requestor.cpp
+@@ -197,7 +197,6 @@ bool ResourceRequestor::NotifyActivity() const {
+ }
+ 
+ bool ResourceRequestor::NotifyPipelineStatus(const std::string& status) const {
+-  umsRMC_->notifyPipelineStatus(status);
+   return true;
+ }
+ 
