@@ -14,7 +14,7 @@ SRC_URI = " \
     file://0001-Fix-build-with-newer-gcc.patch \
 "
 
-PR = "r1"
+PR = "r2"
 
 S = "${WORKDIR}/git"
 
@@ -121,9 +121,13 @@ do_install() {
 }
 
 INHIBIT_PACKAGE_DEBUG_SPLIT = "1"
-SOLIBS = ".so"
+
+# package unversioned .so files in PN (they are not dev symlinks)
 FILES_SOLIBSDEV = ""
+FILES:${PN} += "${libdir}/*.so"
 
-FILES:${PN} += "${libdir}/*.so*"
-FILES:${PN}-dev += "${includedir}/* ${bindir}/* ${libdir}/pkgconfig/*"
-
+PACKAGES =+ "${PN}-tests ${PN}-examples"
+FILES:${PN}-tests = "${bindir}/*/tests"
+FILES:${PN}-examples = "${bindir}/*/examples"
+RDEPENDS:${PN}-tests += "${PN}"
+RDEPENDS:${PN}-examples += "${PN}"
