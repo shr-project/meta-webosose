@@ -1,4 +1,4 @@
-From 2c4d6a23660e5dc49b6bd30804d13f713c4e9155 Mon Sep 17 00:00:00 2001
+From ec35a0509f156e3a65fd8651eb5e8fc5c4e75a99 Mon Sep 17 00:00:00 2001
 From: Martin Jansa <martin2.jansa@lgepartner.com>
 Date: Tue, 7 Jun 2022 09:45:30 +0000
 Subject: [PATCH] opencl_wrapper: dlopen libOpenCL.so.1 instead of libOpenCL.so
