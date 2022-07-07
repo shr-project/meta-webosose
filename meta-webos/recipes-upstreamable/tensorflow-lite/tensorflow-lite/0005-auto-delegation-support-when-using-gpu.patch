@@ -1,4 +1,4 @@
-From b0ecee5b05259d8804b1a344d307be4bf8673f48 Mon Sep 17 00:00:00 2001
+From 313f44a57ee7debf3d58e4b5d86147bc2ddbeb27 Mon Sep 17 00:00:00 2001
 From: "kijoong.lee" <kijoong.lee@lge.com>
 Date: Mon, 13 Jun 2022 18:43:31 +0900
 Subject: [PATCH] auto delegation support when using gpu
@@ -79,6 +79,3 @@ index 40a06bb4384..8a84b0771f8 100644
  } TfLiteGpuDelegateOptionsV2;
  
  // Populates TfLiteGpuDelegateOptionsV2 as follows:
--- 
-2.17.1
-
