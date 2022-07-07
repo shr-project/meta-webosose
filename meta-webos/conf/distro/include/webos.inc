@@ -326,6 +326,7 @@ DEFAULT_WARN_QA = "\
 "
 ERROR_QA:append = " ${DEFAULT_WARN_QA}"
 WARN_QA:remove = "${DEFAULT_WARN_QA}"
+WARN_QA:append = " buildpaths"
 
 # Default WEBOS_TARGET_* values (see webos_cmake.bbclass)
 WEBOS_TARGET_CORE_OS ?= "rockhopper"
