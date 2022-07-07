@@ -185,6 +185,3 @@ index 90dd20e34d9..d06bd12489d 100644
  };
  
  // Specialized partitioner for graphs that possibly contain fp16 tensors.
--- 
-2.17.1
-
