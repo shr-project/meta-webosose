@@ -1,4 +1,4 @@
-From 9310ba0ecfbeb071b72079875b8ef0fb886b7e1a Mon Sep 17 00:00:00 2001
+From d012c17d975bcb077fa842c22603421011f0ae50 Mon Sep 17 00:00:00 2001
 From: "yeseul.joo" <yeseul.joo@lge.com>
 Date: Tue, 12 Jul 2022 16:45:04 +0900
 Subject: [PATCH] auto delegation support when using gpu
@@ -20,29 +20,27 @@ N/A
 :Issues Addressed:
 N/A
 ---
- .../lite/delegates/gpu/common/model_builder.cc    |  5 ++++-
- .../lite/delegates/gpu/common/model_builder.h     |  3 ++-
- tensorflow/lite/delegates/gpu/delegate.cc         | 15 ++++++++++++++-
- tensorflow/lite/delegates/gpu/delegate.h          |  5 +++++
- tensorflow/lite/delegates/utils.cc                |  9 ++++++---
- tensorflow/lite/delegates/utils.h                 |  7 +++++++
- 6 files changed, 38 insertions(+), 6 deletions(-)
+ .../lite/delegates/gpu/common/model_builder.cc   |  3 +++
+ .../lite/delegates/gpu/common/model_builder.h    |  1 +
+ tensorflow/lite/delegates/gpu/delegate.cc        | 16 +++++++++++++++-
+ tensorflow/lite/delegates/gpu/delegate.h         |  5 +++++
+ tensorflow/lite/delegates/utils.cc               |  9 ++++++---
+ tensorflow/lite/delegates/utils.h                |  7 +++++++
+ 6 files changed, 37 insertions(+), 4 deletions(-)
 
 diff --git a/tensorflow/lite/delegates/gpu/common/model_builder.cc b/tensorflow/lite/delegates/gpu/common/model_builder.cc
-index de8d32183d3..f5074f695f4 100644
+index 1f6beafe78a..2494d1eb4d3 100644
 --- a/tensorflow/lite/delegates/gpu/common/model_builder.cc
 +++ b/tensorflow/lite/delegates/gpu/common/model_builder.cc
-@@ -3039,7 +3039,8 @@ std::unique_ptr<TFLiteOperationParser> NewOperationParser(
- // TODO(impjdi): Check number of input/output tensors and their dimensions.
+@@ -2630,6 +2630,7 @@ std::unique_ptr<TFLiteOperationParser> NewOperationParser(
  // TODO(impjdi): Check ops' parameters.
- TfLiteIntArray* GetOpsToReplace(TfLiteContext* context, bool allow_quant_ops,
--                                int max_delegated_partitions) {
-+                                int max_delegated_partitions,
-+				int cpu_fallback_percentage) {
+ TfLiteIntArray* GetOpsToReplace(
+     TfLiteContext* context, bool allow_quant_ops, int max_delegated_partitions,
++    int cpu_fallback_percentage,
+     const absl::flat_hash_set<TfLiteBuiltinOperator>* excluded_ops) {
    delegates::IsNodeSupportedFn node_supported_fn =
        [=](TfLiteContext* context, TfLiteNode* node,
-           TfLiteRegistration* registration,
-@@ -3082,6 +3083,8 @@ TfLiteIntArray* GetOpsToReplace(TfLiteContext* context, bool allow_quant_ops,
+@@ -2673,6 +2674,8 @@ TfLiteIntArray* GetOpsToReplace(
  
    delegates::FP16GraphPartitionHelper partition_helper(context,
                                                         node_supported_fn);
@@ -52,26 +50,24 @@ index de8d32183d3..f5074f695f4 100644
    if (partition_helper.Partition(&unsupported_nodes_info) != kTfLiteOk) {
      return TfLiteIntArrayCreate(0);
 diff --git a/tensorflow/lite/delegates/gpu/common/model_builder.h b/tensorflow/lite/delegates/gpu/common/model_builder.h
-index a46e09a7b94..db1969e8314 100644
+index 7f1c3188044..c4ef2e78c09 100644
 --- a/tensorflow/lite/delegates/gpu/common/model_builder.h
 +++ b/tensorflow/lite/delegates/gpu/common/model_builder.h
-@@ -35,7 +35,8 @@ namespace gpu {
- // consists of a subset of ops) to be replaced.
- TfLiteIntArray* GetOpsToReplace(TfLiteContext* context,
-                                 bool allow_quant_ops = false,
--                                int max_delegated_partitions = 1);
-+                                int max_delegated_partitions = 1,
-+				int cpu_fallback_percentage = 0);
+@@ -40,6 +40,7 @@ namespace gpu {
+ TfLiteIntArray* GetOpsToReplace(
+     TfLiteContext* context, bool allow_quant_ops = false,
+     int max_delegated_partitions = 1,
++    int cpu_fallback_percentage = 0,
+     const absl::flat_hash_set<TfLiteBuiltinOperator>* excluded_ops = nullptr);
  
  // Extracts TFLite delegate execution plan from the input TFLite context and
- // converts it into generic graph format.
 diff --git a/tensorflow/lite/delegates/gpu/delegate.cc b/tensorflow/lite/delegates/gpu/delegate.cc
-index 63ed22373dd..72bc99fc040 100644
+index 9fdb1a88d12..8c72c8b4d84 100644
 --- a/tensorflow/lite/delegates/gpu/delegate.cc
 +++ b/tensorflow/lite/delegates/gpu/delegate.cc
-@@ -86,6 +86,11 @@ class Delegate {
-     if (options_.max_delegated_partitions <= 0) {
-       options_.max_delegated_partitions = 1;
+@@ -103,6 +103,11 @@ class Delegate {
+       params.cache_dir = options_.serialization_dir;
+       serialization_.reset(new Serialization(params));
      }
 +    if (options_.cpu_fallback_percentage < 0) {
 +      options_.cpu_fallback_percentage = 0;
@@ -81,7 +77,7 @@ index 63ed22373dd..72bc99fc040 100644
    }
  
    TfLiteDelegate* tflite_delegate() { return &delegate_; }
-@@ -98,6 +103,7 @@ class Delegate {
+@@ -116,6 +121,7 @@ class Delegate {
    int MaxDelegatedPartitions() const {
      return options_.max_delegated_partitions;
    }
@@ -89,10 +85,10 @@ index 63ed22373dd..72bc99fc040 100644
    int num_delegate_kernels() const { return num_delegate_kernels_; }
  
   private:
-@@ -424,9 +430,15 @@ TfLiteStatus DelegatePrepare(TfLiteContext* context, TfLiteDelegate* delegate) {
-   };
- 
-   auto* gpu_delegate = GetDelegate(delegate);
+@@ -567,9 +573,16 @@ TfLiteStatus DelegatePrepare(TfLiteContext* context, TfLiteDelegate* delegate) {
+     excluded_ops.insert(kTfLiteBuiltinSplit);
+     excluded_ops.insert(kTfLiteBuiltinSplitV);
+   }
 +  if(gpu_delegate->CPUFallbackPercentage() != 0) {
 +    TFLITE_LOG_PROD(TFLITE_LOG_INFO,
 +      "GPU Load Balancing : %d percent CPU Fallback",
@@ -100,28 +96,29 @@ index 63ed22373dd..72bc99fc040 100644
 +  }
    TfLiteIntArray* ops_to_replace =
        GetOpsToReplace(context, gpu_delegate->IsQuantOpsAllowed(),
--                      gpu_delegate->MaxDelegatedPartitions());
+-                      gpu_delegate->MaxDelegatedPartitions(), &excluded_ops);
 +                      gpu_delegate->MaxDelegatedPartitions(),
-+		      gpu_delegate->CPUFallbackPercentage());
++                      gpu_delegate->CPUFallbackPercentage(),
++                      &excluded_ops);
    const auto status = context->ReplaceNodeSubsetsWithDelegateKernels(
        context, kRegistration, ops_to_replace, delegate);
    TFLITE_LOG_PROD(TFLITE_LOG_INFO, "Created %d GPU delegate kernels.",
-@@ -450,6 +462,7 @@ TfLiteGpuDelegateOptionsV2 TfLiteGpuDelegateOptionsV2Default() {
-   options.inference_priority3 = TFLITE_GPU_INFERENCE_PRIORITY_AUTO;
-   options.experimental_flags = TFLITE_GPU_EXPERIMENTAL_FLAGS_ENABLE_QUANT;
+@@ -595,6 +608,7 @@ TfLiteGpuDelegateOptionsV2 TfLiteGpuDelegateOptionsV2Default() {
    options.max_delegated_partitions = 1;
+   options.model_token = nullptr;
+   options.serialization_dir = nullptr;
 +  options.cpu_fallback_percentage = 0;
    return options;
  }
  
 diff --git a/tensorflow/lite/delegates/gpu/delegate.h b/tensorflow/lite/delegates/gpu/delegate.h
-index 40a06bb4384..8a84b0771f8 100644
+index 3a1e1811478..3abb0c5ed2f 100644
 --- a/tensorflow/lite/delegates/gpu/delegate.h
 +++ b/tensorflow/lite/delegates/gpu/delegate.h
-@@ -101,6 +101,11 @@ typedef struct {
-   // This limits the maximum number of partitions to be delegated. By default,
-   // it's set to 1 in TfLiteGpuDelegateOptionsV2Default().
-   int32_t max_delegated_partitions;
+@@ -131,6 +131,11 @@ typedef struct {
+   // Set to nullptr in TfLiteGpuDelegateOptionsV2Default(), which implies the
+   // delegate will not try serialization.
+   const char* model_token;
 +
 +  // A value between 0 and 100, that represents percentage of nodes that are
 +  // forced to run on CPU despite it is supported in GPU.
