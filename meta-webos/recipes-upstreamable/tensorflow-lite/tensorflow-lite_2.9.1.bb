@@ -3,17 +3,17 @@
 SUMMARY = "TensorFlow Lite CPP Library"
 LICENSE = "Apache-2.0"
 
-LIC_FILES_CHKSUM = "file://LICENSE;md5=c7e17cca1ef4230861fb7868e96c387e"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=4158a261ca7f2525513e31ba9c50ae98"
 
 BRANCH = "r${@oe.utils.trim_version('${PV}', 2)}"
 
 SRCREV_FORMAT = "tensorflow"
 # Matches v${PV} tag
-SRCREV_tensorflow = "c2363d6d025981c661f8cbecf4c73ca7fbf38caf"
+SRCREV_tensorflow = "d8ce9f9c301d021a69953134185ab728c1c248d3"
 # v2.0.6
 SRCREV_flatbuffers = "3d79a88adb0eceb2ab5ff994c9b4c03b4b3c0daf"
 SRCREV_eigen = "7b35638ddb99a0298c5d3450de506a8e8e0203d3"
-SRCREV_xnnpack = "476eb84d6a8e6f8249d5584d30759c6fbdbf791d"
+SRCREV_xnnpack = "11b2812d64e49bab9b6c489f79067fc94e69db9f"
 SRCREV_neon2sse = "1200fe90bb174a6224a525ee60148671a786a71f"
 SRCREV_fft2d = "c6fd2dd6d21397baa6653139d31d84540d5449a2"
 SRCREV_farmhash = "816a4ae622e964763ca0862d9dbd19324a1eaf45"
@@ -61,19 +61,22 @@ SRC_URI = " \
     git://github.com/KhronosGroup/Vulkan-Headers;branch=master;protocol=https;destsuffix=git/vulkan_headers;name=vulkan-headers \
     git://github.com/KhronosGroup/EGL-Registry;branch=main;protocol=https;destsuffix=git/egl_headers;name=egl-headers \
     git://github.com/KhronosGroup/OpenGL-Registry;branch=main;protocol=https;destsuffix=git/opengl_headers;name=opengl-headers \
-    git://github.com/pytorch/cpuinfo;branch=master;protocol=https;destsuffix=git/cpuinfo-source;name=cpuinfo \
-    git://github.com/pytorch/cpuinfo;branch=master;protocol=https;destsuffix=git/clog-source;name=clog \
+    git://github.com/pytorch/cpuinfo;branch=master;protocol=https;destsuffix=git/cpuinfo;name=cpuinfo \
+    git://github.com/pytorch/cpuinfo;branch=master;protocol=https;destsuffix=git/clog;name=clog \
     git://github.com/Maratyszcza/FP16;branch=master;protocol=https;destsuffix=git/FP16-source;name=fp16 \
     git://github.com/Maratyszcza/FXdiv;branch=master;protocol=https;destsuffix=git/FXdiv-source;name=fxdiv \
     git://github.com/Maratyszcza/pthreadpool;branch=master;protocol=https;destsuffix=git/pthreadpool-source;name=pthreadpool \
     git://github.com/Maratyszcza/psimd;branch=master;protocol=https;destsuffix=git/psimd-source;name=psimd \
     file://0001-remove-label_image-benchmark_model-exclude-option.patch \
-    file://0002-enable-external-delegate-in-benchmarktool.patch \
-    file://0003-Fix-return-type-issues.patch \
-    file://0004-opencl_wrapper-dlopen-libOpenCL.so.1-instead-of-libO.patch \
-    file://0005-auto-delegation-support-when-using-gpu.patch \
-    file://0006-lite-Switch-to-Flatbuffer-2.0.5.patch \
-    file://0007-Update-FlatBuffer-to-2.0.6.patch \
+    file://0002-opencl_wrapper-dlopen-libOpenCL.so.1-instead-of-libO.patch \
+    file://0003-auto-delegation-support-when-using-gpu.patch \
+    file://0004-Allow-to-set-XNNpack-flag-options-via-tflite-acceler.patch \
+    file://0005-Add-support-for-disabling-default-XNNPack-delegate-i.patch \
+    file://0006-Add-RELU_0_TO_1-into-TensorFlow-Lite-schema.patch \
+    file://0007-lite-Add-unsorted_segment_prod-support.patch \
+    file://0008-lite-Switch-to-Flatbuffer-2.0.5.patch \
+    file://0009-Update-FlatBuffer-to-2.0.6.patch \
+    file://0010-Fix-return-type-issues.patch \
     file://tensorflowlite.pc.in \
 "
 
@@ -144,7 +147,7 @@ PACKAGECONFIG[gpu] = "-DTFLITE_ENABLE_GPU=ON,-DTFLITE_ENABLE_GPU=OFF,opencl-head
 # tensorflow/lite/tools/cmake/modules/vulkan_headers.cmake:OverridableFetchContent_GetProperties(vulkan_headers)
 # tensorflow/lite/tools/cmake/modules/xnnpack.cmake:OverridableFetchContent_GetProperties(xnnpack)
 do_configure:prepend() {
-    for i in flatbuffers eigen xnnpack neon2sse fft2d farmhash ruy gemmlowp vulkan_headers egl_headers opengl_headers; do
+    for i in flatbuffers eigen xnnpack neon2sse fft2d farmhash ruy gemmlowp vulkan_headers egl_headers opengl_headers clog cpuinfo; do
         cp -ra ${S}/$i ${B}/$i
     done
     # this prevents abslConfig.cmake to be found from system absl
@@ -166,8 +169,8 @@ do_configure:prepend() {
 #    MESSAGE(STATUS "Downloading Google Benchmark to ${CMAKE_BINARY_DIR}/googlebenchmark-source (define GOOGLEBENCHMARK_SOURCE_DIR to avoid it)")
 
 EXTRA_OECMAKE += " \
-    -DCLOG_SOURCE_DIR=${S}/clog-source \
-    -DCPUINFO_SOURCE_DIR=${S}/cpuinfo-source \
+    -DCLOG_SOURCE_DIR=${S}/clog \
+    -DCPUINFO_SOURCE_DIR=${S}/cpuinfo \
     -DFP16_SOURCE_DIR=${S}/FP16-source \
     -DFXDIV_SOURCE_DIR=${S}/FXdiv-source \
     -DPTHREADPOOL_SOURCE_DIR=${S}/pthreadpool-source \
