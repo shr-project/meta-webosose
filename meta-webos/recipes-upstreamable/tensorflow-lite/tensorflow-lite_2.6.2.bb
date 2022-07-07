@@ -11,8 +11,8 @@ SRCREV_FORMAT = "tensorflow"
 # Matches v${PV} tag
 SRCREV_tensorflow = "c2363d6d025981c661f8cbecf4c73ca7fbf38caf"
 SRCREV_abseil-cpp = "997aaf3a28308eba1b9156aa35ab7bca9688e9f6"
-# v1.12.0
-SRCREV_flatbuffers = "6df40a2471737b27271bdd9b900ab5f3aec746c7"
+# v2.0.6
+SRCREV_flatbuffers = "3d79a88adb0eceb2ab5ff994c9b4c03b4b3c0daf"
 SRCREV_eigen = "7b35638ddb99a0298c5d3450de506a8e8e0203d3"
 SRCREV_xnnpack = "476eb84d6a8e6f8249d5584d30759c6fbdbf791d"
 SRCREV_neon2sse = "1200fe90bb174a6224a525ee60148671a786a71f"
@@ -74,6 +74,8 @@ SRC_URI = " \
     file://0003-Fix-return-type-issues.patch \
     file://0004-opencl_wrapper-dlopen-libOpenCL.so.1-instead-of-libO.patch \
     file://0005-auto-delegation-support-when-using-gpu.patch \
+    file://0006-lite-Switch-to-Flatbuffer-2.0.5.patch \
+    file://0007-Update-FlatBuffer-to-2.0.6.patch \
     file://tensorflowlite.pc.in \
 "
 
