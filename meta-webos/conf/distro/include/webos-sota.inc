@@ -8,10 +8,14 @@
 # this file and that's why I use 'include' directive rather than 'require'.
 include conf/distro/sota.conf.inc
 
-inherit image-artifact-names
+IMAGE_CLASSES += "image-artifact-names"
 
 # override OSTREE variables
 OSTREE_OSNAME = "${DISTRO}"
+# avoid following parsing error from sota_sanity when OSTREE_BRANCHNAME
+# is defined but IMAGE_BASENAME isn't as it's defined only in image recipes now
+# OSTREE_BRANCHNAME Should only contain characters from the character set [a-zA-Z0-9._-].
+IMAGE_BASENAME ??= ""
 OSTREE_BRANCHNAME = "${IMAGE_BASENAME}-${WEBOS_DISTRO_BUILD_CODENAME}"
 OSTREE_COMMIT_SUBJECT ?= "${IMAGE_BASENAME}${IMAGE_VERSION_SUFFIX}"
 
