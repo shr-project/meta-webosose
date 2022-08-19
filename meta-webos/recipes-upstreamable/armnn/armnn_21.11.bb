@@ -126,16 +126,9 @@ do_install:append() {
             cp $CP_ARGS "${file}" "${D}${includedir}/armnn/delegate"
         done
 
-        #install delegate cmake module
-        install -d ${D}${libdir}
-        install -d ${D}${libdir}/cmake
+        # move delegate cmake module to cmake/armnn subdirectory
         install -d ${D}${libdir}/cmake/armnn
-        cp $CP_ARGS "${B}/delegate/ArmnnDelegateConfig.cmake" "${D}${libdir}/cmake/armnn"
-        cp $CP_ARGS "${B}/delegate/CMakeFiles/Export/${baselib}/ArmnnDelegateTargets.cmake" "${D}${libdir}/cmake/armnn"
-        cp $CP_ARGS "${B}/delegate/CMakeFiles/Export/${baselib}/ArmnnDelegateTargets-release.cmake" "${D}${libdir}/cmake/armnn"
-
-        #remove duplicate files
-        rm ${D}${libdir}/ArmnnDelegate*.cmake
+        mv ${D}${libdir}/ArmnnDelegate*.cmake ${D}${libdir}/cmake/armnn/
 
         #install pkgconfig
         install -d ${D}${libdir}/pkgconfig
