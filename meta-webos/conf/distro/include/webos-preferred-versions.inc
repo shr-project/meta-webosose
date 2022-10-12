@@ -17,5 +17,3 @@ PREFERRED_VERSION_gstreamer1.0-vaapi        = "${GSTREAMER_VERSION}"
 PREFERRED_VERSION_gst-devtools              = "${GSTREAMER_VERSION}"
 PREFERRED_VERSION_gst-examples              = "${GSTREAMER_VERSION}"
 PREFERRED_VERSION_gst-validate1.0           = "${GSTREAMER_VERSION}"
-
-RUSTVERSION = "1.63.0"
