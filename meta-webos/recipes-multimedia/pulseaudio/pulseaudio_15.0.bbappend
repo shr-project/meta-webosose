@@ -24,6 +24,7 @@ SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     file://0002-do-not-display-CLFAGS-to-improve-reproducibility-bui.patch \
     file://0001-meson-Check-for-__get_cpuid.patch \
     file://0001-doxygen-meson.build-remove-dependency-on-doxygen-bin.patch \
+    file://0001-meson.build-use-cpp_std-c-14.patch \
 "
 
 S = "${WORKDIR}/git"
