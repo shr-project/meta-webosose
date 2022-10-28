@@ -6,7 +6,7 @@ require umediaserver.inc
 
 PACKAGECONFIG += "${@bb.utils.contains('USE_WEBRUNTIME_LIBCXX', '1', 'webruntime-libcxx', 'system-libcxx', d)}"
 PACKAGECONFIG[webruntime-libcxx] = ",,chromium-toolchain-native chromium-stdlib"
-PACKAGECONFIG[system-libcxx] = ",,llvm-native clang"
+PACKAGECONFIG[system-libcxx] = ",,libcxx"
 
 WEBOS_REPO_NAME = "umediaserver"
 FILESEXTRAPATHS:prepend := "${THISDIR}/umediaserver:"
