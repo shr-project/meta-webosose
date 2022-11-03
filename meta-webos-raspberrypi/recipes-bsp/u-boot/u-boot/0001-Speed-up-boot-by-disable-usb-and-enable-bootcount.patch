@@ -1,4 +1,4 @@
-From 53a985d2d4817a55878fdec7f5a6814ae471ac19 Mon Sep 17 00:00:00 2001
+From f793afff43efcb4507fcf806f2543f87439c32e2 Mon Sep 17 00:00:00 2001
 From: JeongBong Seo <jb.seo@lge.com>
 Date: Wed, 9 Feb 2022 12:00:57 +0900
 Subject: [PATCH] Speed up boot by disable usb and enable bootcount
@@ -22,18 +22,18 @@ Upstream-Status: Pending
  7 files changed, 33 insertions(+), 9 deletions(-)
 
 diff --git a/configs/rpi_3_32b_defconfig b/configs/rpi_3_32b_defconfig
-index 060fd36da5..a311c312b4 100644
+index c1d5538810..c2e149a185 100644
 --- a/configs/rpi_3_32b_defconfig
 +++ b/configs/rpi_3_32b_defconfig
-@@ -11,7 +11,6 @@ CONFIG_DEFAULT_DEVICE_TREE="bcm2837-rpi-3-b"
- CONFIG_DISTRO_DEFAULTS=y
+@@ -10,7 +10,6 @@ CONFIG_DEFAULT_DEVICE_TREE="bcm2837-rpi-3-b"
  CONFIG_SYS_LOAD_ADDR=0x1000000
+ CONFIG_DISTRO_DEFAULTS=y
  CONFIG_OF_BOARD_SETUP=y
 -CONFIG_USE_PREBOOT=y
  # CONFIG_DISPLAY_CPUINFO is not set
  # CONFIG_DISPLAY_BOARDINFO is not set
  CONFIG_MISC_INIT_R=y
-@@ -47,3 +46,8 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+@@ -49,3 +48,8 @@ CONFIG_VIDEO_BCM2835=y
  CONFIG_CONSOLE_SCROLL_LINES=10
  CONFIG_PHYS_TO_BUS=y
  CONFIG_OF_LIBFDT_OVERLAY=y
@@ -43,18 +43,18 @@ index 060fd36da5..a311c312b4 100644
 +
 +CONFIG_BOOTDELAY=0
 diff --git a/configs/rpi_3_b_plus_defconfig b/configs/rpi_3_b_plus_defconfig
-index 0a69f97342..f16a8b0f13 100644
+index f935e67878..e6416df86b 100644
 --- a/configs/rpi_3_b_plus_defconfig
 +++ b/configs/rpi_3_b_plus_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DEFAULT_DEVICE_TREE="bcm2837-rpi-3-b-plus"
- CONFIG_DISTRO_DEFAULTS=y
+@@ -9,7 +9,6 @@ CONFIG_DEFAULT_DEVICE_TREE="bcm2837-rpi-3-b-plus"
  CONFIG_SYS_LOAD_ADDR=0x1000000
+ CONFIG_DISTRO_DEFAULTS=y
  CONFIG_OF_BOARD_SETUP=y
 -CONFIG_USE_PREBOOT=y
  # CONFIG_DISPLAY_CPUINFO is not set
  # CONFIG_DISPLAY_BOARDINFO is not set
  CONFIG_MISC_INIT_R=y
-@@ -46,3 +45,8 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+@@ -48,3 +47,8 @@ CONFIG_VIDEO_BCM2835=y
  CONFIG_CONSOLE_SCROLL_LINES=10
  CONFIG_PHYS_TO_BUS=y
  CONFIG_OF_LIBFDT_OVERLAY=y
@@ -64,18 +64,18 @@ index 0a69f97342..f16a8b0f13 100644
 +
 +CONFIG_BOOTDELAY=0
 diff --git a/configs/rpi_3_defconfig b/configs/rpi_3_defconfig
-index 8016fe1d55..2daf5b5fa4 100644
+index 9e4e168ef0..b88ddf8a66 100644
 --- a/configs/rpi_3_defconfig
 +++ b/configs/rpi_3_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DEFAULT_DEVICE_TREE="bcm2837-rpi-3-b"
- CONFIG_DISTRO_DEFAULTS=y
+@@ -9,7 +9,6 @@ CONFIG_DEFAULT_DEVICE_TREE="bcm2837-rpi-3-b"
  CONFIG_SYS_LOAD_ADDR=0x1000000
+ CONFIG_DISTRO_DEFAULTS=y
  CONFIG_OF_BOARD_SETUP=y
 -CONFIG_USE_PREBOOT=y
  # CONFIG_DISPLAY_CPUINFO is not set
  # CONFIG_DISPLAY_BOARDINFO is not set
  CONFIG_MISC_INIT_R=y
-@@ -46,3 +45,8 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+@@ -48,3 +47,8 @@ CONFIG_VIDEO_BCM2835=y
  CONFIG_CONSOLE_SCROLL_LINES=10
  CONFIG_PHYS_TO_BUS=y
  CONFIG_OF_LIBFDT_OVERLAY=y
@@ -85,18 +85,18 @@ index 8016fe1d55..2daf5b5fa4 100644
 +
 +CONFIG_BOOTDELAY=0
 diff --git a/configs/rpi_4_32b_defconfig b/configs/rpi_4_32b_defconfig
-index 990589de64..eeea6e6836 100644
+index a699591cee..aec61c78f0 100644
 --- a/configs/rpi_4_32b_defconfig
 +++ b/configs/rpi_4_32b_defconfig
-@@ -7,7 +7,6 @@ CONFIG_ENV_SIZE=0x4000
- CONFIG_DISTRO_DEFAULTS=y
+@@ -7,7 +7,6 @@ CONFIG_DEFAULT_DEVICE_TREE="bcm2711-rpi-4-b"
  CONFIG_SYS_LOAD_ADDR=0x1000000
+ CONFIG_DISTRO_DEFAULTS=y
  CONFIG_OF_BOARD_SETUP=y
 -CONFIG_USE_PREBOOT=y
  CONFIG_PREBOOT="pci enum; usb start;"
  # CONFIG_DISPLAY_CPUINFO is not set
  # CONFIG_DISPLAY_BOARDINFO is not set
-@@ -63,3 +62,8 @@ CONFIG_PHYS_TO_BUS=y
+@@ -65,3 +64,8 @@ CONFIG_PHYS_TO_BUS=y
  CONFIG_ADDR_MAP=y
  CONFIG_SYS_NUM_ADDR_MAP=2
  CONFIG_OF_LIBFDT_OVERLAY=y
@@ -106,18 +106,18 @@ index 990589de64..eeea6e6836 100644
 +
 +CONFIG_BOOTDELAY=0
 diff --git a/configs/rpi_4_defconfig b/configs/rpi_4_defconfig
-index 0720505c6a..851e9f9f06 100644
+index eae03bf023..5c6e40c612 100644
 --- a/configs/rpi_4_defconfig
 +++ b/configs/rpi_4_defconfig
-@@ -7,7 +7,6 @@ CONFIG_ENV_SIZE=0x4000
- CONFIG_DISTRO_DEFAULTS=y
+@@ -7,7 +7,6 @@ CONFIG_DEFAULT_DEVICE_TREE="bcm2711-rpi-4-b"
  CONFIG_SYS_LOAD_ADDR=0x1000000
+ CONFIG_DISTRO_DEFAULTS=y
  CONFIG_OF_BOARD_SETUP=y
 -CONFIG_USE_PREBOOT=y
  CONFIG_PREBOOT="pci enum; usb start;"
  # CONFIG_DISPLAY_CPUINFO is not set
  # CONFIG_DISPLAY_BOARDINFO is not set
-@@ -61,3 +60,8 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+@@ -63,3 +62,8 @@ CONFIG_VIDEO_BCM2835=y
  CONFIG_CONSOLE_SCROLL_LINES=10
  CONFIG_PHYS_TO_BUS=y
  CONFIG_OF_LIBFDT_OVERLAY=y
@@ -127,18 +127,18 @@ index 0720505c6a..851e9f9f06 100644
 +
 +CONFIG_BOOTDELAY=0
 diff --git a/configs/rpi_arm64_defconfig b/configs/rpi_arm64_defconfig
-index 06ae3e93b2..158e1a3ca7 100644
+index 933e142206..60fb585407 100644
 --- a/configs/rpi_arm64_defconfig
 +++ b/configs/rpi_arm64_defconfig
-@@ -7,7 +7,6 @@ CONFIG_ENV_SIZE=0x4000
- CONFIG_DISTRO_DEFAULTS=y
+@@ -7,7 +7,6 @@ CONFIG_DEFAULT_DEVICE_TREE="bcm2711-rpi-4-b"
  CONFIG_SYS_LOAD_ADDR=0x1000000
+ CONFIG_DISTRO_DEFAULTS=y
  CONFIG_OF_BOARD_SETUP=y
 -CONFIG_USE_PREBOOT=y
  CONFIG_PREBOOT="pci enum; usb start;"
  # CONFIG_DISPLAY_CPUINFO is not set
  # CONFIG_DISPLAY_BOARDINFO is not set
-@@ -53,3 +52,8 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+@@ -55,3 +54,8 @@ CONFIG_VIDEO_BCM2835=y
  CONFIG_CONSOLE_SCROLL_LINES=10
  CONFIG_PHYS_TO_BUS=y
  CONFIG_OF_LIBFDT_OVERLAY=y
@@ -148,10 +148,10 @@ index 06ae3e93b2..158e1a3ca7 100644
 +
 +CONFIG_BOOTDELAY=0
 diff --git a/include/configs/rpi.h b/include/configs/rpi.h
-index 4c5c1ac31f..e90df9b661 100644
+index 7a5f0851b5..2fba8ad1bb 100644
 --- a/include/configs/rpi.h
 +++ b/include/configs/rpi.h
-@@ -72,9 +72,9 @@
+@@ -68,9 +68,9 @@
  
  /* Environment */
  #define ENV_DEVICE_SETTINGS \
