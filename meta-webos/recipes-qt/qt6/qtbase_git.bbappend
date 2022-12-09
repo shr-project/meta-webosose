@@ -88,6 +88,8 @@ SRC_URI:append = " \
     file://0002-evdev-Prevent-race-condition-in-touch-events-process.patch;maxver=6.2.* \
 "
 
+SRC_URI:append = " file://0001-Revert-Cater-for-upstream-changes-in-eglplatform.h.patch"
+
 # Upstream-Status: Inappropriate
 # NOTE: Increase maxver when upgrading Qt version
 SRC_URI:append = " \

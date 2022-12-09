@@ -1,0 +1,167 @@
+From a21368cabc6d28a45e961804521e32474b70b9fd Mon Sep 17 00:00:00 2001
+From: Martin Jansa <martin2.jansa@lgepartner.com>
+Date: Thu, 8 Dec 2022 13:50:07 +0000
+Subject: [PATCH] Revert "Cater for upstream changes in eglplatform.h"
+
+This reverts commit 4cc5428548cb8ab973e4b0281dd123d59bfaf6a0.
+
+:Release Notes:
+Makes HAVE_egl_x11 test to be successful even when X11 PACKAGECONFIG
+is not enabled as shown in log.do_configure diff.
+
+:Detailed Notes:
+  @@ -410,7 +410,7 @@
+   -- Performing Test HAVE_drm_atomic - Success
+   -- Performing Test HAVE_egl_x11
+   CMake Warning at /OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/build/CMakeFiles/CMakeTmp/CMakeLists.txt:21 (add_executable):
+  -  Cannot generate a safe runtime search path for target cmTC_2186d because
+  +  Cannot generate a safe runtime search path for target cmTC_555f5 because
+     files in some directories may conflict with libraries in implicit
+     directories:
+
+  @@ -420,7 +420,7 @@
+     Some of these libraries may not be found correctly.
+
+  --- Performing Test HAVE_egl_x11 - Failed
+  +-- Performing Test HAVE_egl_x11 - Success
+   -- Performing Test HAVE_egl_brcm
+   -- Performing Test HAVE_egl_brcm - Failed
+   -- Performing Test HAVE_egl_egldevice
+  @@ -811,7 +811,7 @@
+   qt_extend_target(Gui CONDITION QT_FEATURE_opengl;AND;QT_FEATURE_xlib;AND;NOT;QT_FEATURE_opengles2 ...): Skipped
+   qt_extend_target(Gui CONDITION QT_FEATURE_opengles2 ...): Evaluated
+   qt_extend_target(Gui CONDITION QT_FEATURE_egl;AND;QT_FEATURE_opengl ...): Evaluated
+  -qt_extend_target(Gui CONDITION QT_FEATURE_egl;AND;NOT;QT_FEATURE_egl_x11 ...): Evaluated
+  +qt_extend_target(Gui CONDITION QT_FEATURE_egl;AND;NOT;QT_FEATURE_egl_x11 ...): Skipped
+   qt_extend_target(Gui CONDITION QT_FEATURE_dlopen;AND;QT_FEATURE_egl ...): Evaluated
+   qt_extend_target(Gui CONDITION QT_FEATURE_standarditemmodel ...): Evaluated
+   qt_extend_target(Gui CONDITION QT_FEATURE_filesystemmodel ...): Evaluated
+  @@ -1157,7 +1157,7 @@
+     X11 specific:
+       XLib ................................. no
+       XCB Xlib ............................. no
+  -    EGL on X11 ........................... no
+  +    EGL on X11 ........................... yes
+       xkbcommon-x11 ........................ no
+       xcb-sm ............................... no
+   QPA backends:
+
+CMakeError.log with mesa-22.3.0:
+
+Performing C++ SOURCE FILE Test HAVE_egl_x11 failed with the following output:
+Change Dir: /OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):ninja cmTC_2186d && [1/2] Building CXX object CMakeFiles/cmTC_2186d.dir/src.cxx.o
+FAILED: CMakeFiles/cmTC_2186d.dir/src.cxx.o
+/OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/recipe-sysroot-native/usr/bin/x86_64-webos-linux/x86_64-webos-linux-g++ -DHAVE_egl_x11 -isystem /OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/recipe-sysroot-native/usr/include -m64 -march=core2 -mtune=core2 -msse3 -mfpmath=sse -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security -Werror=return-type  --sysroot=/OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/recipe-sysroot  -O2 -pipe -g -feliminate-unused-debug-types -fmacro-prefix-map=/OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/git=/usr/src/debug/qtbase/6.4.1-r0  -fdebug-prefix-map=/OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/git=/usr/src/debug/qtbase/6.4.1-r0  -fmacro-prefix-map=/OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/build=/usr/src/debug/qtbase/6.4.1-r0  -fdebug-prefix-map=/OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/build=/usr/src/debug/qtbase/6.4.1-r0  -fdebug-prefix-map=/OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/recipe-sysroot=  -fmacro-prefix-map=/OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/recipe-sysroot=  -fdebug-prefix-map=/OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/recipe-sysroot-native=   -fmacro-prefix-map=/OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/image=  -D__WEBOS__ -D__WEBOS__     -DQFONTCACHE_MIN_COST=512  -fvisibility-inlines-hidden   -fPIE -DEGL_NO_X11 -o CMakeFiles/cmTC_2186d.dir/src.cxx.o -c /OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/build/CMakeFiles/CMakeTmp/src.cxx
+In file included from /OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/recipe-sysroot-native/usr/include/EGL/egl.h:20,
+                 from /OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/build/CMakeFiles/CMakeTmp/src.cxx:7:
+/OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/build/CMakeFiles/CMakeTmp/src.cxx: In function 'int main()':
+/OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/build/CMakeFiles/CMakeTmp/src.cxx:13:16: error: invalid conversion from 'EGLNativeDisplayType' {aka 'void*'} to 'Display*' [-fpermissive]
+   13 | Display *dpy = EGL_DEFAULT_DISPLAY;
+      |                ^~~~~~~~~~~~~~~~~~~
+      |                |
+      |                EGLNativeDisplayType {aka void*}
+/OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/build/CMakeFiles/CMakeTmp/src.cxx:15:7: error: invalid conversion from 'EGLNativeDisplayType' {aka 'void*'} to 'Display*' [-fpermissive]
+   15 | dpy = egldpy;
+      |       ^~~~~~
+      |       |
+      |       EGLNativeDisplayType {aka void*}
+ninja: build stopped: subcommand failed.
+
+Source file was:
+ // Check if EGL is compatible with X. Some EGL implementations, typically on
+// embedded devices, are not intended to be used together with X. EGL support
+// has to be disabled in plugins like xcb in this case since the native display,
+// window and pixmap types will be different than what an X-based platform
+// plugin would expect.
+
+int main(void)
+{
+    /* BEGIN TEST: */
+Display *dpy = EGL_DEFAULT_DISPLAY;
+EGLNativeDisplayType egldpy = XOpenDisplay("");
+dpy = egldpy;
+EGLNativeWindowType w = XCreateWindow(dpy, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+XDestroyWindow(dpy, w);
+XCloseDisplay(dpy);
+    /* END TEST: */
+    return 0;
+}
+
+Performing C++ SOURCE FILE Test HAVE_egl_brcm failed with the following output:
+Change Dir: /OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):ninja cmTC_45ac1 && [1/2] Building CXX object CMakeFiles/cmTC_45ac1.dir/src.cxx.o
+FAILED: CMakeFiles/cmTC_45ac1.dir/src.cxx.o
+
+CMakeOutput.log with mesa-22.2.3:
+Performing C++ SOURCE FILE Test HAVE_egl_x11 succeeded with the following output:
+Change Dir: /OE/lge/build/webos/mickledore/BUILD/work/qemux86_64-webos-linux/qtbase/6.4.1-r0/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):ninja cmTC_555f5 && [1/2] Building CXX object CMakeFiles/cmTC_555f5.dir/src.cxx.o
+[2/2] Linking CXX executable cmTC_555f5
+
+Source file was:
+ // Check if EGL is compatible with X. Some EGL implementations, typically on
+// embedded devices, are not intended to be used together with X. EGL support
+// has to be disabled in plugins like xcb in this case since the native display,
+// window and pixmap types will be different than what an X-based platform
+// plugin would expect.
+
+int main(void)
+{
+    /* BEGIN TEST: */
+Display *dpy = EGL_DEFAULT_DISPLAY;
+EGLNativeDisplayType egldpy = XOpenDisplay("");
+dpy = egldpy;
+EGLNativeWindowType w = XCreateWindow(dpy, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+XDestroyWindow(dpy, w);
+XCloseDisplay(dpy);
+    /* END TEST: */
+    return 0;
+}
+
+:Testing Performed:
+Only build tested.
+
+:QA Notes:
+No change to image.
+
+:Issues Addressed:
+[WRP-412] Create GPVB with Yocto 4.2 Mickledore
+
+---
+ src/gui/configure.cmake                | 1 -
+ src/gui/opengl/platform/egl/qt_egl_p.h | 6 +-----
+ 2 files changed, 1 insertion(+), 6 deletions(-)
+
+diff --git a/src/gui/configure.cmake b/src/gui/configure.cmake
+index 9844d778e6..23b45379db 100644
+--- a/src/gui/configure.cmake
++++ b/src/gui/configure.cmake
+@@ -171,7 +171,6 @@ qt_config_compile_test(egl_x11
+ // has to be disabled in plugins like xcb in this case since the native display,
+ // window and pixmap types will be different than what an X-based platform
+ // plugin would expect.
+-#define USE_X11
+ #include <EGL/egl.h>
+ #include <X11/Xlib.h>
+ 
+diff --git a/src/gui/opengl/platform/egl/qt_egl_p.h b/src/gui/opengl/platform/egl/qt_egl_p.h
+index 1f538e22af..1ea333d41a 100644
+--- a/src/gui/opengl/platform/egl/qt_egl_p.h
++++ b/src/gui/opengl/platform/egl/qt_egl_p.h
+@@ -30,11 +30,7 @@
+ # if !defined(Q_OS_INTEGRITY)
+ #  define WIN_INTERFACE_CUSTOM   // NV
+ # endif // Q_OS_INTEGRITY
+-#else // QT_EGL_NO_X11
+-// If one has an eglplatform.h with https://github.com/KhronosGroup/EGL-Registry/pull/130
+-// that needs USE_X11 to be defined.
+-# define USE_X11
+-#endif
++#endif  // QT_EGL_NO_X11
+ 
+ #ifdef QT_EGL_WAYLAND
+ # define WAYLAND // NV
