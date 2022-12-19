@@ -439,6 +439,7 @@ SANITY_TESTED_DISTROS ?= " \
     ubuntu-20.04 \n \
     ubuntu-22.04 \n \
     ubuntu-22.10 \n \
+    ubuntu-23.04 \n \
 "
 
 # Override setting in upstream fontcache.bbclass and fontconfig recipe
