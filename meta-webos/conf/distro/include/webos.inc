@@ -379,7 +379,10 @@ PACKAGE_ARCH:pn-qemuwrapper-cross = "${TUNE_PKGARCH}"
 # Also notice qemux86_64 instead of qemux86-64, because it's _${MACHINE_ARCH}, not
 # an old syntax override _${MACHINE}.
 QEMU_EXTRAOPTIONS_qemux86 = "${QEMU_EXTRAOPTIONS_core2-32}"
-QEMU_EXTRAOPTIONS_qemux86_64 = "${QEMU_EXTRAOPTIONS_core2-64}"
+
+# sent upstream in https://lists.openembedded.org/g/openembedded-core/message/175619
+QEMU_EXTRAOPTIONS_x86-64-v3 = " -cpu Skylake-Client,check=false"
+QEMU_EXTRAOPTIONS_qemux86_64 = "${QEMU_EXTRAOPTIONS_x86-64-v3}"
 
 PATH:prepend = "${WEBOS_EXTRA_PATH}"
 
