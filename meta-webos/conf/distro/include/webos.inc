@@ -19,6 +19,9 @@ require conf/distro/include/no-static-libs.inc
 # http://lists.openembedded.org/pipermail/openembedded-core/2018-July/153408.html
 require conf/distro/include/security_flags.inc
 
+# Enable 64-bit time_t
+require conf/distro/include/time64.inc
+
 # Enable -Werror=return-type flag
 EXTRA_WEBOS_WERROR = "-Werror=return-type"
 # http://gecko.lge.com:8000/Errors/Details/565722
