@@ -25,6 +25,14 @@ require conf/distro/include/security_flags.inc
 # Enable 64-bit time_t
 require conf/distro/include/time64.inc
 
+# http://errors.yoctoproject.org/Errors/Details/687476/
+# {standard input}:5769: Error: symbol `mmap64' is already defined
+# make[5]: *** [Makefile:659: libgp_collector_la-mmaptrace.lo] Error 1
+# {standard input}:10378: Error: symbol `creat64' is already defined
+# {standard input}:10378: Error: symbol `creat64.cold' is already defined
+# make[5]: *** [Makefile:631: iotrace.lo] Error 1
+GLIBC_64BIT_TIME_FLAGS:pn-binutils = ""
+
 # Enable -Werror=return-type flag
 EXTRA_WEBOS_WERROR = "-Werror=return-type"
 # http://gecko.lge.com:8000/Errors/Details/565722
