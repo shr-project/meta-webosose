@@ -7,7 +7,8 @@ Signed-off-by: Christophe Chapuis <chris.chapuis@gmail.com>
 
 Imported from LuneOS:
 https://github.com/webOS-ports/nodejs-module-webos-dynaload/commit/ab87a7f2c59e96ec91360f3d4a1bc82f42594d6a
-Upstream-Status: Pending
+
+Upstream-Status: Submitted [http://gpro.lge.com/c/webosose/nodejs-module-webos-dynaload/+/344286 Fix build for nodejs-14]
 ---
  src/external_string.cpp |  6 +--
  src/node_webos.cpp      | 84 +++++++++++++++++++++--------------------
