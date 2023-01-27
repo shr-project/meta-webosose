@@ -7,6 +7,8 @@ Signed-off-by: Christophe Chapuis <chris.chapuis@gmail.com>
 
 Imported from LuneOS:
 https://github.com/webOS-ports/nodejs-module-webos-pmlog/commit/50e5fa85b67d594f0fac088c041cae88b48695e7
+
++Upstream-Status: Submitted [http://gpro.lge.com/c/webosose/nodejs-module-webos-pmlog/+/344284 Fix build for nodejs-14]
 ---
  src/pmloglib.cpp | 49 +++++++++++++++++++++++++-----------------------
  1 file changed, 26 insertions(+), 23 deletions(-)
