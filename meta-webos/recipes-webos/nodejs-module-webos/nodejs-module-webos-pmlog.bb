@@ -12,7 +12,10 @@ WEBOS_VERSION = "3.0.1-7_f08fbbec80e018cccf71d4f1ddae8a3f43a8895b"
 PR = "r15"
 
 # [http://gpro.lge.com/c/webosose/nodejs-module-webos-pmlog/+/344284 Fix build with nodejs-14]
-SRC_URI += "file://0001-Fix-build-with-nodejs-14.patch"
+# [http://gpro.lge.com/c/webosose/nodejs-module-webos-pmlog/+/344285 Fix build with nodejs-18]
+SRC_URI += "file://0001-Fix-build-with-nodejs-14.patch \
+    file://0002-Fix-build-with-nodejs-18.patch \
+"
 
 do_configure() {
     cd src
