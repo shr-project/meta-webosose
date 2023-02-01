@@ -30,7 +30,9 @@ inherit webos_machine_dep
 inherit webos_distro_dep
 inherit webos_bluetooth_sil
 
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-Fix-build-with-gcc-13.patch \
+"
 S = "${WORKDIR}/git"
 
 # http://caprica.lgsvl.com:8080/Errors/Details/1092093
