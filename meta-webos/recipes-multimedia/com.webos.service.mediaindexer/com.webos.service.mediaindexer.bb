@@ -27,7 +27,9 @@ DEPENDS += "luna-service2 pmloglib libpbnjson"
 VIRTUAL-RUNTIME_pdm ?= "com.webos.service.pdm"
 RDEPENDS:${PN} = "${VIRTUAL-RUNTIME_pdm} db8"
 
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-Fix-build-with-gcc-13.patch \
+"
 S = "${WORKDIR}/git"
 
 # uncomment next line to use mediaindexer in shell/interactive mode
