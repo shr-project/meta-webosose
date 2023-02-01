@@ -24,7 +24,9 @@ inherit webos_machine_dep
 inherit webos_system_bus
 inherit webos_daemon
 
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-Fix-build-with-gcc-13.patch \
+"
 S = "${WORKDIR}/git"
 
 COMPATIBLE_MACHINE = "(.*)"
