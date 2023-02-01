@@ -36,7 +36,9 @@ inherit webos_public_repo
 
 WAM_DATA_DIR = "${webos_execstatedir}/${BPN}"
 
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-Fix-build-with-gcc-13.patch \
+"
 
 S = "${WORKDIR}/git"
 
