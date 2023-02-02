@@ -20,6 +20,9 @@ PR = "r3"
 
 S = "${WORKDIR}/git"
 
+# scons here is too old for MAXLINELENGTH
+SCONS_MAXLINELENGTH = ""
+
 inherit scons
 
 ARM_INSTRUCTION_SET = "arm"
