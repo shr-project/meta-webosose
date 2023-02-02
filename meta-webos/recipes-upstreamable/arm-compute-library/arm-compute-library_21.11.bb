@@ -13,6 +13,7 @@ SRC_URI = " \
     file://arm-compute-library.pc.in \
     file://0001-Fix-build-with-newer-gcc.patch \
     file://0001-OpenCL-dlopen-libOpenCL.so.1-instead-of-libO.patch \
+    file://0001-Fix-build-with-gcc-13.patch \
 "
 
 PR = "r3"
