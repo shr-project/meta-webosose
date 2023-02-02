@@ -4,8 +4,9 @@ SUMMARY = "Media codec interface for webOS"
 AUTHOR = "Kalaimani K <kalaimani.k@lge.com>"
 SECTION = "webos/media"
 LICENSE = "Apache-2.0"
-LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10"
-LIC_FILES_CHKSUM += "file://oss-pkg-info.yaml;md5=2bdfe040dcf81b4038370ae96036c519"
+LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/Apache-2.0;md5=89aea4e17d99a7cacdbeed46a0096b10 \
+    file://oss-pkg-info.yaml;md5=2bdfe040dcf81b4038370ae96036c519 \
+"
 
 inherit webos_component
 inherit webos_cmake
@@ -27,7 +28,9 @@ PR = "r7"
 WEBOS_GIT_PARAM_BRANCH:raspberrypi3 = "master"
 WEBOS_VERSION:raspberrypi3 = "1.0.0-10_25f5d0aaeee799e84b1bb3616451a1bc94b09986"
 
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE};name=main"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-Fix-build-with-gcc-13.patch \
+"
 
 S = "${WORKDIR}/git"
 
