@@ -1,7 +1,7 @@
 # Copyright (c) 2012-2022 LG Electronics, Inc.
 
 # Prefer gstreamer version 1.20.% from oe-core for webos
-GSTREAMER_VERSION = "1.20.%"
+GSTREAMER_VERSION = "1.22.%"
 
 PREFERRED_VERSION_gstreamer1.0              = "${GSTREAMER_VERSION}"
 PREFERRED_VERSION_gstreamer1.0-plugins-bad  = "${GSTREAMER_VERSION}"
