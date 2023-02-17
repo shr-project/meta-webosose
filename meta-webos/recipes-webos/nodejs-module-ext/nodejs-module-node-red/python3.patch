@@ -4,6 +4,7 @@ Date: Sat, 7 Jul 2018 19:01:14 +0100
 Subject: [PATCH] Let nrgpio code work with python 3
 
 (just in case that becomes default)
+Upstream-Status: Pending
 ---
  nodes/core/hardware/nrgpio.py | 40 ++++++++++++++++-------------------
  1 file changed, 18 insertions(+), 22 deletions(-)

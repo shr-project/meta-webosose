@@ -33,6 +33,7 @@ No change to image.
 :Issues Addressed:
 
 Change-Id: I3959c1f28a45c1074f961333df0304e568631252
+Upstream-Status: Pending
 ---
  src/db-luna/CMakeLists.txt          | 1 +
  test/db-core/CMakeLists.txt         | 1 +

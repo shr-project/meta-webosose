@@ -4,6 +4,7 @@ Date: Wed, 12 Jan 2022 11:59:16 +0000
 Subject: [PATCH 3/3] gator: modified driver Makefile to allow compilation
 
 Signed-off-by: milan.shah <milan.shah@lge.com>
+Upstream-Status: Pending
 ---
  Makefile | 46 ++++++++++++++++++++++++++++++++--------------
  1 file changed, 32 insertions(+), 14 deletions(-)

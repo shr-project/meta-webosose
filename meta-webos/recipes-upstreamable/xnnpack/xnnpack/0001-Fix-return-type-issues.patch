@@ -9,6 +9,7 @@ Subject: [PATCH] Fix return-type issues
 xnnpack/475884903-r0/git/src/cache.c:385:1: error: control reaches end of non-void function [-Werror=return-type]
   385 | }
       | ^
+Upstream-Status: Pending
 ---
  src/cache.c | 2 ++
  1 file changed, 2 insertions(+)

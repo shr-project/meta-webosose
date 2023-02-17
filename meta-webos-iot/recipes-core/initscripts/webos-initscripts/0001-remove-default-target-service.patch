@@ -3,6 +3,7 @@ From: "seungchul.han" <seungchul.han@lge.com>
 Date: Tue, 24 Sep 2019 17:04:13 +0900
 Subject: [PATCH] temp
 
+Upstream-Status: Pending
 ---
  .../overrides/common/default-webos.target.wants/dropbear.service | 1 +
  .../overrides/common/default-webos.target.wants/ls-hubd.service  | 1 +

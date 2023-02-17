@@ -4,6 +4,7 @@ Date: Sat, 22 Dec 2018 20:12:51 +0000
 Subject: [PATCH] hippomocks: fix build for MIPS
 
 Signed-off-by: Martin Jansa <martin.jansa@lge.com>
+Upstream-Status: Pending
 ---
  HippoMocks/hippomocks.h | 2 ++
  1 file changed, 2 insertions(+)

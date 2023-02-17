@@ -3,6 +3,7 @@ From: Hyungchan Kim <hyungchan2.kim@lge.com>
 Date: Sun, 8 Jan 2023 23:06:47 +0900
 Subject: [PATCH] Use QtWebOSEglClientBuffer for cmake
 
+Upstream-Status: Pending
 ---
  sync.profile | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)

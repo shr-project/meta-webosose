@@ -54,6 +54,7 @@ npm ERR! Failed at the com.webos.service.flowmanager@1.0.0 webpack script.
 npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
 
 Signed-off-by: Martin Jansa <martin.jansa@lge.com>
+Upstream-Status: Pending
 ---
  webpack.config.js | 1 +
  1 file changed, 1 insertion(+)

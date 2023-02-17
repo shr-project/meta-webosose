@@ -182,6 +182,7 @@ TOPDIR/BUILD/work/mach-distromllib32-linux-gnueabi/lib32-tensorflow-lite/2.6.2-r
 TOPDIR/BUILD/work/mach-distromllib32-linux-gnueabi/lib32-tensorflow-lite/2.6.2-r1/git/tensorflow/lite/delegates/gpu/common/model_builder.cc:1243:3: error: control reaches end of non-void function [-Werror=return-type]
  1243 |   }
       |   ^
+Upstream-Status: Pending
 ---
  tensorflow/lite/delegates/gpu/api.cc          |  2 ++
  .../lite/delegates/gpu/cl/cl_arguments.cc     |  2 ++

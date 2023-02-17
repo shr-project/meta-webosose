@@ -22,6 +22,7 @@ libedgetpu/grouper-r1/git/makefile_build/../driver/memory/dual_address_space.cc:
 urn-type]
 
 Signed-off-by: Martin Jansa <martin2.jansa@lgepartner.com>
+Upstream-Status: Pending
 ---
  api/buffer.cc                       | 2 ++
  api/layer_information.cc            | 4 ++++

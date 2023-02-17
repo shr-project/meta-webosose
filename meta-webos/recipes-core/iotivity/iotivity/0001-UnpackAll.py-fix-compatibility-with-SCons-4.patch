@@ -8,6 +8,7 @@ Subject: [PATCH] UnpackAll.py: fix compatibility with SCons-4
     possible confusion with Python's own Warning class.
 
 Signed-off-by: Martin Jansa <martin.jansa@lge.com>
+Upstream-Status: Pending
 ---
  build_common/tools/UnpackAll.py | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)

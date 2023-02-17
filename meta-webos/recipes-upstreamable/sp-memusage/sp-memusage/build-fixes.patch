@@ -3,6 +3,7 @@ From: Martin Jansa <martin.jansa@lge.com>
 Date: Fri, 4 Mar 2016 15:39:49 +0100
 Subject: [PATCH] build-fixes
 
+Upstream-Status: Pending
 ---
  Makefile | 21 +++++++++++----------
  1 file changed, 11 insertions(+), 10 deletions(-)

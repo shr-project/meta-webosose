@@ -4,6 +4,7 @@ Date: Mon, 6 Nov 2017 17:22:45 +0000
 Subject: [PATCH] Add tzset applet
 
 Signed-off-by: Martin Jansa <martin.jansa@lge.com>
+Upstream-Status: Pending
 ---
  coreutils/tzset.c | 57 +++++++++++++++++++++++++++++++++++++++++++++++
  1 file changed, 57 insertions(+)

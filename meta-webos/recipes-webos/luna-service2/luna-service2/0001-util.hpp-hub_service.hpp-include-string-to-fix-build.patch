@@ -33,6 +33,7 @@ luna-service2/3.21.2-5-r23/recipe-sysroot/usr/include/c++/10.1.0/bits/unordered_
 luna-service2/3.21.2-5-r23/recipe-sysroot/usr/include/c++/10.1.0/type_traits:1093:52: error: static assertion failed: template argument must be a complete class or an unbounded array
 luna-service2/3.21.2-5-r23/recipe-sysroot/usr/include/c++/10.1.0/type_traits:1114:52: error: static assertion failed: template argument must be a complete class or an unbounded array
 luna-service2/3.21.2-5-r23/recipe-sysroot/usr/include/c++/10.1.0/utility:179:32: error: body of 'constexpr' function 'static constexpr _Tp1& std::__pair_get<0>::__get(std::pair<_T1, _T2>&) [with _Tp1 = const std::__cxx11::basic_string<char>; _Tp2 = std::__cxx11::basic_string<char> (HubService::*)(LSTransportMessage*, const char*)]' not a return-statement
+Upstream-Status: Pending
 ---
  include/private/util.hpp    | 1 +
  src/ls-hubd/hub_service.hpp | 1 +
