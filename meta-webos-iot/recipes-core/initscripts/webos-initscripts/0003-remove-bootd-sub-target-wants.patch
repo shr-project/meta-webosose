@@ -3,6 +3,7 @@ From: es <es.lee@lge.com>
 Date: Mon, 24 Feb 2020 17:51:52 +0900
 Subject: [PATCH] Temp
 
+Upstream-Status: Pending
 ---
  .../systemd/overrides/common/webos-cbd.target.wants/obex.service | 1 -
  .../overrides/common/webos-cbd.target.wants/videooutputd.service | 1 -

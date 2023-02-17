@@ -4,6 +4,7 @@ Date: Thu, 27 Aug 2020 06:39:27 +0000
 Subject: [PATCH] Fix v4l2h264dec output caps to RGB16
 
 gstreamer1.0-plugins-good=webosrpi3
+Upstream-Status: Pending
 ---
  .../sys/v4l2/gstv4l2videodec.c                | 25 +++++++++++++++++++
  1 file changed, 25 insertions(+)

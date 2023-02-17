@@ -28,6 +28,7 @@ Reviewed-by: <yeseul.joo@lge.com>
 Reviewed-by: <kijoong.lee@lge.com>
 Tested-by: <yeseul.joo@lge.com>
 Tested-by: <kijoong.lee@lge.com>
+Upstream-Status: Pending
 ---
  .../lite/delegates/gpu/common/model_builder.cc    |  5 ++++-
  .../lite/delegates/gpu/common/model_builder.h     |  3 ++-

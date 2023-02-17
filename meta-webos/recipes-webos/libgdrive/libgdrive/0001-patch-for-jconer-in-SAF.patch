@@ -3,6 +3,7 @@ From: "mukul20.jha" <mukul20.jha@lge.com>
 Date: Mon, 26 Apr 2021 14:26:26 +0000
 Subject: [PATCH] patch-for-jconer-in-SAF
 
+Upstream-Status: Pending
 ---
  Makefile                     | 6 +++---
  include/jconer/allocator.hpp | 6 +++---

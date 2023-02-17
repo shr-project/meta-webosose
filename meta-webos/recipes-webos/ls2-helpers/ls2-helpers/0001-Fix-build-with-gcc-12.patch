@@ -13,6 +13,7 @@ TOPDIR/BUILD/work/MACH-oemllib32-linux-gnueabi/lib32-ls2-helpers/1.0.0-10-r0/git
   525 |         std::array<std::pair<int, string>, 2> INT_ARRAY {{{0, "zero"}, {1234, "many"}}};
       |                                               ^~~~~~~~~
 
+Upstream-Status: Pending
 ---
  include/public/ls2-helpers/jsonparser.hpp | 1 +
  1 file changed, 1 insertion(+)

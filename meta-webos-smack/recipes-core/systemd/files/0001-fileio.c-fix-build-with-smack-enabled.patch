@@ -21,6 +21,7 @@ aarch64-webos-linux-gcc -march=armv8-a+crc -fstack-protector-strong -D_FORTIFY_S
 cc1: some warnings being treated as errors
 
 Signed-off-by: Martin Jansa <martin.jansa@lge.com>
+Upstream-Status: Pending
 ---
  src/basic/fileio.c    | 1 +
  src/basic/meson.build | 2 +-

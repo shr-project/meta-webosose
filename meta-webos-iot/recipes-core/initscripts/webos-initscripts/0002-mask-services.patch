@@ -3,6 +3,7 @@ From: es <es.lee@lge.com>
 Date: Mon, 10 Feb 2020 17:16:49 +0900
 Subject: [PATCH] Temp
 
+Upstream-Status: Pending
 ---
  files/systemd/services/mask/configd.service           | 1 +
  files/systemd/services/mask/lsm-ready.path            | 1 +

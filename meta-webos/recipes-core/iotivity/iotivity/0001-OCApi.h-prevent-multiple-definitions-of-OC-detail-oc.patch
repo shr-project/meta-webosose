@@ -25,6 +25,7 @@ collect2: error: ld returned 1 exit status
 * it probably isn't the right fix, but at least it builds now with just
   warnings:
   resource/include/OCApi.h:73:5: warning: inline variables are only available with '-std=c++17' or '-std=gnu++17'
+Upstream-Status: Pending
 ---
  resource/include/OCApi.h | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)

@@ -14,6 +14,7 @@ drop FOREACH_LINE() in systemd version 244, it is replaced.
 | ../git/src/core/smack-setup.c:41:121: error: expected ';' before '{' token
 |    41 |         FOREACH_LINE(unconfined, f,log_error_errno(errno, "Failed to read line from '%s': %m", "/etc/smack/unconfined")) {
 |       |
+Upstream-Status: Pending
 ---
  src/core/smack-setup.c | 67 ++++++++++++++++++++++++++++++++++++++++++
  1 file changed, 67 insertions(+)

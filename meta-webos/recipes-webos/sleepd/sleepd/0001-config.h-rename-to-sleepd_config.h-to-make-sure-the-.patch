@@ -16,6 +16,7 @@ Subject: [PATCH] config.h: rename to sleepd_config.h to make sure the right
 /OE/build/luneos-master/webos-ports/tmp-glibc/work/core2-64-webos-linux/sleepd/2.0.0-1+gitAUTOINC+805f724dd3-r0/git/src/utils/init.c:155:9: note: each undeclared identifier is reported only once for each function it appears in
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Upstream-Status: Pending
 ---
  include/internal/{config.h => sleepd_config.h} | 0
  src/alarms/alarm.c                             | 2 +-

@@ -3,6 +3,7 @@ From: Soonwon Hong <soonwon.hong@lge.com>
 Date: Fri, 19 May 2017 09:47:01 +0900
 Subject: [PATCH] Add symlink path validity
 
+Upstream-Status: Pending
 ---
  libopkg/opkg_archive.c | 3 +++
  libopkg/opkg_conf.c    | 1 +

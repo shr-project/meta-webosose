@@ -7,6 +7,7 @@ Signed-off-by: Christophe Chapuis <chris.chapuis@gmail.com>
 
 Imported from LuneOS:
 https://github.com/webOS-ports/nodejs-module-webos-sysbus/commit/db4c888e627f4c4afe406600563daee88dc24578
+Upstream-Status: Pending
 ---
  src/node_ls2_call.cpp                   | 10 +++++-----
  src/node_ls2_handle.cpp                 | 18 +++++++++---------

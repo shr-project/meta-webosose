@@ -59,6 +59,7 @@ gyp ERR! not ok
 WARNING: exit code 1 from a shell command.
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Upstream-Status: Pending
 ---
  CMakeLists.txt | 2 +-
  binding.gyp    | 2 +-

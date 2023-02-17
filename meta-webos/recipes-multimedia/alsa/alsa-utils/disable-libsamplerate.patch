@@ -8,6 +8,7 @@ Subject: [PATCH] configure.ac: add parameters to enable/disable libsamplerate
 * we don't like the autodetection
 
 Signed-off-by: Martin Jansa <Martin.Jansa@gmail.com>
+Upstream-Status: Pending
 ---
  configure.ac | 18 +++++++++++++++---
  1 file changed, 15 insertions(+), 3 deletions(-)

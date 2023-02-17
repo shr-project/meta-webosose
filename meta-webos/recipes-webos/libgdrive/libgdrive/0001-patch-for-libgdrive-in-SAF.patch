@@ -3,6 +3,7 @@ From: "mukul20.jha" <mukul20.jha@lge.com>
 Date: Mon, 26 Apr 2021 20:09:51 +0530
 Subject: [PATCH] patch-for-libgdrive-in-SAF
 
+Upstream-Status: Pending
 ---
  Makefile                      |  6 ++---
  include/gdrive/credential.hpp |  4 ++-

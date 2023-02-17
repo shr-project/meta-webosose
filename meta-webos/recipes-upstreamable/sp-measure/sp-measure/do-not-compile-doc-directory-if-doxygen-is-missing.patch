@@ -7,6 +7,7 @@ Add conditions for making doxgen dependency optional.
 Build will now not fail if doxygen is missing.
 
 Change-Id: I86fc95d7f53d363c23a851d7a98f238ae38ec127
+Upstream-Status: Pending
 ---
  Makefile.am  |    6 +++++-
  configure.ac |   11 ++++++++++-
