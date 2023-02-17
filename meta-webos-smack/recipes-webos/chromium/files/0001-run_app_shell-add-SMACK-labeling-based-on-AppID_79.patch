@@ -4,6 +4,7 @@ Date: Wed, 8 Jan 2020 01:04:47 -0800
 Subject: run_app_shell: add SMACK labeling based on AppID
 
 Change-Id: I800c0f5959bd70b3d424b3cede7e1c081e60afb6
+Upstream-Status: Pending
 ---
  src/webos/install/app_shell/run_app_shell | 1 +
  1 file changed, 1 insertion(+)

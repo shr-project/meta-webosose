@@ -58,6 +58,7 @@ It seems to be triggered by this change in gtest.h:
 +  }
 
 Change-Id: I3416d77fa4b5fc3672f5cc4e43fab8c7afe141e5
+Upstream-Status: Pending
 ---
  test/test_subscriptionpoint.cpp | 16 ++++++++--------
  1 file changed, 8 insertions(+), 8 deletions(-)

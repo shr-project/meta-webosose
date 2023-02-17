@@ -12,6 +12,7 @@ TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/com.webos.service.unifiedsearch/1.
 TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/com.webos.service.unifiedsearch/1.0.0-6-r1/git/src/util/LinuxProcess.cpp:208:22: error: aggregate 'std::array<char, 128> buffer' has incomplete type and cannot be defined
   208 |     array<char, 128> buffer;
       |                      ^~~~~~
+Upstream-Status: Pending
 ---
  src/util/LinuxProcess.cpp | 1 +
  1 file changed, 1 insertion(+)

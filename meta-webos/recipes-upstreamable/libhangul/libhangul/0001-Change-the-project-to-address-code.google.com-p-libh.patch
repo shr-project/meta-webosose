@@ -14,6 +14,7 @@ http://code.google.com/로 바꿨다.
 그에 맞게 관련 주소를 변경한다.
 
 Change-Id: If8f57fc8518c2f7eee33c00a552de7973957a849
+Upstream-Status: Pending
 ---
  README           |    9 +++------
  configure.ac     |    2 +-

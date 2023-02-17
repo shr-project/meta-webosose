@@ -26,6 +26,7 @@ N/A
 [WRO-12611] LTTng tracing is not working
 
 Change-Id: Iaa2e7bcf068ac584302c8562202959a0bf8b9878
+Upstream-Status: Pending
 ---
  performancelog/plugin/pmtrace_performancelog_provider.h | 6 +++---
  pmtrace/plugin/pmtrace_qmlplugin_provider.h             | 6 +++---

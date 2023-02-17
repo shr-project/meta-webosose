@@ -29,6 +29,7 @@ In file included from TOPDIR/BUILD/work/qemux86_64-webos-linux/pulseaudio/15.0-4
 TOPDIR/BUILD/work/qemux86_64-webos-linux/pulseaudio/15.0-41-r0/recipe-sysroot/usr/include/absl/base/policy_checks.h:79:2: error: #error "C++ versions less than C++14 are not supported."
    79 | #error "C++ versions less than C++14 are not supported."
       |  ^~~~~
+Upstream-Status: Pending
 ---
  meson.build | 7 +++++--
  1 file changed, 5 insertions(+), 2 deletions(-)

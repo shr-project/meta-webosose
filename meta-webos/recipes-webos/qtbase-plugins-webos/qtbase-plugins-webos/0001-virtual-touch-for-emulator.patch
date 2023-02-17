@@ -3,6 +3,7 @@ From: Heegoo Han <heegoo.han@lge.com>
 Date: Thu, 4 Nov 2021 16:14:14 +0900
 Subject: [PATCH] virtual touch for emulator
 
+Upstream-Status: Pending
 ---
  src/eglfs_webos/weboseglfsintegration.cpp | 73 ++++++++++++++++++++++-
  src/eglfs_webos/weboseglfsintegration.h   |  2 -

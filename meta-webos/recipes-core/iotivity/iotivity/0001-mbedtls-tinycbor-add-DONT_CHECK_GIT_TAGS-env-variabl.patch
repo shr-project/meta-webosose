@@ -49,6 +49,7 @@ https://git.openembedded.org/openembedded-core/commit/?id=8bed8e6993e7297bdcd689
 but exporting GIT_CONFIG_PARAMETERS doesn't work for this SConscript, because
 it filters the environment as in:
 https://scons.org/doc/2.4.0/HTML/scons-api/SCons.Script.SConscript%27.DefaultEnvironmentCall-class.html
+Upstream-Status: Pending
 ---
  build_common/SConscript     | 1 +
  extlibs/mbedtls/SConscript  | 2 +-

@@ -11,6 +11,7 @@ hangul_ic_process함수에서 backspace 처리도 가능하게 함
 ascii 코드를 직접 처리하는 경우 backspace를 예외 처리하기 보다는
 hangul_ic_process함수에서 '\b' 코드로 처리하게 하면 여러 테스트
 코드들이 훨씬 간결해질 수 있다.
+Upstream-Status: Pending
 ---
  hangul/hangulinputcontext.c | 4 ++++
  1 file changed, 4 insertions(+)

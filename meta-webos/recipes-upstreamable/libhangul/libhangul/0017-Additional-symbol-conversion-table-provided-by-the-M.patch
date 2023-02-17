@@ -14,6 +14,7 @@ MS IME에서 제공하는 심볼 변환 테이블 추가
 https://github.com/choehwanjin/libhangul/pull/4
 
 Change-Id: Id29eccc6ef47c099bccbeb9389fe31a45bbe67f5
+Upstream-Status: Pending
 ---
  data/hanja/Makefile.am  |    5 +-
  data/hanja/mssymbol.txt | 1014 +++++++++++++++++++++++++++++++++++++++++++++++

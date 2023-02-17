@@ -3,6 +3,7 @@ From: "sc.heo" <sc.heo@lge.com>
 Date: Tue, 8 Mar 2022 17:56:04 +0900
 Subject: [PATCH] Disable mouse wheel on touch mode for emulator
 
+Upstream-Status: Pending
 ---
  src/eglfs_webos/emulator/qemulatormousemanager.cpp | 12 +++++++++++-
  1 file changed, 11 insertions(+), 1 deletion(-)

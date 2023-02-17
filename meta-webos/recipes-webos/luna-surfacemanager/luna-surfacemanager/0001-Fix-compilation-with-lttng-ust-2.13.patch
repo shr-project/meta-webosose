@@ -26,6 +26,7 @@ N/A
 [WRO-12611] LTTng tracing is not working
 
 Change-Id: I318ffecf815c8d1d98bae6b8eb1abff6d233c513
+Upstream-Status: Pending
 ---
  modules/weboscompositor/pmtrace_surfacemanager_provider.h | 6 +++---
  1 file changed, 3 insertions(+), 3 deletions(-)
