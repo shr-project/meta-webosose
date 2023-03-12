@@ -24,6 +24,7 @@ inherit webos_system_bus
 # http://gpro.lge.com/c/webosose/com.webos.service.unifiedsearch/+/347406 CMakeLists.txt: update from libprocps to libproc2
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     file://0001-Fix-build-with-gcc-12.patch \
+    file://0002-CMakeLists.txt-update-from-libprocps-to-libproc2.patch \
 "
 S = "${WORKDIR}/git"
 
