@@ -12,7 +12,7 @@ inherit features_check
 REQUIRED_DISTRO_FEATURES = "webos-camera"
 
 VIRTUAL-RUNTIME_g-camera-pipeline ?= ""
-VIRTUAL-RUNTIME_g-camera-pipeline:raspberrypi4 = "g-camera-pipeline"
+VIRTUAL-RUNTIME_g-camera-pipeline:rpi = "g-camera-pipeline"
 VIRTUAL-RUNTIME_g-camera-pipeline:qemux86 = "g-camera-pipeline"
 VIRTUAL-RUNTIME_g-camera-pipeline:qemux86-64 = "g-camera-pipeline"
 
