@@ -33,7 +33,12 @@ VIRTUAL-RUNTIME_nyx_modules_providers ??= "\
     nyx-modules-qemux86 \
 "
 
-# Restricted to only these 3 MACHINEs by COMPATIBLE_MACHINE
+# Restricted to only these 4 MACHINEs by COMPATIBLE_MACHINE and for raspberrypi3 doesn't build due to:
+# http://gecko.lge.com:8000/Builds/Details/1374302
+# com.webos.service.mediacontroller/1.0.0-27-r4/git $ git grep rasp
+# CMakeLists.txt:if(WEBOS_TARGET_MACHINE STREQUAL "raspberrypi4" OR WEBOS_TARGET_MACHINE STREQUAL "raspberrypi4-64" OR WEBOS_TARGET_MACHINE STREQUAL "qemux86" OR WEBOS_TARGET_MACHINE STREQUAL "qemux86-64")
+# src/MediaControlService.cpp:      if(("raspberrypi4 #2" == adapterName) || ("raspberrypi4" == adapterName) ||
+# src/MediaControlService.cpp:         ("raspberrypi4-64 #2" == adapterName) || ("raspberrypi4-64" == adapterName) ||
 VIRTUAL-RUNTIME_com.webos.service.mediacontroller ?= ""
 VIRTUAL-RUNTIME_com.webos.service.mediacontroller:qemux86 = "com.webos.service.mediacontroller"
 VIRTUAL-RUNTIME_com.webos.service.mediacontroller:qemux86-64 = "com.webos.service.mediacontroller"
@@ -41,16 +46,12 @@ VIRTUAL-RUNTIME_com.webos.service.mediacontroller:raspberrypi4 = "com.webos.serv
 VIRTUAL-RUNTIME_com.webos.service.mediacontroller:raspberrypi4-64 = "com.webos.service.mediacontroller"
 
 VIRTUAL-RUNTIME_g-media-pipeline ?= ""
-VIRTUAL-RUNTIME_g-media-pipeline:raspberrypi3 = "g-media-pipeline"
-VIRTUAL-RUNTIME_g-media-pipeline:raspberrypi3-64 = "g-media-pipeline"
-VIRTUAL-RUNTIME_g-media-pipeline:raspberrypi4 = "g-media-pipeline"
-VIRTUAL-RUNTIME_g-media-pipeline:raspberrypi4-64 = "g-media-pipeline"
+VIRTUAL-RUNTIME_g-media-pipeline:rpi = "g-media-pipeline"
 VIRTUAL-RUNTIME_g-media-pipeline:qemux86 = "g-media-pipeline"
 VIRTUAL-RUNTIME_g-media-pipeline:qemux86-64 = "g-media-pipeline"
 
 VIRTUAL-RUNTIME_g-camera-pipeline ?= ""
-VIRTUAL-RUNTIME_g-camera-pipeline:raspberrypi4 = "g-camera-pipeline"
-VIRTUAL-RUNTIME_g-camera-pipeline:raspberrypi4-64 = "g-camera-pipeline"
+VIRTUAL-RUNTIME_g-camera-pipeline:rpi = "g-camera-pipeline"
 VIRTUAL-RUNTIME_g-camera-pipeline:qemux86 = "g-camera-pipeline"
 VIRTUAL-RUNTIME_g-camera-pipeline:qemux86-64 = "g-camera-pipeline"
 
