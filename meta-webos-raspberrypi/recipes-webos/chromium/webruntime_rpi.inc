@@ -1,6 +1,6 @@
 # Copyright (c) 2023 LG Electronics, Inc.
 
-EXTENDPRAUTO:append:rpi = "webosrpi1"
+EXTENDPRAUTO:append:rpi = "webosrpi2"
 
 modify_run_app_shell:append:rpi() {
      sed -i 's/# Setup 4Mb limitation mse audio buffer size/# Setup 2Mb limitation mse audio buffer size/' ${D}${APP_SHELL_RUNTIME_RUN_SCRIPT}
@@ -10,6 +10,3 @@ modify_run_app_shell:append:rpi() {
 
      sed -i '/--in-process-gpu\\/a\  --disable-web-media-player-neva\\' ${D}${APP_SHELL_RUNTIME_RUN_SCRIPT}
 }
-
-PACKAGECONFIG_MEDIA:raspberrypi3 = ""
-PACKAGECONFIG_NEVA_WEBRTC:raspberrypi3 = ""
