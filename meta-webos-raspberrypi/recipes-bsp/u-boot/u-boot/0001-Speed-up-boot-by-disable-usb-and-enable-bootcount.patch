@@ -1,4 +1,4 @@
-From 429048a0bef474fa965b681eb92b8aa81b36e5aa Mon Sep 17 00:00:00 2001
+From 97c98bf77b7216e2fc125b2144aba3f189e537f5 Mon Sep 17 00:00:00 2001
 From: JeongBong Seo <jb.seo@lge.com>
 Date: Wed, 9 Feb 2022 12:00:57 +0900
 Subject: [PATCH] Speed up boot by disable usb and enable bootcount
@@ -22,13 +22,13 @@ Upstream-Status: Pending
  7 files changed, 33 insertions(+), 9 deletions(-)
 
 diff --git a/configs/rpi_3_32b_defconfig b/configs/rpi_3_32b_defconfig
-index 06aefc4d43..e38ef640b7 100644
+index ed14571d20..aeac01e5ad 100644
 --- a/configs/rpi_3_32b_defconfig
 +++ b/configs/rpi_3_32b_defconfig
-@@ -13,7 +13,6 @@ CONFIG_DISTRO_DEFAULTS=y
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x7ffff00
+@@ -13,7 +13,6 @@ CONFIG_SYS_PROMPT="U-Boot> "
+ CONFIG_SYS_LOAD_ADDR=0x1000000
  CONFIG_OF_BOARD_SETUP=y
+ CONFIG_DISTRO_DEFAULTS=y
 -CONFIG_USE_PREBOOT=y
  # CONFIG_DISPLAY_CPUINFO is not set
  # CONFIG_DISPLAY_BOARDINFO is not set
@@ -43,13 +43,13 @@ index 06aefc4d43..e38ef640b7 100644
 +
 +CONFIG_BOOTDELAY=0
 diff --git a/configs/rpi_3_b_plus_defconfig b/configs/rpi_3_b_plus_defconfig
-index 05b3bac8f5..ee9e99928f 100644
+index d29bc7d61c..504667cdde 100644
 --- a/configs/rpi_3_b_plus_defconfig
 +++ b/configs/rpi_3_b_plus_defconfig
-@@ -12,7 +12,6 @@ CONFIG_DISTRO_DEFAULTS=y
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x7fffe40
+@@ -12,7 +12,6 @@ CONFIG_SYS_PROMPT="U-Boot> "
+ CONFIG_SYS_LOAD_ADDR=0x1000000
  CONFIG_OF_BOARD_SETUP=y
+ CONFIG_DISTRO_DEFAULTS=y
 -CONFIG_USE_PREBOOT=y
  # CONFIG_DISPLAY_CPUINFO is not set
  # CONFIG_DISPLAY_BOARDINFO is not set
@@ -64,13 +64,13 @@ index 05b3bac8f5..ee9e99928f 100644
 +
 +CONFIG_BOOTDELAY=0
 diff --git a/configs/rpi_3_defconfig b/configs/rpi_3_defconfig
-index c9ecc6e4d1..80bcade304 100644
+index eb92519371..d31b0339e0 100644
 --- a/configs/rpi_3_defconfig
 +++ b/configs/rpi_3_defconfig
-@@ -12,7 +12,6 @@ CONFIG_DISTRO_DEFAULTS=y
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x7fffe40
+@@ -12,7 +12,6 @@ CONFIG_SYS_PROMPT="U-Boot> "
+ CONFIG_SYS_LOAD_ADDR=0x1000000
  CONFIG_OF_BOARD_SETUP=y
+ CONFIG_DISTRO_DEFAULTS=y
 -CONFIG_USE_PREBOOT=y
  # CONFIG_DISPLAY_CPUINFO is not set
  # CONFIG_DISPLAY_BOARDINFO is not set
@@ -85,13 +85,13 @@ index c9ecc6e4d1..80bcade304 100644
 +
 +CONFIG_BOOTDELAY=0
 diff --git a/configs/rpi_4_32b_defconfig b/configs/rpi_4_32b_defconfig
-index e9c18f6b27..97acc54238 100644
+index 2fdc4b2360..7cb0939cc7 100644
 --- a/configs/rpi_4_32b_defconfig
 +++ b/configs/rpi_4_32b_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DISTRO_DEFAULTS=y
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x7fffee0
+@@ -11,7 +11,6 @@ CONFIG_DM_RESET=y
+ CONFIG_SYS_LOAD_ADDR=0x1000000
  CONFIG_OF_BOARD_SETUP=y
+ CONFIG_DISTRO_DEFAULTS=y
 -CONFIG_USE_PREBOOT=y
  CONFIG_PREBOOT="pci enum; usb start;"
  # CONFIG_DISPLAY_CPUINFO is not set
@@ -106,13 +106,13 @@ index e9c18f6b27..97acc54238 100644
 +
 +CONFIG_BOOTDELAY=0
 diff --git a/configs/rpi_4_defconfig b/configs/rpi_4_defconfig
-index 1163750558..0b033230e0 100644
+index efa42569b1..879c1bf0bb 100644
 --- a/configs/rpi_4_defconfig
 +++ b/configs/rpi_4_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DISTRO_DEFAULTS=y
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x7fffe30
+@@ -11,7 +11,6 @@ CONFIG_DM_RESET=y
+ CONFIG_SYS_LOAD_ADDR=0x1000000
  CONFIG_OF_BOARD_SETUP=y
+ CONFIG_DISTRO_DEFAULTS=y
 -CONFIG_USE_PREBOOT=y
  CONFIG_PREBOOT="pci enum; usb start;"
  # CONFIG_DISPLAY_CPUINFO is not set
@@ -127,13 +127,13 @@ index 1163750558..0b033230e0 100644
 +
 +CONFIG_BOOTDELAY=0
 diff --git a/configs/rpi_arm64_defconfig b/configs/rpi_arm64_defconfig
-index 364a1532df..8568641f18 100644
+index 53bf410a79..270c14c2db 100644
 --- a/configs/rpi_arm64_defconfig
 +++ b/configs/rpi_arm64_defconfig
-@@ -10,7 +10,6 @@ CONFIG_DISTRO_DEFAULTS=y
- CONFIG_HAS_CUSTOM_SYS_INIT_SP_ADDR=y
- CONFIG_CUSTOM_SYS_INIT_SP_ADDR=0x7fffe30
+@@ -11,7 +11,6 @@ CONFIG_DM_RESET=y
+ CONFIG_SYS_LOAD_ADDR=0x1000000
  CONFIG_OF_BOARD_SETUP=y
+ CONFIG_DISTRO_DEFAULTS=y
 -CONFIG_USE_PREBOOT=y
  CONFIG_PREBOOT="pci enum; usb start;"
  # CONFIG_DISPLAY_CPUINFO is not set
@@ -148,7 +148,7 @@ index 364a1532df..8568641f18 100644
 +
 +CONFIG_BOOTDELAY=0
 diff --git a/include/configs/rpi.h b/include/configs/rpi.h
-index 4f5025d0da..723fde550c 100644
+index 4da982f735..2d942f70f3 100644
 --- a/include/configs/rpi.h
 +++ b/include/configs/rpi.h
 @@ -60,9 +60,9 @@
