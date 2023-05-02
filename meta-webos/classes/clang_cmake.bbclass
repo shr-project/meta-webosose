@@ -21,3 +21,10 @@ TOOLCHAIN_OPTIONS = "\
 "
 
 TOOLCHAIN_OPTIONS:append = " ${@bb.utils.contains('USE_WEBRUNTIME_LIBCXX', '1', '-D_LIBCPP_ABI_UNSTABLE', '', d)}"
+
+# The same as in
+# https://github.com/kraj/meta-clang/commit/4cf1e9e0baf30568851c6646510d18bad50c613b
+# but applied without toolchain-clang override which this doesn't use
+# fixes:
+# http://gecko.lge.com:8000/Builds/Details/1431440
+DEBUG_PREFIX_MAP:remove = "-fcanon-prefix-map"
