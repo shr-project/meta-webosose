@@ -115,6 +115,8 @@ SRC_URI:append = " file://9903-Revert-Remove-qmake-files-that-provide-support-fo
 SRC_URI:append = " file://9904-Revert-CMake-remove-tests-for-C-17-and-C11-and-earli.patch;minver=6.6.0"
 # https://bugreports.qt.io/browse/WEBOSCI-64
 SRC_URI:append:class-native = " file://9905-Revert-Remove-syncqt.pl.patch;minver=6.7.0"
+# https://codereview.qt-project.org/c/qt/qtbase/+/475132
+SRC_URI:append = " file://0001-tinycbor-fix-build-with-gcc-13.patch"
 
 # Flags needed for webOS
 TARGET_CXXFLAGS:append = " \
