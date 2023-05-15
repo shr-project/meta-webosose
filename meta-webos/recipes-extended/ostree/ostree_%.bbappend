@@ -17,4 +17,5 @@ RDEPENDS:${PN}-ptest:remove:class-target = "${@oe.utils.conditional('WEBOS_PREFE
 # Fails to build with gold:
 # http://gecko.lge.com:8000/Errors/Details/588441
 # ./.libs/libostree-1.so: error: undefined reference to 'gpg_strerror_r'
+# Fixed in nanbield with https://lists.openembedded.org/g/openembedded-devel/message/103253
 LDFLAGS:append = "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', ' -fuse-ld=bfd ', '', d)}"
