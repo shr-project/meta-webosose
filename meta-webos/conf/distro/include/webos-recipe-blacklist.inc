@@ -32,10 +32,13 @@ SKIP_RECIPE[fwts] ?= "fails to build with: fwts/22.01.00-r0/build/src/lib/src/.l
 SKIP_RECIPE[netplan] ?= "fails to build with gold: aarch64-webos-linux/11.3.0/ld: error: abicompat.lds:10:8: syntax error, unexpected STRING http://gecko.lge.com:8000/Errors/Details/565730"
 SKIP_RECIPE[transmission] ?= "fails to fetch: WARNING: Failed to fetch URL gitsm://github.com/transmission/transmission;branch=master;protocol=https, attempting MIRRORS if available DEBUG: Fetcher failure: Unable to find revision bb6b5a062ee594dfd4b7a12a6b6e860c43849bfd in branch master even from upstream: http://gecko.lge.com:8000/Errors/Details/565717"
 SKIP_RECIPE[vboxguestdrivers] ?= "BROKEN: kernel-module-vboxguest conflicts in pkgdata with the vboxguest kernel modules we have enabled in linux-yocto meta-webos/recipes-kernel/linux/linux-yocto/vbox_gfx.cfg:CONFIG_VBOXGUEST=m http://gecko.lge.com:8000/Errors/Details/565857"
+SKIP_RECIPE[gutenprint] ?= "BROKEN: needs 'lp' group in base-passwd, chgrp added in https://git.openembedded.org/meta-openembedded/commit/?id=4d921bb5144b653c2f195fb2e8694a31dbd539f1"
 
 # meta-networking
 SKIP_RECIPE[networkmanager] ?= "fails to build with: NetworkManager-1.36.2/meson.build:821:4: ERROR: Assert failed: vala api require GObject introspection. Use -Dvapi=false to disable it: http://gecko.lge.com:8000/Errors/Details/565739"
 SKIP_RECIPE[networkmanager-openvpn] ?= "depends on blacklisted networkmanager"
+SKIP_RECIPE[networkmanager-openconnect] ?= "depends on blacklisted networkmanager"
+SKIP_RECIPE[networkmanager-fortisslvpn] ?= "depends on blacklisted networkmanager"
 SKIP_RECIPE[python3-networkmanager] ?= "rdepends on blacklisted networkmanager"
 
 # meta-filesystems
