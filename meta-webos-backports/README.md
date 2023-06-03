@@ -28,5 +28,6 @@ If you're looking for backports from kirkstone to honister, check honister branc
 If you're looking for backports from langdale, mickledore, nanbield to kirkstone, check kirkstone branch.
 If you're looking for backports from mickledore, nanbield to langdale, check langdale branch.
 If you're looking for backports from nanbield to mickledore, check mickledore branch.
+Backports from 5.0 (Scarthgap) to 4.3 (Nanbield) are in "meta-webos-backports-5.0" subdirectory.
 
 See https://wiki.yoctoproject.org/wiki/Releases for complete list of releases.
