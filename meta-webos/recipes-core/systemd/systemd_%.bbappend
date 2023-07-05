@@ -12,10 +12,6 @@ SRC_URI:append:webos = " \
     file://0006-Change-ownership-of-media-directory-to-support-non-r.patch \
 "
 
-SRC_URI:append = " \
-    file://0007-remove-broken-link-for-TAS-error.patch \
-"
-
 inherit webos_prerelease_dep
 
 VIRTUAL-RUNTIME_bash ?= "bash"
