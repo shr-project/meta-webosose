@@ -146,3 +146,7 @@ RRECOMMENDS:${PN}-dev += "${@bb.utils.contains_any('DISTRO_FEATURES', 'vulkan op
 
 export CCACHE_MAXSIZE = "1200M"
 
+# work around for issues described in:
+# https://codereview.qt-project.org/c/yocto/meta-qt6/+/483660
+# http://gecko.lge.com:8000/Errors/Details/888939
+PACKAGECONFIG[use-lld-linker] = ""
