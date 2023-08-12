@@ -19,7 +19,7 @@ WEBOS_DISTRO_FEATURES_USB = ""
 WEBOS_DISTRO_FEATURES_CONNECTIVITY = "wifi"
 WEBOS_DISTRO_FEATURES_NETWORKING = ""
 
-WEBOS_DISTRO_FEATURES_INIT = "systemd"
+WEBOS_DISTRO_FEATURES_INIT = "systemd usrmerge"
 WEBOS_DISTRO_FEATURES_INIT_CONSIDERED = "sysvinit"
 # Our gstreamer recipes and forks didn't apply the fixes for introspection.m4 and fail with:
 # | make[4]: *** No rule to make target `/usr/bin/g-ir-scanner-wrapper', needed by `Gst-1.0.gir'.  Stop.
