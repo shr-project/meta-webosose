@@ -14,6 +14,7 @@ inherit webos_enhanced_submissions
 WEBOS_REPO_NAME = "ebd-core"
 WEBOS_GIT_PARAM_BRANCH = "webos-5.4"
 
+SRCREV_FORMAT = "main_libbpf"
 SRC_URI = " \
     ${WEBOS_KERNEL_GIT_REPO_COMPLETE} \
     git://github.com/libbpf/libbpf.git;protocol=https;branch=master;destsuffix=git/src/cc/libbpf;name=libbpf \
