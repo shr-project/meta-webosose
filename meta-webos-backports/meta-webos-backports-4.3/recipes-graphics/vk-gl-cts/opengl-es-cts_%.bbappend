@@ -1,5 +1,7 @@
 # Backport changes from:
+# https://git.openembedded.org/meta-openembedded/commit/?id=0262013e03485048bc5d057c414f4989ed1be05a
 # https://lists.openembedded.org/g/openembedded-devel/message/104699
+# https://lists.openembedded.org/g/openembedded-devel/message/104723
 
 # This is added by annonymous python in meta-oe/recipes-graphics/vk-gl-cts/khronos-cts.inc
 # so even :remove operator is too weak for that
