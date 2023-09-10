@@ -1,0 +1,56 @@
+From f7e1b67533a8d4a80dc3abeaacbebddec169b5ca Mon Sep 17 00:00:00 2001
+From: Martin Jansa <martin2.jansa@lgepartner.com>
+Date: Mon, 11 Sep 2023 09:11:12 +0200
+Subject: [PATCH] syscall.c: add MAP_SHARED_VALIDATE fallback
+
+:Release Notes:
+libc defines it in mman.h:
+linux-headers/linux/mman.h:#define MAP_SHARED_VALIDATE 0x03     /* share + validate extension flags */
+and for non-linux systems there is fallback in mmap-alloc.c:
+util/mmap-alloc.c:#define MAP_SHARED_VALIDATE   0x0
+but since:
+https://github.com/qemu/qemu/commit/9ab8d0714964abce6f5b8bcac49d6239c548ed12
+it's also used in syscall.c for systems with old linux-libc-headers
+as this was added with 4.15.
+
+:Detailed Notes:
+Fixes:
+http://gecko.lge.com:8000/Errors/Details/690250
+
+FAILED: libqemu-arm-linux-user.fa.p/linux-user_syscall.c.o 
+gcc -m64 -mcx16 -Ilibqemu-arm-linux-user.fa.p -I. -I../qemu-8.1.0 -Itarget/arm -I../qemu-8.1.0/target/arm -I../qemu-8.1.0/common-user/host/x86_64 -I../qemu-8.1.0/linux-user/include/host/x86_64 -I../qemu-8.1.0/linux-user/include -Ilinux-user -I../qemu-8.1.0/linux-user -Ilinux-user/arm -I../qemu-8.1.0/linux-user/arm -Iqapi -Itrace -Iui/shader -ITOPDIR/BUILD/work/x86_64-linux/qemu-native/8.1.0/recipe-sysroot-native/usr/lib/pkgconfig/../../../usr/include -ITOPDIR/BUILD/work/x86_64-linux/qemu-native/8.1.0/recipe-sysroot-native/usr/lib/pkgconfig/../../../usr/include/glib-2.0 -ITOPDIR/BUILD/work/x86_64-linux/qemu-native/8.1.0/recipe-sysroot-native/usr/lib/pkgconfig/../../../usr/lib/glib-2.0/include -fdiagnostics-color=auto -Wall -Winvalid-pch -std=gnu11 -O2 -g -fstack-protector-strong -U_FORTIFY_SOURCE -D_FORTIFY_SOURCE=2 -Wundef -Wwrite-strings -Wmissing-prototypes -Wstrict-prototypes -Wredundant-decls -Wold-style-declaration -Wold-style-definition -Wtype-limits -Wformat-security -Wformat-y2k -Winit-self -Wignored-qualifiers -Wempty-body -Wnested-externs -Wendif-labels -Wexpansion-to-defined -Wimplicit-fallthrough=2 -Wmissing-format-attribute -Wno-missing-include-dirs -Wno-shift-negative-value -Wno-psabi -isystem TOPDIR/BUILD/work/x86_64-linux/qemu-native/8.1.0/qemu-8.1.0/linux-headers -isystem linux-headers -iquote . -iquote TOPDIR/BUILD/work/x86_64-linux/qemu-native/8.1.0/qemu-8.1.0 -iquote TOPDIR/BUILD/work/x86_64-linux/qemu-native/8.1.0/qemu-8.1.0/include -iquote TOPDIR/BUILD/work/x86_64-linux/qemu-native/8.1.0/qemu-8.1.0/host/include/x86_64 -iquote TOPDIR/BUILD/work/x86_64-linux/qemu-native/8.1.0/qemu-8.1.0/host/include/generic -iquote TOPDIR/BUILD/work/x86_64-linux/qemu-native/8.1.0/qemu-8.1.0/tcg/i386 -pthread -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -fno-strict-aliasing -fno-common -fwrapv -O2 -pipe -isystemTOPDIR/BUILD/work/x86_64-linux/qemu-native/8.1.0/recipe-sysroot-native/usr/include -O2 -fPIE -isystem../qemu-8.1.0/linux-headers -isystemlinux-headers -DNEED_CPU_H '-DCONFIG_TARGET="arm-linux-user-config-target.h"' '-DCONFIG_DEVICES="arm-linux-user-config-devices.h"' -MD -MQ libqemu-arm-linux-user.fa.p/linux-user_syscall.c.o -MF libqemu-arm-linux-user.fa.p/linux-user_syscall.c.o.d -o libqemu-arm-linux-user.fa.p/linux-user_syscall.c.o -c ../qemu-8.1.0/linux-user/syscall.c
+../qemu-8.1.0/linux-user/syscall.c: In function âdo_mmapâ:
+../qemu-8.1.0/linux-user/syscall.c:6066:22: error: âMAP_SHARED_VALIDATEâ undeclared (first use in this function); did you mean âTARGET_MAP_SHARED_VALIDATEâ?
+ 6066 |         host_flags = MAP_SHARED_VALIDATE;
+      |                      ^~~~~~~~~~~~~~~~~~~
+      |                      TARGET_MAP_SHARED_VALIDATE
+
+:Testing Performed:
+Only build tested.
+
+:QA Notes:
+No change to image.
+
+:Issues Addressed:
+[WRP-13301] Create GPVB with Yocto 4.3 Nanbield
+---
+Upstream-Status: Inappropriate [LGE specific due to old libc in ubuntu 18.04 on LGE servers]
+
+ linux-user/syscall.c | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/linux-user/syscall.c b/linux-user/syscall.c
+index 9353268cc1..622c5b226d 100644
+--- a/linux-user/syscall.c
++++ b/linux-user/syscall.c
+@@ -148,6 +148,10 @@
+ #define CLONE_IO                0x80000000      /* Clone io context */
+ #endif
+ 
++#ifndef MAP_SHARED_VALIDATE
++#define MAP_SHARED_VALIDATE 0x03	/* share + validate extension flags */
++#endif
++
+ /* We can't directly call the host clone syscall, because this will
+  * badly confuse libc (breaking mutexes, for example). So we must
+  * divide clone flags into:
