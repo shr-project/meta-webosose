@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM_OSS_PKG_INFO = "file://oss-pkg-info.yaml;md5=aad9c121c4d20efb97
 # This is blacklisted because of the license
 DEPENDS:remove = "libatomic-ops"
 
-DEPENDS += "pmloglib tensorflow-lite flatbuffers webrtc-audio-processing libpbnjson"
+DEPENDS += "pmloglib tensorflow-lite flatbuffers webrtc-audio-processing-1 libpbnjson"
 
 WEBOS_VERSION = "15.0-55_989a203096a7e200bb53cf6d22253d7467eef4fe"
 EXTENDPRAUTO:append = "webos13"
