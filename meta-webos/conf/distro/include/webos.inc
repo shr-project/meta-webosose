@@ -308,14 +308,6 @@ PTEST_ENABLED:pn-apr = "0"
 
 INHERIT_DISTRO ?= "debian devshell ccache sstate license buildstats-summary webos_base remove-libtool image-buildinfo ccache_stats"
 
-# Inherit icecc here, so that all builders have the same sstate signatures
-INHERIT_DISTRO += "icecc"
-# and then disable its function by default (so that people still need to explicity
-# enable it in webos-local.conf if they have configured icecc and want to use it.
-# You need to set _empty_ value in webos-local.conf to enable icecc function:
-# ICECC_DISABLED = ""
-ICECC_DISABLED ??= "1"
-
 # webOS supports the generation of oss package information file.
 # $ bitbake -c write_oss_pkg_info <image>
 # Components can have oss-pkg-info file itself but it is forced to
