@@ -16,3 +16,8 @@ SRCREV_v8 = "fd143650b4f9a6c37695cafbd39baed42ac64038"
 # http://gpro.lge.com/c/webosose/chromium94/+/363094 avcodec/x86/mathops: clip constants used with shift instructions within inline assembly
 # http://gpro.lge.com/c/webosose/chromium108/+/363100 avcodec/x86/mathops: clip constants used with shift instructions within inline assembly
 SRC_URI += "file://0001-avcodec-x86-mathops-clip-constants-used-with-shift-i.patch"
+
+# http://gpro.lge.com/c/webosose/chromium94/+/373211 Disable usage of `__is_cpp17_contiguous_iterator` until libc++ rolls.
+# http://gpro.lge.com/c/webosose/chromium108/+/373222 Disable usage of `__is_cpp17_contiguous_iterator` until libc++ rolls. (master branch)
+# http://gpro.lge.com/c/webosose/chromium108/+/373221 Disable usage of `__is_cpp17_contiguous_iterator` until libc++ rolls. (@pro branch)
+SRC_URI += "file://0001-Disable-usage-of-__is_cpp17_contiguous_iterator-unti.patch"
