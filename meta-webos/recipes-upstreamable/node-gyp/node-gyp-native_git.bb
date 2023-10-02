@@ -6,7 +6,7 @@ LICENSE = "MIT"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=694e396551033371686c80d3a1a69e88"
 DEPENDS = "nodejs-native node-gyp-packages-native"
 
-PV = "6.1.0+git${SRCPV}"
+PV = "6.1.0+git"
 PR = "r1"
 SRCREV = "d1dea13fe44bc65ee3ea8441c08c9a3d03d6d63d"
 SRC_URI = "git://github.com/nodejs/node-gyp.git;branch=main;protocol=https \
