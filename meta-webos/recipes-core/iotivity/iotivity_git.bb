@@ -52,7 +52,7 @@ do_fetch[vardeps] = "SRCREV_main SRCREV_tinycbor SRCREV_gtest SRCREV_hippomocks 
 S = "${WORKDIR}/git"
 
 PR = "r9"
-PV = "1.3.99+git${SRCPV}"
+PV = "1.3.99+git"
 
 inherit scons pkgconfig webos_filesystem_paths
 
