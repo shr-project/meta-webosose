@@ -15,7 +15,7 @@ inherit pkgconfig scons perlnative
 BBCLASSEXTEND = "native"
 
 SRCREV = "f39c195db08661e894017507842991a1ef70bedf"
-PV = "2.99+3.0.0-rc1+git${SRCPV}"
+PV = "2.99+3.0.0-rc1+git"
 PR = "r3"
 
 SRC_URI[arpa.md5sum] = "20cdc36b3bd7ec28f7e39c2ebb810421"
