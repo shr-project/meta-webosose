@@ -1,4 +1,4 @@
-From f021c385f950246268d3398e2fe446da35c78c9f Mon Sep 17 00:00:00 2001
+From 8334898a296da065cc29f5793e1de3e1f4a0f549 Mon Sep 17 00:00:00 2001
 From: "sungmok.shin" <sungmok.shin@lge.com>
 Date: Wed, 19 Aug 2020 09:50:56 +0900
 Subject: [PATCH] Use human readable process name for chrome inspector
@@ -37,7 +37,7 @@ Upstream-Status: Pending
  3 files changed, 10 insertions(+), 1 deletion(-)
 
 diff --git a/src/inspector_io.cc b/src/inspector_io.cc
-index 7e0b3ea63cf..b6b50f7e031 100644
+index b7b8f21e3ff..b02f408c483 100644
 --- a/src/inspector_io.cc
 +++ b/src/inspector_io.cc
 @@ -361,7 +361,11 @@ std::vector<std::string> InspectorIoDelegate::GetTargetIds() {
@@ -54,10 +54,10 @@ index 7e0b3ea63cf..b6b50f7e031 100644
  
  std::string InspectorIoDelegate::GetTargetUrl(const std::string& id) {
 diff --git a/src/node_internals.h b/src/node_internals.h
-index f27e03aed66..431e9a96c15 100644
+index 9243344eb78..fceb37a488f 100644
 --- a/src/node_internals.h
 +++ b/src/node_internals.h
-@@ -91,6 +91,7 @@ void SignalExit(int signal, siginfo_t* info, void* ucontext);
+@@ -94,6 +94,7 @@ void SignalExit(int signal, siginfo_t* info, void* ucontext);
  
  std::string GetProcessTitle(const char* default_title);
  std::string GetHumanReadableProcessName();
@@ -66,10 +66,10 @@ index f27e03aed66..431e9a96c15 100644
  v8::Maybe<bool> InitializeBaseContextForSnapshot(
      v8::Local<v8::Context> context);
 diff --git a/src/util.cc b/src/util.cc
-index 6bbd9fd926f..48406704e7d 100644
+index 91c69a98c49..9d12215c610 100644
 --- a/src/util.cc
 +++ b/src/util.cc
-@@ -164,6 +164,10 @@ std::string GetHumanReadableProcessName() {
+@@ -169,6 +169,10 @@ std::string GetHumanReadableProcessName() {
    return SPrintF("%s[%d]", GetProcessTitle("Node.js"), uv_os_getpid());
  }
  
@@ -77,6 +77,6 @@ index 6bbd9fd926f..48406704e7d 100644
 +  return SPrintF("%s", GetProcessTitle("Node.js"));
 +}
 +
- std::vector<std::string> SplitString(const std::string& in,
-                                      char delim,
-                                      bool skipEmpty) {
+ std::vector<std::string_view> SplitString(const std::string_view in,
+                                           const std::string_view delim) {
+   std::vector<std::string_view> out;
