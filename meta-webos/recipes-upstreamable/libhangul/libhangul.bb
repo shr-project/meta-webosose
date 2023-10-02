@@ -14,7 +14,7 @@ inherit autotools
 inherit pkgconfig
 
 SRCREV = "4a71565b289ac0503673002527584dd356f70719"
-PV = "0.1.0+git${SRCPV}"
+PV = "0.1.0+git"
 
 EXTRA_OECONF += "--libdir=${libdir}/maliit/plugins"
 
