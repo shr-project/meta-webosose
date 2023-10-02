@@ -9,4 +9,4 @@ INC_PR = "r5"
 
 SRC_URI = "git://github.com/ARM-software/gator.git;protocol=https;branch=main" 
 SRCREV = "3ff46fedd4d097813156069edab9704cc65e0a42"
-PV = "6.7+git${SRCPV}"
+PV = "6.7+git"
