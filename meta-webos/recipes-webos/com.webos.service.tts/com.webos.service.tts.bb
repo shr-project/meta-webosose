@@ -22,7 +22,9 @@ inherit webos_cmake
 inherit webos_pkgconfig
 inherit webos_system_bus
 
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-google-add-gpr-lib-to-TTS_ENGINE-call.patch \
+"
 S = "${WORKDIR}/git"
 
 inherit webos_systemd
