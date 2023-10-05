@@ -1,4 +1,4 @@
-From c5550896a0aed870b64a3a3b7c9036ed520dcd2a Mon Sep 17 00:00:00 2001
+From e508439f98b51ca8ce0288188211e187ba3ed41a Mon Sep 17 00:00:00 2001
 From: JeongBong Seo <jb.seo@lge.com>
 Date: Wed, 9 Feb 2022 12:00:57 +0900
 Subject: [PATCH] Speed up boot by disable usb and enable bootcount
@@ -9,31 +9,46 @@ Author: Simon Glass <sjg@chromium.org>
 Date:   Sat Jul 20 20:51:14 2019 -0600
 
   Convert CONFIG_USE_PREBOOT and CONFIG_PREBOOT to Kconfig
+
+DISTRO_DEFAULTS was removed in:
+90f626a5d8 rpi: Disable DISTRO_DEFAULTS
+
+environment moved from include/configs/rpi.h to board/raspberrypi/rpi/rpi.env in:
+fc2af2d978 arm: rpi: Switch to a text environment
 ---
 Upstream-Status: Pending
 
- configs/rpi_3_32b_defconfig    | 6 +++++-
- configs/rpi_3_b_plus_defconfig | 6 +++++-
- configs/rpi_3_defconfig        | 6 +++++-
- configs/rpi_4_32b_defconfig    | 6 +++++-
- configs/rpi_4_defconfig        | 6 +++++-
- configs/rpi_arm64_defconfig    | 6 +++++-
- include/configs/rpi.h          | 6 +++---
- 7 files changed, 33 insertions(+), 9 deletions(-)
+ board/raspberrypi/rpi/rpi.env  | 6 +++---
+ configs/rpi_3_32b_defconfig    | 5 +++++
+ configs/rpi_3_b_plus_defconfig | 5 +++++
+ configs/rpi_3_defconfig        | 5 +++++
+ configs/rpi_4_32b_defconfig    | 5 +++++
+ configs/rpi_4_defconfig        | 5 +++++
+ configs/rpi_arm64_defconfig    | 5 +++++
+ 7 files changed, 33 insertions(+), 3 deletions(-)
 
+diff --git a/board/raspberrypi/rpi/rpi.env b/board/raspberrypi/rpi/rpi.env
+index 30228285ed..cb2ff7954d 100644
+--- a/board/raspberrypi/rpi/rpi.env
++++ b/board/raspberrypi/rpi/rpi.env
+@@ -5,9 +5,9 @@
+ dhcpuboot=usb start; dhcp u-boot.uimg; bootm
+ 
+ /* Environment */
+-stdin=serial,usbkbd
+-stdout=serial,vidconsole
+-stderr=serial,vidconsole
++stdin=serial
++stdout=serial
++stderr=serial
+ 
+ /* DFU over USB/UDC */
+ #ifdef CONFIG_CMD_DFU
 diff --git a/configs/rpi_3_32b_defconfig b/configs/rpi_3_32b_defconfig
-index 80885aa948..802c9c74fa 100644
+index 0ccc93d572..c4c8691d2a 100644
 --- a/configs/rpi_3_32b_defconfig
 +++ b/configs/rpi_3_32b_defconfig
-@@ -14,7 +14,6 @@ CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SYS_LOAD_ADDR=0x1000000
- CONFIG_OF_BOARD_SETUP=y
- CONFIG_DISTRO_DEFAULTS=y
--CONFIG_USE_PREBOOT=y
- # CONFIG_DISPLAY_CPUINFO is not set
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_MISC_INIT_R=y
-@@ -51,3 +50,8 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+@@ -51,3 +51,8 @@ CONFIG_SYS_WHITE_ON_BLACK=y
  CONFIG_VIDEO_BCM2835=y
  CONFIG_CONSOLE_SCROLL_LINES=10
  CONFIG_PHYS_TO_BUS=y
@@ -43,18 +58,10 @@ index 80885aa948..802c9c74fa 100644
 +
 +CONFIG_BOOTDELAY=0
 diff --git a/configs/rpi_3_b_plus_defconfig b/configs/rpi_3_b_plus_defconfig
-index 0acce8b883..18e557a92c 100644
+index 53f7f3117c..428452cf07 100644
 --- a/configs/rpi_3_b_plus_defconfig
 +++ b/configs/rpi_3_b_plus_defconfig
-@@ -13,7 +13,6 @@ CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SYS_LOAD_ADDR=0x1000000
- CONFIG_OF_BOARD_SETUP=y
- CONFIG_DISTRO_DEFAULTS=y
--CONFIG_USE_PREBOOT=y
- # CONFIG_DISPLAY_CPUINFO is not set
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_MISC_INIT_R=y
-@@ -50,3 +49,8 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+@@ -50,3 +50,8 @@ CONFIG_SYS_WHITE_ON_BLACK=y
  CONFIG_VIDEO_BCM2835=y
  CONFIG_CONSOLE_SCROLL_LINES=10
  CONFIG_PHYS_TO_BUS=y
@@ -64,18 +71,10 @@ index 0acce8b883..18e557a92c 100644
 +
 +CONFIG_BOOTDELAY=0
 diff --git a/configs/rpi_3_defconfig b/configs/rpi_3_defconfig
-index bb6fe12806..ed3748f603 100644
+index 84b61f862a..4d72994aa6 100644
 --- a/configs/rpi_3_defconfig
 +++ b/configs/rpi_3_defconfig
-@@ -13,7 +13,6 @@ CONFIG_OF_LIBFDT_OVERLAY=y
- CONFIG_SYS_LOAD_ADDR=0x1000000
- CONFIG_OF_BOARD_SETUP=y
- CONFIG_DISTRO_DEFAULTS=y
--CONFIG_USE_PREBOOT=y
- # CONFIG_DISPLAY_CPUINFO is not set
- # CONFIG_DISPLAY_BOARDINFO is not set
- CONFIG_MISC_INIT_R=y
-@@ -50,3 +49,8 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+@@ -50,3 +50,8 @@ CONFIG_SYS_WHITE_ON_BLACK=y
  CONFIG_VIDEO_BCM2835=y
  CONFIG_CONSOLE_SCROLL_LINES=10
  CONFIG_PHYS_TO_BUS=y
@@ -85,18 +84,10 @@ index bb6fe12806..ed3748f603 100644
 +
 +CONFIG_BOOTDELAY=0
 diff --git a/configs/rpi_4_32b_defconfig b/configs/rpi_4_32b_defconfig
-index f621334097..29bbc7312d 100644
+index 766c983196..1fd3c00c83 100644
 --- a/configs/rpi_4_32b_defconfig
 +++ b/configs/rpi_4_32b_defconfig
-@@ -13,7 +13,6 @@ CONFIG_SYS_LOAD_ADDR=0x1000000
- CONFIG_PCI=y
- CONFIG_OF_BOARD_SETUP=y
- CONFIG_DISTRO_DEFAULTS=y
--CONFIG_USE_PREBOOT=y
- CONFIG_PREBOOT="pci enum; usb start;"
- # CONFIG_DISPLAY_CPUINFO is not set
- # CONFIG_DISPLAY_BOARDINFO is not set
-@@ -67,3 +66,8 @@ CONFIG_CONSOLE_SCROLL_LINES=10
+@@ -67,3 +67,8 @@ CONFIG_CONSOLE_SCROLL_LINES=10
  CONFIG_PHYS_TO_BUS=y
  CONFIG_ADDR_MAP=y
  CONFIG_SYS_NUM_ADDR_MAP=2
@@ -106,18 +97,10 @@ index f621334097..29bbc7312d 100644
 +
 +CONFIG_BOOTDELAY=0
 diff --git a/configs/rpi_4_defconfig b/configs/rpi_4_defconfig
-index bbc0fd6c64..cf0d51914a 100644
+index 553d47b174..a8bf283a4a 100644
 --- a/configs/rpi_4_defconfig
 +++ b/configs/rpi_4_defconfig
-@@ -13,7 +13,6 @@ CONFIG_SYS_LOAD_ADDR=0x1000000
- CONFIG_PCI=y
- CONFIG_OF_BOARD_SETUP=y
- CONFIG_DISTRO_DEFAULTS=y
--CONFIG_USE_PREBOOT=y
- CONFIG_PREBOOT="pci enum; usb start;"
- # CONFIG_DISPLAY_CPUINFO is not set
- # CONFIG_DISPLAY_BOARDINFO is not set
-@@ -65,3 +64,8 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+@@ -65,3 +65,8 @@ CONFIG_SYS_WHITE_ON_BLACK=y
  CONFIG_VIDEO_BCM2835=y
  CONFIG_CONSOLE_SCROLL_LINES=10
  CONFIG_PHYS_TO_BUS=y
@@ -127,18 +110,10 @@ index bbc0fd6c64..cf0d51914a 100644
 +
 +CONFIG_BOOTDELAY=0
 diff --git a/configs/rpi_arm64_defconfig b/configs/rpi_arm64_defconfig
-index 5d9a273cb9..d4a88d42f2 100644
+index 7ff166a41d..9208ae637a 100644
 --- a/configs/rpi_arm64_defconfig
 +++ b/configs/rpi_arm64_defconfig
-@@ -13,7 +13,6 @@ CONFIG_SYS_LOAD_ADDR=0x1000000
- CONFIG_PCI=y
- CONFIG_OF_BOARD_SETUP=y
- CONFIG_DISTRO_DEFAULTS=y
--CONFIG_USE_PREBOOT=y
- CONFIG_PREBOOT="pci enum; usb start;"
- # CONFIG_DISPLAY_CPUINFO is not set
- # CONFIG_DISPLAY_BOARDINFO is not set
-@@ -57,3 +56,8 @@ CONFIG_SYS_WHITE_ON_BLACK=y
+@@ -57,3 +57,8 @@ CONFIG_SYS_WHITE_ON_BLACK=y
  CONFIG_VIDEO_BCM2835=y
  CONFIG_CONSOLE_SCROLL_LINES=10
  CONFIG_PHYS_TO_BUS=y
@@ -147,20 +122,3 @@ index 5d9a273cb9..d4a88d42f2 100644
 +CONFIG_BOOTCOUNT_ENV=y
 +
 +CONFIG_BOOTDELAY=0
-diff --git a/include/configs/rpi.h b/include/configs/rpi.h
-index 4da982f735..2d942f70f3 100644
---- a/include/configs/rpi.h
-+++ b/include/configs/rpi.h
-@@ -60,9 +60,9 @@
- 
- /* Environment */
- #define ENV_DEVICE_SETTINGS \
--	"stdin=serial,usbkbd\0" \
--	"stdout=serial,vidconsole\0" \
--	"stderr=serial,vidconsole\0"
-+	"stdin=serial\0" \
-+	"stdout=serial\0" \
-+	"stderr=serial\0"
- 
- #ifdef CONFIG_ARM64
- #define FDT_HIGH "ffffffffffffffff"
