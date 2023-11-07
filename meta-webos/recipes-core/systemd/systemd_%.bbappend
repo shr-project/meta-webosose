@@ -45,3 +45,8 @@ FILES:${PN} += "${@oe.utils.conditional('DISTRO', 'webos','${datadir}/dbus-1/sys
 do_install:append:qemuall() {
     rm -rf ${D}/${base_libdir}/systemd/network/99-default.link
 }
+
+# Apply https://patchwork.yoctoproject.org/project/oe-core/patch/20231106200424.1019839-1-raj.khem@gmail.com/
+# to fix http://gecko.lge.com:8000/Errors/Details/726571
+# ERROR: QA Issue: systemd-container rdepends on libnss-mymachines, but it isn't a build dependency? [build-deps]
+RDEPENDS:${PN}-container = "${@bb.utils.contains('PACKAGECONFIG', 'nss-mymachines', 'libnss-mymachines', '', d)}"
