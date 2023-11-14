@@ -23,5 +23,7 @@ inherit webos_pkgconfig
 inherit webos_system_bus
 inherit webos_machine_dep
 
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0002-CMakeLists.txt-use-gupnp-1.6.patch \
+"
 S = "${WORKDIR}/git"
