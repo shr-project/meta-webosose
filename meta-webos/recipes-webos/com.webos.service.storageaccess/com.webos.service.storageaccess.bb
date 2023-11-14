@@ -25,5 +25,6 @@ inherit webos_machine_dep
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     file://0001-CMakeLists.txt-use-pkg-config-for-libcurl-and-respec.patch \
+    file://0002-CMakeLists.txt-use-gupnp-1.6.patch \
 "
 S = "${WORKDIR}/git"
