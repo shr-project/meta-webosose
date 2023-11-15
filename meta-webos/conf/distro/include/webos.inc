@@ -197,7 +197,7 @@ WEBOS_IMAGE_BUILD_CODENAME ?= "${@ \
 
 IMAGE_VERSION_SUFFIX = "${WEBOS_IMAGE_BUILD_CODENAME}-${@oe.utils.conditional( \
                                   'WEBOS_DISTRO_BUILD_ID', 'unofficial', \
-                                  '${DATETIME}', '${WEBOS_DISTRO_BUILD_ID}', d) }"
+                                  '${IMAGE_VERSION_SUFFIX_DATETIME}', '${WEBOS_DISTRO_BUILD_ID}', d) }"
 
 # Without this, the shared state is always invalidated
 # during the build which has different WEBOS_DISTRO_BUILD_ID
