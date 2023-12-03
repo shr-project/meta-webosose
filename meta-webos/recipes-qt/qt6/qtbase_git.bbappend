@@ -94,6 +94,9 @@ SRC_URI:append = " \
     file://0001-Support-to-get-timing-from-pagefilp.patch;maxver=6.2.* \
     file://0002-evdev-Prevent-race-condition-in-touch-events-process.patch;maxver=6.2.* \
 "
+SRC_URI:append = " \
+    file://0001-xkb-fix-build-with-libxkbcommon-1.6.0-and-later.patch;maxver=6.6.0 \
+"
 
 # Upstream-Status: Inappropriate
 # NOTE: Increase maxver when upgrading Qt version
