@@ -20,7 +20,9 @@ inherit webos_public_repo
 
 WEBOS_REPO_NAME = "pulseaudio-webos"
 FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-meson.build-use-C-17.patch \
+"
 
 S = "${WORKDIR}/git"
 
