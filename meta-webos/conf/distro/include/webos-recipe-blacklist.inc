@@ -58,6 +58,7 @@ SKIP_RECIPE[compiler-rt-sanitizers] ?= "BROKEN: with webos DISTRO, Failed to fin
 
 # meta-raspberrypi
 SKIP_RECIPE[rpidistro-vlc] ?= "Depends on faad2 which needs commercial license (and currently isn't in meta-webos/conf/distro/webos.conf LICENSE_FLAGS_ACCEPTED)"
+SKIP_RECIPE[libcamera-apps] ?= "Depends on libcamera blacklisted in meta-oe with: https://git.openembedded.org/meta-openembedded/commit/?id=dd402176a6e28df76e4b737cec7d266b5bfbfa06"
 
 # Not really broken, just sstate is big (~800MB) and we don't need to test it with world builds
 EXCLUDE_FROM_WORLD:pn-webkitgtk = "1"
