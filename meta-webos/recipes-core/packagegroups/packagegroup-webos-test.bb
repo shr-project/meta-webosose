@@ -23,7 +23,7 @@ RDEPENDS:${PN} = "\
     db8-tests \
     glib-2.0-utils \
     iotop \
-    ltp \
+    ${@bb.utils.contains("BBFILE_COLLECTIONS", "meta-lg-gplv2", "", "ltp", d)} \
     make \
     ptest-runner \
     sam-tests \
