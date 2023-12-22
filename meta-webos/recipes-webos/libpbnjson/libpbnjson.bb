@@ -13,7 +13,7 @@ LIC_FILES_CHKSUM = " \
 DEPENDS = "yajl glib-2.0 gperf-native flex-native lemon-native gmp uriparser boost"
 
 WEBOS_VERSION = "2.15.0-13_954ce083d33787e247c8495586886f3018f914c3"
-PR = "r15"
+PR = "r14"
 
 inherit webos_component
 inherit webos_public_repo
@@ -33,7 +33,9 @@ EXTRA_OECMAKE += "-DCMAKE_AR:FILEPATH=${AR}"
 
 PACKAGECONFIG[tools] = "-DPBNJSON_INSTALL_TOOLS:BOOL=TRUE,-DPBNJSON_INSTALL_TOOLS:BOOL=FALSE"
 
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-Fix-build-with-lemon-3.44.patch \
+"
 
 S = "${WORKDIR}/git"
 
