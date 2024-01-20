@@ -214,6 +214,7 @@ PR = "r11"
 SRC_URI = "\
     npm://registry.npmjs.org/;package=usocket;version=${PV} \
     npmsw://${THISDIR}/${BPN}/npm-shrinkwrap.json \
+    file://0001-package.json-use-node-gyp-10.patch \
 "
 
 S = "${WORKDIR}/npm"
