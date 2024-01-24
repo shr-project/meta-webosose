@@ -33,3 +33,7 @@ TOOLCHAIN_OPTIONS:append = " ${@bb.utils.contains('USE_WEBRUNTIME_LIBCXX', '1', 
 # fixes:
 # http://gecko.lge.com:8000/Builds/Details/1431440
 DEBUG_PREFIX_MAP:remove = "-fcanon-prefix-map"
+
+# pass dyld-prefix with usrmerge otherwise the default loader from clang++ will be non-existent (on target)
+# /lib64/ld-linux-x86-64.so.2 instead of expected /usr/lib/ld-linux-x86-64.so.2 for qemux86-64
+TUNE_CCARGS:append = "${@bb.utils.contains("DISTRO_FEATURES", "usrmerge", " --dyld-prefix=/usr", "", d)}"
