@@ -8,3 +8,5 @@ WEBOS_VERSION = "108.0.5359.217-16_0809da0cf5b0956ba3fcc91bad759716a7374c13"
 CHROMIUM_LICENSE_CHKSUM = "file://src/LICENSE;md5=c408a301e3407c3803499ce9290515d6"
 # oss-pkg-info.yaml
 CHROMIUM_OSS_PKG_INFO_CHKSUM = "file://oss-pkg-info.yaml;md5=f6cf1c62d76fef64d3ca1b3556fc1d9a"
+
+SRC_URI += "file://0001-avoid-link-latomic-failure-on-CentOS-8-host.patch"
