@@ -1,0 +1,61 @@
+From 92435808f2f82e1a568951cf0484c4a7fc94bc37 Mon Sep 17 00:00:00 2001
+From: Jose Dapena Paz <j.dapena@lgepartner.com>
+Date: Tue, 4 Jul 2023 15:36:41 +0200
+Subject: [PATCH] fixup! [op][n_upsable][push] Implemented
+ PushMessasgingService for app_runtime
+
+:Release Notes:
+Fix development asserts in push  messaging implementation.
+
+:Detailed Notes:
+Fix a DCHECK guarded call that was not adapted to recent Chromium
+changes in NEVA push messaging implementation.
+
+DCHECK_EQ(origin_.GetOrigin(), origin_);
+was added in:
+
+  commit f9bebd4b90d6ec90e01f65d5b23b6bea2294af9e
+  Author: Minsu Kim <minsu0.kim@lge.com>
+  Date:   Wed Aug 23 18:18:35 2023 +0900
+
+    [op][n_ups][build][base] Snapshot of webos-pro/chromium release changes (branch: ose/chromium108)
+
+but there is no GetOrigin on GURL since:
+https://chromium.googlesource.com/chromium/src/+/800532c0bf6712ea4ab5928da9e776d6607a10b1
+
+Fixes:
+../../git/src/third_party/llvm-build/Release+Asserts/bin/clang++ -MMD -MF obj/neva/app_runtime/app_runtime/push_messaging_app_identifier.o.d -DWEBVIEW_IMPLEMENTATION -DENABLE_BROWSER_CONTROL_WEBAPI=1 -DENABLE_SAMPLE_WEBAPI=1 -DENABLE_MEMORYMANAGER_WEBAPI=1 -DENABLE_WEBOS_SERVICE_BRIDGE_WEBAPI=1 -DENABLE_WEBOS_SYSTEM_WEBAPI=1 -DNEVA_DCHECK_ALWAYS_ON=1 -DOZONE_PLATFORM_WAYLAND_EXTERNAL=1 -DNEVA_OZONE_PLATFORM_WAYLAND=1 -DOS_WEBOS=1 -DNEVA_VIDEO_HOLE=1 -DUSE_NEVA_APPRUNTIME=1 -DUSE_NEVA_BROWSER_SERVICE=1 -DUSE_WEBRISK_SERVICE=1 -DUSE_WEBRISK_DATABASE=1 -DENABLE_PINCH_TO_ZOOM=1 -DENABLE_WEBM_AUDIO_CODECS=1 -DENABLE_WEBM_VIDEO_CODECS=1 -DUSE_CBE=1 -DUSE_PMLOG=1 -DUSE_NEVA_SUSPEND_MEDIA_CAPTURE=1 -DUSE_FILESCHEME_CODECACHE=1 -DUSE_SINGLE_WINDOW_MODE=1 -DWEBOS_SUBMISSION_NUMBER=16 -DUSE_LOCAL_STORAGE_TRACKER=1 -DDCHECK_ALWAYS_ON=1 -DUSE_UDEV -DUSE_AURA=1 -DUSE_GLIB=1 -DUSE_OZONE=1 -D__STDC_CONSTANT_MACROS -D__STDC_FORMAT_MACROS -D_FORTIFY_SOURCE=2 -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE -D_GNU_SOURCE -DCR_CLANG_REVISION=\"llvmorg-16-init-6578-g0d30e92f-2\" -DCR_SYSROOT_KEY=20220331T153654Z-0 -DNDEBUG -DNVALGRIND -DDYNAMIC_ANNOTATIONS_ENABLED=0 -DAPP_RUNTIME_IMPLEMENTATION -DGLIB_VERSION_MAX_ALLOWED=GLIB_VERSION_2_40 -DGLIB_VERSION_MIN_REQUIRED=GLIB_VERSION_2_40 -DLIBYUV_DISABLE_NEON -DWEBP_EXTERN=extern -DUSE_EGL -DVK_USE_PLATFORM_WAYLAND_KHR -D_WTL_NO_AUTOMATIC_NAMESPACE -DTOOLKIT_VIEWS=1 -DON_FOCUS_PING_ENABLED -DV8_USE_EXTERNAL_STARTUP_DATA -DU_USING_ICU_NAMESPACE=0 -DU_ENABLE_DYLOAD=0 -DUSE_CHROMIUM_ICU=1 -DU_ENABLE_TRACING=1 -DU_ENABLE_RESOURCE_TRACING=0 -DU_STATIC_IMPLEMENTATION -DICU_UTIL_DATA_IMPL=ICU_UTIL_DATA_FILE -DGOOGLE_PROTOBUF_NO_RTTI -DGOOGLE_PROTOBUF_NO_STATIC_INITIALIZER -DGOOGLE_PROTOBUF_INTERNAL_DONATE_STEAL_INLINE=0 -DHAVE_PTHREAD -DWEBRTC_ENABLE_AVX2 -DWEBRTC_NON_STATIC_TRACE_EVENT_HANDLERS=0 -DWEBRTC_CHROMIUM_BUILD -DWEBRTC_POSIX -DWEBRTC_LINUX -DABSL_ALLOCATOR_NOTHROW=1 -DWEBRTC_USE_BUILTIN_ISAC_FIX=0 -DWEBRTC_USE_BUILTIN_ISAC_FLOAT=1 -DLOGGING_INSIDE_WEBRTC -DSK_CODEC_DECODES_PNG -DSK_CODEC_DECODES_WEBP -DSK_ENCODE_PNG -DSK_ENCODE_WEBP -DSK_ENABLE_SKSL -DSK_UNTIL_CRBUG_1187654_IS_FIXED -DSK_USER_CONFIG_HEADER=\"../../skia/config/SkUserConfig.h\" -DSK_WIN_FONTMGR_NO_SIMULATIONS -DSK_GL -DSK_CODEC_DECODES_JPEG -DSK_ENCODE_JPEG -DSK_HAS_WUFFS_LIBRARY -DSK_VULKAN=1 -DSK_SUPPORT_GPU=1 -DSK_GPU_WORKAROUNDS_HEADER=\"gpu/config/gpu_driver_bug_workaround_autogen.h\" -DLEVELDB_PLATFORM_CHROMIUM=1 -DV8_COMPRESS_POINTERS -DV8_COMPRESS_POINTERS_IN_SHARED_CAGE -DV8_31BIT_SMIS_ON_64BIT_ARCH -DV8_DEPRECATION_WARNINGS -DCPPGC_CAGED_HEAP -DCPPGC_YOUNG_GENERATION -DCPPGC_POINTER_COMPRESSION -DFLATBUFFERS_LOCALE_INDEPENDENT=0 -I../../git/src/neva/app_runtime -I../../git/src -Igen -I../../git/src/third_party/perfetto/include -Igen/third_party/perfetto/build_config -Igen/third_party/perfetto -I../../git/src/third_party/libyuv/include -I../../git/src/third_party/jsoncpp/source/include -I../../git/src/third_party/libwebp/src/src -I../../git/src/third_party/vulkan-deps/vulkan-headers/src/include -I../../git/src/third_party/khronos -I../../git/src/gpu -Igen/third_party/dawn/include -I../../git/src/third_party/dawn/include -Igen/third_party/private_membership/src -Igen/third_party/shell-encryption/src -Igen/components/policy/proto -I../../git/src/third_party/wtl/include -I../../git/src/third_party/abseil-cpp -I../../git/src/third_party/boringssl/src/include -I../../git/src/third_party/protobuf/src -Igen/protoc_out -I../../git/src/third_party/ced/src -I../../git/src/third_party/icu/source/common -I../../git/src/third_party/icu/source/i18n -I../../git/src/net/third_party/quiche/overrides -I../../git/src/net/third_party/quiche/src/quiche/common/platform/default -I../../git/src/net/third_party/quiche/src -Igen/net/third_party/quiche/src -I../../git/src/third_party/webrtc_overrides -I../../git/src/third_party/webrtc -Igen/third_party/webrtc -I../../git/src/third_party/skia -I../../git/src/third_party/wuffs/src/release/c -I../../git/src/third_party/vulkan/include -I../../git/src/third_party/libwebm/source -I../../git/src/third_party/mesa_headers -I../../git/src/third_party/leveldatabase -I../../git/src/third_party/leveldatabase/src -I../../git/src/third_party/leveldatabase/src/include -I../../git/src/third_party/libaom/source/libaom -I../../git/src/v8/include -Igen/v8/include -I../../git/src/third_party/re2/src -I../../git/src/third_party/flatbuffers/src/include -Wno-unused-variable -Wall -Wextra -Wimplicit-fallthrough -Wextra-semi -Wunreachable-code-aggressive -Wthread-safety -Wno-missing-field-initializers -Wno-unused-parameter -Wno-psabi -Wloop-analysis -Wno-unneeded-internal-declaration -Wenum-compare-conditional -Wno-ignored-pragma-optimize -Wno-deprecated-builtins -Wno-bitfield-constant-conversion -Wshadow -fno-delete-null-pointer-checks -fno-ident -fno-strict-aliasing --param=ssp-buffer-size=4 -fstack-protector -funwind-tables -fPIC -pthread -fcolor-diagnostics -fmerge-all-constants -fcrash-diagnostics-dir=../../git/src/tools/clang/crashreports -mllvm -instcombine-lower-dbg-declare=0 -ffp-contract=off -m64 -msse3 -Wno-builtin-macro-redefined -D__DATE__= -D__TIME__= -D__TIMESTAMP__= -ffile-compilation-dir=. -no-canonical-prefixes -ftrivial-auto-var-init=pattern -O2 -fdata-sections -ffunction-sections -fno-unique-section-names -fno-omit-frame-pointer -g0 -fvisibility=hidden -Xclang -add-plugin -Xclang find-bad-constructs -Xclang -plugin-arg-find-bad-constructs -Xclang raw-ref-template-as-trivial-member -Xclang -plugin-arg-find-bad-constructs -Xclang check-ipc -Wheader-hygiene -Wstring-conversion -Wtautological-overlap-compare -I/OE/build/luneos-scarthgap/tmp-glibc/work/corei7-64-webos-linux/webruntime-clang/108.0.5359.217-16/recipe-sysroot/usr/include/glib-2.0 -I/OE/build/luneos-scarthgap/tmp-glibc/work/corei7-64-webos-linux/webruntime-clang/108.0.5359.217-16/recipe-sysroot/usr/lib/glib-2.0/include -Wno-null-pointer-subtraction -DPROTOBUF_ALLOW_DEPRECATED=1 -I/OE/build/luneos-scarthgap/tmp-glibc/work/corei7-64-webos-linux/webruntime-clang/108.0.5359.217-16/recipe-sysroot/usr/include/nss3 -I/OE/build/luneos-scarthgap/tmp-glibc/work/corei7-64-webos-linux/webruntime-clang/108.0.5359.217-16/recipe-sysroot/usr/include/nspr -std=c++20 -Wno-trigraphs -fno-exceptions -fno-rtti --sysroot=../../recipe-sysroot -fvisibility-inlines-hidden -Wno-deprecated-declarations      -I/OE/build/luneos-scarthgap/tmp-glibc/work/corei7-64-webos-linux/webruntime-clang/108.0.5359.217-16/recipe-sysroot/usr/include/c++/v1       -I/OE/build/luneos-scarthgap/tmp-glibc/work/corei7-64-webos-linux/webruntime-clang/108.0.5359.217-16/recipe-sysroot/usr/include/cbe     -I/OE/build/luneos-scarthgap/tmp-glibc/work/corei7-64-webos-linux/webruntime-clang/108.0.5359.217-16/recipe-sysroot/usr/include/cbe/gmp     -I/OE/build/luneos-scarthgap/tmp-glibc/work/corei7-64-webos-linux/webruntime-clang/108.0.5359.217-16/recipe-sysroot/usr/include/media-resource-calculator-clang   -m64 -march=nehalem -mtune=generic -mfpmath=sse -msse4.2  -c ../../git/src/neva/app_runtime/browser/push_messaging/push_messaging_app_identifier.cc -o obj/neva/app_runtime/app_runtime/push_messaging_app_identifier.o
+../../git/src/neva/app_runtime/browser/push_messaging/push_messaging_app_identifier.cc:316:21: error: no member named 'GetOrigin' in 'GURL'
+  DCHECK_EQ(origin_.GetOrigin(), origin_);
+            ~~~~~~~ ^
+
+:Testing Performed:
+Build with dcheck_always_on=true
+
+:QA Notes:
+Test-cases: N/A
+
+:Issues Addressed:
+[WRP-16526] [M110][Bug]Check failed: sequence_checker_.CalledOnValidSequence()
+
+Change-Id: I3efc079ecb72a078ca033a4f8fa38380b6c6fcb0
+Originally-Reviewed-on: http://gpro.lge.com/c/webos-pro/chromium/+/359286
+---
+Upstream-Status: Submitted [http://gpro.lge.com/c/webosose/chromium108/+/393561 fixup! opn_upsablepush Implemented PushMessasgingService for app_runtime]
+
+ .../browser/push_messaging/push_messaging_app_identifier.cc     | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/neva/app_runtime/browser/push_messaging/push_messaging_app_identifier.cc b/src/neva/app_runtime/browser/push_messaging/push_messaging_app_identifier.cc
+index a25ac56a89..c8d6c33451 100644
+--- a/src/neva/app_runtime/browser/push_messaging/push_messaging_app_identifier.cc
++++ b/src/neva/app_runtime/browser/push_messaging/push_messaging_app_identifier.cc
+@@ -300,7 +300,7 @@ void PushMessagingAppIdentifier::DCheckValid() const {
+   DCHECK_GE(service_worker_registration_id_, 0);
+ 
+   DCHECK(origin_.is_valid());
+-  DCHECK_EQ(origin_.GetOrigin(), origin_);
++  DCHECK_EQ(origin_.DeprecatedGetOriginAsURL(), origin_);
+ 
+   // "wp:"
+   DCHECK_EQ(kPushMessagingAppIdentifierPrefix,
