@@ -9,7 +9,7 @@ LIC_FILES_CHKSUM = " \
     file://oss-pkg-info.yaml;md5=2bdfe040dcf81b4038370ae96036c519 \
 "
 
-DEPENDS = "glib-2.0 glib-2.0-native luna-service2 libpbnjson pmloglib"
+DEPENDS = "glib-2.0 glib-2.0-native luna-service2 libpbnjson pmloglib python3-packaging-native"
 
 WEBOS_VERSION = "1.0.0-62_3d28d42c1e66b70321246b6e7c3f30325b2c9388"
 PR = "r11"
@@ -24,6 +24,7 @@ inherit webos_machine_impl_dep
 inherit webos_distro_dep
 inherit webos_distro_variant_dep
 inherit webos_public_repo
+inherit python3native
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
 S = "${WORKDIR}/git"
