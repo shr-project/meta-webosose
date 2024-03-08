@@ -40,7 +40,10 @@ COMPATIBLE_MACHINE:x86-64 = "(.*)"
 
 WEBOS_VERSION = "1.0.0-gav.40_37ef88f5f401ced68d9296ba425fffe74fbfa0ac"
 
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+# http://gpro.lge.com/c/webosose/umediaserver/+/396224 Fix build with boost-1.84.0
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-Fix-build-with-boost-1.84.0.patch \
+"
 S = "${WORKDIR}/git"
 
 PACKAGECONFIG = ""
