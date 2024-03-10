@@ -15,6 +15,7 @@ SRC_URI = " \
     file://0004-Makefile-fix-race-condition.patch \
     file://0005-Fix-build-with-gcc-13.patch \
     file://0006-makefile_build-Makefile-use-C-17.patch \
+    file://0007-makefile_build-Makefile-drop-absl_flags.patch \
     file://edgetpu.pc.in \
     file://edgetpu-max.pc.in \
 "
