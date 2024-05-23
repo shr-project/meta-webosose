@@ -1,0 +1,52 @@
+From 9b57d21fc378a679efc78bbb84c60722062ec7dd Mon Sep 17 00:00:00 2001
+From: Martin Jansa <martin2.jansa@lgepartner.com>
+Date: Thu, 23 May 2024 17:17:24 +0000
+Subject: [PATCH] ExtensionInspector.cpp: add missing fstream
+
+:Release Notes:
+Fix the build failure introduced with the upgrade from:
+http://gpro.lge.com/c/webos-pro/meta-lg-webos/+/404543
+
+:Detailed Notes:
+Fixes:
+http://gecko.lge.com:8000/Errors/Details/846878
+
+FAILED: bin/inspector/CMakeFiles/edgeai-inspector.dir/ExtensionInspector.cpp.o
+ccache TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/edgeai-vision/1.0.0-plugin.13/recipe-sysroot-native/usr/bin/aarch64-webos-linux/aarch64-webos-linux-g++ --sysroot=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/edgeai-vision/1.0.0-plugin.13/recipe-sysroot -DBOOST_ATOMIC_DYN_LINK -DBOOST_ATOMIC_NO_LIB -DBOOST_DATE_TIME_DYN_LINK -DBOOST_DATE_TIME_NO_LIB -DBOOST_FILESYSTEM_DYN_LINK -DBOOST_FILESYSTEM_NO_LIB -DBOOST_IOSTREAMS_DYN_LINK -DBOOST_IOSTREAMS_NO_LIB -DBOOST_SYSTEM_DYN_LINK -DBOOST_SYSTEM_NO_LIB -DBOOST_THREAD_DYN_LINK -DBOOST_THREAD_NO_LIB -DEDGEAI_VISION_EXTENSION_REGISTRY_PATH=\"/tmp/edgeai_extension_registry.json\" -DENABLE_DEBUG -DLOG_APPLICATION=\"AIF\" -DLOG_CONTEXT=\"EDGEAI_INSPECTOR\" -DUSE_EXTRA_MODELS -DXTENSOR_USE_XSIMD -ITOPDIR/BUILD/work/raspberrypi4_64-webos-linux/edgeai-vision/1.0.0-plugin.13/recipe-sysroot/usr/include/opencv4 -ITOPDIR/BUILD/work/raspberrypi4_64-webos-linux/edgeai-vision/1.0.0-plugin.13/git/include -ITOPDIR/BUILD/work/raspberrypi4_64-webos-linux/edgeai-vision/1.0.0-plugin.13/git/third_party -ITOPDIR/BUILD/work/raspberrypi4_64-webos-linux/edgeai-vision/1.0.0-plugin.13/git/bin/inspector -mcpu=cortex-a72+crc -mbranch-protection=standard -fstack-protector-strong  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security -Werror=return-type  --sysroot=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/edgeai-vision/1.0.0-plugin.13/recipe-sysroot  -O2 -pipe -g -feliminate-unused-debug-types -fcanon-prefix-map  -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/edgeai-vision/1.0.0-plugin.13/git=/usr/src/debug/edgeai-vision/1.0.0-plugin.13  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/edgeai-vision/1.0.0-plugin.13/git=/usr/src/debug/edgeai-vision/1.0.0-plugin.13  -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/edgeai-vision/1.0.0-plugin.13/build=/usr/src/debug/edgeai-vision/1.0.0-plugin.13  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/edgeai-vision/1.0.0-plugin.13/build=/usr/src/debug/edgeai-vision/1.0.0-plugin.13  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/edgeai-vision/1.0.0-plugin.13/recipe-sysroot=  -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/edgeai-vision/1.0.0-plugin.13/recipe-sysroot=  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/edgeai-vision/1.0.0-plugin.13/recipe-sysroot-native=  -fvisibility-inlines-hidden  -std=gnu++17 -MD -MT bin/inspector/CMakeFiles/edgeai-inspector.dir/ExtensionInspector.cpp.o -MF bin/inspector/CMakeFiles/edgeai-inspector.dir/ExtensionInspector.cpp.o.d -o bin/inspector/CMakeFiles/edgeai-inspector.dir/ExtensionInspector.cpp.o -c TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/edgeai-vision/1.0.0-plugin.13/git/bin/inspector/ExtensionInspector.cpp
+TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/edgeai-vision/1.0.0-plugin.13/git/bin/inspector/ExtensionInspector.cpp: In member function 'aif::t_aif_status aif::ExtensionInspector::dump(std::string)':
+TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/edgeai-vision/1.0.0-plugin.13/git/bin/inspector/ExtensionInspector.cpp:114:29: error: variable 'std::ofstream ofs' has initializer but incomplete type
+  114 |   std::ofstream ofs(dumpPath);
+      |                             ^
+TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/edgeai-vision/1.0.0-plugin.13/git/bin/inspector/ExtensionInspector.cpp:6:1: note: 'std::ofstream' is defined in header '<fstream>'; this is probably fixable by adding '#include <fstream>'
+    5 | #include <rapidjson/stringbuffer.h>
+  +++ |+#include <fstream>
+    6 |
+
+:Testing Performed:
+Only build tested.
+
+:QA Notes:
+No change to image.
+
+:Issues Addressed:
+[WRQ-17959] Create GPVB with Yocto 5.1 Styhead
+
+Change-Id: Ie3b3e5510047aa4a113e162e3f138cca9778300b
+---
+Upstream-Status: Submitted [http://gpro.lge.com/c/webosose/edge-ai-computer-vision/+/408141 ExtensionInspector.cpp: add missing fstream]
+
+ bin/inspector/ExtensionInspector.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/bin/inspector/ExtensionInspector.cpp b/bin/inspector/ExtensionInspector.cpp
+index b3fe740..06b98f5 100644
+--- a/bin/inspector/ExtensionInspector.cpp
++++ b/bin/inspector/ExtensionInspector.cpp
+@@ -3,6 +3,7 @@
+ #include <boost/filesystem.hpp>
+ #include <rapidjson/prettywriter.h>
+ #include <rapidjson/stringbuffer.h>
++#include <fstream>
+ 
+ namespace aif
+ {
