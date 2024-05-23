@@ -12,7 +12,9 @@ LIC_FILES_CHKSUM = " \
 
 WEBOS_VERSION = "1.0.0-plugin.13_2b0d4532b7e415e0a5e518c14386d66b98ae46ff"
 WEBOS_REPO_NAME = "edge-ai-computer-vision"
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-ExtensionInspector.cpp-add-missing-fstream.patch \
+"
 
 PR = "r12"
 S = "${WORKDIR}/git"
