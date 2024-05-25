@@ -9,7 +9,7 @@ PR = "r4"
 
 SRC_URI = "\
     https://github.com/${BPN}/${BPN}/releases/download/${PV}/${BPN}-${PV}.zip \
-    npmsw://${THISDIR}/${BPN}/npm-shrinkwrap.json \
+    npmsw://${THISDIR}/${BPN}/npm-shrinkwrap.json;destsuffix=${BPN} \
     file://${BPN}.service \
 "
 
