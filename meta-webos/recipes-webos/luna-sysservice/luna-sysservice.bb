@@ -33,8 +33,7 @@ inherit webos_cmake
 # now it needs to be set in DISTRO config
 PACKAGECONFIG ??= "qt"
 PACKAGECONFIG[qt] = ",,qtbase"
-EXTRA_INHERIT = "${@bb.utils.contains('PACKAGECONFIG', 'qt', 'qt6-cmake', '', d)}"
-inherit ${EXTRA_INHERIT}
+inherit_defer ${@bb.utils.contains('PACKAGECONFIG', 'qt', 'qt6-cmake', '', d)}
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
 S = "${WORKDIR}/git"
