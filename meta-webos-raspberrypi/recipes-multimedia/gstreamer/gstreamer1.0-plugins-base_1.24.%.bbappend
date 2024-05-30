@@ -10,9 +10,6 @@ WEBOS_REPO_NAME:rpi = "gst-plugins-base"
 
 WEBOS_VERSION:rpi = "1.14.4-3_dba68182527f24b313951383ddbb701ddde340d1"
 
-PACKAGECONFIG[dispmanx] = ",,virtual/libomxil"
-OPENGL_WINSYS:append = "${@bb.utils.contains('PACKAGECONFIG', 'dispmanx', ' dispmanx', '', d)}"
-
 FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
 SRC_URI:append:rpi = " \
