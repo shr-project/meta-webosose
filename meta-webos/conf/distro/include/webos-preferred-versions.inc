@@ -5,8 +5,8 @@ PREFERRED_VERSION_webruntime = "120.%"
 PREFERRED_VERSION_webruntime-clang = "${PREFERRED_VERSION_webruntime}"
 PREFERRED_VERSION_mksnapshot-cross-${TARGET_ARCH} = "${PREFERRED_VERSION_webruntime}"
 
-# Prefer gstreamer version 1.20.% from oe-core for webos
-GSTREAMER_VERSION = "1.22.%"
+# Prefer gstreamer version 1.24.% from oe-core for webos
+GSTREAMER_VERSION = "1.24.%"
 
 PREFERRED_VERSION_gstreamer1.0              = "${GSTREAMER_VERSION}"
 PREFERRED_VERSION_gstreamer1.0-plugins-bad  = "${GSTREAMER_VERSION}"
@@ -15,7 +15,6 @@ PREFERRED_VERSION_gstreamer1.0-plugins-cool = "${GSTREAMER_VERSION}"
 PREFERRED_VERSION_gstreamer1.0-plugins-good = "${GSTREAMER_VERSION}"
 PREFERRED_VERSION_gstreamer1.0-plugins-ugly = "${GSTREAMER_VERSION}"
 PREFERRED_VERSION_gstreamer1.0-libav        = "${GSTREAMER_VERSION}"
-PREFERRED_VERSION_gstreamer1.0-omx          = "${GSTREAMER_VERSION}"
 PREFERRED_VERSION_gstreamer1.0-python       = "${GSTREAMER_VERSION}"
 PREFERRED_VERSION_gstreamer1.0-rtsp-server  = "${GSTREAMER_VERSION}"
 PREFERRED_VERSION_gstreamer1.0-vaapi        = "${GSTREAMER_VERSION}"
