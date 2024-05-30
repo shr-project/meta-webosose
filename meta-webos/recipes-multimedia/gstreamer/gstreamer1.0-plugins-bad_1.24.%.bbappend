@@ -11,5 +11,5 @@ SRC_URI:append:qemuall = " \
 "
 
 SRC_URI:append = " \
-    file://0006-fix-Webex-meeting-Participant-video-screen-is-gray.patch \
+    file://0006-fix-Webex-meeting-Participant-video-screen-is-gray.patch;striplevel=3 \
 "
