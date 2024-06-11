@@ -9,7 +9,7 @@ RDEPENDS:${PN}-ptest:remove:class-target = "${@oe.utils.conditional('WEBOS_PREFE
 
 FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 SRC_URI:append = " \
-    file://0002-support-fuse_passthrough-to-lib_fuse.patch \
+    file://0001-support-fuse_passthrough-to-lib_fuse.patch \
 "
 
 inherit webos_test_provider
