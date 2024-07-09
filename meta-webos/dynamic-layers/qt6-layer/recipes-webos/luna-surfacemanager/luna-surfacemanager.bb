@@ -60,6 +60,10 @@ do_install:append() {
 
 TARGET_CXXFLAGS:append = " ${@bb.utils.contains('IMAGE_FEATURES', 'webos-test', '--coverage -fprofile-dir=/tmp/luna-surfacemanager-gcov -O0', '', d)}"
 TARGET_LDFLAGS:append = " ${@bb.utils.contains('IMAGE_FEATURES', 'webos-test', '--coverage', '', d)}"
+# ld.lld: error: version script assignment of 'Qt_6.7' to symbol 'qt_version_tag' failed: symbol not defined
+# http://gecko.lge.com:8000/Errors/Details/887026
+# fatal since --no-undefined-version is the default since https://reviews.llvm.org/D135402
+TARGET_LDFLAGS:append = " -Wl,--undefined-version"
 
 VIRTUAL-RUNTIME_gpu-libs ?= ""
 RDEPENDS:${PN} += "${VIRTUAL-RUNTIME_gpu-libs}"
