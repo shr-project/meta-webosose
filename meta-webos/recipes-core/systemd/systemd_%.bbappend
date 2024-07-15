@@ -1,6 +1,6 @@
 # Copyright (c) 2017-2024 LG Electronics, Inc.
 
-EXTENDPRAUTO:append = "webos16"
+EXTENDPRAUTO:append = "webos17"
 FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
 SRC_URI:append:webos = " \
@@ -33,7 +33,6 @@ PACKAGECONFIG:remove = " \
 
 PACKAGECONFIG:append = " \
     ${@oe.utils.conditional('DISTRO', 'webos', 'oomd', '', d)} \
-    ${@oe.utils.conditional('DISTRO', 'webos', 'cgroupv2', '', d)} \
     coredump \
     elfutils \
 "
