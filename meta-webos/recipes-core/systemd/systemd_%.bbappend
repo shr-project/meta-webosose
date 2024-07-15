@@ -33,7 +33,6 @@ PACKAGECONFIG:remove = " \
 
 PACKAGECONFIG:append = " \
     ${@oe.utils.conditional('DISTRO', 'webos', 'oomd', '', d)} \
-    ${@oe.utils.conditional('DISTRO', 'webos', 'cgroupv2', '', d)} \
     coredump \
     elfutils \
 "
