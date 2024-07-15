@@ -349,19 +349,13 @@ WEBOS_ERROR_QA_AUTOREV ?= "webos-enh-sub-autorev-error"
 ERROR_QA:append = " webos-enh-sub-error acg-dirty acg-json ${WEBOS_ERROR_QA_AUTOREV} acg-api acg-perm ls2-role ls2-schema"
 ERROR_QA:remove = " version-going-backwards"
 # Move all default WARN_QA from insane.bbclass to ERROR_QA to prevent silently re-introducing these issues
+# as of https://git.openembedded.org/openembedded-core/commit/?id=b79b191cc43a45dde2adb61ea349b426cb2461d1
 DEFAULT_WARN_QA = "\
-    libdir xorg-driver-abi \
-    textrel incompatible-license files-invalid \
-    infodir build-deps src-uri-bad symlink-to-sysroot multilib \
-    invalid-packageconfig host-user-contaminated uppercase-pn patch-fuzz \
-    mime mime-xdg unlisted-pkg-lics unhandled-features-check \
-    missing-update-alternatives native-last missing-ptest \
-    license-exists license-no-generic license-syntax license-format \
-    license-incompatible license-file-missing obsolete-license \
-    virtual-slash \
+    32bit-time native-last \
 "
-ERROR_QA:append = " ${DEFAULT_WARN_QA} patch-status"
-WARN_QA:remove = "${DEFAULT_WARN_QA}"
+# We can enable native-last for layers we use:
+ERROR_QA:append = " native-last"
+WARN_QA:remove = "native-last"
 
 # Default WEBOS_TARGET_* values (see webos_cmake.bbclass)
 WEBOS_TARGET_CORE_OS ?= "rockhopper"
