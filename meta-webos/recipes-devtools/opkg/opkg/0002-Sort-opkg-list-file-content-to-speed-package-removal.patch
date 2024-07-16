@@ -1,4 +1,4 @@
-From aeab2198d72c9b8aafabc9c6cf0357e2a74e0521 Mon Sep 17 00:00:00 2001
+From 68a352e558e1f9716c1b877fe81177b49609431c Mon Sep 17 00:00:00 2001
 From: Rohit Anand <rohit.anand@lge.com>
 Date: Mon, 30 May 2016 16:43:49 +0530
 Subject: [PATCH] Sort opkg list file content to speed package removal
