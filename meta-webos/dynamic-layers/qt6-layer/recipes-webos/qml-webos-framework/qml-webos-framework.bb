@@ -68,3 +68,12 @@ EXTRA_QMAKEVARS_PRE += "${PACKAGECONFIG_CONFARGS}"
 PR:append = "${@bb.utils.contains('DISTRO_FEATURES', 'smack', 'smack1', '', d)}"
 PATCH_SMACK = "${@bb.utils.contains('DISTRO_FEATURES', 'smack', 'file://0001-Add-SMACK-security-labeling.patch', '', d)}"
 SRC_URI:append = " ${PATCH_SMACK}"
+
+# FIXME-buildpaths!!!
+# [WRP-10883] buildpath QA issues
+# http://gecko.lge.com:8000/Errors/Details/894425
+# ERROR: QA Issue: File /usr/src/debug/qml-webos-framework/1.0.0-169/src/Eos/Items/qrc_beziergon.cpp in package qml-webos-framework-src contains reference to TMPDIR
+# File /usr/src/debug/qml-webos-framework/1.0.0-169/examples/com.webos.exampleapp.canvastablet/.rcc/qrc_com.webos.exampleapp.canvastablet.cpp in package qml-webos-framework-src contains reference to TMPDIR
+# File /usr/src/debug/qml-webos-framework/1.0.0-169/examples/com.webos.exampleapp.tabletevent/.rcc/qrc_com.webos.exampleapp.tabletevent.cpp in package qml-webos-framework-src contains reference to TMPDIR [buildpaths]
+ERROR_QA:remove = "buildpaths"
+WARN_QA:append = " buildpaths"
