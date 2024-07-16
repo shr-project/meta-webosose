@@ -1,4 +1,4 @@
-From 9301f08472e352b9b58066865cb31a848a6b177f Mon Sep 17 00:00:00 2001
+From 4f469c79b9462be9082ab47394d528395a6eda5a Mon Sep 17 00:00:00 2001
 From: Rohit Anand <rohit.anand@lge.com>
 Date: Mon, 30 May 2016 16:54:15 +0530
 Subject: [PATCH] Load installed files before update file ownership
