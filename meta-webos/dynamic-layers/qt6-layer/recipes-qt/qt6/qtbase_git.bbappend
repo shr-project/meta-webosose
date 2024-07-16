@@ -153,3 +153,14 @@ export CCACHE_MAXSIZE = "1200M"
 # https://codereview.qt-project.org/c/yocto/meta-qt6/+/483660
 # http://gecko.lge.com:8000/Errors/Details/888939
 PACKAGECONFIG[use-lld-linker] = ""
+
+# FIXME-buildpaths!!!
+# [WRP-10883] buildpath QA issues
+# https://bugreports.qt.io/browse/QTBUG-105913
+# http://gecko.lge.com:8000/Errors/Details/894432
+# ERROR: QA Issue: File /usr/src/debug/qtbase/6.7.2/src/assets/icons/.qt/rcc/qrc_example_icons.cpp in package qtbase-src contains reference to TMPDIR
+# File /usr/src/debug/qtbase/6.7.2/src/plugins/platforms/eglfs/.qt/rcc/qrc_cursor.cpp in package qtbase-src contains reference to TMPDIR
+# File /usr/src/debug/qtbase/6.7.2/src/gui/.qt/rcc/qrc_gui_shaders.cpp in package qtbase-src contains reference to TMPDIR
+# File /usr/src/debug/qtbase/6.7.2/src/gui/.qt/rcc/qrc_qpdf.cpp in package qtbase-src contains reference to TMPDIR [buildpaths]
+ERROR_QA:remove = "buildpaths"
+WARN_QA:append = " buildpaths"

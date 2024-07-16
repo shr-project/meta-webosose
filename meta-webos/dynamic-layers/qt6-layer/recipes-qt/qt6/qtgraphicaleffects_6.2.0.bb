@@ -23,3 +23,14 @@ PV = "6.2.0"
 QT_MODULE_BRANCH = "6.2"
 
 SRCREV = "59ab3e11433a5157aac0f3af7c0d7fe70a373373"
+
+# FIXME-buildpaths!!!
+# [WRP-10883] buildpath QA issues
+# http://gecko.lge.com:8000/Errors/Details/894424
+# ERROR: QA Issue: File /usr/src/debug/qtgraphicaleffects/6.2.0/src/effects/.qt/rcc/qrc_qtgraphicaleffectsshaders.cpp in package qtgraphicaleffects-src contains reference to TMPDIR
+# File /usr/src/debug/qtgraphicaleffects/6.2.0/src/effects/.qt/rcc/qrc_qtgraphicaleffectsplugin_raw_qml_0.cpp in package qtgraphicaleffects-src contains reference to TMPDIR
+# File /usr/src/debug/qtgraphicaleffects/6.2.0/src/effects/.qt/rcc/qrc_qmake_QtGraphicalEffects.cpp in package qtgraphicaleffects-src contains reference to TMPDIR
+# File /usr/src/debug/qtgraphicaleffects/6.2.0/src/effects/private/.qt/rcc/qrc_qtgraphicaleffectsprivate_raw_qml_0.cpp in package qtgraphicaleffects-src contains reference to TMPDIR
+# File /usr/src/debug/qtgraphicaleffects/6.2.0/src/effects/private/.qt/rcc/qrc_qmake_QtGraphicalEffects_private.cpp in package qtgraphicaleffects-src contains reference to TMPDIR [buildpaths]
+ERROR_QA:remove = "buildpaths"
+WARN_QA:append = " buildpaths"
