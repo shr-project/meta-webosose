@@ -1,4 +1,4 @@
-From 9121f930770b02eb1bfc8f3ce03ac35fb021da00 Mon Sep 17 00:00:00 2001
+From 9f9acd2da991f975c0d1a60907e468846cb7a023 Mon Sep 17 00:00:00 2001
 From: Soonwon Hong <soonwon.hong@lge.com>
 Date: Fri, 19 May 2017 09:47:01 +0900
 Subject: [PATCH] Add symlink path validity
@@ -13,10 +13,10 @@ Upstream-Status: Pending
  4 files changed, 10 insertions(+)
 
 diff --git a/libopkg/opkg_archive.c b/libopkg/opkg_archive.c
-index 8dd902d..d50f3f0 100644
+index 23575b1..9b78daa 100644
 --- a/libopkg/opkg_archive.c
 +++ b/libopkg/opkg_archive.c
-@@ -920,6 +920,9 @@ struct opkg_ar *ar_open_pkg_data_archive(const char *filename)
+@@ -922,6 +922,9 @@ struct opkg_ar *ar_open_pkg_data_archive(const char *filename)
      ar->extract_flags |= ARCHIVE_EXTRACT_FFLAGS | ARCHIVE_EXTRACT_XATTR;
  #endif
  
@@ -27,7 +27,7 @@ index 8dd902d..d50f3f0 100644
          ar->extract_flags &= ~ARCHIVE_EXTRACT_OWNER;
  
 diff --git a/libopkg/opkg_conf.c b/libopkg/opkg_conf.c
-index c2e1c2f..9363fef 100644
+index 4dc777b..798b4f3 100644
 --- a/libopkg/opkg_conf.c
 +++ b/libopkg/opkg_conf.c
 @@ -75,6 +75,7 @@ static opkg_option_t options[] = {
@@ -39,7 +39,7 @@ index c2e1c2f..9363fef 100644
      {"offline_root", OPKG_OPT_TYPE_STRING, &_conf.offline_root},
      {"overlay_root", OPKG_OPT_TYPE_STRING, &_conf.overlay_root},
 diff --git a/libopkg/opkg_conf.h b/libopkg/opkg_conf.h
-index d13d50b..e5c8ae0 100644
+index 3fa6ca9..55da85a 100644
 --- a/libopkg/opkg_conf.h
 +++ b/libopkg/opkg_conf.h
 @@ -107,6 +107,7 @@ typedef struct opkg_conf {
@@ -51,28 +51,28 @@ index d13d50b..e5c8ae0 100644
      char *offline_root;
      char *overlay_root;
 diff --git a/src/opkg.c b/src/opkg.c
-index 0c729ff..1f99e0c 100644
+index 6249fd9..59f290b 100644
 --- a/src/opkg.c
 +++ b/src/opkg.c
-@@ -61,6 +61,7 @@ enum {
-     ARGS_OPT_AUTOREMOVE,
+@@ -62,6 +62,7 @@ enum {
      ARGS_OPT_VOLATILE_CACHE,
      ARGS_OPT_COMBINE,
+     ARGS_OPT_INSTALL_RECOMMENDS,
 +    ARGS_OPT_NO_INSTALL_INSECURE_SYMLINK,
      ARGS_OPT_NO_INSTALL_RECOMMENDS,
      ARGS_OPT_CACHE_DIR,
      ARGS_OPT_HOST_CACHE_DIR,
-@@ -108,6 +109,7 @@ static struct option long_options[] = {
-     {"noaction", 0, 0, ARGS_OPT_NOACTION},
+@@ -110,6 +111,7 @@ static struct option long_options[] = {
      {"download-only", 0, 0, ARGS_OPT_DOWNLOAD_ONLY},
      {"nodeps", 0, 0, ARGS_OPT_NODEPS},
+     {"install-recommends", 0, 0, ARGS_OPT_INSTALL_RECOMMENDS},
 +    {"no-install-insecure-symlink", 0, 0, ARGS_OPT_NO_INSTALL_INSECURE_SYMLINK},
      {"no-install-recommends", 0, 0, ARGS_OPT_NO_INSTALL_RECOMMENDS},
      {"offline-root", 1, 0, 'o'},
      {"add-arch", 1, 0, ARGS_OPT_ADD_ARCH},
-@@ -257,6 +259,9 @@ static int args_parse(int argc, char *argv[])
-         case ARGS_OPT_VOLATILE_CACHE:
-             opkg_config->volatile_cache = 1;
+@@ -321,6 +323,9 @@ static int args_parse_stage2(int argc, char *argv[])
+         case ARGS_OPT_INSTALL_RECOMMENDS:
+             opkg_config->no_install_recommends = 0;
              break;
 +        case ARGS_OPT_NO_INSTALL_INSECURE_SYMLINK:
 +            opkg_config->no_install_insecure_symlink = 1;
