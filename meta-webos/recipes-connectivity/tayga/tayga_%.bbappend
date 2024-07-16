@@ -1,0 +1,7 @@
+
+# FIXME-buildpaths!!!
+# [WRP-10883] buildpath QA issues
+# http://gecko.lge.com:8000/Errors/Details/895294
+# ERROR: QA Issue: File /usr/sbin/.debug/tayga in package tayga-dbg contains reference to TMPDIR [buildpaths]
+ERROR_QA:remove = "buildpaths"
+WARN_QA:append = " buildpaths"

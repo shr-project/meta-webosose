@@ -6,3 +6,10 @@ EXTENDPRAUTO:append = "webosvirt1"
 VIRTUAL-RUNTIME_bash ?= "bash"
 RDEPENDS:${PN}:append:class-target = " ${VIRTUAL-RUNTIME_bash}"
 RDEPENDS:${PN}:remove:class-target = "${@oe.utils.conditional('WEBOS_PREFERRED_PROVIDER_FOR_BASH', 'busybox', 'bash', '', d)}"
+
+# FIXME-buildpaths!!!
+# [WRP-10883] buildpath QA issues
+# http://gecko.lge.com:8000/Errors/Details/895268
+# ERROR: QA Issue: File /usr/lib/openvswitch/ptest/tests/atlocal in package openvswitch-ptest contains reference to TMPDIR [buildpaths]
+ERROR_QA:remove = "buildpaths"
+WARN_QA:append = " buildpaths"
