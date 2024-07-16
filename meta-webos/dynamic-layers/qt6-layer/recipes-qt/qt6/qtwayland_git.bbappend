@@ -60,3 +60,149 @@ do_install:append() {
         ${D}${QT6_INSTALL_PLUGINSDIR}/wayland-graphics-integration-client \
         ${D}${QT6_INSTALL_PLUGINSDIR}/wayland-graphics-integration-server/libqt-wayland-compositor-wayland-eglstream-controller.so
 }
+
+# FIXME-buildpaths!!!
+# [WRP-10883] buildpath QA issues
+# https://bugreports.qt.io/browse/QTBUG-105913
+# http://gecko.lge.com:8000/Errors/Details/894431
+# ERROR: QA Issue: File /usr/include/QtWaylandCompositor/6.7.2/QtWaylandCompositor/private/qwayland-server-scaler.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandCompositor/6.7.2/QtWaylandCompositor/private/qwayland-server-qt-text-input-method-unstable-v1.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandCompositor/6.7.2/QtWaylandCompositor/private/qwayland-server-viewporter.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandCompositor/6.7.2/QtWaylandCompositor/private/qwayland-server-text-input-unstable-v2.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandCompositor/6.7.2/QtWaylandCompositor/private/qwayland-server-xdg-decoration-unstable-v1.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandCompositor/6.7.2/QtWaylandCompositor/private/qwayland-server-server-buffer-extension.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandCompositor/6.7.2/QtWaylandCompositor/private/qwayland-server-qt-texture-sharing-unstable-v1.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandCompositor/6.7.2/QtWaylandCompositor/private/qwayland-server-hardware-integration.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandCompositor/6.7.2/QtWaylandCompositor/private/qwayland-server-touch-extension.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandCompositor/6.7.2/QtWaylandCompositor/private/qwayland-server-xdg-output-unstable-v1.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandCompositor/6.7.2/QtWaylandCompositor/private/qwayland-server-qt-windowmanager.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandCompositor/6.7.2/QtWaylandCompositor/private/qwayland-server-ivi-application.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandCompositor/6.7.2/QtWaylandCompositor/private/qwayland-server-presentation-time.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandCompositor/6.7.2/QtWaylandCompositor/private/qwayland-server-xdg-shell.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandCompositor/6.7.2/QtWaylandCompositor/private/qwayland-server-qt-key-unstable-v1.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandCompositor/6.7.2/QtWaylandCompositor/private/qwayland-server-wayland.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandCompositor/6.7.2/QtWaylandCompositor/private/qwayland-server-text-input-unstable-v3.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandCompositor/6.7.2/QtWaylandCompositor/private/qwayland-server-idle-inhibit-unstable-v1.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWlShellIntegration/6.7.2/QtWlShellIntegration/private/qwayland-wayland.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-fractional-scale-v1.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-server-buffer-extension.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-wp-primary-selection-unstable-v1.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-viewporter.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-qt-windowmanager.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-tablet-unstable-v2.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-touch-extension.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-qt-text-input-method-unstable-v1.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-xdg-toplevel-drag-v1.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-pointer-gestures-unstable-v1.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-hardware-integration.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-surface-extension.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-text-input-unstable-v1.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-text-input-unstable-v3.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-xdg-shell.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-xdg-output-unstable-v1.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-qt-key-unstable-v1.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-wayland.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-cursor-shape-v1.h in package qtwayland-dev contains reference to TMPDIR
+# File /usr/include/QtWaylandClient/6.7.2/QtWaylandClient/private/qwayland-text-input-unstable-v2.h in package qtwayland-dev contains reference to TMPDIR [buildpaths]
+# ERROR: QA Issue: File /usr/src/debug/qtwayland/6.7.2/src/imports/texture-sharing/qwayland-qt-texture-sharing-unstable-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/imports/texture-sharing/qwayland-qt-texture-sharing-unstable-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/imports/texture-sharing/.qt/rcc/qrc_qmake_QtWayland_Client_TextureSharing.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/imports/texture-sharing-extension/.qt/rcc/qrc_qmake_QtWayland_Compositor_TextureSharingExtension.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/imports/compositor-extensions/iviapplication/.qt/rcc/qrc_qmake_QtWayland_Compositor_IviApplication.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/imports/compositor-extensions/qtshell/qwayland-server-qt-shell-unstable-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/imports/compositor-extensions/qtshell/qwayland-server-qt-shell-unstable-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/imports/compositor-extensions/qtshell/.qt/rcc/qrc_qmake_QtWayland_Compositor_QtShell.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/imports/compositor-extensions/xdgshell/.qt/rcc/qrc_qmake_QtWayland_Compositor_XdgShell.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/imports/compositor-extensions/wlshell/.qt/rcc/qrc_qmake_QtWayland_Compositor_WlShell.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/imports/compositor-extensions/presentationtime/.qt/rcc/qrc_qmake_QtWayland_Compositor_PresentationTime.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/plugins/hardwareintegration/compositor/dmabuf-server/qwayland-server-qt-dmabuf-server-buffer.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/plugins/hardwareintegration/compositor/dmabuf-server/qwayland-server-qt-dmabuf-server-buffer.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/plugins/hardwareintegration/compositor/drm-egl-server/qwayland-server-drm-egl-server-buffer.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/plugins/hardwareintegration/compositor/drm-egl-server/qwayland-server-drm-egl-server-buffer.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/plugins/hardwareintegration/compositor/linux-dmabuf-unstable-v1/qwayland-server-linux-dmabuf-unstable-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/plugins/hardwareintegration/compositor/linux-dmabuf-unstable-v1/qwayland-server-linux-dmabuf-unstable-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/plugins/shellintegration/wl-shell/qwayland-wayland.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/plugins/shellintegration/wl-shell/qwayland-wayland.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/plugins/shellintegration/qt-shell/qwayland-qt-shell-unstable-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/plugins/shellintegration/qt-shell/qwayland-qt-shell-unstable-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-fractional-scale-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-server-buffer-extension.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-wp-primary-selection-unstable-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-viewporter.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-xdg-toplevel-drag-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-qt-windowmanager.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-text-input-unstable-v3.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-qt-windowmanager.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-tablet-unstable-v2.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-pointer-gestures-unstable-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-text-input-unstable-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-cursor-shape-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-touch-extension.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-hardware-integration.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-qt-text-input-method-unstable-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-xdg-toplevel-drag-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-pointer-gestures-unstable-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-surface-extension.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-wp-primary-selection-unstable-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-touch-extension.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-hardware-integration.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-tablet-unstable-v2.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-surface-extension.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-xdg-output-unstable-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-text-input-unstable-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-server-buffer-extension.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-text-input-unstable-v3.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-qt-key-unstable-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-viewporter.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-xdg-shell.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-xdg-output-unstable-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-qt-key-unstable-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-fractional-scale-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-wayland.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-xdg-shell.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-text-input-unstable-v2.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-cursor-shape-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-qt-text-input-method-unstable-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-wayland.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/client/qwayland-text-input-unstable-v2.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-presentation-time.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-scaler.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-ivi-application.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-qt-text-input-method-unstable-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-viewporter.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-qt-key-unstable-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-text-input-unstable-v2.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-qt-windowmanager.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-xdg-decoration-unstable-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-server-buffer-extension.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-qt-texture-sharing-unstable-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-viewporter.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-hardware-integration.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-xdg-shell.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-touch-extension.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-touch-extension.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-server-buffer-extension.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-text-input-unstable-v2.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-xdg-output-unstable-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-xdg-decoration-unstable-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-qt-text-input-method-unstable-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-qt-windowmanager.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-hardware-integration.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-idle-inhibit-unstable-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-ivi-application.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-wayland.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-presentation-time.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-xdg-shell.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-xdg-output-unstable-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-scaler.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-qt-key-unstable-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-wayland.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-qt-texture-sharing-unstable-v1.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-text-input-unstable-v3.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-idle-inhibit-unstable-v1.h in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/qwayland-server-text-input-unstable-v3.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/.qt/rcc/qrc_compositor.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/.qt/rcc/qrc_qmake_QtWayland_Compositor.cpp in package qtwayland-src contains reference to TMPDIR
+# File /usr/src/debug/qtwayland/6.7.2/src/compositor/.qt/rcc/qrc_WaylandCompositor_raw_qml_0.cpp in package qtwayland-src contains reference to TMPDIR [buildpaths]
+ERROR_QA:remove = "buildpaths"
+WARN_QA:append = " buildpaths"
