@@ -10,11 +10,6 @@ require ${COREBASE}/meta/classes-recipe/kernel.bbclass
 
 inherit webos_deploy
 
-# FIXME: These will be dropped when below is upstreamed.
-# https://lists.openembedded.org/g/openembedded-core/message/202309
-RPROVIDES:${KERNEL_PACKAGE_NAME}-base:append = " ${KERNEL_PACKAGE_NAME}-base"
-RPROVIDES:${KERNEL_PACKAGE_NAME}-image:append = " ${KERNEL_PACKAGE_NAME}-image"
-
 do_deploy:append() {
     # The .bin-s are of no use to us.
     for type in ${KERNEL_IMAGETYPES} ; do
