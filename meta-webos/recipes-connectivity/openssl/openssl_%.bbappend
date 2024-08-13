@@ -21,5 +21,4 @@ FILESEXTRAPATHS:prepend := "${THISDIR}/${BPN}:"
 
 SRC_URI += " \
     file://0471-Coverity-1528492-Fix-possible-memory-leak-if-t-NULL.patch \
-    file://0472-Fix-a-mem-leak-when-the-FIPS-provider-is-used-in-a-d.patch \
 "
