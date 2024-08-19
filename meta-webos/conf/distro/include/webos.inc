@@ -139,6 +139,9 @@ EXTRA_WEBOS_WERROR:pn-rust-llvm = ""
 # src/core/lib/promise/party.h:567:5: error: control reaches end of non-void function [-Werror=return-type]
 # http://gecko.lge.com:8000/Errors/Details/793628
 EXTRA_WEBOS_WERROR:pn-python3-grpcio = ""
+# cppgenerate/printer.cpp:47:1: error: no return statement in function returning non-void [-Werror=return-type]
+# http://gecko.lge.com:8000/Errors/Details/926532
+EXTRA_WEBOS_WERROR:pn-cppgenerate = ""
 
 TARGET_CC_ARCH:append = " ${EXTRA_WEBOS_WERROR}"
 
