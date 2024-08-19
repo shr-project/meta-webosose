@@ -26,6 +26,7 @@ SRC_URI += " \
     file://0015-gator_pmu-fix-Waddress.patch;patchdir=.. \
     file://0016-Makefile-ignore-incompatible-pointer-types.patch;patchdir=.. \
     file://0017-gator_fs-Fix-build-with-linux-6.6-and-newer.patch;patchdir=.. \
+    file://0018-gator_fs-Fix-build-with-linux-6.10-and-newer.patch;patchdir=.. \
 "
 
 S = "${WORKDIR}/git/driver"
