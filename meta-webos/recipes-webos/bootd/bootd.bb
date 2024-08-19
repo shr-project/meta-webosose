@@ -25,7 +25,9 @@ inherit webos_lttng
 inherit webos_public_repo
 inherit webos_prerelease_dep
 
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0002-Logger.cpp-fix-segfault-with-64bit-time_t.patch \
+"
 S = "${WORKDIR}/git"
 
 inherit webos_systemd
