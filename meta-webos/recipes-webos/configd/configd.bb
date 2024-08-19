@@ -25,7 +25,9 @@ inherit webos_machine_dep
 inherit webos_distro_variant_dep
 inherit webos_public_repo
 
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-Logger-fix-segfaults-with-64bit-time_t.patch \
+"
 S = "${WORKDIR}/git"
 
 inherit webos_systemd
