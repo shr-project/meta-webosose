@@ -1,4 +1,4 @@
-From 2ef5be71d2fdcb817c6d6e3b1c4aaa404433cd70 Mon Sep 17 00:00:00 2001
+From ff4fa0704f9f61298da894fc8bd1fb184f36f1ac Mon Sep 17 00:00:00 2001
 From: Vibhanshu Dhote <vibhanshu.dhote@lge.com>
 Date: Thu, 3 Sep 2020 12:45:44 +0530
 Subject: [PATCH] Disable 4-way handshake offloading for WPA/WPA2-PSK
@@ -26,7 +26,6 @@ N/A
 :Issues Addressed:
 [PLAT-118498] "Could not establish a connection to access point" Error
               popup displayed for wrong password
-
 ---
 Upstream-Status: Inappropriate [webOS specific]
 
@@ -35,10 +34,10 @@ Upstream-Status: Inappropriate [webOS specific]
  2 files changed, 4 insertions(+), 4 deletions(-)
 
 diff --git a/src/drivers/driver_nl80211_capa.c b/src/drivers/driver_nl80211_capa.c
-index 8318b10..efa06ba 100644
+index dc16bd445..86faa57df 100644
 --- a/src/drivers/driver_nl80211_capa.c
 +++ b/src/drivers/driver_nl80211_capa.c
-@@ -401,14 +401,14 @@ static void wiphy_info_ext_feature_flags(struct wiphy_info_data *info,
+@@ -591,14 +591,14 @@ static void wiphy_info_ext_feature_flags(struct wiphy_info_data *info,
  	if (ext_feature_isset(ext_features, len,
  			      NL80211_EXT_FEATURE_FILS_SK_OFFLOAD))
  		capa->flags |= WPA_DRIVER_FLAGS_FILS_SK_OFFLOAD;
@@ -53,13 +52,13 @@ index 8318b10..efa06ba 100644
 -
 +*/
  	if (ext_feature_isset(ext_features, len,
- 			      NL80211_EXT_FEATURE_MFP_OPTIONAL))
- 		capa->flags |= WPA_DRIVER_FLAGS_MFP_OPTIONAL;
+ 			      NL80211_EXT_FEATURE_SAE_OFFLOAD))
+ 		capa->flags2 |= WPA_DRIVER_FLAGS2_SAE_OFFLOAD_STA;
 diff --git a/src/drivers/driver_wext.c b/src/drivers/driver_wext.c
-index 4d4a05d..cdb6832 100644
+index 2c656fb6f..175b96d29 100644
 --- a/src/drivers/driver_wext.c
 +++ b/src/drivers/driver_wext.c
-@@ -1646,9 +1646,9 @@ static int wpa_driver_wext_get_range(void *priv)
+@@ -1652,9 +1652,9 @@ static int wpa_driver_wext_get_range(void *priv)
  			drv->capa.enc |= WPA_DRIVER_CAPA_ENC_TKIP;
  		if (range->enc_capa & IW_ENC_CAPA_CIPHER_CCMP)
  			drv->capa.enc |= WPA_DRIVER_CAPA_ENC_CCMP;
@@ -71,6 +70,3 @@ index 4d4a05d..cdb6832 100644
  		drv->capa.auth = WPA_DRIVER_AUTH_OPEN |
  			WPA_DRIVER_AUTH_SHARED |
  			WPA_DRIVER_AUTH_LEAP;
--- 
-2.17.1
-
