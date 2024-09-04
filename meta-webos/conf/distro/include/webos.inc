@@ -326,6 +326,10 @@ PTEST_ENABLED:pn-valgrind = "0"
 # http://lists.openembedded.org/pipermail/openembedded-core/2017-February/132917.html
 PTEST_ENABLED:pn-parted = "0"
 PTEST_ENABLED:pn-apr = "0"
+# https://github.com/kraj/meta-clang/commit/6523bcaefc3be49d4aae96a84eca20efcc914d3d
+PTEST_ENABLED:pn-bcc = "0"
+# https://github.com/kraj/meta-clang/commit/814d20901a71fd4d98a5a67789d69ef7e9a2169c
+PTEST_ENABLED:pn-bpftrace = "0"
 
 INHERIT_DISTRO ?= "devshell sstate license buildstats-summary webos_base remove-libtool image-buildinfo"
 
