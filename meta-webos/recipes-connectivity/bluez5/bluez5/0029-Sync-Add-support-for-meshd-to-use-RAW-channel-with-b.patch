@@ -41,20 +41,20 @@ Upstream-Status: Inappropriate [webos specific]
  4 files changed, 6 insertions(+), 3 deletions(-)
 
 diff --git a/mesh/bluetooth-mesh.service.in b/mesh/bluetooth-mesh.service.in
-index ee65ce4..8f8e082 100644
+index 73f3b8e2e..73d59c38c 100644
 --- a/mesh/bluetooth-mesh.service.in
 +++ b/mesh/bluetooth-mesh.service.in
 @@ -5,7 +5,7 @@ ConditionPathIsDirectory=/sys/class/bluetooth
  [Service]
  Type=dbus
  BusName=org.bluez.mesh
--ExecStart=@pkglibexecdir@/bluetooth-meshd --nodetach --use_raw
-+ExecStart=@pkglibexecdir@/bluetooth-meshd --nodetach --u --io generic:hci0
+-ExecStart=@PKGLIBEXECDIR@/bluetooth-meshd --nodetach --use_raw
++ExecStart=@PKGLIBEXECDIR@/bluetooth-meshd --nodetach --u --io generic:hci0
  Capabilities=cap_net_admin,cap_net_bind_service
  NotifyAccess=main
  LimitNPROC=1
 diff --git a/mesh/mesh-io-api.h b/mesh/mesh-io-api.h
-index ae51cbc..182189c 100644
+index ae51cbc55..182189cde 100644
 --- a/mesh/mesh-io-api.h
 +++ b/mesh/mesh-io-api.h
 @@ -49,6 +49,7 @@ struct mesh_io {
@@ -66,7 +66,7 @@ index ae51cbc..182189c 100644
  
  struct mesh_io_table {
 diff --git a/mesh/mesh-io-generic.c b/mesh/mesh-io-generic.c
-index ccb396a..844ee4b 100644
+index ccb396a7d..844ee4b9b 100644
 --- a/mesh/mesh-io-generic.c
 +++ b/mesh/mesh-io-generic.c
 @@ -431,7 +431,7 @@ static bool dev_init(struct mesh_io *io, void *opts, void *user_data)
@@ -79,7 +79,7 @@ index ccb396a..844ee4b 100644
  	io->pvt->use_raw = io_opts->use_raw;
  
 diff --git a/mesh/mesh-io.c b/mesh/mesh-io.c
-index b953bf4..70414b8 100644
+index b953bf4cf..70414b812 100644
 --- a/mesh/mesh-io.c
 +++ b/mesh/mesh-io.c
 @@ -158,7 +158,9 @@ struct mesh_io *mesh_io_new(enum mesh_io_type type, void *opts,
