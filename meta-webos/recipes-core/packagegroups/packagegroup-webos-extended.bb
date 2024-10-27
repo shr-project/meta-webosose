@@ -56,7 +56,7 @@ VIRTUAL-RUNTIME_com.webos.app.statusbar ?= "com.webos.app.statusbar"
 VIRTUAL-RUNTIME_com.webos.app.statusbar:armv4 = ""
 VIRTUAL-RUNTIME_com.webos.app.statusbar:armv5 = ""
 
-VIRTUAL-RUNTIME_com.webos.app.browser ?= "com.webos.app.enactbrowser"
+VIRTUAL-RUNTIME_com.webos.app.browser ?= ""
 
 VIRTUAL-RUNTIME_unifiedsearch ?= "com.webos.service.unifiedsearch com.webos.service.unifiedsearch-plugins"
 
