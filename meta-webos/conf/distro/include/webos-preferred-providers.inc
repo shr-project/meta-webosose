@@ -62,8 +62,7 @@ BLUEZ:class-nativesdk = "bluez5"
 # use them.
 VIRTUAL-RUNTIME_cpushareholder = "cpushareholder-stub"
 
-# Use Enactbrowser by default, except for armv45
-VIRTUAL-RUNTIME_com.webos.app.browser ?= "com.webos.app.enactbrowser"
+VIRTUAL-RUNTIME_com.webos.app.browser ?= ""
 VIRTUAL-RUNTIME_com.webos.app.browser:armv4 = ""
 VIRTUAL-RUNTIME_com.webos.app.browser:armv5 = ""
 
