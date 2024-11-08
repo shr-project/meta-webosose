@@ -13,7 +13,7 @@ PR = "r3${IMAGE_PR_SUFFIX}"
 IMAGE_FEATURES += "${WEBOS_IMAGE_DEFAULT_FEATURES}"
 IMAGE_FEATURES += "${WEBOS_IMAGE_DEFAULT_SSH_IMAGE_FEATURE}"
 
-IMAGE_FEATURES += "tools-debug tools-profile debug-tweaks"
+IMAGE_FEATURES += "tools-debug tools-profile allow-empty-password empty-root-password allow-root-login post-install-logging"
 IMAGE_FEATURES += "webos-devel"
 
 IMAGE_FEATURES += "webos-test"

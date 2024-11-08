@@ -8,7 +8,7 @@ PR = "r5${IMAGE_PR_SUFFIX}"
 
 IMAGE_FEATURES += "${WEBOS_IMAGE_DEFAULT_FEATURES}"
 
-IMAGE_FEATURES += "${@'' if '${WEBOS_DISTRO_PRERELEASE}' == '' else 'debug-tweaks'}"
+IMAGE_FEATURES += "${@'' if '${WEBOS_DISTRO_PRERELEASE}' == '' else 'allow-empty-password empty-root-password allow-root-login post-install-logging'}"
 
 inherit webos_image
 inherit webos_prerelease_dep
