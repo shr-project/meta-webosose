@@ -37,6 +37,7 @@ SKIP_RECIPE[netplan] ?= "fails to build with gold: aarch64-webos-linux/11.3.0/ld
 SKIP_RECIPE[transmission] ?= "fails to fetch: WARNING: Failed to fetch URL gitsm://github.com/transmission/transmission;branch=master;protocol=https, attempting MIRRORS if available DEBUG: Fetcher failure: Unable to find revision bb6b5a062ee594dfd4b7a12a6b6e860c43849bfd in branch master even from upstream: http://gecko.lge.com:8000/Errors/Details/565717"
 SKIP_RECIPE[vboxguestdrivers] ?= "BROKEN: kernel-module-vboxguest conflicts in pkgdata with the vboxguest kernel modules we have enabled in linux-yocto meta-webos/recipes-kernel/linux/linux-yocto/vbox_gfx.cfg:CONFIG_VBOXGUEST=m http://gecko.lge.com:8000/Errors/Details/565857"
 SKIP_RECIPE[gutenprint] ?= "BROKEN: needs 'lp' group in base-passwd, chgrp added in https://git.openembedded.org/meta-openembedded/commit/?id=4d921bb5144b653c2f195fb2e8694a31dbd539f1"
+SKIP_RECIPE[python3-gpiod] ?= "Broken by libgpiod update to v2.2 https://git.openembedded.org/meta-openembedded/commit/?id=9626e8a2c8f20c7ff81a336e0adebd1b74bb9ac7 as reported in https://lists.openembedded.org/g/openembedded-devel/message/113324 python3-gpiod-2.2.2 fails the same http://gecko.lge.com:8000/Errors/Details/1027357"
 
 # meta-networking
 SKIP_RECIPE[networkmanager] ?= "fails to build with: NetworkManager-1.36.2/meson.build:821:4: ERROR: Assert failed: vala api require GObject introspection. Use -Dvapi=false to disable it: http://gecko.lge.com:8000/Errors/Details/565739"
