@@ -145,6 +145,9 @@ EXTRA_WEBOS_WERROR:pn-cppgenerate = ""
 # canopenterm/1.0.8/git/src/core/can_linux.c:140:1: error: control reaches end of non-void function [-Werror=return-type]
 # http://gecko.lge.com:8000/Errors/Details/1029672
 EXTRA_WEBOS_WERROR:pn-canopenterm = ""
+# multidict/_multilib/pair_list.h:1579:1: error: control reaches end of non-void function [-Werror=return-type]
+# http://gecko.lge.com:8000/Errors/Details/1165425
+EXTRA_WEBOS_WERROR:pn-python3-multidict = ""
 
 TARGET_CC_ARCH:append = " ${EXTRA_WEBOS_WERROR}"
 
