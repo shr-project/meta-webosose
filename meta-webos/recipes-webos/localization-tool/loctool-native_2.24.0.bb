@@ -210,7 +210,7 @@ PR = "r0"
 
 SRC_URI = " \
     npm://registry.npmjs.org/;package=loctool;version=${PV} \
-    npmsw://${THISDIR}/${BPN}/npm-shrinkwrap.json \
+    npmsw://${THISDIR}/${BPN}/npm-shrinkwrap.json;destsuffix=npm \
 "
 
 S = "${WORKDIR}/npm"
