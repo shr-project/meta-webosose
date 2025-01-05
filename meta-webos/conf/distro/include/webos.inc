@@ -357,10 +357,6 @@ WARN_QA:append  = " incomp-lic-shlibdeps-warning"
 # will call oe.qa.handle_error("perm-{file,line,config}", msg, d).
 ERROR_QA:append = " perm-file perm-line perm-config"
 
-# work around until https://bugzilla.yoctoproject.org/show_bug.cgi?id=15515 is implemented
-ERROR_QA[vardepvalue] = "${ERROR_QA}"
-WARN_QA[vardepvalue] = "${ERROR_QA}"
-
 # Move all default WARN_QA from insane.bbclass to ERROR_QA to prevent silently re-introducing these issues
 # as of https://git.openembedded.org/openembedded-core/commit/?id=b79b191cc43a45dde2adb61ea349b426cb2461d1
 DEFAULT_WARN_QA = "\
