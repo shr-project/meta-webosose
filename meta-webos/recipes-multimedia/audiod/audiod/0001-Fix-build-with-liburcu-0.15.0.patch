@@ -1,0 +1,79 @@
+From 52c37165cbad00b96153c30a1b3602f98a5e6f1b Mon Sep 17 00:00:00 2001
+From: "jaekyu.lee" <jaekyu.lee@lge.com>
+Date: Thu, 23 Jan 2025 16:08:34 +0900
+Subject: [PATCH] Fix build with liburcu-0.15.0
+
+:Release Notes:
+Fix build error
+
+:Detailed Notes:
+Fixes:
+http://gecko.lge.com:8000/Errors/Details/1095506
+
+FAILED: CMakeFiles/audiod.dir/src/PulseAudioLink.cpp.o
+..
+In file included from TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/audiod/1.0.0-77/recipe-sysroot/usr/include/lttng/tracepoint-rcu.h:10,
+                 from TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/audiod/1.0.0-77/recipe-sysroot/usr/include/lttng/tracepoint.h:13,
+                 from TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/audiod/1.0.0-77/git/include/pmtrace_audiod_provider.h:31,
+                 from TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/audiod/1.0.0-77/git/include/audiodTracer.h:22,
+                 from TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/audiod/1.0.0-77/git/include/PulseAudioLink.h:28,
+                 from TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/audiod/1.0.0-77/git/src/PulseAudioLink.cpp:18:
+TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/audiod/1.0.0-77/recipe-sysroot/usr/include/urcu/compiler.h:205:1: error: template with C linkage
+
+:Testing Performed:
+Only build tested.
+
+:QA Notes:
+No change to image.
+
+:Issues Addressed:
+[WRR-17603] Fix build with liburcu-0.15.0
+
+Change-Id: I7467077afb1f7ab27bd75bd70426071c5b82fe32
+---
+Upstream-Status: Submitted [http://gpro.lge.com/c/webosose/audiod-pro/+/466520]
+
+ include/pmtrace_audiod_provider.h | 16 +++++++---------
+ 1 file changed, 7 insertions(+), 9 deletions(-)
+
+diff --git a/include/pmtrace_audiod_provider.h b/include/pmtrace_audiod_provider.h
+index dbabfb32..90010754 100644
+--- a/include/pmtrace_audiod_provider.h
++++ b/include/pmtrace_audiod_provider.h
+@@ -20,16 +20,15 @@
+ #undef TRACEPOINT_INCLUDE
+ #define TRACEPOINT_INCLUDE "./pmtrace_audiod_provider.h"
+ 
+-#ifdef __cplusplus
+-extern "C"{
+-#endif /*__cplusplus */
+-
+-
+ #if !defined(_PMTRACE_AUDIOD_PROVIDER_H) || defined(TRACEPOINT_HEADER_MULTI_READ)
+ #define _PMTRACE_AUDIOD_PROVIDER_H
+ 
+ #include <lttng/tracepoint.h>
+ 
++#ifdef __cplusplus
++extern "C"{
++#endif /*__cplusplus */
++
+ /* "message" tracepoint should be used for single event trace points */
+ TRACEPOINT_EVENT(
+     pmtrace_audiod,
+@@ -86,12 +85,11 @@ TRACEPOINT_EVENT(
+     function_exit,
+     TP_ARGS(char*, text),
+     TP_FIELDS(ctf_string(scope, text)))
++#ifdef __cplusplus
++}
++#endif /*__cplusplus */
+ 
+ #endif /* _PMTRACE_AUDIOD_PROVIDER_H */
+ 
+ #include <lttng/tracepoint-event.h>
+ 
+-#ifdef __cplusplus
+-}
+-#endif /*__cplusplus */
+-

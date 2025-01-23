@@ -25,7 +25,7 @@ RDEPENDS:${PN} = "\
 "
 
 WEBOS_VERSION = "1.0.0-78_127c6cd6c9247979b4ead42d9b8fc8b5c48b47a2"
-PR = "r37"
+PR = "r38"
 
 inherit webos_component
 inherit webos_enhanced_submissions
@@ -39,7 +39,9 @@ inherit webos_lttng
 inherit webos_public_repo
 
 WEBOS_REPO_NAME = "audiod-pro"
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-Fix-build-with-liburcu-0.15.0.patch \
+"
 S = "${WORKDIR}/git"
 
 inherit webos_systemd
