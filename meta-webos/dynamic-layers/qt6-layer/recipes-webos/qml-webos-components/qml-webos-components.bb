@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = " \
 DEPENDS = "qtdeclarative pmloglib qt-features-webos luna-service2 glib-2.0"
 
 WEBOS_VERSION = "1.0.0-59_bf114a608322c5d188959da22646ea83d1e1a6b7"
-PR = "r21"
+PR = "r22"
 
 inherit webos_qmake6
 inherit webos_pkgconfig
@@ -22,7 +22,9 @@ inherit webos_lttng
 inherit webos_qmllint
 inherit webos_public_repo
 
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-Fix-build-with-liburcu-0.15.0.patch \
+"
 
 S = "${WORKDIR}/git"
 
