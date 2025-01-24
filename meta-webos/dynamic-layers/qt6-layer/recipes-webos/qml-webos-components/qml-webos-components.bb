@@ -22,7 +22,9 @@ inherit webos_lttng
 inherit webos_qmllint
 inherit webos_public_repo
 
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-Fix-build-with-liburcu-0.15.0.patch \
+"
 
 S = "${WORKDIR}/git"
 
