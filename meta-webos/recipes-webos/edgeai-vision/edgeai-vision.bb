@@ -12,7 +12,9 @@ LIC_FILES_CHKSUM = " \
 
 WEBOS_VERSION = "1.1.0-77_4b3e07018ce1e15b599a589df6dd5997978f1831"
 WEBOS_REPO_NAME = "edge-ai-computer-vision"
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-CMakeLists.txt-allow-to-disable-building-examples-to.patch \
+"
 
 PR = "r2"
 S = "${WORKDIR}/git"
@@ -71,6 +73,7 @@ PACKAGECONFIG[examples] = "-DWITH_EXAMPLES=ON -DWITH_EXTRA_MODELS=ON,-DWITH_EXAM
 PACKAGECONFIG[ads] = "-DWITH_AUTO_DELEGATE=ON,-DWITH_AUTO_DELEGATE=OFF,tflite-auto-delegation"
 PACKAGECONFIG[npu] = "-DWITH_NPU=ON,-DWITH_NPU=OFF,tflite-npu-delegate"
 PACKAGECONFIG[nnapi] = "-DWITH_NNAPI=ON,-DWITH_NNAPI=OFF"
+PACKAGECONFIG[examples] = "-DWITH_EXAMPLES=ON,-DWITH_EXAMPLES=OFF"
 
 PACKAGES =+ "${PN}-tests"
 
