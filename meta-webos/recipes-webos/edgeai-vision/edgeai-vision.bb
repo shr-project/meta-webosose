@@ -12,9 +12,11 @@ LIC_FILES_CHKSUM = " \
 
 WEBOS_VERSION = "1.1.0-85_7c5e9a1ebbb294bb7e0e564299820be94fea52e7"
 WEBOS_REPO_NAME = "edge-ai-computer-vision"
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-CMakeLists.txt-allow-to-disable-building-examples-to.patch \
+"
 
-PR = "r9"
+PR = "r10"
 S = "${WORKDIR}/git"
 
 inherit cmake
@@ -69,6 +71,7 @@ PACKAGECONFIG[armnn] = "-DWITH_ARMNN:BOOL=TRUE,-DWITH_ARMNN:BOOL=FALSE,armnn"
 PACKAGECONFIG[ads] = "-DWITH_AUTO_DELEGATE=ON,-DWITH_AUTO_DELEGATE=OFF,tflite-auto-delegation"
 PACKAGECONFIG[npu] = "-DWITH_NPU=ON,-DWITH_NPU=OFF,tflite-npu-delegate"
 PACKAGECONFIG[nnapi] = "-DWITH_NNAPI=ON,-DWITH_NNAPI=OFF"
+PACKAGECONFIG[examples] = "-DWITH_EXAMPLES=ON,-DWITH_EXAMPLES=OFF"
 
 # =+ means prepends. so don't change the order, extra should be run before tests.
 PACKAGES =+ "${PN}-tests"
