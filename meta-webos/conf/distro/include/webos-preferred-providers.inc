@@ -75,6 +75,10 @@ PREFERRED_RPROVIDER_initd-functions = "webos-initscripts"
 
 PREFERRED_RPROVIDER_ssh = "dropbear"
 
+# NOTE: Multiple providers are available for runtime libnss-mdns (avahi-libnss-mdns, mdns)
+# starfish has bbappend for mdns, use that
+PREFERRED_RPROVIDER_libnss-mdns = "mdns"
+
 # Options are: sysvinit, upstart, systemd
 VIRTUAL-RUNTIME_init_manager = "systemd"
 
