@@ -1,6 +1,6 @@
 # Copyright (c) 2019-2025 LG Electronics, Inc.
 
-EXTENDPRAUTO:append = "webosvirt4"
+EXTENDPRAUTO:append = "webosvirt5"
 
 VIRTUAL-RUNTIME_bash ?= "bash"
 RDEPENDS:${PN}-contrib:append:class-target = " ${VIRTUAL-RUNTIME_bash}"
@@ -8,6 +8,9 @@ RDEPENDS:${PN}-contrib:remove:class-target = "${@oe.utils.conditional('WEBOS_PRE
 
 # We don't have seccomp in DISTRO_FEATURES
 PACKAGECONFIG:remove = "seccomp"
+# Disabling the PACKAGECONFIG is not enough after:
+# https://git.yoctoproject.org/meta-virtualization/commit/?id=f9ba743dad694445f7b7385e03aa0c62cbd71a9d
+REQUIRED_DISTRO_FEATURES:remove = "seccomp"
 
 # required kernel modules
 RRECOMMENDS:${PN}:append = " \
