@@ -511,9 +511,9 @@ PACKAGE_ADD_METADATA_DEP = ""
 # To support these fields with opkg package-index where it causes a lot of "Lost field" messages
 # we need to pass -f to opkg-make-index as it was added in:
 # https://git.yoctoproject.org/opkg-utils/commit/opkg-make-index?id=13f6281d24e17199e0fef6c2984419372ea0f86f
-# but there is no simple way to add -f in kirkstone, for scarthgap and newer it will implemented soon with:
-# https://lists.openembedded.org/g/openembedded-core/message/194813
-# https://lists.openembedded.org/g/openembedded-core/message/194814
+# see:
+# https://git.openembedded.org/openembedded-core/commit/?id=6dc772fd9d5c2d90a6e32cfa4bc46ca0221f1b7f
+# https://git.openembedded.org/openembedded-core/commit/?id=31030e7a19a27ad424b997fad36ee4f633ce0d63
 OPKG_MAKE_INDEX_EXTRA_PARAMS = "-f"
 RPMBUILD_EXTRA_PARAMS = " --define '_Author Author' --define '_RP-Maintainer RP-Maintainer' --define '_Recipes Recipes'"
 
