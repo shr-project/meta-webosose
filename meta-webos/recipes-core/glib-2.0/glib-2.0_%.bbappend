@@ -1,7 +1,7 @@
 # Copyright (c) 2013-2025 LG Electronics, Inc.
 
 PKGV .= "-0webos4"
-EXTENDPRAUTO:append = "webos4"
+EXTENDPRAUTO:append = "webos5"
 
 # We need to revert changes from
 # http://lists.openembedded.org/pipermail/openembedded-core/2018-October/156510.html
@@ -11,6 +11,7 @@ EXTENDPRAUTO:append = "webos4"
 # it doesn't work when GLIBC_GENERATE_LOCALES are restricted like they are in our builds:
 # meta-webos/conf/distro/include/webos-toolchain.inc:GLIBC_GENERATE_LOCALES = "en_US.UTF-8"
 RDEPENDS:${PN}-ptest:remove:libc-glibc = " \
+    locale-base-c \
     locale-base-pl-pl.iso-8859-2 \
     locale-base-tr-tr \
     locale-base-lt-lt \
