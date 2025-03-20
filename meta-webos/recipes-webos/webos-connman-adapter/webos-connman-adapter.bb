@@ -14,7 +14,7 @@ DEPENDS = "luna-service2 libpbnjson glib-2.0 luna-prefs openssl glib-2.0-native 
 RDEPENDS:${PN} = "connman connman-client"
 
 WEBOS_VERSION = "1.1.0-50_085b6369346df4d0e6c6338b20df0a0a7ee6245f"
-PR = "r19"
+PR = "r20"
 
 inherit webos_component
 inherit webos_public_repo
@@ -47,3 +47,8 @@ do_install:append:raspberrypi4 () {
 }
 
 FILES:${PN}:append:raspberrypi4 = " ${sysconfdir}/modprobe.d/*"
+
+# http://gecko.lge.com:8000/Errors/Details/1139929
+# webos-connman-adapter/1.1.0-242.apollo.18/git/src/main.c:47:5: error: conflicting types for 'initialize_wifi_ls2_calls'; have 'int(void)'
+# webos-connman-adapter/1.1.0-242.apollo.18/git/src/main.c:86:13: error: too many arguments to function 'initialize_wifi_ls2_calls'; expected 0, have 2
+CFLAGS += "-std=gnu17"
