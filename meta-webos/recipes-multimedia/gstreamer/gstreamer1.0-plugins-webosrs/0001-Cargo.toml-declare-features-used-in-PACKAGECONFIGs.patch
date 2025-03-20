@@ -1,0 +1,55 @@
+From 96654f1cb1e18a8a60b5d22f5a3be8f9eb592d92 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <martin2.jansa@lgepartner.com>
+Date: Thu, 20 Mar 2025 22:14:24 +0100
+Subject: [PATCH] Cargo.toml: declare features used in PACKAGECONFIGs
+
+:Release Notes:
+https://git.openembedded.org/openembedded-core/commit/?id=16745b20452de60ae2474433cc1a2fb1ed9f6a64
+added PACKAGECONFIG_CONFARGS to ${CARGO}" build and that was now
+conflicting with our use of PACKAGECONFIG_CONFARGS in RUSTFLAGS.
+Add missing #include.
+
+:Detailed Notes:
+See https://lists.openembedded.org/g/openembedded-core/message/213418
+and proposed solution to use --features instead of --cfg feature
+from https://lists.openembedded.org/g/openembedded-core/topic/111812482#msg213419
+thread.
+
+Fixes:
+http://gecko.lge.com:8000/Errors/Details/1139955
+error: unexpected argument '--cfg' found
+
+Without this change it was still failing with:
+http://gecko.lge.com:8000/Errors/Details/1139977
+error: the package 'gst-plugin-unifiedbin' does not contain these features: unifieddecodebin, unifiedsinkbin, videoconvert, waylandsink
+
+:Testing Performed:
+Only build tested.
+
+:QA Notes:
+No change to image.
+
+:Issues Addressed:
+[WRR-5443] Create GPVB with Yocto 5.2 Walnascar
+---
+Upstream-Status: Pending
+
+ gst-rs/unifiedbin/Cargo.toml | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/gst-rs/unifiedbin/Cargo.toml b/gst-rs/unifiedbin/Cargo.toml
+index bc59bc9..eddcec6 100644
+--- a/gst-rs/unifiedbin/Cargo.toml
++++ b/gst-rs/unifiedbin/Cargo.toml
+@@ -18,5 +18,11 @@ name = "gstrsunifiedbin"
+ crate-type = ["cdylib"]
+ path = "src/lib.rs"
+ 
++[features]
++unifieddecodebin = []
++unifiedsinkbin = []
++waylandsink = []
++videoconvert = []
++
+ #[build-dependencies]
+ #gst-plugin-version-helper = { version = "0.7", path="../version-helper" }
