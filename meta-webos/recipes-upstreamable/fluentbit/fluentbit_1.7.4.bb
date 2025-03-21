@@ -15,7 +15,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=2ee41112a44fe7014dce33e26468ba93"
 SECTION = "net"
 
-PR = "r1"
+PR = "r2"
 PV = "1.7.4"
 
 SRCREV = "d638a11725ecdaf683be6167709c4712559cde79"
@@ -83,3 +83,12 @@ CFLAGS += "-fcommon"
 # ERROR: QA Issue: File /usr/include/fluent-bit/flb_info.h in package fluentbit-dev contains reference to TMPDIR [buildpaths]
 ERROR_QA:remove = "buildpaths"
 WARN_QA:append = " buildpaths"
+
+# http://gecko.lge.com:8000/Errors/Details/1139985
+# fluentbit/1.7.4/git/src/proxy/go/go.c:110:11: error: too many arguments to function 'plugin->cb_init'; expected 0, have 1
+# fluentbit/1.7.4/build/src/record_accessor/ra_parser.c:69:25: error: too many arguments to function 'flb_ra_lex'; expected 0, have 2
+# fluentbit/1.7.4/build/src/stream_processor/parser/sql_parser.c:69:25: error: conflicting types for 'flb_sp_lex'; have 'int(void)'
+# fluentbit/1.7.4/build/src/stream_processor/parser/sql_parser.c:69:25: error: too many arguments to function 'flb_sp_lex'; expected 0, have 2
+# fluentbit/1.7.4/git/include/fluent-bit/stream_processor/flb_sp_timeseries.h:330:5: error: initialization of 'struct timeseries * (*)(int)' from incompatible pointer type 'struct timeseries * (*)(void)' [-Wincompatible-pointer-types]
+# fluentbit/1.7.4/git/include/fluent-bit/stream_processor/flb_sp_timeseries.h:331:5: error: initialization of 'struct timeseries * (*)(int)' from incompatible pointer type 'struct timeseries * (*)(void)' [-Wincompatible-pointer-types]
+CFLAGS += "-std=gnu17"
