@@ -6,7 +6,10 @@ SECTION = "webos/services"
 
 require com.webos.service.camera.inc
 
-PR = "${INC_PR}.1"
+SRC_URI += " \
+    file://0001-plugin-rename-basename-function-to-avoid-conflict-wi.patch \
+"
+PR = "${INC_PR}.2"
 
 DEPENDS = "glib-2.0 luna-service2 json-c alsa-lib pmloglib udev nlohmann-json camera-utils"
 
