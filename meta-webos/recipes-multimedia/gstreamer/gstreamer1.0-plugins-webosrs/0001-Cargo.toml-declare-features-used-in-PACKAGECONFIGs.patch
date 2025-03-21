@@ -41,7 +41,7 @@ diff --git a/gst-rs/unifiedbin/Cargo.toml b/gst-rs/unifiedbin/Cargo.toml
 index bc59bc9..eddcec6 100644
 --- a/gst-rs/unifiedbin/Cargo.toml
 +++ b/gst-rs/unifiedbin/Cargo.toml
-@@ -18,5 +18,11 @@ name = "gstrsunifiedbin"
+@@ -18,5 +18,13 @@ name = "gstrsunifiedbin"
  crate-type = ["cdylib"]
  path = "src/lib.rs"
  
@@ -50,6 +50,8 @@ index bc59bc9..eddcec6 100644
 +unifiedsinkbin = []
 +waylandsink = []
 +videoconvert = []
++lxvideosink = []
++exynosvidconv = []
 +
  #[build-dependencies]
  #gst-plugin-version-helper = { version = "0.7", path="../version-helper" }
