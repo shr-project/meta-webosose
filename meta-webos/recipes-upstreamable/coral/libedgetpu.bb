@@ -3,7 +3,7 @@ LICENSE = "Apache-2.0"
 LIC_FILES_CHKSUM = "file://LICENSE;md5=86d3f3a95c324c9479bd8986968f4327"
 
 PV = "grouper"
-PR = "r10"
+PR = "r11"
 
 SRCREV = "3164995622300286ef2bb14d7fdc2792dae045b7"
 
@@ -17,6 +17,7 @@ SRC_URI = " \
     file://0006-makefile_build-Makefile-use-C-17.patch \
     file://0007-makefile_build-Makefile-drop-absl_flags.patch \
     file://0008-makefile_build-Makefile-drop-fuse-ld-gold.patch \
+    file://0009-Fix-build-with-gcc-15.patch \
     file://edgetpu.pc.in \
     file://edgetpu-max.pc.in \
 "
