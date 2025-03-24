@@ -54,6 +54,7 @@ SRC_URI += " \
     file://0013-tensorflow-lite-delegates-gpu-gl-regen-with-flatc-2..patch \
     file://0014-Fix-build-with-gcc-13.patch \
     file://0015-lite-CMakeLists.txt-use-C-17.patch \
+    file://0016-Fix-build-with-gcc-15.patch \
     file://CVE2023/0001-CVE-2023-25659-Add-out-of-bounds-array-check-to-dynamic_stitch_op.patch \
     file://CVE2023/0002-CVE-2023-25660-Quick-fix-for-a-vuln-in-printing-empty-tensors.patch \
     file://CVE2023/0003-CVE-2023-25662-Fix-security-vulnerability-in-EditDistance-op-shape-.patch \
@@ -77,7 +78,7 @@ SRC_URI += " \
 
 inherit cmake
 
-PR = "r11"
+PR = "r12"
 S = "${WORKDIR}/git"
 
 DEPENDS += " \

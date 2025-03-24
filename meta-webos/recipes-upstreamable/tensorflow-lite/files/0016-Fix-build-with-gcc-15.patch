@@ -1,0 +1,46 @@
+From 774d342a3b2bd478f12d3ca8982ea0be5f85404e Mon Sep 17 00:00:00 2001
+From: Martin Jansa <martin2.jansa@lgepartner.com>
+Date: Mon, 24 Mar 2025 14:23:53 +0100
+Subject: [PATCH] Fix build with gcc-15
+
+:Release Notes:
+Add missing include.
+
+:Detailed Notes:
+Fixes:
+
+http://gecko.lge.com:8000/Errors/Details/1142262
+
+FAILED: tools/benchmark/CMakeFiles/benchmark_model.dir/__/__/profiling/profile_summary_formatter.cc.o
+TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/recipe-sysroot-native/usr/bin/aarch64-webos-linux/aarch64-webos-linux-g++ --sysroot=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/recipe-sysroot -DEIGEN_MPL2_ONLY -DNOMINMAX=1 -ITOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/git/tensorflow/lite/schema -ITOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/git -ITOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/build/eigen -ITOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/build/neon2sse -ITOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/build/farmhash/src -ITOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/build/flatbuffers/include -ITOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/build/gemmlowp/public -ITOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/build/gemmlowp -ITOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/build/ruy -mbranch-protection=standard -fstack-protector-all  -O2 -D_FORTIFY_SOURCE=2 -Wformat -Wformat-security -Werror=format-security -Werror=return-type -funwind-tables  --sysroot=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/recipe-sysroot  -O2 -g -fcanon-prefix-map  -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/git=/usr/src/debug/benchmark-model/2.9.3  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/git=/usr/src/debug/benchmark-model/2.9.3  -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/build=/usr/src/debug/benchmark-model/2.9.3  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/build=/usr/src/debug/benchmark-model/2.9.3  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/recipe-sysroot=  -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/recipe-sysroot=  -fdebug-prefix-map=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/recipe-sysroot-native=  -fmacro-prefix-map=TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/recipe-sysroot-native=  -pipe -fvisibility-inlines-hidden  -flax-vector-conversions -DNDEBUG -std=c++17 -fPIE -DTFLITE_BUILD_WITH_XNNPACK_DELEGATE -DTFL_STATIC_LIBRARY_BUILD -pthread -MD -MT tools/benchmark/CMakeFiles/benchmark_model.dir/__/__/profiling/profile_summary_formatter.cc.o -MF tools/benchmark/CMakeFiles/benchmark_model.dir/__/__/profiling/profile_summary_formatter.cc.o.d -o tools/benchmark/CMakeFiles/benchmark_model.dir/__/__/profiling/profile_summary_formatter.cc.o -c TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/git/tensorflow/lite/profiling/profile_summary_formatter.cc
+In file included from TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/git/tensorflow/lite/profiling/profile_summary_formatter.cc:16:
+TOPDIR/BUILD/work/raspberrypi4_64-webos-linux/benchmark-model/2.9.3/git/tensorflow/lite/profiling/profile_summary_formatter.h:38:22: error: 'uint32_t' was not declared in this scope
+   38 |       const std::map<uint32_t, std::unique_ptr<tensorflow::StatsCalculator>>&
+      |                      ^~~~~~~~
+
+:Testing Performed:
+Only build tested.
+
+:QA Notes:
+No change to image.
+
+:Issues Addressed:
+[WRR-5443] Create GPVB with Yocto 5.2 Walnascar
+---
+Upstream-Status: Pending
+
+ tensorflow/lite/profiling/profile_summary_formatter.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/tensorflow/lite/profiling/profile_summary_formatter.h b/tensorflow/lite/profiling/profile_summary_formatter.h
+index d19dfc8fdfa..a5f99774f7e 100644
+--- a/tensorflow/lite/profiling/profile_summary_formatter.h
++++ b/tensorflow/lite/profiling/profile_summary_formatter.h
+@@ -15,6 +15,7 @@ limitations under the License.
+ #ifndef TENSORFLOW_LITE_PROFILING_PROFILE_SUMMARY_FORMATTER_H_
+ #define TENSORFLOW_LITE_PROFILING_PROFILE_SUMMARY_FORMATTER_H_
+ 
++#include <cstdint>
+ #include <functional>
+ #include <memory>
+ #include <sstream>
