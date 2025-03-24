@@ -16,7 +16,7 @@ RDEPENDS:${PN} = "iputils"
 WEBOS_REPO_NAME = "com.webos.service.nettools"
 
 WEBOS_VERSION = "1.1.0-9_6ef8de89551bf4ee5d54ff7ab24f3d409a22726c"
-PR = "r3"
+PR = "r4"
 
 inherit webos_component
 inherit webos_public_repo
@@ -39,3 +39,7 @@ FILES:${PN} += "${sysconfdir}/nettools_access_control.conf"
 
 # Ensure the configuration file is included in the package
 CONFFILES:${PN} += "${sysconfdir}/nettools_access_control.conf"
+
+# http://gecko.lge.com:8000/Errors/Details/1142232
+# webos-nettools/1.1.0-43/git/src/main.c:51:13: error: too many arguments to function 'initialize_nettools_ls2_calls'; expected 0, have 1
+CFLAGS += "-std=gnu17"
