@@ -12,7 +12,7 @@ LIC_FILES_CHKSUM = " \
 DEPENDS = "glib-2.0 libpbnjson libxml2 pmloglib luna-service2 luna-prefs loc-utils boost"
 
 WEBOS_VERSION = "1.0.0-108_e9470a0f741371c76db17b1b0d6eef5d269e2196"
-PR = "r5"
+PR = "r6"
 
 inherit webos_component
 inherit webos_public_repo
@@ -23,7 +23,9 @@ inherit webos_program
 inherit webos_system_bus
 inherit webos_machine_impl_dep
 
-SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
+SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
+    file://0001-Fix-build-with-gcc-15.patch \
+"
 S = "${WORKDIR}/git"
 
 FILES:${PN} += "${libdir}/location/plugins/lib*.so"
