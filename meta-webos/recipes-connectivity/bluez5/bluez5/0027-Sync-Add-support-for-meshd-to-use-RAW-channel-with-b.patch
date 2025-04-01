@@ -1,4 +1,4 @@
-From d69e65393a50d332d662934c8b5537273ab8f753 Mon Sep 17 00:00:00 2001
+From b2cbb11b7823dee3f2deb2d85b25df83abd6e2a6 Mon Sep 17 00:00:00 2001
 From: "gadekula.sravan" <gadekula.sravan@lge.com>
 Date: Thu, 23 Jan 2025 17:45:57 +0900
 Subject: [PATCH] Sync Add support for meshd to use RAW channel with bluez 5.72
