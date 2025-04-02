@@ -20,7 +20,7 @@ DEPENDS += "jsoncpp-clang"
 DEPENDS:remove = "gtest googletest"
 DEPENDS += "googletest-clang"
 
-CXXFLAGS +="-I${STAGING_INCDIR}/cbe"
+CXXFLAGS += "-I${STAGING_INCDIR}/cbe"
 
 do_configure:prepend() {
     ln -snf jsoncpp-clang.pc ${STAGING_LIBDIR}/pkgconfig/jsoncpp.pc

@@ -2,4 +2,4 @@
 
 EXTENDPRAUTO:append:rpi = "webosrpi1"
 
-PACKAGECONFIG:append:rpi= " use-rpi"
+PACKAGECONFIG:append:rpi = " use-rpi"

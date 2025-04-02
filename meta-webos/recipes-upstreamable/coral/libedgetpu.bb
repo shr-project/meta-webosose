@@ -34,7 +34,7 @@ DEPENDS = " \
     libusb1 \
 "
 
-EXTRA_OEMAKE="TFROOT=${STAGING_INCDIR}"
+EXTRA_OEMAKE = "TFROOT=${STAGING_INCDIR}"
 
 do_install:append() {
     # install libedgetpu1-std(throttled) and libedgetpu1-max(direct, max frequency)

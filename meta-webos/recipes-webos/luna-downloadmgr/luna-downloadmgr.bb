@@ -1,6 +1,6 @@
 # Copyright (c) 2012-2025 LG Electronics, Inc.
 
-SUMMARY="The Download Manager service supports the downloading and uploading of files to and from a HP webOS device."
+SUMMARY = "The Download Manager service supports the downloading and uploading of files to and from a HP webOS device."
 AUTHOR = "Guruprasad KN <guruprasad.kn@lge.com>"
 SECTION = "webos/apps"
 
