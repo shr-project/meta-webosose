@@ -60,6 +60,7 @@ SKIP_RECIPE[xen] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'Fail
 SKIP_RECIPE[xtf] ?= "${@bb.utils.contains('DISTRO_FEATURES', 'ld-is-gold', 'Rdepends on blacklisted xen-tools-xl from xen-tools"
 SKIP_RECIPE[xvisor] ?= "fails to fetch: WARNING: Failed to fetch URL git://github.com/avpatel/xvisor-next.git;branch=master;protocol=https, attempting MIRRORS if available DEBUG: Fetcher failure: Unable to find revision 6b23764a1439f9d08b2ed2f363da522460d8a22b in branch master even from upstream http://gecko.lge.com:8000/Errors/Details/565714"
 SKIP_RECIPE[uxen-guest-tools] ?= "fails to build for x86 qemux86 qemux86_64-webos-linux/uxen-guest-tools/4.1.8-r0/uxen-4.1.8-72a4af9/vm-support/linux/uxenplatform/platform.c:110:13: error: conflicting types for 'add_hwgenerator_randomness'; have 'void(const char *, size_t,  size_t)' {aka 'void(const char *, long unsigned int,  long unsigned int)'} http://gecko.lge.com:8000/Errors/Details/576618"
+SKIP_RECIPE[yq] ?= "BROKEN: do_compile: package .: no Go files in TOPDIR/tmp/work/core2-64-oe-linux/yq/4.30.8+gitdd6cf3df146f3e2c0f8c765a6ef9e35780ad8cc1/build http://errors.yoctoproject.org/Errors/Details/848018/"
 
 # meta-clang
 SKIP_RECIPE[compiler-rt-sanitizers] ?= "BROKEN: with webos DISTRO, Failed to find compiler-rt builtins library for x86_64-webos-linux"
