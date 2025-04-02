@@ -19,7 +19,7 @@ inherit webos_pkgconfig
 CLANG_DEPENDENCY_SUFFIX ?= ""
 DEPENDS = "pmloglib camera-utils${CLANG_DEPENDENCY_SUFFIX}"
 
-CXXFLAGS +=" \
+CXXFLAGS += " \
     -I${STAGING_INCDIR}/camera${CLANG_DEPENDENCY_SUFFIX} \
 "
 

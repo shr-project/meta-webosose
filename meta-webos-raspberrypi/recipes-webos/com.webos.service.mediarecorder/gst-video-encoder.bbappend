@@ -2,4 +2,4 @@
 
 EXTENDPRAUTO:append:rpi = "webosrpi2"
 
-PACKAGECONFIG:append:rpi= " gst-v4l2-encoder"
+PACKAGECONFIG:append:rpi = " gst-v4l2-encoder"

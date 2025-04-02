@@ -10,7 +10,7 @@ LIC_FILES_CHKSUM = " \
     file://oss-pkg-info.yaml;md5=13b5f44cefd7b1b0040a056eeddf6174 \
 "
 
-DEPENDS= "glib-2.0 libxml2 luna-service2 pmloglib libgdrive libpbnjson curl gupnp"
+DEPENDS = "glib-2.0 libxml2 luna-service2 pmloglib libgdrive libpbnjson curl gupnp"
 
 WEBOS_VERSION = "1.0.0-30_7f8cc7ae2bfdf6f36f2a91c97439027a7ff2df72"
 PR = "r10"

@@ -7,6 +7,6 @@ WEBOS_LTTNG_ENABLED ??= "0"
 DISTROOVERRIDES .= "${@ '' if '${WEBOS_LTTNG_ENABLED}' == '1' else ':no-lttng' }"
 
 LTTNGUST:no-lttng = ""
-LTTNGTOOLS:no-lttng= ""
+LTTNGTOOLS:no-lttng = ""
 LTTNGMODULES:no-lttng = ""
 BABELTRACE:no-lttng = ""
