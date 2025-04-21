@@ -148,6 +148,12 @@ EXTRA_WEBOS_WERROR:pn-canopenterm = ""
 # multidict/_multilib/pair_list.h:1579:1: error: control reaches end of non-void function [-Werror=return-type]
 # http://gecko.lge.com:8000/Errors/Details/1165425
 EXTRA_WEBOS_WERROR:pn-python3-multidict = ""
+# libsimplelog/1.0.4+git/git/src/simplelog.c:1764:1: error: no return statement in function returning non-void [-Werror=return-type]
+# http://gecko.lge.com:8000/Errors/Details/1175904
+EXTRA_WEBOS_WERROR:pn-libsimplelog = ""
+# webrtc-audio-processing-2.1/webrtc/modules/audio_processing/agc2/rnn_vad/rnn_fc.cc:63:1: error: control reaches end of non-void function [-Werror=return-type]
+# http://gecko.lge.com:8000/Errors/Details/1203899
+EXTRA_WEBOS_WERROR:pn-webrtc-audio-processing-2 = ""
 
 TARGET_CC_ARCH:append = " ${EXTRA_WEBOS_WERROR}"
 
