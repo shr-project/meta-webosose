@@ -154,6 +154,12 @@ EXTRA_WEBOS_WERROR:pn-libsimplelog = ""
 # webrtc-audio-processing-2.1/webrtc/modules/audio_processing/agc2/rnn_vad/rnn_fc.cc:63:1: error: control reaches end of non-void function [-Werror=return-type]
 # http://gecko.lge.com:8000/Errors/Details/1203899
 EXTRA_WEBOS_WERROR:pn-webrtc-audio-processing-2 = ""
+# work-shared/llvm-project-source-20.1.3-r0/llvm-project-20.1.3.src/lldb/source/DataFormatters/TypeSummary.cpp:62:1: error: control reaches end of non-void function [-Werror=return-type]
+# http://gecko.lge.com:8000/Errors/Details/1186664
+EXTRA_WEBOS_WERROR:pn-clang = ""
+# work-shared/llvm-project-source-20.1.7-r0/sources/llvm-project-20.1.7.src/lldb/source/DataFormatters/TypeSummary.cpp:62:1: error: control reaches end of non-void function [-Werror=return-type]
+# http://gecko.lge.com:8000/Errors/Details/1252508
+EXTRA_WEBOS_WERROR:pn-lldb = ""
 
 TARGET_CC_ARCH:append = " ${EXTRA_WEBOS_WERROR}"
 
