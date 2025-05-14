@@ -1,0 +1,67 @@
+From 280287c2dbcfad323da1dd441ef2d61f4f5c0cc9 Mon Sep 17 00:00:00 2001
+From: Martin Jansa <martin2.jansa@lgepartner.com>
+Date: Wed, 14 May 2025 08:28:43 +0200
+Subject: [PATCH] ProcessRunner: fix build with boost-1.88.0
+
+:Release Notes:
+See https://github.com/boostorg/process/issues/480
+
+:Detailed Notes:
+Use v1 until the component owner prepares the migration to v2.
+
+:Testing Performed:
+Only build tested.
+
+:QA Notes:
+No change to image.
+
+:Issues Addressed:
+[GBW-2749] Create GPVB with Yocto 5.3 Whinlatter
+
+Change-Id: I3fba0ae53364b689f809e0250292a32b9dabad1b
+---
+Upstream-Status: Submitted [http://kairos-git.lge.com/c/webosose/edge-ai-computer-vision/+/472306 ProcessRunner: fix build with boost-1.88.0]
+
+ core/tools/ProcessRunner.cpp | 21 +++++++++++++++++++--
+ 1 file changed, 19 insertions(+), 2 deletions(-)
+
+diff --git a/core/tools/ProcessRunner.cpp b/core/tools/ProcessRunner.cpp
+index 879a30a8..693dab73 100644
+--- a/core/tools/ProcessRunner.cpp
++++ b/core/tools/ProcessRunner.cpp
+@@ -3,16 +3,33 @@
+  * SPDX-License-Identifier: Apache-2.0
+  */
+ 
++
++// see https://github.com/boostorg/process/issues/480
++// http://gecko.lge.com:8000/Errors/Details/1194895
++#define BOOST_PROCESS_VERSION 1
++// just setting BOOST_PROCESS_VERSION didn't work:
++// http://gecko.lge.com:8000/Errors/Details/1195127
++// use the other suggested work around
++
+ #include <aif/tools/ProcessRunner.h>
+ 
++#include <boost/version.hpp>
++#if BOOST_VERSION < 108800
+ #include <boost/process.hpp>
++namespace bp = boost::process;
++#else
++#include <boost/process/v1/child.hpp>
++#include <boost/process/v1/io.hpp>
++#include <boost/process/v1/pipe.hpp>
++#include <boost/process/v1/start_dir.hpp>
++namespace bp = boost::process::v1;
++#endif
++
+ #include <iostream>
+ #include <string>
+ #include <sys/wait.h>
+ #include <unistd.h>
+ 
+-namespace bp = boost::process;
+-
+ namespace aif
+ {
+ ProcessRunner::ProcessRunner(std::string cmd, std::initializer_list<std::string> args) noexcept
