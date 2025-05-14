@@ -14,6 +14,7 @@ WEBOS_VERSION = "1.1.0-85_7c5e9a1ebbb294bb7e0e564299820be94fea52e7"
 WEBOS_REPO_NAME = "edge-ai-computer-vision"
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     file://0001-CMakeLists.txt-allow-to-disable-building-examples-to.patch \
+    file://0001-ProcessRunner-fix-build-with-boost-1.88.0.patch \
 "
 
 PR = "r10"
