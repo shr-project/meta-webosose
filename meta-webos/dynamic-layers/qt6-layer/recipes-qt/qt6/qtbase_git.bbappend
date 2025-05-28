@@ -137,10 +137,3 @@ TARGET_CFLAGS:append = " ${@bb.utils.contains('DISTRO_FEATURES', 'x11', '-DUSE_X
 
 VIRTUAL-RUNTIME_gpu-libs ?= ""
 RDEPENDS:${PN} += "${VIRTUAL-RUNTIME_gpu-libs}"
-
-# FIXME: Since there is no libgles3-mesa package that would pull in the headers,
-# webos-qt-sdk should have runtime dependency on libgles3-mesa-dev because
-# /usr/include/QtGui/qtgui-config.h will either use gl3.h or gl2.h based
-# on QT_FEATURE_opengles3.
-# https://bugreports.qt.io/browse/WEBOSCI-82
-RRECOMMENDS:${PN}-dev += "${@bb.utils.contains_any('DISTRO_FEATURES', 'vulkan opengl', 'libgles3-mesa-dev', '', d)}"
