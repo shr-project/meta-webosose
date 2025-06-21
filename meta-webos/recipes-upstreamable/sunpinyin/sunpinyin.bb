@@ -30,8 +30,6 @@ SRC_URI =  "git://github.com/sunpinyin/sunpinyin.git;protocol=https;branch=maste
     file://0002-add-sunpinyin-wrapper-class.patch \
 "
 
-S = "${WORKDIR}/git"
-
 do_install:append:class-target() {
     install -d ${D}${libdir}/maliit/plugins/dict
     install -m 755 ${S}/libsunpinyin.so.3.0 ${D}${libdir}/maliit/plugins

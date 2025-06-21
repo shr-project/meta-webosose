@@ -18,7 +18,6 @@ SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
 "
 
 PR = "r10"
-S = "${WORKDIR}/git"
 
 inherit cmake
 inherit pkgconfig

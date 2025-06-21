@@ -23,8 +23,6 @@ inherit features_check
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
 
-S = "${WORKDIR}/git"
-
 REQUIRED_COMBINED_FEATURES = "webos-graphics-drm"
 
 EXTRA_QMAKEVARS_PRE += "${PACKAGECONFIG_CONFARGS}"

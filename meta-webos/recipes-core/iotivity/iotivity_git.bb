@@ -49,8 +49,6 @@ SRCREV_libcoap = "fa8b2b9d2c8215c8579bc05132a6eae1123ae4fd"
 SRCREV_FORMAT = "main"
 do_fetch[vardeps] = "SRCREV_main SRCREV_tinycbor SRCREV_gtest SRCREV_hippomocks SRCREV_mbedtls SRCREV_rapidjson SRCREV_libcoap"
 
-S = "${WORKDIR}/git"
-
 PR = "r11"
 PV = "1.3.99+git"
 

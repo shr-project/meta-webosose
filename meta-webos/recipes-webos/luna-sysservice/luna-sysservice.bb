@@ -28,7 +28,6 @@ inherit webos_daemon
 inherit webos_cmake
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
-S = "${WORKDIR}/git"
 
 inherit webos_systemd
 WEBOS_SYSTEMD_SERVICE = "luna-sys-service.service"

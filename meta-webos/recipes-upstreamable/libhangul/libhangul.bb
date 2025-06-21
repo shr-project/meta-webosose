@@ -46,7 +46,6 @@ SRC_URI = "git://github.com/choehwanjin/libhangul.git;branch=main;protocol=https
     file://0025-Add-option-HANGUL_IC_OPTION_COMBI_ON_DOUBLE_STROKE.patch \
     file://0026-Add-option-HANGUL_IC_OPTION_NON_CHOSEONG_COMBI.patch \
 "
-S = "${WORKDIR}/git"
 
 FILES:${PN} += "${libdir}/maliit/plugins/*"
 FILES:${PN}-staticdev += "${libdir}/maliit/plugins/*.a"

@@ -28,7 +28,6 @@ ANY_OF_DISTRO_FEATURES = "vulkan opengl"
 
 WEBOS_REPO_NAME = "ime-manager"
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
-S = "${WORKDIR}/git"
 
 WEBOS_LOCALIZATION_XLIFF_BASENAME = "imemanager"
 

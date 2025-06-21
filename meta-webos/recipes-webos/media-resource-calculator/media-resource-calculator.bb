@@ -24,7 +24,6 @@ inherit webos_machine_dep
 inherit webos_public_repo
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
-S = "${WORKDIR}/git"
 
 # Since submissions 47 this isn't usable for any other MACHINE than
 # raspberrypi3

@@ -37,4 +37,3 @@ RDEPENDS:${PN} = "gstreamer1.0-plugins-webosrs"
 WEBOS_VERSION = "1.0.0-gav.59_a3765932446632e60cf8491019629de7400adbae"
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
-S = "${WORKDIR}/git"

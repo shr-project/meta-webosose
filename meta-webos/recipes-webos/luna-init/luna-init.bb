@@ -22,7 +22,6 @@ inherit webos_cmake
 inherit python3native
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
-S = "${WORKDIR}/git"
 
 do_install:append() {
     # Expand fonts tarball

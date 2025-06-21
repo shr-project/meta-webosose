@@ -13,7 +13,7 @@ SRC_URI = "file://docker-simple-webserver_${PV}.tar.bz2"
 SRC_URI[md5sum] = "77751dcfeb4ac270d94c9ff4ff02f2aa"
 SRC_URI[sha256sum] = "c0d05406d9e5a7e7b3fcc76b0a3a2808b3a9a35ba49b273b5ba3ed81ecb42a6c"
 
-S = "${WORKDIR}/docker-simple-webserver"
+S = "${UNPACKDIR}/docker-simple-webserver"
 
 do_install() {
     # install systemd service files

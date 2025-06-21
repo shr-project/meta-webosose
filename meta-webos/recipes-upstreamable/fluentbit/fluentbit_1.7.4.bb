@@ -25,7 +25,6 @@ SRC_URI = "git://github.com/fluent/fluent-bit.git;branch=1.7;protocol=https \
     file://0001-build-Make-systemd-init-systemd-detection-contingent.patch \
 "
 
-S = "${WORKDIR}/git"
 DEPENDS = "zlib bison-native flex-native"
 INSANE_SKIP:${PN}-dev += "dev-elf"
 

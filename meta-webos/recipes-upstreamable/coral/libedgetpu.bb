@@ -22,7 +22,6 @@ SRC_URI = " \
     file://edgetpu-max.pc.in \
 "
 
-S = "${WORKDIR}/git"
 B = "${WORKDIR}/git/makefile_build"
 
 DEPENDS = " \

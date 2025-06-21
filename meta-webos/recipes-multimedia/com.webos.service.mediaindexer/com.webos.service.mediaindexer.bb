@@ -30,7 +30,6 @@ RDEPENDS:${PN} = "${VIRTUAL-RUNTIME_pdm} db8"
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     file://0001-Fix-build-with-gcc-14.patch \
 "
-S = "${WORKDIR}/git"
 
 inherit webos_systemd
 WEBOS_SYSTEMD_SERVICE = "com.webos.service.mediaindexer.service"
