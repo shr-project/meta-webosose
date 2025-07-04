@@ -112,3 +112,8 @@ IMAGE_FSTYPES:remove = "ext3"
 
 # Use Fake KMS until surface-manager is fixed to support Full KMS, see WRP-5
 VC4DTBO = "vc4-fkms-v3d"
+
+# Use 6.6 even after the default changed to 6.12 in scarthgap with:
+# https://github.com/agherzan/meta-raspberrypi/commit/8c916b683de8ca969b136524f03d2574af282bac
+# because of seeed-voicecard http://gecko.lge.com:8000/Errors/Details/1244428 and lttng-modules http://gecko.lge.com:8000/Errors/Details/1244367
+PREFERRED_VERSION_linux-raspberrypi = "6.6.%"
