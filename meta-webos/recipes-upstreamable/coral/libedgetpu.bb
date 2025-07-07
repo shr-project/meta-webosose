@@ -18,6 +18,7 @@ SRC_URI = " \
     file://0007-makefile_build-Makefile-drop-absl_flags.patch \
     file://0008-makefile_build-Makefile-drop-fuse-ld-gold.patch \
     file://0009-Fix-build-with-gcc-15.patch \
+    file://0010-Makefile-drop-absl_bad_optional_access.patch \
     file://edgetpu.pc.in \
     file://edgetpu-max.pc.in \
 "
