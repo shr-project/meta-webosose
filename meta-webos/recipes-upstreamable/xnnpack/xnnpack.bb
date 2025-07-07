@@ -46,12 +46,12 @@ SRC_URI += " \
     git://github.com/Maratyszcza/pthreadpool;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/pthreadpool-source;name=pthreadpool \
     git://github.com/Maratyszcza/psimd;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/psimd-source;name=psimd \
     file://0001-Fix-return-type-issues.patch \
-    file://git/CMakeLists.txt \
-    file://git/cmake/xnnpack-config.cmake.in \
-    file://git/cpuinfo-source/CMakeLists.txt \
-    file://git/cpuinfo-source/cmake/cpuinfo-config.cmake.in \
-    file://git/pthreadpool-source/CMakeLists.txt \
-    file://git/pthreadpool-source/cmake/pthreadpool-config.cmake.in \
+    file://CMakeLists.txt;subdir=${BB_GIT_DEFAULT_DESTSUFFIX} \
+    file://cmake/xnnpack-config.cmake.in;subdir=${BB_GIT_DEFAULT_DESTSUFFIX} \
+    file://cpuinfo-source/CMakeLists.txt;subdir=${BB_GIT_DEFAULT_DESTSUFFIX} \
+    file://cpuinfo-source/cmake/cpuinfo-config.cmake.in;subdir=${BB_GIT_DEFAULT_DESTSUFFIX} \
+    file://pthreadpool-source/CMakeLists.txt;subdir=${BB_GIT_DEFAULT_DESTSUFFIX} \
+    file://pthreadpool-source/cmake/pthreadpool-config.cmake.in;subdir=${BB_GIT_DEFAULT_DESTSUFFIX} \
 "
 
 inherit cmake
