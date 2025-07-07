@@ -39,12 +39,12 @@ SRCREV_FORMAT = "main_cpuinfo_clog_fp16_fxdif_pthreadpool_psimd"
 
 SRC_URI += " \
     git://github.com/google/XNNPACK;branch=master;name=main;protocol=https \
-    git://github.com/pytorch/cpuinfo;branch=main;protocol=https;destsuffix=git/cpuinfo-source;name=cpuinfo \
-    git://github.com/pytorch/cpuinfo;branch=main;protocol=https;destsuffix=git/clog-source;name=clog \
-    git://github.com/Maratyszcza/FP16;branch=master;protocol=https;destsuffix=git/FP16-source;name=fp16 \
-    git://github.com/Maratyszcza/FXdiv;branch=master;protocol=https;destsuffix=git/FXdiv-source;name=fxdiv \
-    git://github.com/Maratyszcza/pthreadpool;branch=master;protocol=https;destsuffix=git/pthreadpool-source;name=pthreadpool \
-    git://github.com/Maratyszcza/psimd;branch=master;protocol=https;destsuffix=git/psimd-source;name=psimd \
+    git://github.com/pytorch/cpuinfo;branch=main;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/cpuinfo-source;name=cpuinfo \
+    git://github.com/pytorch/cpuinfo;branch=main;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/clog-source;name=clog \
+    git://github.com/Maratyszcza/FP16;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/FP16-source;name=fp16 \
+    git://github.com/Maratyszcza/FXdiv;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/FXdiv-source;name=fxdiv \
+    git://github.com/Maratyszcza/pthreadpool;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/pthreadpool-source;name=pthreadpool \
+    git://github.com/Maratyszcza/psimd;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/psimd-source;name=psimd \
     file://0001-Fix-return-type-issues.patch \
     file://git/CMakeLists.txt \
     file://git/cmake/xnnpack-config.cmake.in \
