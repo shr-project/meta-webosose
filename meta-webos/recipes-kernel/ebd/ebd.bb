@@ -17,7 +17,7 @@ WEBOS_GIT_PARAM_BRANCH = "webos-5.4"
 SRCREV_FORMAT = "main_libbpf"
 SRC_URI = " \
     ${WEBOS_KERNEL_GIT_REPO_COMPLETE} \
-    git://github.com/libbpf/libbpf.git;protocol=https;branch=master;destsuffix=git/src/cc/libbpf;name=libbpf \
+    git://github.com/libbpf/libbpf.git;protocol=https;branch=master;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/src/cc/libbpf;name=libbpf \
     file://remove_btf_dependency.patch \
 "
 

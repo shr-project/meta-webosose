@@ -25,16 +25,16 @@ SRCREV_opengl-headers = "0cb0880d91581d34f96899c86fc1bf35627b4b81"
 
 SRC_URI += " \
     git://github.com/tensorflow/tensorflow.git;branch=${BRANCH};protocol=https;name=tensorflow \
-    git://github.com/google/flatbuffers;branch=master;protocol=https;destsuffix=git/flatbuffers;name=flatbuffers \
-    git://gitlab.com/libeigen/eigen;branch=master;protocol=https;destsuffix=git/eigen;name=eigen \
-    git://github.com/intel/ARM_NEON_2_x86_SSE;branch=master;protocol=https;destsuffix=git/neon2sse;name=neon2sse \
-    git://github.com/petewarden/OouraFFT;branch=master;protocol=https;destsuffix=git/fft2d;name=fft2d \
-    git://github.com/google/farmhash;branch=master;protocol=https;destsuffix=git/farmhash;name=farmhash \
-    git://github.com/google/ruy;branch=master;protocol=https;destsuffix=git/ruy;name=ruy \
-    git://github.com/google/gemmlowp;branch=master;protocol=https;destsuffix=git/gemmlowp;name=gemmlowp \
-    git://github.com/KhronosGroup/Vulkan-Headers;branch=main;protocol=https;destsuffix=git/vulkan_headers;name=vulkan-headers \
-    git://github.com/KhronosGroup/EGL-Registry;branch=main;protocol=https;destsuffix=git/egl_headers;name=egl-headers \
-    git://github.com/KhronosGroup/OpenGL-Registry;branch=main;protocol=https;destsuffix=git/opengl_headers;name=opengl-headers \
+    git://github.com/google/flatbuffers;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/flatbuffers;name=flatbuffers \
+    git://gitlab.com/libeigen/eigen;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/eigen;name=eigen \
+    git://github.com/intel/ARM_NEON_2_x86_SSE;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/neon2sse;name=neon2sse \
+    git://github.com/petewarden/OouraFFT;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/fft2d;name=fft2d \
+    git://github.com/google/farmhash;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/farmhash;name=farmhash \
+    git://github.com/google/ruy;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/ruy;name=ruy \
+    git://github.com/google/gemmlowp;branch=master;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/gemmlowp;name=gemmlowp \
+    git://github.com/KhronosGroup/Vulkan-Headers;branch=main;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/vulkan_headers;name=vulkan-headers \
+    git://github.com/KhronosGroup/EGL-Registry;branch=main;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/egl_headers;name=egl-headers \
+    git://github.com/KhronosGroup/OpenGL-Registry;branch=main;protocol=https;destsuffix=${BB_GIT_DEFAULT_DESTSUFFIX}/opengl_headers;name=opengl-headers \
     file://0001-Fix-clog-cpuinfo-configure-error.patch \
     file://0002-opencl_wrapper-dlopen-libOpenCL.so.1-instead-of-libO.patch \
     file://0003-auto-delegation-support-when-using-gpu.patch \
