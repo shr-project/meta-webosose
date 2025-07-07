@@ -24,8 +24,8 @@ SRC_URI[dict.md5sum] = "2055f50a0f942b49d4417d801388eba5"
 SRC_URI[dict.sha256sum] = "af70bc2bcd7af7468495774fed9e3a2de434650119fbc3d3388c2bcf7e0acb01"
 
 SRC_URI =  "git://github.com/sunpinyin/sunpinyin.git;protocol=https;branch=master \
-    https://downloads.sourceforge.net/project/open-gram/lm_sc.3gm.arpa-20140820.tar.bz2;name=arpa;subdir=git \
-    https://downloads.sourceforge.net/project/open-gram/dict.utf8-20131214.tar.bz2;name=dict;subdir=git \
+    https://downloads.sourceforge.net/project/open-gram/lm_sc.3gm.arpa-20140820.tar.bz2;name=arpa;subdir=${BB_GIT_DEFAULT_DESTSUFFIX} \
+    https://downloads.sourceforge.net/project/open-gram/dict.utf8-20131214.tar.bz2;name=dict;subdir=${BB_GIT_DEFAULT_DESTSUFFIX} \
     file://0001-Change-scon-to-download-open-gram-dictionary.patch \
     file://0002-add-sunpinyin-wrapper-class.patch \
 "
