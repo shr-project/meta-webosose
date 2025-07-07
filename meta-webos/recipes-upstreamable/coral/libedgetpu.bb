@@ -22,7 +22,7 @@ SRC_URI = " \
     file://edgetpu-max.pc.in \
 "
 
-B = "${WORKDIR}/git/makefile_build"
+B = "${S}/makefile_build"
 
 DEPENDS = " \
     flatbuffers-native \
