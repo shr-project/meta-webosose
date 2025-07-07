@@ -11,13 +11,11 @@ LIC_FILES_CHKSUM = " \
 
 WEBOS_VERSION = "0.0.1-7_0fd67e20ba223e92a876679abbaed40000a6b5ab"
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
-S = "${WORKDIR}/git"
 PR = "r1"
 
 inherit webos_enhanced_submissions
 inherit webos_enactjs_app
 inherit webos_public_repo
-
 
 WEBOS_ENACTJS_APP_ID = "com.webos.app.statusbar"
 

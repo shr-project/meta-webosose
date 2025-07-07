@@ -14,7 +14,6 @@ PV = "1.3.2+git"
 SRC_URI = "git://github.com/maemo-tools-old/${BPN}.git;branch=master;protocol=https \
     file://0001-build-fixes.patch \
 "
-S = "${WORKDIR}/git"
 
 FILES:${PN} += "${datadir}/sp-memusage-tests"
 

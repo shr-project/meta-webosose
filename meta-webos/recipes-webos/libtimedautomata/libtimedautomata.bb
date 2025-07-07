@@ -17,4 +17,3 @@ inherit webos_public_repo
 inherit pkgconfig cmake
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
-S = "${WORKDIR}/git"

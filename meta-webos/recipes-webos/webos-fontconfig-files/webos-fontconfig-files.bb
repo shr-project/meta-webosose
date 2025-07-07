@@ -17,7 +17,6 @@ inherit fontcache
 inherit webos_public_repo
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
-S = "${WORKDIR}/git"
 
 # Skip the unwanted tasks
 do_configure[noexec] = "1"

@@ -21,7 +21,6 @@ inherit webos_enhanced_submissions
 inherit webos_public_repo
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
-S = "${WORKDIR}/git"
 
 QMAKE_PROFILES = "${S}/qml-app-components.pro"
 OE_QMAKE_PATH_HEADERS = "${OE_QMAKE_PATH_QT_HEADERS}"

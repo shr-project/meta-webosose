@@ -32,7 +32,6 @@ PACKAGECONFIG[whitelist] = "-DENABLE_WHITELIST:BOOL=TRUE, -DENABLE_WHITELIST:BOO
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     ${@bb.utils.contains('PACKAGECONFIG', 'whitelist', 'file://whitelist.txt', '', d)} \
 "
-S = "${WORKDIR}/git"
 
 do_install:append() {
     if ${@bb.utils.contains('PACKAGECONFIG', 'whitelist', 'true', 'false', d)} ; then

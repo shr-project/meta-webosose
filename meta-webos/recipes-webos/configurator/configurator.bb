@@ -24,7 +24,6 @@ inherit webos_daemon
 inherit webos_machine_impl_dep
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
-S = "${WORKDIR}/git"
 FILES:${PN} += "${webos_sysbus_datadir}"
 
 inherit webos_systemd

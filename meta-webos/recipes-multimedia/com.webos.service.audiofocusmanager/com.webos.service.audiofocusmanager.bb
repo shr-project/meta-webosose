@@ -27,7 +27,6 @@ inherit webos_public_repo
 inherit webos_machine_impl_dep
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
-S = "${WORKDIR}/git"
 
 inherit webos_systemd
 WEBOS_SYSTEMD_SERVICE = "audiofocusmanager.service"

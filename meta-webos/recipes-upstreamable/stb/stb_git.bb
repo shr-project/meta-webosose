@@ -15,8 +15,6 @@ SRC_URI = " \
     git://github.com/nothings/stb.git;branch=${BRANCH};protocol=https \
 "
 
-S = "${WORKDIR}/git"
-
 do_install() {
     install -d ${D}${includedir}
     for hdr in ${S}/*.h

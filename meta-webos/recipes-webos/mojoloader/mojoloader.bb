@@ -19,7 +19,6 @@ inherit webos_arch_indep
 inherit webos_filesystem_paths
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
-S = "${WORKDIR}/git"
 
 do_install() {
     install -d ${D}${webos_frameworksdir}

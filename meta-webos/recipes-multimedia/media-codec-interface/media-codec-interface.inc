@@ -33,8 +33,6 @@ SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     file://0002-resource_wrapper-add-missing-include.patch \
 "
 
-S = "${WORKDIR}/git"
-
 PACKAGECONFIG_REACQUIRE ?= "support-reacquire"
 PACKAGECONFIG ?= "${PACKAGECONFIG_REACQUIRE}"
 PACKAGECONFIG[support-reacquire] = "-DSUPPORT_REACQUIRE:BOOL=True,-DSUPPORT_REACQUIRE:BOOL=False"

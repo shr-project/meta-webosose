@@ -22,7 +22,6 @@ DEPENDS_TO_ADD_MCIL ?= ""
 DEPENDS:remove = "${DEPENDS_TO_REMOVE_MCIL}"
 DEPENDS += "${DEPENDS_TO_ADD_MCIL}"
 
-
 PKGCONFIG_DIR = "${datadir}/pkgconfig"
 
 do_configure:prepend() {

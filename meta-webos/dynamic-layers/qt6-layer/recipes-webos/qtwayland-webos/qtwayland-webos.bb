@@ -32,8 +32,6 @@ SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     file://0001-Fix-build-with-liburcu-0.15.0.patch \
 "
 
-S = "${WORKDIR}/git"
-
 # Enable LTTng tracing capability when enabled in webos_lttng class
 PACKAGECONFIG:append = "${@ ' lttng' if '${WEBOS_LTTNG_ENABLED}' == '1' else ''}"
 

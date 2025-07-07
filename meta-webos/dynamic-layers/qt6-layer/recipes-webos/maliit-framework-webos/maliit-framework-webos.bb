@@ -28,7 +28,6 @@ inherit features_check
 ANY_OF_DISTRO_FEATURES = "vulkan opengl"
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
-S = "${WORKDIR}/git"
 
 inherit webos_systemd
 WEBOS_SYSTEMD_SERVICE = "maliit-server@.service maliit-server.service"

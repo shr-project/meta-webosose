@@ -16,8 +16,6 @@ SRC_URI = "git://github.com/mongodb/${BPN};branch=master;protocol=https \
     file://0001-Update-CMakelist-file-to-install-lib-correctly.patch \
 "
 
-S = "${WORKDIR}/git"
-
 inherit cmake
 
 do_configure:append() {

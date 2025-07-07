@@ -19,8 +19,6 @@ WEBOS_VERSION = "1.0.0-2_bfd94595f8dd03972c8070b094e4196e9c8ff19a"
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
 
-S = "${WORKDIR}/git"
-
 # move test files into -tests
 PACKAGES:prepend = "${PN}-tests "
 FILES:${PN}-tests += "${bindir}/*.test"

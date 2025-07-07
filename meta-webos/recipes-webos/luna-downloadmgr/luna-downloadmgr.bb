@@ -28,7 +28,6 @@ WEBOS_MACHINE ?= "${MACHINE}"
 EXTRA_OECMAKE += "-DMACHINE=${WEBOS_MACHINE}"
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
-S = "${WORKDIR}/git"
 
 inherit webos_systemd
 WEBOS_SYSTEMD_SERVICE = "luna-download-mgr.service.in"

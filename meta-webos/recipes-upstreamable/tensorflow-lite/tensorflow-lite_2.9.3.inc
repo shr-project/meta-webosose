@@ -79,7 +79,6 @@ SRC_URI += " \
 inherit cmake
 
 PR = "r12"
-S = "${WORKDIR}/git"
 
 DEPENDS += " \
     unzip-native \

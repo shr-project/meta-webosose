@@ -30,7 +30,6 @@ inherit webos_public_repo
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     file://0001-Add-var-cache-xdg-directory-to-tmpfiles-configuratio.patch  \
 "
-S = "${WORKDIR}/git"
 
 EXTRA_OECMAKE += "-DWEBOS_QTTESTABILITY_ENABLED:BOOL=${@ '1' if d.getVar('WEBOS_DISTRO_PRERELEASE') != '' else '0'}"
 

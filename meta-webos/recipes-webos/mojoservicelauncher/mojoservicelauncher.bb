@@ -32,7 +32,6 @@ inherit webos_daemon
 inherit webos_distro_variant_dep
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG:append = " ${@bb.utils.filter('DISTRO_FEATURES', 'smack', d)}"
 PACKAGECONFIG[smack] = "-Denable_webos_smack=true:BOOL=TRUE"

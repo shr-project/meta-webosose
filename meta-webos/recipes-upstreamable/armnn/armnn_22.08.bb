@@ -21,8 +21,6 @@ SRCREV = "0ba0b2bf80f1d7aff1eff8de2b67eb04081b2af0"
 
 PR = "r4"
 
-S = "${WORKDIR}/git"
-
 inherit cmake
 inherit pkgconfig
 
@@ -149,7 +147,6 @@ do_install:append() {
             s:@libdir@:${libdir}:g
             s:@includedir@:${includedir}:g' ${D}${libdir}/pkgconfig/armnn-delegate.pc
     fi
-
 
 }
 
