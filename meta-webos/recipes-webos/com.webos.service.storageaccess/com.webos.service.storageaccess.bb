@@ -27,4 +27,3 @@ SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     file://0001-Fix-build-with-curl-8.13.0-and-newer.patch \
     file://0002-CMakeLists.txt-use-gupnp-1.6.patch \
 "
-S = "${WORKDIR}/git"

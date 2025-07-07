@@ -42,7 +42,6 @@ WEBOS_REPO_NAME = "audiod-pro"
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     file://0001-Fix-build-with-liburcu-0.15.0.patch \
 "
-S = "${WORKDIR}/git"
 
 inherit webos_systemd
 WEBOS_SYSTEMD_SERVICE = "audiod.service"

@@ -25,7 +25,6 @@ inherit webos_public_repo
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     file://0001-CMakeLists.txt-switch-to-libxml-5.patch \
 "
-S = "${WORKDIR}/git"
 
 inherit webos_systemd
 WEBOS_SYSTEMD_SERVICE = "notificationmgr.service.in"

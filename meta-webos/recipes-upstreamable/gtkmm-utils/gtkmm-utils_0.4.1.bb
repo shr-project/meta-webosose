@@ -20,7 +20,6 @@ SRC_URI = " \
     file://0002-Fix-includes-with-newer-glib.patch \
     file://0003-Fix-log-definition.patch \
 "
-S = "${WORKDIR}/git"
 
 PACKAGECONFIG ??= "${@bb.utils.contains('DISTRO_FEATURES', 'x11', 'gtkmm', '', d)}"
 PACKAGECONFIG[gtkmm] = "--enable-gtkmm,--disable-gtkmm,gtkmm"

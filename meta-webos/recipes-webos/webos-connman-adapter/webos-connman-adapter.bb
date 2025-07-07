@@ -35,7 +35,6 @@ PACKAGECONFIG = "enable-multiple-routing-table"
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
 SRC_URI:append:raspberrypi4 = " file://blacklistcdc_ether.conf"
-S = "${WORKDIR}/git"
 
 inherit webos_systemd
 WEBOS_SYSTEMD_SERVICE = "webos-connman-adapter.service"

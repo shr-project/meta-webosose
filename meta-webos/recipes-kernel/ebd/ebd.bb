@@ -25,8 +25,6 @@ WEBOS_VERSION = "1.0.0-5_1daddf9cbd43dd931ab462a2869f3fe30b44eca5"
 
 SRCREV_libbpf = "26e768783ce99bd16540a5064cee8677818d2358"
 
-S = "${WORKDIR}/git"
-
 DEPENDS = "zlib elfutils"
 
 do_compile() {

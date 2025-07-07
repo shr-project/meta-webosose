@@ -26,8 +26,6 @@ SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     file://0001-Fix-build-with-liburcu-0.15.0.patch \
 "
 
-S = "${WORKDIR}/git"
-
 OE_QMAKE_PATH_HEADERS = "${OE_QMAKE_PATH_QT_HEADERS}"
 
 # Perform extra QML validation

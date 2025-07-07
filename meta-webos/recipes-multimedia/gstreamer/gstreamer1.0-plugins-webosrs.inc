@@ -15,7 +15,6 @@ SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     file://0001-Cargo.toml-declare-features-used-in-PACKAGECONFIGs.patch \
 "
 WEBOS_VERSION = "1.18.5-rust.11_cac1c661e3f79a8ec407d5e8140022ba47c0c1fe"
-S = "${WORKDIR}/git"
 
 require gstreamer1.0-plugins-webosrs-crates.inc
 

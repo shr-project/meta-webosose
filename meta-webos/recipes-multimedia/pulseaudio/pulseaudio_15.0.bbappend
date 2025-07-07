@@ -24,8 +24,6 @@ SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     file://0001-meson.build-use-C-17.patch \
 "
 
-S = "${WORKDIR}/git"
-
 inherit webos_systemd
 WEBOS_SYSTEMD_SERVICE = "pulseaudio.service"
 
@@ -70,7 +68,6 @@ do_install:append:qemuall() {
 }
 
 FILES:${PN} += "${libdir}/pulse-15.0/modules/audioeffects/preprocess/*"
-
 
 RDEPENDS:pulseaudio-server:append:webos = "\
     pulseaudio-module-postprocess-sink \

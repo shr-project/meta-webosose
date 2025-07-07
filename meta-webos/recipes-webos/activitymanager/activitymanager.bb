@@ -26,7 +26,6 @@ inherit webos_machine_impl_dep
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     file://0001-CMakeLists.txt-replace-std-c-11-with-std-c-17-for-ic.patch \
 "
-S = "${WORKDIR}/git"
 
 inherit webos_systemd
 WEBOS_SYSTEMD_SERVICE = "activitymanager.service"

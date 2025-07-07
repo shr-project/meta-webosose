@@ -14,7 +14,7 @@ SRC_URI += " \
     file://0001-disable-stripping-debug-info.patch \
 "
 
-S = "${WORKDIR}/git/daemon"
+S = "${UNPACKDIR}/git/daemon"
 
 INHIBIT_PACKAGE_STRIP  = "1"
 

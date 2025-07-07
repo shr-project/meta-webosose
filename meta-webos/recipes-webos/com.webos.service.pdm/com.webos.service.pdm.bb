@@ -37,7 +37,6 @@ GROUPADD_PARAM:${PN} = "-g 2023 pdmgroup"
 USERADD_PACKAGES = "${PN}"
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
-S = "${WORKDIR}/git"
 
 inherit webos_systemd
 WEBOS_SYSTEMD_SERVICE = "physical-device-manager.service"

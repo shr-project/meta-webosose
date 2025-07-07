@@ -12,15 +12,12 @@ LIC_FILES_CHKSUM = " \
 WEBOS_VERSION = "0.0.1-8_347c8e1fb0c3e856ad76bbad96dba12dc2a0cfb5"
 PR = "r1"
 
-
 inherit webos_enhanced_submissions
 inherit webos_enactjs_app
 inherit webos_public_repo
 inherit webos_localizable
 
-
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
-S = "${WORKDIR}/git"
 
 WEBOS_ENACTJS_APP_ID = "com.webos.app.videocall"
 

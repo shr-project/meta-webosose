@@ -18,8 +18,6 @@ SRC_URI = " \
 
 PR = "r4"
 
-S = "${WORKDIR}/git"
-
 # scons here is too old for MAXLINELENGTH
 SCONS_MAXLINELENGTH = ""
 

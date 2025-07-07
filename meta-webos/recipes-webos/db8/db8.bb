@@ -42,7 +42,6 @@ SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE} \
     file://0001-CMakeLists.txt-replace-std-c-14-with-std-c-17-for-ic.patch \
     file://0002-test-Don-t-use-long-deprecated-boost-filesystem-path.patch \
 "
-S = "${WORKDIR}/git"
 
 inherit webos_systemd
 WEBOS_SYSTEMD_SERVICE = "db8-maindb.service db8-mediadb.service db8-pre-config.service db8-tempdb.service db8.service"

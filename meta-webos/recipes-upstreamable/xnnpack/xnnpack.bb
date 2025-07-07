@@ -57,7 +57,6 @@ SRC_URI += " \
 inherit cmake
 
 PR = "r4"
-S = "${WORKDIR}/git"
 
 ARM_INSTRUCTION_SET = "arm"
 

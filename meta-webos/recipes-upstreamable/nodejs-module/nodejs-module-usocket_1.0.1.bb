@@ -225,7 +225,7 @@ SRC_URI = "\
     file://0001-package.json-use-node-gyp-10.patch \
 "
 
-S = "${WORKDIR}/npm"
+S = "${UNPACKDIR}/npm"
 
 # This is needed here only for x86 MACHINEs, because other MACHINEs get it by default from node-gyp:
 # https://github.com/nodejs/node-v0.x-archive/commit/d4ccdeaf00d7994b4a959a3ddfe8c52a2bd3c30d

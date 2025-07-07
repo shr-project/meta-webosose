@@ -18,7 +18,6 @@ inherit features_check
 ANY_OF_DISTRO_FEATURES = "vulkan opengl"
 
 SRC_URI = "${WEBOSOSE_GIT_REPO_COMPLETE}"
-S = "${WORKDIR}/git"
 
 DEPENDS = "qtbase qt-features-webos qtdeclarative glib-2.0"
 RDEPENDS:${PN} += "qml-webos-framework qml-webos-bridge"

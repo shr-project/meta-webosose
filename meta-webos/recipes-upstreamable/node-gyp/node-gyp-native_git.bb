@@ -11,8 +11,6 @@ PR = "r0"
 SRCREV = "da19158e7a02c574d4f6d3d367ee264cb08d47ec"
 SRC_URI = "git://github.com/nodejs/node-gyp.git;branch=main;protocol=https"
 
-S = "${WORKDIR}/git"
-
 inherit native
 
 # nmp's cache has following structure

@@ -26,4 +26,3 @@ SRC_URI = "git://github.com/pyzy/pyzy.git;branch=master;protocol=https \
     file://0007-More-tweaks-of-data-db-android-create_db.py.patch \
     file://0008-Add-utf-16-encoding-when-opening-the-phrase-file.patch \
 "
-S = "${WORKDIR}/git"

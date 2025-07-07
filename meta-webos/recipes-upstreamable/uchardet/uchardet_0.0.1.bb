@@ -12,6 +12,5 @@ PR = "r1"
 # with uchardet-0.0.1.tar.gz
 SRCREV = "56a4c0d86c1c89ae3f756480fdec03ba5f7e7323"
 SRC_URI = "git://github.com/BYVoid/${BPN}.git;branch=master;protocol=https"
-S = "${WORKDIR}/git"
 
 inherit cmake

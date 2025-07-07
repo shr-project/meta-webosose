@@ -15,4 +15,3 @@ SRC_URI = "git://github.com/maemo-tools-old/${BPN}.git;branch=master;protocol=ht
     file://do-not-compile-doc-directory-if-doxygen-is-missing.patch \
 "
 
-S = "${WORKDIR}/git"
