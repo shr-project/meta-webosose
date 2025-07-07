@@ -30,7 +30,7 @@ SRC_URI += " \
     file://0019-gator_trace_sched.c-use-strscpy-instead-of-long-depr.patch;patchdir=.. \
 "
 
-S = "${UNPACKDIR}/git/driver"
+S = "${UNPACKDIR}/${BB_GIT_DEFAULT_DESTSUFFIX}/driver"
 
 inherit module
 
