@@ -14,7 +14,7 @@ SRC_URI += " \
     file://0001-disable-stripping-debug-info.patch \
 "
 
-S = "${UNPACKDIR}/git/daemon"
+S = "${UNPACKDIR}/${BB_GIT_DEFAULT_DESTSUFFIX}/daemon"
 
 INHIBIT_PACKAGE_STRIP  = "1"
 
