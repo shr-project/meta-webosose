@@ -66,7 +66,7 @@ PACKAGECONFIG[webos-codec] = "use_webos_codec=true,use_webos_codec=false,media-c
 PACKAGECONFIG[pulseaudio] = "use_pulseaudio=true, use_pulseaudio=false, pulseaudio"
 
 PACKAGECONFIG:append = " ${@bb.utils.contains('WEBOS_LTTNG_ENABLED', '1', 'lttng', '', d)}"
-PACKAGECONFIG[lttng] = "use_lttng=true,use_lttng=false,lttng-ust,lttng-tools lttng-modules babeltrace"
+PACKAGECONFIG[lttng] = "use_lttng=true,use_lttng=false,lttng-ust,lttng-tools lttng-modules babeltrace2"
 PACKAGECONFIG[webos-camera] = "use_webos_camera=true,use_webos_camera=false, cambufferlib"
 PACKAGECONFIG[webos-audio] = "use_webos_audio=true,use_webos_audio=false, pulseaudio"
 PACKAGECONFIG[test-coverage] = "enable_neva_test_coverage_build=true,enable_neva_test_coverage_build=false"
